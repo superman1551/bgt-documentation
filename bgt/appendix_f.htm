@@ -1,0 +1,40 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Appendix F</title>
+</head>
+<body>
+<br>
+<b>Screen Reader Distribution</b><br>
+<br>
+The screen reader related functions in BGT depend upon certain files being included with your application in order to operate. This applies to System Access, and NVDA. Jaws for Windows and Window Eyes come with Active X COM components in their installations that BGT calls upon to perform the requested tasks, which means that nothing needs to be distributed along with your game in order to support these. Please note that older versions of Jaws for Windows do not come with this Active X component. It is unclear at the time of this writing in which version the component was introduced, but our tests indicate that Jaws version 10.0 and above work without problems. We will amend this section in the documentation as soon as we have more specific information regarding exact version numbers.<br>
+<br>
+For System Access and NVDA, BGT calls external dll's that have to be present. By default, the engine expects them to be in the same folder as your game executable, though you can explicitly change the path with the screen_reader_set_library_path function. You may find these dll files in the BGT installation directory/redist/screen_readers. The System Access dll has no explicit license attached to it but is freely distributable, while the NVDA dll is distributed under the terms of the GNU Lesser General Public license. This means that you need to include the file called license.txt along with NVDA's dll (found in the same directory) if you wish to support this screen reader.<br>
+<br>
+When calling the screen reader functions, they all take a parameter that indicates which screen reader to use. You may use the following constants:<br>
+<br>
+<ul>
+<li>JAWS</li>
+<li>WINDOW_EYES</li>
+<li>SYSTEM_ACCESS</li>
+<li>NVDA</li>
+</ul>
+</body>
+</html>

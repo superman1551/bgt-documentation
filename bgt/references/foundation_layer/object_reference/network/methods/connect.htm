@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>connect</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will attempt to establish a connection between yourself and a remote peer.<br>
+<br>
+uint connect(string host, int port)<br>
+<br>
+Parameters:<br>
+host<br>
+The host name or IP address to connect to.<br>
+port<br>
+The port that the other person is listening on.<br>
+<br>
+Return value:<br>
+A unique peer ID that will be used when sending data on success, or 0 on error.<br>
+<br>
+Remarks:<br>
+When this method returns a peer ID, this peer is not yet in a connected state. The connection will take some time to perform, and you thus have to call the request method in order to retrieve events from the host. Eventually you will receive either an event of type connect or of type disconnect, that contains the same peer ID as that returned by the call to connect. If a connect event is received, you know that the connection attempt succeeded and you may begin using the peer ID to send messages to this peer. If a disconnect event is fired, however, the connection failed and the peer ID should be discarded.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

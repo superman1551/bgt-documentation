@@ -1,0 +1,72 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>audio_form</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+The audio_form object is stored in form.bgt in the BGT include directory, and is used to create a form-based interface that users can interact with.<br>
+<br>
+audio_form()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The audio_form object is audio-based, using Microsoft SAPI 5.1 or a screen reader as its output, and relies on keyboard input. It will simulate the functionality of a graphical interface, but there are no controls on the screen, and they can not be used with the mouse.<br>
+<br>
+An audio_form object can hold up to 50 controls.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("Cancel");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

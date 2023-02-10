@@ -1,0 +1,72 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>rest</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method inserts a rest or pause into the music for a specified number of beats.<br>
+<br>
+bool rest(double beats)<br>
+<br>
+Parameters:<br>
+beats<br>
+Number of beats to rest<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method can also be used as a fast forward option.<br>
+<br>
+As the tone synth supports chords, it is essential that you call this method before moving on to your next phrase, otherwise all notes will be mashed into one area.<br>
+<br>
+Example:<br>
+<pre>
+// Make a C major chord in the bass and a spread out C major chord as the melody. This uses the rest method to spread the notes.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+
+//chord
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+
+//melody
+synth.waveform_type=3;
+synth.note("C5", 0.666);
+synth.rest(0.666);
+synth.note("E5", 0.666);
+synth.rest(0.666);
+synth.note("G5", 0.666);
+synth.rest(0.666);
+synth.note("C6", 2);
+synth.write_wave_file("synth.wav");
+}
+</pre>
+</body>
+</html>

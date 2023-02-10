@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>seek</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will move the playing cursor in the sound to a new position.<br>
+<br>
+bool seek(double new_position)<br>
+<br>
+Parameters:<br>
+new_position<br>
+The position to seek to, specified in milliseconds. 0 indicates the beginning of the file.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Seeking currently only works on static sounds, not streaming ones.<br>
+<br>
+Example:<br>
+<pre>
+//Start playing a sound at the 1 second mark.
+
+void main()
+{
+sound test;
+test.load("curry.ogg");
+test.seek(1000);
+test.play_wait();
+}
+</pre>
+</body>
+</html>

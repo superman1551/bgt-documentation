@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>character_to_ascii</b><br>
+<br>
+This function returns the ASCII code of a character.<br>
+<br>
+int character_to_ascii(string the_character)<br>
+<br>
+Parameters:<br>
+the_character<br>
+The character that will be converted.<br>
+<br>
+Return value:<br>
+An integer containing the given character's ASCII code, or -1 on error.<br>
+<br>
+Remarks:<br>
+If an empty string is passed, the function will return -1.<br>
+<br>
+This function supports all ASCII values from 0 to 255, which includes the extended character set. This means that foreign characters and currency symbols can also be converted.<br>
+<br>
+If more than one character is entered into the string parameter, the function converts the first character and ignores the rest.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("character_to_ascii test", character_to_ascii("A")); // Output should be 65
+}
+</pre>
+</body>
+</html>

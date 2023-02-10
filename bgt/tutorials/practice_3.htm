@@ -1,0 +1,519 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Game Programming in Practice Part III</title>
+</head>
+<body>
+<h1>The Amulet of Quang</h1>
+<h1>Contents</h1>
+<ul>
+<li><a href="#1">1. Introduction</a></li>
+<li><a href="#2">2. The name of the game</a></li>
+<li><a href="#3">3. Let's get serious</a></li>
+<li><a href="#4">4. Designing the interface</a></li>
+<li><a href="#5">5. Music</a></li>
+<li><a href="#6">6. Sound effects</a></li>
+<li><a href="#7">7. Speech</a></li>
+<li><a href="#8">8. Sound design</a></li>
+<li><a href="#9">9. Inventory</a></li>
+<li><a href="#10">10. Items</a></li>
+<li><a href="#11">11. Areas</a></li>
+<li><a href="#12">12. Player position</a></li>
+<li><a href="#13">13. Looking around</a></li>
+<li><a href="#14">14. Moving around</a></li>
+<li><a href="#15">15. Object manipulation</a></li>
+<li><a href="#16">16. Game loop</a></li>
+<li><a href="#17">17. Use your imagination</a></li>
+</ul>
+<h2><a name="1">1. Introduction</a></h2>
+Welcome to the third and final installment of Practical BGT, the series of tutorials in which you develop actual playable games while learning the basic concepts and techniques of BGT programming. If you haven't completed the first two installments in this series, we strongly recommend that you do so before starting out on part III.<br>
+<br>
+Let us take just a few minutes to go over what you learned in the first two parts.<br>
+<br>
+In part I, Memory Train, you took a straight dive into the syntax and basic functionality of BGT. You learned how the execution of your game program can be described in terms of functions calling other functions and making decisions based on what they return. More specifically, you saw how to display a game window and ask for keypresses, how to load and play sounds and background music, how to keep track of time, and, last but not least, how to exit your game.<br>
+<br>
+In Part II, Windows Attack, you took a more systematic approach to game design. You took the description of a game and extracted from it a list of required sounds, a description of the game state, and finally, the source code of the game itself, complete with a self-made script class. In addition, you learned to harness the power of a sound pool to position an arbitrary number of sounds in real-time.<br>
+<br>
+This final installment will provide you with some powerful programming techniques and design approaches to make your life easier as you begin to work on larger-scale projects. You will probably not learn any new syntactic constructions here, nor will the mini game you will write be anywhere as spectacular as those you programmed in the first two parts. Instead, this part is designed to put the tools into your hands which, combined with imagination and creativity, will allow you to create games of high software quality and consistent user experience.<br>
+<br>
+If anything in this tutorial should appear confusing or unclear, chances are you will find the missing puzzle pieces in the language tutorial, the BGT reference, or, indeed, in the first two parts of this series. Sometimes it is also a good idea to just continue reading with dogged determination, and you might find the answer in the next paragraph. In any case, you should take frequent breaks, maintain a calm, rational, detective-like approach to complexity, and remember that bugs happen to the best of us, and are valuable lessons only real life can teach.<br>
+<br>
+With that in mind, let the games begin!<br>
+<h2><a name="2">2. The name of the game</a></h2>
+In ancient and altogether more interesting days, ages before the golden days of yore, the mysterious days of lore, and the ridiculously long-ago days of nevermore, the Kingdom of Quang stood proudly. Proudly indeed it stood, impervious to the ravages of slime, until its two supreme rulers, during one of their regular and excessive drinking binges, got into a fateful and bloody argument about who stole the cookies from the cookie jar. The question was never answered, but such was the monstrosity of the ensuing war that the mighty Kingdom of Quang fell and sank beneath the sea. The wizards of Quang, however, having gazed deeply into their crystal balls, knew that tragedy was afoot, and managed to transfer all the knowledge of their high culture into a powerful magical artefact---the Amulet of Quang.<br>
+<br>
+You, a secret agent of the even more secret world government, have been transported to the vast underground empire of Quang. Your mission is to recover the Amulet of Quang and transport it back to the surface of the earth.<br>
+<h2><a name="3">3. Let's get serious</a></h2>
+Here is a more serious description of the game.<br>
+<br>
+The Amulet of Quang is an audio adventure in which the player can explore his surroundings, walk from place to place, and interact with the various objects which litter the game world. Every area of the game map may provide its own background music, and objects may or may not emit sound. The player will be informed by means of a spoken message when the main character spots a new object. The player can obtain a detailed description of an object by examining it. Some objects can be picked up. The objects the player is carrying are organized into an inventory list which can be accessed at any time during the game. It is possible to use objects in the inventory list. The game can be paused at any time.<br>
+<h2><a name="4">4. Designing the interface</a></h2>
+<h6>Exercise</h6>
+Analyzing the description in the previous section, create a detailed specification of the game's interface. The interface consists of everything the player needs to know in order to successfully play your game. Mostly, this would be the kind of information you might put into a user manual. Here are a few questions to put you on the right track:<br>
+<ol>
+<li>How does the player walk around the map?</li>
+<li>When and in which way is the player informed of available objects?</li>
+<li>Will there be footstep sounds?</li>
+<li>How does the player examine, pick up, or use an object?</li>
+<li>How does the player access the inventory list?</li>
+<li>How does the player examine or use an object in the inventory list?</li>
+<li>How does the player pause and unpause the game?</li>
+<li>Finally, how would the player exit the game?</li>
+</ol>
+Here is my solution. In case our answers differ, this does not mean that you have got it wrong, but merely that we have chosen to create slightly, or maybe even dramatically, different kinds of games. The main reason why I am detailing my solution here is to show you the level of detail required for a user interface specification. In general, the more complete your specification at design time, the less trial and error at coding time. It is perfectly reasonable at design time to leave certain details open to discussion or change, but this should happen as the result of deliberate choice rather than unconscious omission. So let us agree for the moment to stick to my specification, and if afterwards you feel that your solution is worthwhile trying, I shall leave it as an exercise to you to go back and redo from that point onward. In fact, I highly recommend doing so. Also, do not be put off if it seems to take days, or even weeks, to get exactly right. This is to be expected.<br>
+<br>
+The player walks around the game map by using the four arrow keys. Pressing and then immediately releasing an arrow key will move the player exactly one step in the corresponding direction. Holding an arrow key will move the player one step in the corresponding direction every half second. In this way, a steady motion is established just by comfortably holding down a key, but an impatient player can still accelerate the process by tapping the key more quickly.<br>
+<br>
+To give the player feedback that motion has indeed occurred, the game will play a footstep sound for every step the player takes. If, after taking that step, the available directions for the next step have changed, we will play a slightly modified footstep sound to alert the player to that change. For example, assume the player is walking down a long east-west corridor, and suddenly comes upon an exit to the north. This would be the time when our modified footstep sound would be played. So we define two footstep sounds, one of them soft and unobtrusive, the other slightly more demanding, which might be accomplished by making it slightly louder or higher in pitch.<br>
+<br>
+Let's move on to what we might call the model of visibility. This is the set of rules which determine what objects the player sees at any given time. Such a model could get arbitrarily complex, taking into account such details as distance and size of objects, lighting conditions, fog, or other objects which obstruct the view. For this design, however, we will keep it simple by defining just two basic visibility rules. An object is visible if<br>
+1. it has the same x or y coordinate as the player, i.e. it is straight to the north, east, south, or west,<br>
+and<br>
+2. there is no wall anywhere between the player and the object.<br>
+<br>
+Whenever the player moves such that a new item is spotted, we will provide a spoken message stating what kind of object it is, in what direction it lies, and how many steps it would take to get to it. Note that we will only speak the objects as they move into view, not those which were already visible before. For example, if the player took one step north, we wouldn't need to speak any visible objects to the north or south because they would have been visible before taking the step. If this sounds confusing, I recommend you reread the two visibility rules above and then form some examples in your mind to illustrate how they work. Specifically, it is important to understand that taking a step to the north or south can only change what is visible to the east or west, and vice versa.<br>
+<br>
+A general description of the area at large is spoken when the player enters it, and repeated as requested via the l command. Note: l as in look.<br>
+<br>
+To examine, pick up, or use an object, the player must first move to that object's location. A special sound is then played to indicate that an object has been reached, and the object is announced. To examine it, the player uses the x command. The t command will attempt to pick up the object. Finally, hitting the space bar will attempt to interact with the object in some way. For instance, hitting the space bar on a door might try to walk through that door, and hitting the space bar on a gong might strike the gong.<br>
+<br>
+The tab command will cycle through the objects in the player's inventory. To use an object in the inventory, the player first cycles to this object by pressing tab until the object is announced, and then presses u, as in use. To examine an object in your inventory, you would first cycle to it by pressing tab repeatedly, and then press i, as in inventory information.<br>
+<br>
+To pause the game at any time, the player can press the p command. The same command also resumes a paused game.<br>
+<br>
+Finally, the escape key will exit the game. The game may also exit when the player wins or dies, but escape is always available to exit prematurely.<br>
+<br>
+Pressing page up or page down will allow the player to adjust the volume of the music. This is especially useful in conjunction with spoken messages, because the music might drown out the voice if too loud.<br>
+<br>
+To make the experience of learning the interface as smooth as it could possibly be, we will implement a help feature which will make our game self-documenting. Help can be accessed at any time by pressing f1, whereupon the game will provide spoken information about all the possible keyboard commands at that time.<br>
+<h2><a name="5">5. Music</a></h2>
+<h6>Exercise</h6>
+One important aspect of game music is its ability to gracefully fade in and out. Write a fade function which can be called as follows:<br>
+fade(sound@ noise, double start_volume, double end_volume, double time, bool interruptable);<br>
+When called, this function should fade the given sound object from the start volume to the end volume in the given time in milliseconds. If interruptable is true, the player can interrupt the process by pressing the space bar. The fade function returns true if the player interrupted the process using the space bar, and false otherwise.<br>
+<br>
+Here is one possible solution:<br>
+<br>
+bool fade(sound@ noise, double start_volume, double end_volume, double time, bool interruptable)<br>
+{<br>
+noise.volume = start_volume;<br>
+timer t;<br>
+double elapsed = t.elapsed;<br>
+while(elapsed &lt; time)<br>
+{</li>
+noise.volume = start_volume + (end_volume-start_volume)*elapsed/time;<br>
+wait(10);<br>
+elapsed = t.elapsed;<br>
+if(key_pressed(KEY_SPACE) && interruptable)<br>
+{<br>
+return true;<br>
+}<br>
+}<br>
+noise.volume = end_volume;<br>
+return false;<br>
+}<br>
+<br>
+We will use a sound object to play our in-game music, so let us declare this object now:<br>
+<br>
+sound music; // The one sound object used for all music<br>
+<br>
+Next, we need a variable to keep track of the current volume of the music as the player configured it using the page up and page down commands:<br>
+<br>
+int music_volume; // Volume for all game music<br>
+<br>
+Now let us define a function to change the currently playing music. This function will accept as parameter the filename of the music to change to. The elegant thing about this function is that it will fade out the currently playing song, then fade in the new one, resulting in a graceful transition from one track to the next.<br>
+<br>
+// Changes the music, fading if appropriate<br>
+void music_change(string music_file)<br>
+{<br>
+if(music.playing)<br>
+{<br>
+fade(@music, music_volume, -50, 500, false);<br>
+}<br>
+music.stream(music_file);<br>
+music.volume = -50;<br>
+music.play_looped();<br>
+fade(@music, -50, music_volume, 500, false);<br>
+}<br>
+<br>
+And while we are at it, let's define some more music-related functions:<br>
+<br>
+// Fades out the music<br>
+void music_stop()<br>
+{<br>
+if(music.playing)<br>
+{<br>
+fade(@music, music_volume, -50, 500, false);<br>
+}<br>
+}<br>
+<br>
+// Pauses the music abruptly<br>
+void music_pause()<br>
+{<br>
+music.pause();<br>
+}<br>
+<br>
+// Resumes the music abruptly<br>
+void music_resume()<br>
+{<br>
+music.play_looped();<br>
+}<br>
+<br>
+// Increases the volume of the music gracefully<br>
+void music_volume_up()<br>
+{<br>
+if(music_volume &lt;= -5)<br>
+{<br>
+int old_volume = music_volume;<br>
+music_volume += 5;<br>
+fade(@music, old_volume, music_volume, 200, false);<br>
+}<br>
+}<br>
+<br>
+// Decreases the volume of the music gracefully<br>
+void music_volume_down()<br>
+{<br>
+if(music_volume &gt;= -55)<br>
+{<br>
+int old_volume = music_volume;<br>
+music_volume -= 5;<br>
+fade(@music, old_volume, music_volume, 200, false);<br>
+}<br>
+}<br>
+<br>
+Note that in the remainder of our source code, we will never manipulate the music object directly, but only through the functions we just defined. Software engineering calls this approach modularization. It makes sure that whenever something is wrong with the music, we need only check the correctness of our music functions, because since all music-related activity takes place through these functions, this is where any music-related bug would logically be found.<br>
+<br>
+Another advantage of modularization is that if the underlying implementation of the music module changes in the future, no source code outside this module would need to be adjusted because the rest of our source code does not rely on the underlying implementation but only upon the functions which our module exposes to the outside world. For example, a future incarnation of our music module might use midi files and sound fonts instead of prerecorded audio. All we need to change in order to accomplish this would be the functions we just defined. No other part of our source code would need to be modified because all music-related activity is channeled through the above functions.<br>
+<h2><a name="6">6. Sound effects</a></h2>
+In part II of this tutorial series you learned about the sound_pool class. Let us use this class now to define some sound-related functions:<br>
+<br>
+sound_pool pool; // The sound pool used for all sound effects<br>
+<br>
+// Plays a sound in the center of the stereo field<br>
+void sound_play_centered(string filename)<br>
+{<br>
+pool.play_stationary(filename, false); // Not looping<br>
+}<br>
+<br>
+// Pause all sounds<br>
+void sound_pause_all()<br>
+{<br>
+pool.pause_all();<br>
+}<br>
+<br>
+// Resume all sounds<br>
+void sound_resume_all()<br>
+{<br>
+pool.resume_all();<br>
+}<br>
+<br>
+// Gets rid of all sounds at once<br>
+void sound_purge()<br>
+{<br>
+pool.destroy_all();<br>
+}<br>
+<h6>Exercise</h6>
+Our example game is relatively simple in that it uses only centered sounds. As your games become more complex and challenging, you will want to use positional audio. Extend the sound module accordingly. Apply what you know about the sound_pool class, and consult the reference when in doubt.<br>
+<h2><a name="7">7. Speech</a></h2>
+The third and final auditory component of our game will be spoken messages. For now, the voice which delivers them will be computer-generated, so we will use the tts_voice class you already saw in the first two installments of Practical BGT.<br>
+<br>
+tts_voice voice; // The voice used for all in-game messages<br>
+<br>
+// Speaks some text<br>
+void voice_speak(string text)<br>
+{<br>
+voice.speak(text);<br>
+}<br>
+<br>
+// Speaks some text, interrupting text which is being spoken<br>
+void voice_speak_immediately(string text)<br>
+{<br>
+voice.speak_interrupt(text);<br>
+}<br>
+<br>
+// Silences the voice<br>
+void voice_stop()<br>
+{<br>
+voice.stop();<br>
+}<br>
+<h2><a name="8">8. Sound design</a></h2>
+<h6>Exercise</h6>
+From the specification in section 4, extract a list of required sounds.<br>
+<br>
+Here is my solution:<br>
+<ul>
+<li>step.wav: A standard footstep</li>
+<li>step_alert.wav: A footstep after which the available directions have changed</li>
+<li>item.wav: The player has reached an object</li>
+</ul>
+<h2><a name="9">9. Inventory</a></h2>
+Now we are slowly making our way from the very general-purpose modules to the more game-specific functionality. In this section we deal with the player's inventory list, a dynamically expanding or shrinking list of all the items the player is currently carrying. We are going to use an array to keep track of the handles to the items in the player's inventory, and we will provide functions through which this array is manipulated.<br>
+<br>
+item@[] inventory; // The inventory is an array of handles to items<br>
+int inventory_position = -1; // Current position in the inventory list<br>
+<br>
+// Adds an entry to the inventory list<br>
+void inventory_add(item@ entry)<br>
+{<br>
+int old_length = inventory.length();<br>
+inventory.resize(old_length+1);<br>
+@inventory[old_length] = entry;<br>
+}<br>
+<br>
+// Removes an item from the inventory; returns true on success, false on failure<br>
+bool inventory_remove(item@ entry)<br>
+{<br>
+uint index; // For searching the inventory for the entry<br>
+for(index=0; index&lt;inventory.length(); index++)<br>
+{<br>
+if(inventory[index] is entry) // Found it<br>
+{<br>
+break;<br>
+}<br>
+}<br>
+if(index &gt;= inventory.length()) // Entry not found<br>
+{<br>
+return false;<br>
+}<br>
+// Move all above entries one slot down<br>
+for(uint i = index+1; i&lt;inventory.length(); i++)<br>
+{<br>
+@inventory[i-1] = @inventory[i];<br>
+}<br>
+// Finally, make the inventory one slot smaller<br>
+inventory.resize(inventory.length() - 1);<br>
+inventory_position = -1; // Make it invalid<br>
+return true;<br>
+}<br>
+<br>
+// Gets the current inventory entry<br>
+item@ inventory_current()<br>
+{<br>
+if(inventory_position &lt; 0) // No current item
+{<br>
+return null;<br>
+}<br>
+return @inventory[inventory_position];<br>
+}<br>
+<br>
+void inventory_cycle()<br>
+{<br>
+if(inventory_position+1 &gt;= int(inventory.length()))<br>
+{<br>
+inventory_position = 0; // Go back to first if at the end<br>
+}<br>
+inventory_position++;<br>
+}<br>
+<h2><a name="10">10. Items</a></h2>
+The inventory list is all about managing and cycling through the items in the player's possession. Let us now turn to the question of what an item is in the first place.<br>
+<br>
+In an adventure game, an item can be defined as any object with which the player might want to interact. For example, if one of the game's challenges consisted of unlocking a door with a key, both the door and key would be considered items. We use the word item here as a generic term for any object in the game world, including treasures, monsters, doors, and weapons.<br>
+<br>
+For our purposes, an item must provide at least three pieces of information:<br>
+<ol>
+<li>A name; this is how the game refers to the item when describing what the player sees, or when cycling through the inventory.</li>
+<li>A description; this is what the player hears when examining the item.</li>
+<li>A takeable flag; this determines whether or not the item can be picked up. Note that flag is just programmer lingo for bool. Setting a flag to true is sometimes referred to as just setting it, and setting it to false can also be called clearing it.</li>
+</ol>
+Let us translate this into code:<br>
+<br>
+class item<br>
+{<br>
+string name;<br>
+string description;<br>
+bool takeable;<br>
+item()<br>
+{<br>
+alert("Programming Error", "Cannot make item without parameters.");<br>
+}<br>
+item(string name, string description, bool takeable)<br>
+{<br>
+this.name = name;<br>
+this.description = description;<br>
+this.takeable = takeable;<br>
+}<br>
+}<br>
+<h2><a name="11">11. Areas</a></h2>
+Areas comprise the geography of an adventure game. They have been known under various names, including rooms, levels, or maps. But no matter how we refer to them, they are the world through which the player navigates.<br>
+<br>
+Some mainstream games go out of their way to simulate real world geography, complete with heights, textures, and weather conditions. While all of this is certainly possible in BGT, for simplicity's sake we shall stick with a basic setup here, keeping track of just the locations of walls and items on our maps. We represent this information in two arrays, both of them two-dimensional. In addition, every area will provide a general description of where the player is located. This will be announced when the player chooses to look around by pressing the l command.<br>
+<br>
+class area<br>
+{<br>
+int size_x; // East-west size of area<br>
+int size_y; // North-south size of area<br>
+bool[][] walls; // true for wall tiles, false for floor space<br>
+item@[][] items; // Items on the map<br>
+string description; // Announced when looking around<br>
+area()<br>
+{<br>
+alert("Programming Error", "Cannot construct area without parameters.");<br>
+}<br>
+area(int size_x, int size_y, string description)<br>
+{<br>
+this.size_x = size_x;<br>
+this.size_y = size_y;<br>
+this.description = description;<br>
+walls.resize(size_x);<br>
+items.resize(size_x);<br>
+for(int i=0; i&lt;size_x; i++)<br>
+{<br>
+walls[i].resize(size_y);<br>
+items[i].resize(size_y);<br>
+for(int j=0; j&lt;size_y; j++)<br>
+{<br>
+walls[i][j] = false;<br>
+@items[i][j] = null;<br>
+}<br>
+}<br>
+}<br>
+void add_wall(int x, int y)<br>
+{<br>
+walls[x][y] = true;<br>
+}<br>
+void add_item(item@ entry, int x, int y)<br>
+{<br>
+@items[x][y] = @entry;<br>
+}<br>
+bool get_wall(int x, int y)<br>
+{<br>
+if(x&lt;0 or x&gt;=size_x or y&lt;0 or y&gt;=size_y)<br>
+{<br>
+return true; // The wall of the universe<br>
+}<br>
+bool ret = walls[x][y];<br>
+return ret;<br>
+}<br>
+item@ get_item(int x, int y)<br>
+{<br>
+item@ ret = @items[x][y];<br>
+return ret;<br>
+}<br>
+}<br>
+<h2><a name="12">12. Player position</a></h2>
+To represent the player's current position, we need to store the current area as well as the player's current x and y coordinates.<br>
+<br>
+area@ player_area;<br>
+int player_x;<br>
+int player_y;<br>
+<h2><a name="13">13. Looking around</a></h2>
+Let us now define a function which looks out from the player's location in a given direction, and reports on what the player sees. This function takes an x and a y increment. For instance, to look eastward, you would supply an x increment of 1 and a y increment of 0. To look south, you would supply an x increment of 0 and a y increment of -1.<br>
+<br>
+void look(int x_increment, int y_increment)<br>
+{<br>
+int x = player_x;<br>
+int y = player_y;<br>
+string direction; // Name of direction, such as east or north<br>
+if(x_increment&lt;0) // Westerly<br>
+{<br>
+if(y_increment&lt;0) // Southwest<br>
+{<br>
+direction = "southwest";<br>
+}<br>
+else if(y_increment==0) // West<br>
+{<br>
+direction = "west";<br>
+}<br>
+else // Northwest<br>
+{<br>
+direction = "northwest";<br>
+}<br>
+}<br>
+else if(x_increment==0) // North/south<br>
+{<br>
+if(y_increment&lt;0) // South<br>
+{<br>
+direction = "south";<br>
+}<br>
+else if(y_increment==0) // Right here<br>
+{<br>
+direction = "here";<br>
+}<br>
+else // North<br>
+{<br>
+direction = "north";<br>
+}<br>
+}<br>
+else // Easterly<br>
+{<br>
+if(y_increment&lt;0) // Southeast<br>
+{<br>
+direction = "southeast";<br>
+}<br>
+else if(y_increment==0) // East<br>
+{<br>
+direction = "east";<br>
+}<br>
+else // Northeast<br>
+{<br>
+direction = "northeast";<br>
+}<br>
+}<br>
+while(true)<br>
+{<br>
+x += x_increment;<br>
+y += y_increment;<br>
+if(player_area.get_wall(x, y))<br>
+{<br>
+break; // Hit a wall<br>
+}<br>
+if(player_area.get_item(x, y) is null)<br>
+{<br>
+continue; // Nothing there, so look on<br>
+}<br>
+// Found an item<br>
+int distance = absolute(x-player_x) + absolute(y-player_y);<br>
+voice_speak(player_area.get_item(x, y).description + ", " + distance + " " + direction);<br>
+}<br>
+}<br>
+<h2><a name="14">14. Moving around</a></h2>
+<h6>Exercise</h6>
+Write a function<br>
+bool move(int x_increment, int y_increment)<br>
+that moves the player in the given direction if possible. The function should return true if the movement was successful, false otherwise. If this function returns false, the player's position should not be altered. This function should play the appropriate footstep sound.<br>
+<h2><a name="15">15. Object manipulation</a></h2>
+<h6>Exercise</h6>
+Write a function<br>
+examine()<br>
+that examines the item at the player's position. The function should speak the description of the item, or an appropriate message if there is no item at this position.<br>
+Hint: To find out if the handle x indeed refers to an object, use the expression (x !is null).<br>
+<h6>Exercise</h6>
+Write a function<br>
+use()<br>
+that uses the object at the player's position, giving an appropriate spoken message if there is no object there, or if the object at this position cannot be used.<br>
+Hint: You will modify this function frequently as you add items to your game.<br>
+<h6>Exercise</h6>
+Write a function<br>
+use_inventory()<br>
+that uses the currently selected object in the player's inventory, giving an appropriate spoken message if no object was selected, or if the currently selected object cannot be used.<br>
+Hint: You will modify this function frequently as you add items to your game.<br>
+<h2><a name="16">16. Game loop</a></h2>
+<h6>Exercise</h6>
+Write a function<br>
+game_loop()<br>
+that continually checks for keypresses and carries out the appropriate commands until the game is over.<br>
+Hint 1: Use a flag for the game over condition, and set this flag at an appropriate place, for instance in your use or use_inventory function.<br>
+Hint 2: You may wish to write a helper function for pause mode.<br>
+<h2><a name="17">17. Use your imagination</a></h2>
+<h6>Exercise</h6>
+Using the adventure game framework you created, begin adding areas and items to your game.<br>
+Hint: It might be a good idea to create a separate initializer function for each area.<br>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pause_sound</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method pauses an active sound.<br>
+<br>
+bool pause_sound(int slot)<br>
+<br>
+Parameters:<br>
+slot<br>
+The slot of the sound to pause.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If the sound is already paused, you must call the resume_sound method to resume it.<br>
+<br>
+Please note: When dealing with sound slots, be sure that you set the persistent flag to true for all non-looping sounds when you first create them. If you fail to do this, manipulating a sound in any way by use of its slot number can have unpredictable results. This is because the sound pool automatically cleans up any sound that has finished playing and that is not set to be persistent, with the result that the slot that was returned on creation is no longer invalid and may, in the worst case scenario, refer to a completely different sound.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sounds;
+
+void main()
+{
+sounds.max_distance=70;
+int slot=sounds.play_stationary("sounds/ambience.wav", true);
+wait(5000);
+sounds.pause_sound(slot);
+wait(5000);
+sounds.resume_sound(slot);
+wait(5000);
+}
+</pre>
+</body>
+</html>

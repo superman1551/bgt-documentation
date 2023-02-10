@@ -1,0 +1,79 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_text</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will add or append text to an input box or status bar without interfering with any text that is already present.<br>
+<br>
+bool add_text(int control_id, string text, int position=-1)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID of the input box.<br>
+text<br>
+The text that is to be added.<br>
+position<br>
+An optional parameter specifying the 0-based position where the new text should be added. A value of -1 will append the text to the end of the original.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and an input box.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int input=form.create_input_box("test", "Let's add!", "", 0, true, false);
+int ok=form.create_button("&Add");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+form.add_text(input, " text", 9);
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

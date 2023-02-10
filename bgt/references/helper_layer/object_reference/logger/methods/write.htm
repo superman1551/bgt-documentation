@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write</title>
+</head>
+<body>
+<br>
+<b>logger object</b><br>
+<br>
+This method will write the data accumulated internally for the log to a text file.<br>
+<br>
+bool write(string filename, bool reset_text)<br>
+<br>
+Parameters:<br>
+filename<br>
+The name of the file to write to.<br>
+reset_text<br>
+A boolean value specifying whether the log should be reset. If set to false, the text will remain in the log until you manually call the reset method.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If an error occurs, no file will be written to and the text will remain in the log, regardless of the value of the reset_text parameter.<br>
+<br>
+If the always_include_header property is set to true and the header_text property contains some text, the header will be written to the log every time the write method is called. Otherwise the header will only be written if there is no text already in the specified file.<br>
+<br>
+The footer will only be included in the log if the reset_text parameter is set to true.<br>
+<br>
+Example:<br>
+<pre>
+//add some text to a log.
+
+#include "logger.bgt"
+
+log test;
+
+void main()
+{
+test.add_entry("text1");
+test.write("test.log", true);
+}
+</pre>
+</body>
+</html>

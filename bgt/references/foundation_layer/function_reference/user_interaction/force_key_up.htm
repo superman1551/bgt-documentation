@@ -1,0 +1,78 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>force_key_up</b><br>
+<br>
+This function causes a given key to assume the state of being released.<br>
+<br>
+bool force_key_up(int key)<br>
+<br>
+Parameters:<br>
+key<br>
+One of the BGT key name constants, see appendix A for a full list.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Forcing keys is useful for controlling certain aspects of games. For example, if you wanted a game to completely replay itself in the player's style, you might record the code and length of each key pressed in a previous game, and code the replay so that all the keys are forced up or up at the right moments, thereby completely simulating the player's actions.<br>
+<br>
+The state of the key being forced is only recognised by the script calling the function and does not affect any other applications.<br>
+<br>
+Please note that forcing a key up after being forced down does not pass control of the key back to the user, rather it reverses the state of the affected key. To reset the state of the key so that it can again be controlled by the user, use either the reset_forced_key or reset_all_forced_keys function.<br>
+<br>
+Example:<br>
+<pre>
+/*
+This is a small example that plays the Windows ding every second until the space bar is pressed. If the f key is pressed, the script will force the space key up, thereby triggering the ding to play whether the space bar is physically pressed or not.
+*/
+
+void main()
+{
+sound ding;
+timer time;
+ding.load("c:/windows/media/ding.wav");
+show_game_window("Ding Test");
+while(true)
+{
+if((time.elapsed&lt;1000)||(!key_up(KEY_SPACE)))
+{
+if((key_pressed(KEY_ESCAPE))||((key_down(KEY_LMENU))&&(key_pressed(KEY_F4))))
+{
+exit();
+}
+if(key_pressed(KEY_F))
+{
+force_key_up(KEY_SPACE);
+}
+wait(5);
+continue;
+}
+time.restart();
+ding.play();
+}
+}
+</pre>
+</body>
+</html>

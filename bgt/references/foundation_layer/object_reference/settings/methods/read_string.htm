@@ -1,0 +1,69 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>read_string</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will read the data contained in a string value.<br>
+<br>
+string read_string(string value_name)<br>
+<br>
+Parameters:<br>
+value_name<br>
+The name of the value to read.<br>
+<br>
+Return value:<br>
+The value data on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+If an error occurs, the method will return a blank string and the last_error flag will be set.<br>
+<br>
+Example:<br>
+<pre>
+// Read a user license from the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+if(!game_data.exists("user_registration"))
+{
+alert("Error", "Could not read user_registration. The specified value does not exist.");
+exit();
+}
+string reg=game_data.read_string("user_registration");
+if(last_error<0)
+{
+alert("Error", "Could not access user_registration.");
+exit();
+}
+alert("User Registration", reg);
+}
+</pre>
+</body>
+</html>

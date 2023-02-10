@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>is_empty</title>
+</head>
+<body>
+<br>
+<b>dictionary object</b><br>
+<br>
+This method is used to determine whether the dictionary is empty. That is to say, contains no entries.<br>
+<br>
+bool is_empty()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+True if the dictionary is empty, false otherwise.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Declare a dictionary and check if it is empty.
+
+void main()
+{
+dictionary example;
+example.set("Name", "Damien");
+if(example.is_empty())
+{
+alert("Oh dear!", "The dictionary seems to be empty, despite attempting to feed it with data.");
+exit();
+}
+alert("Information", "The dictionary is nicely full of data.");
+}
+</pre>
+</body>
+</html>

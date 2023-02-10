@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>logger object</b><br>
+<br>
+string header_text<br>
+This will be the string that will be prepended to any log file. This can be useful, for example, if you need to log when the program started. Default is blank.<br>
+<br>
+string footer_text<br>
+This will be the string that will be appended to any log file. This can be useful if you need to log when the program ended. Default is blank.<br>
+<br>
+string date_format<br>
+This specifies the date and time format that the log will use. This is fully customisable, and can be any text, using the following combinations as date and time controllers enclosed in &lt; and &gt; signs (less than/greater than signs).<br>
+<ul>
+<li>d or D=the date (1 to 31).</li>
+<li>dd or DD=date (01 to 31).</li>
+<li>w=weekday (1 to 7).</li>
+<li>W=weekday (monday to sunday).</li>
+<li>m=month (1 to 12).</li>
+<li>mm or MM=month (01 to 12).</li>
+<li>M=month (January to December).</li>
+<li>y=year in 4-digit format.</li>
+<li>Y=year in 2-digit format.</li>
+<li>h=hour (1 to 12).</li>
+<li>hh=hour (01 to 12).</li>
+<li>H=hour (0 to 23).</li>
+<li>HH=hour (00 to 23).</li>
+<li>n or N=minute (0 to 59).</li>
+<li>nn or NN=minute (00 to 59).</li>
+<li>s or S=second (0 to 59).</li>
+<li>ss or SS=second (00 to 59).</li>
+<li>tt=am/pm.</li>
+<li>TT=AM/PM.</li>
+</ul>
+Default value is "&lt;dd&gt;/&lt;mm&gt;/&lt;y&gt;, &lt;hh&gt;:&lt;nn&gt;:&lt;ss&gt; &lt;tt&gt;".<br>
+<br>
+bool date_all_entries<br>
+This specifies whether all logged entries should be dated. If set to true, all entries will be dated. If set to false, no entries are dated unless you manually enter the date. Default value is false.<br>
+<br>
+bool overwrite_file<br>
+This specifies whether the log file will be appended to or overwritten. Set this to true to overwrite the file, or false to append. Default value is false.<br>
+<br>
+bool always_include_header<br>
+Specifies whether the header should always be included in the log. This property is ignored if the header_text property is blank. Default is false.<br>
+</body>
+</html>

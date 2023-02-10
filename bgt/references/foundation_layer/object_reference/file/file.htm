@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>file</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+The file object is used to read and write files stored on the hard disk.<br>
+<br>
+file()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The file object is initially blank, until a file is associated with it. To associate a file you must call the "open" method specifying a name or a path for the file, and the mode in which the file is opened. You may call the "open" method again at any time if you wish to open a new file, at which point the old file (if any) will be cleared. This, in short, allows you to reuse the same file object to control multiple files.<br>
+<br>
+Example:<br>
+<pre>
+// Write some text into a file.
+
+void main()
+{
+file test;
+test.open("c:\\test.txt", "w");
+test.write("I am a text file!");
+test.close();
+}
+</pre>
+</body>
+</html>

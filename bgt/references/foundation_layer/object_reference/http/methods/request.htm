@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>request</title>
+</head>
+<body>
+<br>
+<b>http object</b><br>
+<br>
+This method retrieves any new data from a currently active download using either the get or post methods.<br>
+<br>
+string request()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The data from the server on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+This method checks if any new data has been returned by the server since the last call, and returns it as a string. It must be called continuously, without any long pauses, if the retrieval is to succeed. You must keep calling this function until the progress boolean property reports false.<br>
+<br>
+Please note that it is perfectly normal for this method to return a blank string without any error having occured. This simply means that no new data was provided by the server since the last call. Always call get_last_error to detect if an actual error has occured.<br>
+<br>
+Example:<br>
+<pre>
+// Retrieve the contents of the index page at blastbay.com.
+
+void main()
+{
+http download;
+string body=download.get("http://www.blastbay.com/");
+if(get_last_error()!=0)
+{
+alert("Error", "An error occured.\r\nDescription: " + body + "");
+}
+else
+{
+while(download.progress)
+{
+body+=download.request();
+wait(5);
+}
+clipboard_copy_text(body);
+alert("Success", "The data was retrieved and has been copied to your clipboard.");
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>convert_to_currency</b><br>
+<br>
+This function is contained within finance.bgt in the BGT include directory, and is used to convert a number into a valid currency formatted string.<br>
+<br>
+string convert_to_currency(int number, string currency_symbol)<br>
+<br>
+Parameters:<br>
+number<br>
+The number that will be converted.<br>
+currency_symbol<br>
+Your local currency symbol, for example £, $, ¥, € etc.<br>
+<br>
+Return value:<br>
+A string containing the converted currency.<br>
+<br>
+Remarks:<br>
+The number parameter should contain the value in the smallest possible units. For example, if you are working in British Pounds then you will be providing the value in pence, in dollars the value will be in cents, etc. The function will then convert it into pounds and pence, dollars and cents, etc.<br>
+<br>
+This function only works with positive numbers. Any value below 0 will return an empty string.<br>
+<br>
+Example:<br>
+<pre>
+//Display a number as a currency.
+
+#include "finance.bgt"
+
+void main()
+{
+alert("convert_to_currency test", convert_to_currency(150, "£")); //output should be £1.50.
+}
+</pre>
+</body>
+</html>

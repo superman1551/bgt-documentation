@@ -1,0 +1,59 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write_wave_sound</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method writes the current data to a sound object in memory.<br>
+<br>
+sound@ write_wave_sound()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+A sound object with the data loaded into it on success, or an inactive sound object on failure.<br>
+<br>
+Remarks:<br>
+This method writes the data directly to a sound object in memory, without using a file in any way. The sound object may take a while to be created, depending on the complexity of the piece.<br>
+<br>
+Example:<br>
+<pre>
+// Generate and play a B major chord.
+
+tone_synth synth;
+
+void main()
+{
+synth.note("B3, D#4, Gb4", 4);
+sound@ output=synth.write_wave_sound();
+if(output.active==false)
+{
+alert("Error", "The sound object could not be created.\nReason: " + get_last_error_text());
+exit();
+}
+output.play_wait();
+}
+</pre>
+</body>
+</html>

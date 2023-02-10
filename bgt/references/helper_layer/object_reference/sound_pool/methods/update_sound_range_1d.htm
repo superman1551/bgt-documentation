@@ -1,0 +1,78 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>update_sound_range_1d</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method will update the range of a sound on a 1d grid.<br>
+<br>
+bool update_sound_range_1d(int slot, int left_range, int right_range)<br>
+<br>
+Parameters:<br>
+slot<br>
+The slot of the sound to update.<br>
+left_range<br>
+The leftmost position from the centre of the source where the sound should remain with the listener.<br>
+right_range<br>
+The rightmost position from the centre of the source where the sound should remain with the listener.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The range of the sound determines how far the listener can move before they move away from the source. This, for example, enables you to have a river or an impassable wall of fire or electricity, etc.<br>
+<br>
+Please note: When dealing with sound slots, be sure that you set the persistent flag to true for all non-looping sounds when you first create them. If you fail to do this, manipulating a sound in any way by use of its slot number can have unpredictable results. This is because the sound pool automatically cleans up any sound that has finished playing and that is not set to be persistent, with the result that the slot that was returned on creation is no longer invalid and may, in the worst case scenario, refer to a completely different sound.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sounds;
+timer move_timer;
+
+int pos;
+
+void main()
+{
+sounds.max_distance=70;
+pos=0;
+int slot=sounds.play_1d("sounds/loop.wav", 100, pos, true);
+while(true)
+{
+if(move_timer.elapsed>=200)
+{
+move_timer.restart();
+pos++;
+sounds.update_sound_range_1d(slot, 5, 5);
+sounds.update_sound_1d(slot, pos);
+}
+if(pos>=100)
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

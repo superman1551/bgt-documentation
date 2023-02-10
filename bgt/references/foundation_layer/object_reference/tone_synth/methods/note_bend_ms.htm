@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>note_bend_ms</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method generates a given note or list of notes that will last for a specified number of milliseconds, with the additional option of being able to bend.<br>
+<br>
+bool note_bend_ms(string notes, double bend_amount, double length, double bend_start, double bend_length)<br>
+<br>
+Parameters:<br>
+notes<br>
+A string specifying a note or list of notes to generate.<br>
+bend_amount<br>
+The amount in semitones to bend the pitch.<br>
+length<br>
+The length of the generated notes, in milliseconds.<br>
+bend_start<br>
+The millisecond at which to start the bend.<br>
+bend_length<br>
+The length of the bend, in milliseconds.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Notes are written inside a string and are separated by a comma and space. Values inside notes are case sensitive.<br>
+<br>
+Notes are written as the note letter from A to G (notice that they are upper case), followed by the octave number. To sharpen a note add a # after the note and before the number, and to flatten it use a b (lower case). Middle C is C4. Valid notes are from C0 to D#8/Eb8.<br>
+<br>
+The notes provided in the list will be generated together (as opposed to separately, one after the other), allowing for easier and quicker creation of chords.<br>
+<br>
+When specifying bend_amount, positive values bend upwards while negative values bend downwards.<br>
+<br>
+Example:<br>
+<pre>
+// Write a B major chord and bend it up to an E major.
+
+tone_synth synth;
+
+void main()
+{
+synth.note_bend("B3, D#4, Gb4", 5, 2000, 500, 500);
+synth.write_wave_file("wave.wav");
+}
+</pre>
+</body>
+</html>

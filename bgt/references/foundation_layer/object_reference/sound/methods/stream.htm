@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>stream</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will load a sound as a stream for playback.<br>
+<br>
+bool stream(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The file to open. If the sound is stored on disk this can be either an absolute path, a relative path or the file name on its own. Absolute paths are not applicable however, if the sound is being loaded from a pack file (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The location in which the engine searches for the file specified in the filename parameter is determined by a call to the "set_sound_storage" function. By default it will look on the users hard drive and in the directory where the program is stored, unless an absolute path is specified such as "C:\\Windows\\media\\ding.wav". If the engine has been set up to look inside a pack file then only a file name such as "creature.ogg" or a relative path such as "sounds\\monster.ogg" can be specified.<br>
+<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+Be careful when creating streaming sounds. A streamed sound will be read from disk while it is playing which means that it does not have to be loaded into memory in its entirety. This in turn means that the engine will constantly have to retrieve new data, so playing many streams at once is not a good idea; especially not if they are in a compressed format which needs to be decoded on the fly. Streames should generally be used for longer sounds such as background music, cut scenes or ambiences.<br>
+<br>
+Example:<br>
+<pre>
+// Load a sound for streaming, play it and close it.
+
+void main()
+{
+sound test;
+test.stream("c:\\windows\\media\\ding.wav");
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>url_decode</b><br>
+<br>
+This function decodes a URL compatible string back to its standard form.<br>
+<br>
+string url_decode(string url)<br>
+<br>
+Parameters:<br>
+url<br>
+The encoded URL string to decode.<br>
+<br>
+Return value:<br>
+The decoded string on success, or the passed string on failure.<br>
+<br>
+Remarks:<br>
+The url_decode function changes special character combinations in URL's that represent spaces and other symbols back to their ASCII equivalents.<br>
+<br>
+Example:<br>
+<pre>
+// Decode a URL.
+
+void main()
+{
+alert("Decoded URL",url_decode("http%3a%2f%2fwww.mysite.com%2ffiles%2fmy+program+%28v1.0%29.exe")); // Reads http://www.mysite.com/files/my program (v1.0).exe
+}
+</pre>
+</body>
+</html>

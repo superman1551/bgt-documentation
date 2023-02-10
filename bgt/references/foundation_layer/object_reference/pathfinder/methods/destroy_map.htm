@@ -1,0 +1,45 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>destroy_map</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+This method destroys the current map so that no further search operations may be performed until a new one is set up.<br>
+<br>
+bool destroy_map()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method frees the internal resources associated with the map. Note that this is done automatically when the pathfinder object itself is destroyed.<br>
+<br>
+This method must not be invoked from within the user callback.<br>
+<br>
+Example:<br>
+See the main pathfinder chapter and the pathfinding tutorial.<br>
+</body>
+</html>

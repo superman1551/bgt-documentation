@@ -1,0 +1,78 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>refresh_joystick_list</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This method refreshes the list of available joysticks.<br>
+<br>
+bool refresh_joystick_list()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The joystick list is cached in order to prevent the ID's becoming invalid. This method reenumerates all the joysticks, and also automatically closes the currently open joystick device if any. It is necessary to call the set method with an ID after reenumerating the joysticks.<br>
+<br>
+Example:<br>
+<pre>
+// Refresh the list of joysticks continuously, and print a message if the list changes.
+
+joystick stick;
+
+timer recheck;
+
+void main()
+{
+show_game_window("Joystick searcher");
+alert("Information", "There are currently "+stick.joysticks+" joysticks connected. Monitoring...");
+string[] stick_list=stick.list_joysticks();
+recheck.restart();
+while(key_pressed(KEY_ESCAPE)==false)
+{
+if(recheck.elapsed&gt;=1000)
+{
+stick.refresh_joystick_list();
+recheck.restart();
+string[] new_list=stick.list_joysticks();
+if(new_list.length()==stick_list.length())
+continue;
+if(new_list.length()&lt;stick_list.length())
+{
+alert("Terror!", "One or more joysticks have now become sleeping sadsticks as they were disconnected from the system.");
+}
+else
+{
+alert("Joy!", "One or more new joysticks are now living up to their name as they are now active, connected to the system, and happily waiting for something to do!");
+}
+stick_list=new_list;
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

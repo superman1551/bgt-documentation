@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>reset</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will reset the calendar object to the current system time.<br>
+<br>
+bool reset()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and reset it.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.reset();
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

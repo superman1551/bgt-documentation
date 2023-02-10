@@ -1,0 +1,83 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_cancel_button</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will return the ID of the control that contains the cancel button.<br>
+<br>
+int get_cancel_button()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The ID of the control on success, or -1 on failure or if no control has the cancel button.<br>
+<br>
+Remarks:<br>
+For a more detailed explanation on how the primary and cancel attributes work, please see the topic covering the create_button method.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int set_device=form.create_button("Set &Device");
+int reset=form.create_button("Reset &Password");
+int website=form.create_button("Open &Website");
+int ok=form.create_button("OK", true, false);
+int cancel=form.create_button("E&xit", false, true);
+int assist_me=form.create_button("&Help");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+alert("Information", "The cancel button is "+form.get_cancel_button());
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if(form.is_pressed(assist_me))
+{
+alert("Help", "This program does pretty much nothing. It is supposed to be an example from the BGT manual.");
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

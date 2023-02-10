@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_file</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will pass a file within a pack to a file object for reading.<br>
+<br>
+file@ get_file(string internal_name)<br>
+<br>
+Parameters:<br>
+internal_name<br>
+The name of the file to pass to a file object.<br>
+<br>
+Return value:<br>
+A file object pointing to the data on success, or an inactive file object on failure.<br>
+<br>
+Remarks:<br>
+This method passes data from a file inside a pack to a standard file object. This allows a file to be read in chunks from inside the pack without the need to extract it to disk. The file object does not contain a copy of the data, it reads from the original pack but only the relevant section of the file, so that you need not worry about accessing other data in the pack by accident.<br>
+<br>
+Remember to always check the active property of the file object after this call, in order to determine whether or not the retrieval was successful.<br>
+<br>
+Example:<br>
+<pre>
+// Read a file from inside a pack.
+
+void main()
+{
+file@ data;
+pack_file pack;
+pack.open("pack.dat");
+@data=pack.get_file("t1");
+if(data.active==false)
+{
+alert("Oops","The file could not be read from the pack");
+pack.close();
+}
+else
+{
+string text=data.read(0);
+data.close();
+pack.close();
+alert("information", "Data in the t1 file in pack.dat reads the following:\r\n"+text);
+}
+}
+</pre>
+</body>
+</html>

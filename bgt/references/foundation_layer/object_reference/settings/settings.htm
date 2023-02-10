@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>settings</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+The settings object is used to store data in the Windows registry.<br>
+<br>
+settings()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The settings object is useful for storing small amounts of data that can be retrieved when needed. Some common tasks include storing and retrieving registration keys, game configurations such as music and sound volumes, and other game related data such as current score, level, difficulty etc. However, the settings object should not be used to serialize game states. These should always be stored in a file.<br>
+<br>
+Please note: Caution should be exercised when accessing the registry. If done incorrectly, it can impair the performance of the end user's system. Certain limitations apply when writing content to the registry, see the chapters for the individual functions for more details.<br>
+<br>
+Example:<br>
+<pre>
+// Store a value in the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+success=game_data.write_number("music_volume", -5.0);
+if(!success)
+{
+alert("Error", "Couldn't write music_volume.");
+}
+}
+</pre>
+</body>
+</html>

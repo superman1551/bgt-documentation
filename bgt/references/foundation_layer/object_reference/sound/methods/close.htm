@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>close</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will close any sound associated with the object.<br>
+<br>
+bool close()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Closing a sound is useful when you want to release the current sound memory that is associated with the object in order to save resources, while still keeping the object alive for future use. This method is executed automatically when a sound object is destroyed, so you need not worry about calling it to clean up after yourself at the end of your script for example. This method is also executed if you call either the load or stream method on a sound object that already has a sound associated with it.<br>
+<br>
+Example:<br>
+<pre>
+// Load a sound into memory, play it and close it.
+
+void main()
+{
+sound test;
+test.load("c:\\windows\\media\\ding.wav");
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

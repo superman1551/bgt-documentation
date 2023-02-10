@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write</title>
+</head>
+<body>
+<br>
+<b>soundtrack object</b><br>
+<br>
+This method will write a song to a wave file.<br>
+<br>
+bool write(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+a string containing the desired file name for the wave file.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Use the add_channel method first to add some music, otherwise you will create an empty wave file.<br>
+<br>
+Example:<br>
+<pre>
+// Write a song.
+
+#include "soundtrack.bgt"
+
+void main()
+{
+soundtrack s;
+string preamble = "t140u6";
+string chords1 = "@1v97l2a8r100q12[C&amp;E&amp;G]2[&lt;B&amp;&gt;E&amp;G]2[&lt;B-&amp;&gt;E&amp;G]2[&lt;A&amp;&gt;D&amp;F]2&lt;F+&amp;A&amp;B&amp;&gt;D&lt;A-&amp;B&amp;&gt;D&amp;E&lt;A&amp;&gt;C&amp;E&lt;G&amp;&gt;C&amp;E&lt;E&amp;G&amp;&gt;C&lt;D&amp;F+&amp;&gt;C&lt;F&amp;G&amp;&gt;C&amp;D&lt;F&amp;G&amp;B&amp;&gt;D";
+string chords2 = "[&lt;B&amp;&gt;D&amp;G]2[C&amp;E&amp;G]2q20&lt;B4&amp;&gt;D4&amp;B4C8&amp;E8&amp;&gt;C8&lt;&lt;l4B&amp;&gt;D&amp;B&lt;A&amp;&gt;C&amp;Aq12l2&lt;G&amp;B&amp;&gt;Gp8&lt;G&amp;B&amp;&gt;C&amp;G&lt;B&amp;&gt;D&amp;G&lt;B&amp;&gt;D&amp;F&lt;B&amp;&gt;D&amp;G&lt;G&amp;&gt;C&amp;E";
+string chords3 = "&lt;G&amp;&gt;C&amp;E&lt;F+&amp;&gt;C&amp;D&lt;F&amp;&gt;C&amp;D&lt;F&amp;B&amp;&gt;D";
+string chords4 = "[&lt;A&amp;&gt;C&amp;F]3&lt;G&amp;B&amp;&gt;F&lt;G&amp;&gt;C&amp;El8q8r10&lt;B-&amp;&gt;C&amp;Gl4&lt;A-&amp;&gt;C&amp;Fl1&lt;G&amp;&gt;C&amp;Ep8l4&lt;A-&amp;&gt;C&amp;E&lt;A-&amp;&gt;C&amp;Dp4l1&lt;E&amp;G&amp;&gt;C";
+string chords = chords1 + chords1 + chords2 + chords3 + chords2 + chords4;
+string bass1 = "@3r100C2.CC2.CC2.CC2.C&lt;B2&gt;E2&lt;A2.A&gt;D2.D&lt;G2.";
+string bass2 = "E2.E&lt;A2.A&gt;F2.FE2&lt;A2&gt;F2&lt;B2&gt;E2&lt;A2&gt;";
+string bass3 = "D2.D&lt;G2.&gt;F";
+string bass4 = "D2.D4&lt;G2.G&gt;C1C1C4&lt;G4p4C1";
+string bass = bass1 + "G&gt;" + bass1 + "&gt;F" + bass2 + bass3 + bass2 + bass4;
+string melody1 = "@2a10r10E2.p4E2.p4EE8FCD2.p4p8DD8E4.&lt;B8&gt;C4.DC&lt;BA2p8&gt;E.";
+string melody2 = "l4G2.p4G2.p4B&gt;C8&lt;BAG2.p4p8B8B8&gt;C8&lt;B4.A8G4.&gt;D8C4.&lt;";
+string melody3 = "E8E2.p8D8CD2A4.";
+string melody4 = "l4EEF8F4.GA2B2&gt;C1.";
+string melody = melody1 + "D2.p4" + melody1 + "D2p8A4." + melody2 + melody3 + melody2 + melody4;
+s.add_channel(preamble + "o3" + bass);
+s.add_channel(preamble + "o2" + bass);
+s.add_channel(preamble + chords);
+s.add_channel(preamble + melody);
+s.add_channel(preamble + "o5v90" + melody);
+s.write("song4.wav");
+}
+</pre>
+</body>
+</html>

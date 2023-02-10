@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>stop</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will stop the sound playback.<br>
+<br>
+bool stop()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method will stop the playback of the sound, resetting its position to the beginning of the file. Thus, it will start from the very beginning the next time the "play" method is called.<br>
+<br>
+Example:<br>
+<pre>
+// Play a sound and let the user pause and unpause it with the space bar, stop it with enter and exit with escape.
+
+void main()
+{
+sound ambience;
+show_game_window("Sound Test");
+ambience.load("curry.wav");
+if(ambience.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+ambience.play();
+while(true)
+{
+if(key_pressed(KEY_SPACE))
+{
+if(ambience.playing==true)
+{
+ambience.pause();
+}
+else
+{
+ambience.play();
+}
+}
+if(key_pressed(KEY_RETURN))
+{
+ambience.stop();
+}
+if(key_pressed(KEY_ESCAPE))
+{
+break;
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

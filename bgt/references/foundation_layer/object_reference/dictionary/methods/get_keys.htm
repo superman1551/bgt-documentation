@@ -1,0 +1,66 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_keys</title>
+</head>
+<body>
+<br>
+<b>dictionary object</b><br>
+<br>
+This method will retrieve a list of all the keys that are present in the dictionary.<br>
+<br>
+string[] get_keys()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array with all the keys on success, or an empty array on failure.<br>
+<br>
+Remarks:<br>
+Internally the BGT engine uses what is known as a hash map for the dictionary, which means that the time that it takes to look up values is greatly decreased at the cost of losing ordering. This means that the keys returned by this method may appear in any order, which is likely to be very different from the order in which you actually added them.<br>
+<br>
+Example:<br>
+<pre>
+dictionary game_board; // Declare our dictionary.
+
+void main()
+{
+// Add a bunch of keys to the dictionary.
+for(uint i=0;i&lt;20;i++)
+{
+game_board.set("key_" + (i+1), 0);
+}
+
+// Assemble a string with a list of all the keys and display it in an alert box.
+string output;
+string[] keys=game_board.get_keys();
+for(uint i=0;i&lt;keys.length();i++)
+{
+if(output=="")
+output+=keys[i];
+else
+output+="\n" + keys[i];
+}
+alert("Keys", output);
+}
+</pre>
+</body>
+</html>

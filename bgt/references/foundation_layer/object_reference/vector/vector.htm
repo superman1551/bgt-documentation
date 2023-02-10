@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>vector</title>
+</head>
+<body>
+<br>
+<b>vector object</b><br>
+<br>
+The vector object is used to store a set of coordinates for a 2d or 3d environment.<br>
+<br>
+vector(float x, float y, float z)<br>
+<br>
+Parameters:<br>
+x<br>
+An optional float representing the x value of the vector.<br>
+y<br>
+A float representing the y value of the vector. This parameter must be filled in if an x value is specified.<br>
+z<br>
+An optional float representing the z value of the vector.<br>
+<br>
+Remarks:<br>
+The parameters may simply be left out if desired. This will simply give values of 0 to all the coordinates.<br>
+<br>
+This object contains the following overloaded operators:<br>
+<ul>
+<li>== and != (compares two vectors)</li>
+<li>=, +=, +, -=, - (uses arithmetic to add and subtract vectors to and from other vectors)</li>
+<li>*=, /=, *, / (multiplies/divides a vector by a scale value, represented by a float)</li>
+</ul>
+<br>
+Example:<br>
+<pre>
+// Create a vector object and display its values.
+
+void main()
+{
+vector game_world(5, 2, 3);
+alert("Information", "Current coordinates are "+game_world.x+", "+game_world.y+", "+game_world.z+".");
+}
+</pre>
+</body>
+</html>

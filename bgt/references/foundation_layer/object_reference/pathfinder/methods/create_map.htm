@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>create_map</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+This method sets up the pathfinder for use with a map of a given size.<br>
+<br>
+bool create_map(int x_size, int y_size)<br>
+<br>
+Parameters:<br>
+x_size<br>
+The width of the map, in squares.<br>
+y_size<br>
+The height of the map, in squares.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Before pathfinding can begin, the map needs to be set up. This method allocates resources for the entire map, which are used internally while searching.<br>
+<br>
+This method must not be invoked from within the user callback.<br>
+<br>
+The maximum size of a map is 10000 by 10000 squares.<br>
+<br>
+Example:<br>
+See the main pathfinder chapter and the pathfinding tutorial.<br>
+</body>
+</html>

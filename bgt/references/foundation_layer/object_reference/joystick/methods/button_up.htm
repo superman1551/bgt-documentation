@@ -1,0 +1,71 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>button_up</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This function checks if a particular button on the joystick is currently up.<br>
+<br>
+bool button_up(int button)<br>
+<br>
+Parameters:<br>
+button<br>
+The ID of a joystick button to check (see remarks).<br>
+<br>
+Return value:<br>
+true if the button is up, false if it is not or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between button_up and button_released is that button_released will only return true when the user first releases the button, while button_up will continue returning true until the button is pushed down again.<br>
+<br>
+The joystick object supports up to 128 buttons, ranging from 0 to 127. However the actual maximum button is determined by the buttons property for the given device, meaning that the allowed range is from 0 to buttons minus 1.<br>
+<br>
+It is important to remember when mapping functions to joystick buttons that devices can vary greatly between models, supporting anything between 3 and 15 buttons, and therefore it is always a good idea to map the most common activities to buttons with lower numbers.<br>
+<br>
+Example:<br>
+<pre>
+// The engine sound will only play when button 0 is down.
+
+void main()
+{
+show_game_window("Joystick buttons");
+sound truck;
+joystick stick;
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+truck.load("engine.wav");
+while(key_up(KEY_ESCAPE))
+{
+if((stick.button_up(0))&&(truck.playing))
+truck.pause();
+else
+truck.play_looped();
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

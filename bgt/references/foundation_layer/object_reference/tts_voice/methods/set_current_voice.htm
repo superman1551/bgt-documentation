@@ -1,0 +1,59 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_current_voice</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method sets the voice that is to be used for subsequently spoken text.<br>
+<br>
+bool set_current_voice(int voice)<br>
+<br>
+Parameters:<br>
+voice<br>
+The ID of the voice that is to be used, as indicated by a call to the get_voice_names method.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The voice ID's correspond to the index that each voice has in the array returned by the get_voice_names method. In short, if Microsoft Sam is the first voice in the array returned by get_voice_names, then 0 would be specified as the argument to this method in order to select Microsoft Sam.<br>
+<br>
+The list of voices returned by the get_voice_names method is cached. The tts_voice object automatically retrieves a list of all the available voices when it is first created, and this list is then kept internally for performance reasons. This means that if the user installs or uninstalls voices while your game is running then the list, and as a result also the ID's that this method uses to refer to it, will be out of date. You may refresh the internal cache manually by calling the refresh_voice_list method.<br>
+<br>
+Example:<br>
+<pre>
+// Let all the voices present on the system, introduce themselves by name.
+
+void main()
+{
+tts_voice speech;
+string[] list=speech.get_voice_names();
+for(uint counter=0; counter&lt;list.length(); counter++)
+{
+speech.set_current_voice(counter);
+speech.speak_wait(list[counter]);
+}
+}
+</pre>
+</body>
+</html>

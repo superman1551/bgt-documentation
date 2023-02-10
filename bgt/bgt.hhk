@@ -1,0 +1,452 @@
+<html>
+<head>
+</head>
+<body>
+<ul>
+<li><object type="text/sitemap"><param name="Name" value="absolute"><param name="Local" value="references/foundation_layer/function_reference/Math/absolute.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="alert"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/alert.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix A - Keyboard Constants"><param name="Local" value="Appendix_A.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix B - Error Codes"><param name="Local" value="Appendix_B.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix C - Date and Time Constants"><param name="Local" value="Appendix_C.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix D - Script Properties"><param name="Local" value="Appendix_D.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix E - Directory Constants"><param name="Local" value="Appendix_E.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix F - Screen Reader Distribution"><param name="Local" value="Appendix_F.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix G - BGT Command Line Options"><param name="Local" value="Appendix_G.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Appendix H - Debug Versus Release Builds"><param name="Local" value="Appendix_H.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array"><param name="Local" value="references/foundation_layer/object_reference/array/array.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.find"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/find.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.get_size"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/get_size.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.insert_at"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/insert_at.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.insert_last"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/insert_last.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.is_empty"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/is_empty.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.length"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/length.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.remove_at"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/remove_at.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.remove_last"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/remove_last.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.reserve"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/reserve.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.resize"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/resize.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.reverse"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/reverse.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.sort_ascending"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/sort_ascending.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="array.sort_descending"><param name="Local" value="references/foundation_layer/object_reference/array/Methods/sort_descending.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="arc_cosine"><param name="Local" value="references/foundation_layer/function_reference/Math/arc_cosine.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="arc_sine"><param name="Local" value="references/foundation_layer/function_reference/Math/arc_sine.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="arc_tangent"><param name="Local" value="references/foundation_layer/function_reference/Math/arc_tangent.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="ascii_to_character"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/ascii_to_character.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="assert"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/assert.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form"><param name="Local" value="references/helper_layer/object_reference/audio_form/audio_form.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form Control Types"><param name="Local" value="references/helper_layer/object_reference/audio_form/constants/control_types.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form Error Codes"><param name="Local" value="references/helper_layer/object_reference/audio_form/constants/errors.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form Input Box Speech Flags"><param name="Local" value="references/helper_layer/object_reference/audio_form/constants/input_speech.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form Object Properties"><param name="Local" value="references/helper_layer/object_reference/audio_form/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form Text Edit Modes"><param name="Local" value="references/helper_layer/object_reference/audio_form/constants/text_edit_modes.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.activate_progress_timer"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/activate_progress_timer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.add_list_item"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/add_list_item.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.add_text"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/add_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.clear_list"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/clear_list.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_button"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_button.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_checkbox"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_checkbox.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_input_box"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_input_box.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_list"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_list.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_progress_bar"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_progress_bar.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_status_bar"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_status_bar.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.create_window"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/create_window.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.delete_control"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/delete_control.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.delete_list_item"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/delete_list_item.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.delete_list_selections"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/delete_list_selections.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.edit_list_item"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/edit_list_item.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.edit_text"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/edit_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.focus"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/focus.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_cancel_button"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_cancel_button.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_caption"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_caption.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_control_attributes"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_control_attributes.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_control_count"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_control_count.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_control_type"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_control_type.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_current_focus"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_current_focus.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_default_button"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_default_button.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_last_error"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_last_error.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_list_count"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_list_count.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_list_item"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_list_item.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_list_position"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_list_position.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_list_selections"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_list_selections.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_progress"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_progress.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.get_text"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/get_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_checked"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_checked.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_enabled"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_enabled.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_multiline"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_multiline.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_pressed"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_read_only"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_read_only.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.is_visible"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/is_visible.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.monitor"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/monitor.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.pause_progress_timer"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/pause_progress_timer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.reset"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_button_attributes"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_button_attributes.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_checkbox_mark"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_checkbox_mark.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_list_position"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_list_position.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_progress"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_progress.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_output_mode"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_output_mode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_overwrite_mode"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_overwrite_mode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_speech_verbosity_options"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_speech_verbosity_options.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_state"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_state.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_text"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="audio_form.set_tts_object"><param name="Local" value="references/helper_layer/object_reference/audio_form/methods/set_tts_object.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar"><param name="Local" value="references/foundation_layer/object_reference/calendar/calendar.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar Object Properties"><param name="Local" value="references/foundation_layer/object_reference/calendar/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_days"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_days.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_hours"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_hours.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_minutes"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_minutes.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_months"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_months.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_seconds"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_seconds.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.add_years"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/add_years.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_days"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_days.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_hours"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_hours.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_minutes"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_minutes.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_months"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_months.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_seconds"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_seconds.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.diff_years"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/diff_years.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.reset"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="calendar.set"><param name="Local" value="references/foundation_layer/object_reference/calendar/Methods/set.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="ceiling"><param name="Local" value="references/foundation_layer/function_reference/Math/ceiling.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Change Log"><param name="Local" value="Change_Log.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="character_to_ascii"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/character_to_ascii.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="clipboard_copy_text"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/clipboard_copy_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="clipboard_read_text"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/clipboard_read_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination"><param name="Local" value="references/foundation_layer/object_reference/combination/combination.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination Object Properties"><param name="Local" value="references/foundation_layer/object_reference/combination/Properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination.generate_all_combinations"><param name="Local" value="references/foundation_layer/object_reference/combination/Methods/generate_all_combinations.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination.generate_unique_combinations"><param name="Local" value="references/foundation_layer/object_reference/combination/Methods/generate_unique_combinations.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination.next"><param name="Local" value="references/foundation_layer/object_reference/combination/Methods/next.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="combination.reset"><param name="Local" value="references/foundation_layer/object_reference/combination/Methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="convert_to_currency"><param name="Local" value="references/helper_layer/function_reference/financial_operations/convert_to_currency.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="cosine"><param name="Local" value="references/foundation_layer/function_reference/Math/cosine.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Credits"><param name="Local" value="Credits.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="deserialize"><param name="Local" value="references/foundation_layer/function_reference/Serialization/deserialize.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary"><param name="Local" value="references/foundation_layer/object_reference/dictionary/dictionary.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.delete"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/delete.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.delete_all"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/delete_all.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.exists"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/exists.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.get"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/get.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.get_keys"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/get_keys.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.get_size"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/get_size.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.is_empty"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/is_empty.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dictionary.set"><param name="Local" value="references/foundation_layer/object_reference/dictionary/Methods/set.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="directory_create"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/directory_create.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="directory_delete"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/directory_delete.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="directory_exists"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/directory_exists.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/dynamic_menu.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu Object Properties"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.add_item"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/add_item.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.add_item_tts"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/add_item_tts.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.get_item_count"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/get_item_count.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.get_item_name"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/get_item_name.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.get_position"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/get_position.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.is_running"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/is_running.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.reset"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.run"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/run.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.run_extended"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/run_extended.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.set_callback"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/set_callback.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.set_speech_mode"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/methods/set_speech_mode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.set_sound_object"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/set_sound_object.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="dynamic_menu.set_tts_object"><param name="Local" value="references/helper_layer/object_reference/dynamic_menu/Methods/set_tts_object.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="End User License Agreement"><param name="Local" value="End_user_License_Agreement.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="exit"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/exit.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="exponent"><param name="Local" value="references/foundation_layer/function_reference/Math/exponent.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file"><param name="Local" value="references/foundation_layer/object_reference/file/file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file Object Properties"><param name="Local" value="references/foundation_layer/object_reference/file/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.close"><param name="Local" value="references/foundation_layer/object_reference/file/methods/close.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.open"><param name="Local" value="references/foundation_layer/object_reference/file/methods/open.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.read"><param name="Local" value="references/foundation_layer/object_reference/file/methods/read.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.read_until"><param name="Local" value="references/foundation_layer/object_reference/file/methods/read_until.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.seek"><param name="Local" value="references/foundation_layer/object_reference/file/methods/seek.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file.write"><param name="Local" value="references/foundation_layer/object_reference/file/methods/write.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_copy"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/file_copy.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_decrypt"><param name="Local" value="references/foundation_layer/function_reference/security_functions/file_decrypt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_delete"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/file_delete.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_encrypt"><param name="Local" value="references/foundation_layer/function_reference/security_functions/file_encrypt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_exists"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/file_exists.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="file_hash"><param name="Local" value="references/foundation_layer/function_reference/security_functions/file_hash.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="find_directories"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/find_directories.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="find_files"><param name="Local" value="references/foundation_layer/function_reference/file_and_directory_management/find_files.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="floor"><param name="Local" value="references/foundation_layer/function_reference/Math/floor.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="force_key_down"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/force_key_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="force_key_up"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/force_key_up.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Foundation Layer"><param name="Local" value="references/foundation_layer/foundation_layer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Game Programming in Practice Part I"><param name="Local" value="Tutorials/Practice_1.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Game Programming in Practice Part II"><param name="Local" value="Tutorials/Practice_2.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Game Programming in Practice Part III"><param name="Local" value="Tutorials/Practice_3.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="garbage_collect"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/garbage_collect.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="generate_computer_id"><param name="Local" value="references/foundation_layer/function_reference/security_functions/generate_computer_id.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="generate_profile"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/generate_profile.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_call_stack"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/get_call_stack.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_call_stack_size"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/get_call_stack_size.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_characters"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/get_characters.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_last_error"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/get_last_error.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_last_error_text"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/get_last_error_text.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_sound_master_volume"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/get_sound_master_volume.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="get_sound_storage"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/get_sound_storage.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Helper layer"><param name="Local" value="references/helper_layer/helper_layer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="hex_to_string"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/hex_to_string.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="hide_game_window"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/hide_game_window.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http"><param name="Local" value="references/foundation_layer/object_reference/http/http.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http Object Properties"><param name="Local" value="references/foundation_layer/object_reference/http/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http.get"><param name="Local" value="references/foundation_layer/object_reference/http/methods/get.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http.get_headers"><param name="Local" value="references/foundation_layer/object_reference/http/methods/get_headers.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http.post"><param name="Local" value="references/foundation_layer/object_reference/http/methods/post.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="http.request"><param name="Local" value="references/foundation_layer/object_reference/http/methods/request.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="input_box"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/input_box.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="install_keyhook"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/install_keyhook.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="instance"><param name="Local" value="references/foundation_layer/object_reference/instance/instance.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="instance Object Properties"><param name="Local" value="references/foundation_layer/object_reference/instance/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Introduction"><param name="Local" value="Introduction.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="is_admin"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/is_admin.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="is_game_window_active"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/is_game_window_active.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick"><param name="Local" value="references/foundation_layer/object_reference/joystick/joystick.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick Object Properties"><param name="Local" value="references/foundation_layer/object_reference/joystick/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.button_down"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/button_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.button_pressed"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/button_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.button_released"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/button_released.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.button_up"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/button_up.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.buttons_down"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/buttons_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.buttons_pressed"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/buttons_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.buttons_released"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/buttons_released.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.buttons_up"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/buttons_up.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.list_joysticks"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/list_joysticks.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.pov_centered"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/pov_centered.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.refresh_joystick_list"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/refresh_joystick_list.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="joystick.set"><param name="Local" value="references/foundation_layer/object_reference/joystick/methods/set.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="key_down"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/key_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="key_pressed"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/key_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="key_released"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/key_released.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="key_up"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/key_up.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="keys_down"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/keys_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="keys_pressed"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/keys_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="keys_released"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/keys_released.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="keys_up"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/keys_up.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Language Tutorial"><param name="Local" value="Tutorials/Language_Tutorial.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="library"><param name="Local" value="references/foundation_layer/object_reference/library/library.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="library properties"><param name="Local" value="references/foundation_layer/object_reference/library/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="library.call"><param name="Local" value="references/foundation_layer/object_reference/library/methods/call.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="library.load"><param name="Local" value="references/foundation_layer/object_reference/library/methods/load.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="library.unload"><param name="Local" value="references/foundation_layer/object_reference/library/methods/unload.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Limitations"><param name="Local" value="Limitations.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="list_sound_devices"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/list_sound_devices.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="log"><param name="Local" value="references/foundation_layer/function_reference/Math/log.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="log10"><param name="Local" value="references/foundation_layer/function_reference/Math/log10.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="logger"><param name="Local" value="references/helper_layer/object_reference/logger/logger.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="logger Object Properties"><param name="Local" value="references/helper_layer/object_reference/logger/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="logger.add_entry"><param name="Local" value="references/helper_layer/object_reference/logger/Methods/add_entry.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="logger.reset"><param name="Local" value="references/helper_layer/object_reference/logger/Methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="logger.write"><param name="Local" value="references/helper_layer/object_reference/logger/Methods/write.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="mouse_down"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/mouse_down.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="mouse_pressed"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/mouse_pressed.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="mouse_update"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/mouse_update.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network"><param name="Local" value="references/foundation_layer/object_reference/network/network.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network Object Properties"><param name="Local" value="references/foundation_layer/object_reference/network/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.connect"><param name="Local" value="references/foundation_layer/object_reference/network/methods/connect.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.destroy"><param name="Local" value="references/foundation_layer/object_reference/network/methods/destroy.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.disconnect_peer"><param name="Local" value="references/foundation_layer/object_reference/network/methods/disconnect_peer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.disconnect_peer_forcefully"><param name="Local" value="references/foundation_layer/object_reference/network/methods/disconnect_peer_forcefully.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.disconnect_peer_softly"><param name="Local" value="references/foundation_layer/object_reference/network/methods/disconnect_peer_softly.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.get_peer_address"><param name="Local" value="references/foundation_layer/object_reference/network/methods/get_peer_address.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.get_peer_average_round_trip_time"><param name="Local" value="references/foundation_layer/object_reference/network/methods/get_peer_average_round_trip_time.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.get_peer_list"><param name="Local" value="references/foundation_layer/object_reference/network/methods/get_peer_list.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.request"><param name="Local" value="references/foundation_layer/object_reference/network/methods/request.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.send_reliable"><param name="Local" value="references/foundation_layer/object_reference/network/methods/send_reliable.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.send_unreliable"><param name="Local" value="references/foundation_layer/object_reference/network/methods/send_unreliable.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.set_bandwidth_limits"><param name="Local" value="references/foundation_layer/object_reference/network/methods/set_bandwidth_limits.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.setup_client"><param name="Local" value="references/foundation_layer/object_reference/network/methods/setup_client.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network.setup_server"><param name="Local" value="references/foundation_layer/object_reference/network/methods/setup_server.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network_event"><param name="Local" value="references/foundation_layer/object_reference/network/network_event/network_event.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="network_event Object Properties"><param name="Local" value="references/foundation_layer/object_reference/network/network_event/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker"><param name="Local" value="references/helper_layer/object_reference/number_speaker/number_speaker.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker Object Properties"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker.set_sound_object"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Methods/set_sound_object.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker.speak"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Methods/speak.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker.speak_next"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Methods/speak_next.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker.speak_wait"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Methods/speak_wait.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_speaker.stop"><param name="Local" value="references/helper_layer/object_reference/number_speaker/Methods/stop.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_to_hex_string"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/number_to_hex_string.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="number_to_words"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/number_to_words.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="open_sound_device"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/open_sound_device.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file"><param name="Local" value="references/foundation_layer/object_reference/pack_file/pack_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file Object Properties"><param name="Local" value="references/foundation_layer/object_reference/pack_file/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.add_file"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/add_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.close"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/close.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.create"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/create.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.extract_file"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/extract_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.file_exists"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/file_exists.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.get_file"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/get_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.list_files"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/list_files.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pack_file.open"><param name="Local" value="references/foundation_layer/object_reference/pack_file/methods/open.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Packaging Files in Your Executable"><param name="Local" value="Tutorials/Packaging.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/pathfinder.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder_callback"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/pathfinder_callback.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder Object Properties"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Pathfinder Tutorial"><param name="Local" value="Tutorials/Pathfinder_Tutorial.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder.cancel"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/Methods/cancel.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder.create_map"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/Methods/create_map.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder.destroy_map"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/Methods/destroy_map.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder.find"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/Methods/find.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="pathfinder.set_callback_function"><param name="Local" value="references/foundation_layer/object_reference/pathfinder/Methods/set_callback_function.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Performance Optimizations"><param name="Local" value="Tutorials/Performance.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="position_sound_1d"><param name="Local" value="references/helper_layer/function_reference/Audio_Management/position_sound_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="position_sound_2d"><param name="Local" value="references/helper_layer/function_reference/Audio_Management/position_sound_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="position_sound_custom_1d"><param name="Local" value="references/helper_layer/function_reference/Audio_Management/position_sound_custom_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="position_sound_custom_2d"><param name="Local" value="references/helper_layer/function_reference/Audio_Management/position_sound_custom_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="power"><param name="Local" value="references/foundation_layer/function_reference/Math/power.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Privacy Policy"><param name="Local" value="Privacy_Policy.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="question"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/question.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="random"><param name="Local" value="references/foundation_layer/function_reference/Math/random.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="random_get_state"><param name="Local" value="references/foundation_layer/function_reference/Math/random_get_state.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="random_set_state"><param name="Local" value="references/foundation_layer/function_reference/Math/random_set_state.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="read_environment_variable"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/read_environment_variable.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Registration in BGT"><param name="Local" value="Tutorials/Registration.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="reset_all_forced_keys"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/reset_all_forced_keys.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="reset_forced_key"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/reset_forced_key.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="round"><param name="Local" value="references/foundation_layer/function_reference/Math/round.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="run"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/run.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_is_running"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_is_running.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_set_library_path"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_set_library_path.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_speak"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_speak.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_speak_interrupt"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_speak_interrupt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_stop_speech"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_stop_speech.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="screen_reader_unload_library"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/screen_reader_unload_library.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="serialize"><param name="Local" value="references/foundation_layer/function_reference/Serialization/serialize.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="Serialization Tutorial"><param name="Local" value="Tutorials/Serialization_Tutorial.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="set_error_output"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/set_error_output.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="set_sound_decryption_key"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/set_sound_decryption_key.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="set_sound_master_volume"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/set_sound_master_volume.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="set_sound_storage"><param name="Local" value="references/foundation_layer/function_reference/Audio_Management/set_sound_storage.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings"><param name="Local" value="references/foundation_layer/object_reference/settings/settings.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings Object Properties"><param name="Local" value="references/foundation_layer/object_reference/settings/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.close"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/close.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.exists"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/exists.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.read_number"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/read_number.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.read_string"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/read_string.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.remove_product"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/remove_product.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.remove_value"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/remove_value.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.setup"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/setup.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.write_number"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/write_number.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="settings.write_string"><param name="Local" value="references/foundation_layer/object_reference/settings/Methods/write_string.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="show_game_window"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/show_game_window.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sine"><param name="Local" value="references/foundation_layer/function_reference/Math/sine.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound"><param name="Local" value="references/foundation_layer/object_reference/sound/sound.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound Object Properties"><param name="Local" value="references/foundation_layer/object_reference/sound/Properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.close"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/close.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.load"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/load.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.load_from_memory"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/load_from_memory.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.pause"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/pause.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.play"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/play.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.play_looped"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/play_looped.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.play_wait"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/play_wait.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.seek"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/seek.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.stop"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/stop.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound.stream"><param name="Local" value="references/foundation_layer/object_reference/sound/Methods/stream.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool"><param name="Local" value="references/helper_layer/object_reference/sound_pool/sound_pool.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool Object Properties"><param name="Local" value="references/helper_layer/object_reference/sound_pool/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.destroy_all"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/destroy_all.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.destroy_sound"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/destroy_sound.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.pause_all"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/pause_all.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.pause_sound"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/pause_sound.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_1d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_2d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_extended_1d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_extended_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_extended_2d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_extended_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_stationary"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_stationary.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.play_stationary_extended"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/play_stationary_extended.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.resume_all"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/resume_all.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.resume_sound"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/resume_sound.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.sound_is_active"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/sound_is_active.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.sound_is_playing"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/sound_is_playing.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_listener_1d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_listener_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_listener_2d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_listener_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_sound_1d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_sound_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_sound_2d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_sound_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_sound_range_1d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_sound_range_1d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_sound_range_2d"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_sound_range_2d.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="sound_pool.update_sound_start_values"><param name="Local" value="references/helper_layer/object_reference/sound_pool/methods/update_sound_start_values.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="soundtrack"><param name="Local" value="references/helper_layer/object_reference/soundtrack/soundtrack.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="soundtrack Object Properties"><param name="Local" value="references/helper_layer/object_reference/soundtrack/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="soundtrack.add_channel"><param name="Local" value="references/helper_layer/object_reference/soundtrack/methods/add_channel.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="soundtrack.write"><param name="Local" value="references/helper_layer/object_reference/soundtrack/methods/write.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="square_root"><param name="Local" value="references/foundation_layer/function_reference/Math/square_root.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="start_profiling"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/start_profiling.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="stop_profiling"><param name="Local" value="references/foundation_layer/function_reference/Debugging_and_Analysis/stop_profiling.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string"><param name="Local" value="references/foundation_layer/object_reference/string/string.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string.get_size"><param name="Local" value="references/foundation_layer/object_reference/string/Methods/get_size.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string.is_empty"><param name="Local" value="references/foundation_layer/object_reference/string/Methods/is_empty.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string.length"><param name="Local" value="references/foundation_layer/object_reference/string/Methods/length.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string.resize"><param name="Local" value="references/foundation_layer/object_reference/string/Methods/resize.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_base64_decode"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_base64_decode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_base64_encode"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_base64_encode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_contains"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_contains.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_decrypt"><param name="Local" value="references/foundation_layer/function_reference/security_functions/string_decrypt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_distance"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_distance.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_encrypt"><param name="Local" value="references/foundation_layer/function_reference/security_functions/string_encrypt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_hash"><param name="Local" value="references/foundation_layer/function_reference/security_functions/string_hash.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_is_alphabetic"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_is_alphabetic.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_is_alphanumeric"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_is_alphanumeric.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_is_digits"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_is_digits.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_is_lower_case"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_is_lower_case.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_is_upper_case"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_is_upper_case.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_left"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_left.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_len"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_len.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_mid"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_mid.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_replace"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_replace.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_reverse"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_reverse.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_right"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_right.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_split"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_split.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_to_hex"><param name="Local" value="references/foundation_layer/function_reference/Variable_management/string_to_hex.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_to_lower_case"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_to_lower_case.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_to_number"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_to_number.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_to_upper_case"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_to_upper_case.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_trim_left"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_trim_left.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="string_trim_right"><param name="Local" value="references/foundation_layer/function_reference/Variable_Management/string_trim_right.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tangent"><param name="Local" value="references/foundation_layer/function_reference/Math/tangent.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer"><param name="Local" value="references/foundation_layer/object_reference/timer/timer.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer Object Properties"><param name="Local" value="references/foundation_layer/object_reference/timer/Properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer.force"><param name="Local" value="references/foundation_layer/object_reference/timer/Methods/force.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer.pause"><param name="Local" value="references/foundation_layer/object_reference/timer/Methods/pause.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer.restart"><param name="Local" value="references/foundation_layer/object_reference/timer/Methods/restart.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="timer.resume"><param name="Local" value="references/foundation_layer/object_reference/timer/Methods/resume.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/tone_synth.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth Object Properties"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.freq"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/freq.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.freq_bend"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/freq_bend.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.freq_bend_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/freq_bend_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.freq_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/freq_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.note"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/note.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.note_bend"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/note_bend.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.note_bend_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/note_bend_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.note_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/note_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.reset"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/reset.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.rest"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/rest.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.rest_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/rest_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.rewind"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/rewind.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.rewind_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/rewind_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.seek"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/seek.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.seek_ms"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/seek_ms.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.set_edge_fades"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/set_edge_fades.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.write_wave_file"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/write_wave_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tone_synth.write_wave_sound"><param name="Local" value="references/foundation_layer/object_reference/tone_synth/methods/write_wave_sound.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/tts_voice.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice Object Properties"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.get_voice_names"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/get_voice_names.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.refresh_voice_list"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/refresh_voice_list.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.set_current_voice"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/set_current_voice.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.speak"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/speak.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.speak_interrupt"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/speak_interrupt.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.speak_interrupt_wait"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/speak_interrupt_wait.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.speak_to_file"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/speak_to_file.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.speak_wait"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/speak_wait.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="tts_voice.stop"><param name="Local" value="references/foundation_layer/object_reference/tts_voice/methods/stop.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="uninstall_keyhook"><param name="Local" value="references/foundation_layer/function_reference/User_Interaction/uninstall_keyhook.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="url_decode"><param name="Local" value="references/foundation_layer/function_reference/Internet_Related/url_decode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="url_encode"><param name="Local" value="references/foundation_layer/function_reference/Internet_Related/url_encode.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="url_get"><param name="Local" value="references/foundation_layer/function_reference/Internet_Related/url_get.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="url_post"><param name="Local" value="references/foundation_layer/function_reference/Internet_Related/url_post.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="vector"><param name="Local" value="references/foundation_layer/object_reference/vector/vector.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="vector Object Properties"><param name="Local" value="references/foundation_layer/object_reference/vector/properties.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="vector.length"><param name="Local" value="references/foundation_layer/object_reference/vector/methods/length.htm"></object>
+<li><object type="text/sitemap"><param name="Name" value="wait"><param name="Local" value="references/foundation_layer/function_reference/Miscellaneous/wait.htm"></object>
+</ul>
+</body>
+</html>

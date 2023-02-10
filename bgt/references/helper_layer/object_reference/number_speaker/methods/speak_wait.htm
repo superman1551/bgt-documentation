@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak_wait</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+This method will speak a number between -999999999 and 999999999, and wait until the number is fully read before returning.<br>
+<br>
+int speak_wait(int the_number)<br>
+<br>
+Parameters:<br>
+the_number<br>
+The number to speak.<br>
+<br>
+Return value:<br>
+0 on success, -1 on failure.<br>
+<br>
+Remarks:<br>
+The speak_wait method will look for sounds in accordance with the values stored in the prepend and append properties, and ascertain the best sound files to load by performing a number of searches based on the number at hand.<br>
+<br>
+The speak_wait function waits until the number is fully spoken before returning. This means that script execution pauses throughout the entire reading. If you wish to avoid this, use the speak and speak_next methods.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a number using speak_wait.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+number_speaker test;
+test.speak_wait(1056);
+}
+</pre>
+</body>
+</html>

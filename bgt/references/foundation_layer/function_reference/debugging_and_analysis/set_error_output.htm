@@ -1,0 +1,69 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>set_error_output</b><br>
+<br>
+This function logs a list of internal errors set by the engine during the script's execution and writes them to a specified file.<br>
+<br>
+bool set_error_output(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The name of the file to write to.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If an internal error is encountered while this function is active, it will print the engine function that produced the error, the error description, and the stack trace of the script into the log file of your choice. This is useful for debugging whether certain unexpected error conditions are being met and are not accounted for in the script.<br>
+<br>
+Please note that runtime errors are not accounted for, only errors that can be retrieved from within the script with the get_last_error or get_last_error_text functions.<br>
+<br>
+For this function to work accurately throughout the whole script's execution, it is recommended to call it before calling any other function, in the beginning of main.<br>
+<br>
+Example:<br>
+<pre>
+// Generate a bunch of error conditions and have the program log them.
+
+void main()
+{
+timer error;
+sound test;
+file whatever;
+set_error_output("errors.log");
+whatever.open("test.temp.txt", "wb");
+whatever.write("This is a test.\r\n");
+whatever.close();
+whatever.open("test.temp.txt", "rb");
+whatever.write("This shouldn't work.\r\n"); // This should generate an error because the file is opened for reading.
+whatever.close();
+file_delete("test.temp.txt");
+test.stream("z:\\whatever.mp3.ogg.wav"); // This should generate an error, because this file probably doesn't exist.
+error.pause();
+error.pause(); // This should generate an error, since the timer is already paused.
+directory_delete("z:/this/directory/should/not/exist/at/all"); // This should generate yet another nice error to log.
+}
+</pre>
+</body>
+</html>

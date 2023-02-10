@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_peer_average_round_trip_time</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method retrieves the average round trip time between yourself and a connected peer.<br>
+<br>
+double get_peer_average_round_trip_time(uint peer_id)<br>
+<br>
+Parameters:<br>
+peer_id<br>
+The peer ID to retrieve the average round trip time for.<br>
+<br>
+Return value:<br>
+The average round trip time between you and the specified peer in milliseconds on success, or -1 on error.<br>
+<br>
+Remarks:<br>
+The round trip time is the time that it takes for a packet to travel from your location to the remote peer, and back to you again. Thus, if you have an average round trip time of 100 milliseconds it means that it takes roughly 50 milliseconds for one of your packets to arrive at the remote peer's location and vise versa.<br>
+<br>
+The round trip time is calculated when reliable packets are sent out and subsequent acknowledgements of these are received. When a connection is first established the average round trip time will thus not be accurate, but will stabilise over time. The rate of this is determined by how many reliable packets that are sent out. BGT itself sends out reliable packets at regular intervals in order to monitor the connection, which means that the average round trip time will eventually be accurate even if you don't send out any reliable packets yourself, although this will take longer. Thus, don't rely on the average round trip time in the very beginning of a connection.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

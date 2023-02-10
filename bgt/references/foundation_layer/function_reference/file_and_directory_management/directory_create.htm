@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>directory_create</b><br>
+<br>
+This function creates one or more directories.<br>
+<br>
+bool directory_create(string directories)<br>
+<br>
+Parameters:<br>
+directories<br>
+A list of one or more directories that you wish to create, separated by either slash or backslash.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function will create a tree with one or more directories. If one or more of the specified new directories already exist, the function will leave these untouched and report success.<br>
+<br>
+Please note that the list of directories may not end in a trailing slash or backslash, and may not contain wildcards.<br>
+<br>
+The directory tree may be specified as either an absolute or a relative path.<br>
+<br>
+Example:<br>
+<pre>
+// Create a directory called dummy in the application's current directory, with a sub folder called test inside it.
+
+void main()
+{
+if(directory_create("dummy\\test")==false)
+{
+alert("Error", "The directory could not be created.");
+}
+else
+{
+alert("Success", "The directory was created successfully.");
+}
+}
+</pre>
+</body>
+</html>

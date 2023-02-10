@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>remove_value</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will delete a value from your game's store in the Windows registry.<br>
+<br>
+bool remove_value(string value_name)<br>
+<br>
+Parameters:<br>
+value_name<br>
+The name of the value to delete.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Delete our music_volume value from the registry if it exists.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+if(!game_data.exists("music_volume"))
+{
+alert("Error", "Could not delete music_volume. The specified value does not exist.");
+exit();
+}
+success=game_data.remove_value("music_volume");
+if(!success)
+{
+alert("Error", "Could not delete music_volume.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

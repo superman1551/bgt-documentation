@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak_interrupt</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will speak a given string, interrupting all other queued strings.<br>
+<br>
+bool speak_interrupt(string text)<br>
+<br>
+Parameters:<br>
+text<br>
+The text to speak.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+All previous text queued by the speak or speak_interrupt method will be cleared, and the new text spoken straight away.<br>
+<br>
+Example:<br>
+<pre>
+// Add various text to a buffer and interrupt it.
+
+tts_voice speech;
+
+void main()
+{
+speech.speak("This is text1.");
+speech.speak("This is text2.");
+speech.speak("This is text3.");
+wait(300);
+speech.speak_interrupt("This is text4 interrupting all previous announcements.");
+while(speech.speaking)
+{
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

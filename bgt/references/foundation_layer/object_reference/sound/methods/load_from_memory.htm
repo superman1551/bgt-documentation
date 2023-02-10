@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>load_from_memory</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will set up the sound object for playback using data that is already stored in memory, as opposed to reading it from a file on disk like the load method does.<br>
+<br>
+bool load_from_memory(string data)<br>
+<br>
+Parameters:<br>
+data<br>
+A string with the data that is to be loaded.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The data must be a valid Ogg Vorbis or Wave stream, with or without encryption. If the data is encrypted, the engine will decrypt it automatically using the global sound decryption key. The data is copied from your string into an internal buffer, so there is no need to keep your string around after this function has returned.<br>
+<br>
+A loaded sound is completely put into memory when it is first created. This means that more of the system memory is taken up, but this also lowers the CPU usage considerably as all the audio data is available at all times. Loaded sounds should be used for most things that are meant to play quickly and/or often such as footsteps, gunshots, character noises and the like.<br>
+<br>
+Example:<br>
+<pre>
+// Store the contents of a sound file in a string, and then set up a sound object with this data.
+
+void main()
+{
+file reader;
+reader.open("c:\\windows\\media\\ding.wav", "rb");
+if(reader.active==false)
+{
+alert("Error", "The file could not be opened for reading.");
+exit();
+}
+string data=reader.read();
+reader.close();
+sound test;
+test.load_from_memory(data);
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

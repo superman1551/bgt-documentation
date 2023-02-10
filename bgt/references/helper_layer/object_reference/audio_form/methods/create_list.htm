@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>create_list</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will create a listbox and return a control ID.<br>
+<br>
+int create_list(string caption, int maximum_items=0, bool multiselect=false)<br>
+<br>
+Parameters:<br>
+caption<br>
+The title for the listbox.<br>
+maximum_items<br>
+An optional parameter specifying how many items can be in the listbox. A value of 0 means there is no limit to the number of items that can be shown.<br>
+multiselect<br>
+An optional parameter indicating whether the listbox should have the capability to be able to manage multiple selections.<br>
+<br>
+Return value:<br>
+A control ID that can be used to check the status of the control, or -1 on error.<br>
+<br>
+Remarks:<br>
+Prepending any letter in the caption string with an ampersand (&) sign will cause a shortcut to be created for the listbox. For example, &People will cause alt+p to be the shortcut for the list of people.<br>
+<br>
+If the listbox is a multiselect-enabled listbox, each item in the list can be manipulated like a checkbox with the space bar, and Control+A can be used to select the entire list.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a listbox.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int list=form.create_list("&People", 0);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

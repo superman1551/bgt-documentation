@@ -1,0 +1,82 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>file_encrypt</b><br>
+<br>
+This function encrypts a file based on a provided key.<br>
+<br>
+bool file_encrypt(string input_file, string output_file, string encryption_key)<br>
+<br>
+Parameters:<br>
+input_file<br>
+The name of the file to encrypt.<br>
+output_file<br>
+The name of the file that will contain the encrypted data.<br>
+encryption_key<br>
+The key that will be used to encrypt and later decrypt the data.<br>
+<br>
+Return value:<br>
+true if the file was successfully encrypted, false otherwise.<br>
+<br>
+Remarks:<br>
+This uses the AES-Rijndel 256-bit encryption algorithm, which is one of the most secure algorithms available to date. It has never been successfully cracked, and is used to protect files stored by various governments.<br>
+<br>
+Files produced by file_encrypt are not compatible with strings produced by string_encrypt.<br>
+<br>
+This function will encrypt any file, from text files to sounds, and the result can be used with the sound object (see the set_sound_decryption_key function for details).<br>
+<br>
+The encrypted files are a few bytes longer than their decrypted equivalents.<br>
+<br>
+The encrypted data is in binary form.<br>
+<br>
+Example:<br>
+<pre>
+// Encrypt a sound file and play it.
+
+sound test;
+
+void main()
+{
+if(!file_exists("test.wav"))
+{
+alert("Error", "Cannot find test.wav.");
+return;
+}
+if(!file_encrypt("test.wav", "test.dat", "you_are_not_hacking_into_me"))
+{
+alert("Error", "Could not encrypt test.wav.");
+return;
+}
+set_sound_decryption_key("you_are_not_hacking_into_me", true);
+test.load("test.dat");
+if(test.active==false)
+{
+alert("Error", "Cannot play encrypted sound. errorcode="+error);
+return;
+}
+test.play_wait();
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>rewind</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method rewinds the cursor to a previous position.<br>
+<br>
+bool rewind(double beats)<br>
+<br>
+Parameters:<br>
+beats<br>
+Number of beats to rewind.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Rewinding is useful if you want to go back to a certain position relative to where the cursor is at present.<br>
+<br>
+Example:<br>
+<pre>
+// Write a chord, two melody notes, then rewind to add some more.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+synth.waveform_type=3;
+synth.note("C5", 2);
+synth.rest(2);
+synth.note("C6", 2);
+synth.rewind(1.333);
+synth.note("E5", 0.666);
+synth.rest(0.666);
+synth.note("G5", 0.666);
+synth.rest(0.666);
+synth.write_wave_file("synth.wav");
+}
+</pre>
+</body>
+</html>

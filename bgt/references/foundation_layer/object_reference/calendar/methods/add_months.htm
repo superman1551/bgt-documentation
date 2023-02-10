@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_months</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will add a number of months to the month property.<br>
+<br>
+bool add_months(int months)<br>
+<br>
+Parameters:<br>
+months<br>
+The number of months to add.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+A negative value in the months parameter will subtract months from the current month.<br>
+<br>
+There are several cases where values can change. If the date property is not valid for the new month, the date is set to the last day of the new month. If the month itself is not valid for the current year, then the year and month will be adjusted accordingly.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and add four months.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.add_months(4);
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>arc_sine</b><br>
+<br>
+This function returns the principal value of the arc sine of x, expressed in radians.<br>
+<br>
+double arc_sine(double x)<br>
+<br>
+Parameters:<br>
+x<br>
+The number to calculate between -1 and 1.<br>
+<br>
+Return value:<br>
+Arc sine of x, in the interval [-pi/2,+pi/2] radians. If x is out of the valid range, this function will return 0.<br>
+<br>
+Remarks:<br>
+In trigonometrics, arc sine is the inverse operation of sine.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("arc_sine test", "Arc sine of -1 is "+arc_sine(-1)+".");
+alert("arc_sine test", "Arc sine of 0 is "+arc_sine(0)+".");
+alert("arc_sine test", "Arc sine of 1 is "+arc_sine(1)+".");
+}
+</pre>
+</body>
+</html>

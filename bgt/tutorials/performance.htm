@@ -1,0 +1,180 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Performance Optimizations</title>
+</head>
+<body>
+<h1>Performance Optimizations</h1>
+<h2>Introduction</h2>
+You have a game that you are relatively happy with. It has nice sounds, seems stable, and is enjoyable. However, you start to notice that as the game grows, it is becoming slower and slower. Is all hope now lost? Not quite.<br>
+<br>
+There are plenty of steps you can take to make your script run optimally. Below is a summary of the most effective techniques which should make you notice a difference immediately. They are ordered roughly after how useful they are in a general gaming context.<br>
+<h2>Optimize sounds with preloads</h2>
+In larger games, you most likely have a lot of sounds that are playing simultaneously. Often times you will probably be using the sound pool to manage your audio environments. The sound pool loads all the sounds that you ask it to play, into memory in their entirety. It does not stream them as this would create a lot of problems when the number of playing sounds grew. However, loading sounds from disk is very costly in terms of CPU cycles, and as a result it has a great impact on the general performance of the game. To combat this problem, BGT has a very useful but often overlooked feature. Whenever you load the same sound more than once, it does not actually read the sound from disk again. It simply tells the new sound object to refer to the same internal memory location as the existing one does where the actual data is stored, while still giving you a completely independent sound to work with in terms of pan and volume etc. This is called cloning. The benefits of cloning become especially apparent for encrypted Ogg Vorbis files as the engine does not only have to decrypt the data after reading it from disk, but also decode it which takes an additional amount of time that may be significant if the sound is more than a few seconds in length. If this takes place in the middle of gameplay where a lot of things are happening, you will notice a severe lag as well as possible stuttering of the sounds that are already playing. As mentioned earlier, the sound pool loads all the sounds from disk whenever you ask it to play them. Thus, you will run into this performance bottleneck very quickly with the sound pool as well as with any other code that loads sounds from disk frequently.<br>
+<br>
+Luckily, there is a very easy solution to this problem. It is to simply load all the sounds into memory at the start of each level. When this is done and what sounds are loaded will naturally depend on the characteristics of your game, but the idea is to load any sound that you might need during the game before the actual gameplay starts. You keep these sounds around constantly, usually in a global array, so that they never go out of scope and are thus never unloaded until you specifically want them to be. When the sounds are loaded, the BGT engine is able to clone all of them when the sound pool or any other piece of code attempts to load them. The result is that while you will introduce a more or less noticeable lag while the sounds are initially loaded, you will also see that performance increases dramatically during the gameplay as nothing needs to be loaded from disk. Disk reading and writing is one of the slowest processes in an operating system, and Windows is no exception. Add decryption and Ogg Vorbis decoding on top of this, and you will see that the benefits of preloading sounds really cannot be stressed enough. Below is a basic example of how the preloading mechanism can be constructed:<br>
+<br>
+// Create a small class that will hold the sound handle for each preload along with its filename.<br>
+<br>
+class preload<br>
+{<br>
+sound@ handle;<br>
+string name;<br>
+}<br>
+<br>
+// Declare a global array of preload class instances.<br>
+<br>
+preload[] preloads;<br>
+<br>
+// The following function takes a filename as its only argument and loads the sound as a preload.<br>
+// It returns true on success and false on failure.<br>
+// It will fail if the sound has already been loaded as a preload, or if something goes wrong while actually loading it.<br>
+<br>
+bool preload_add(string filename)<br>
+{<br>
+<br>
+// Verify that the sound hasn't already been loaded as a preload by comparing the filenames.<br>
+<br>
+for(int i=0;i&lt;preloads.length();i++)<br>
+{<br>
+if(preloads[i].name==filename)<br>
+return false;<br>
+}<br>
+<br>
+// Load the preload, and return true if everything went well.<br>
+<br>
+sound temp;<br>
+temp.load(filename);<br>
+if(temp.active==false)<br>
+{<br>
+return false;<br>
+}<br>
+preload loader;<br>
+@loader.handle=temp;<br>
+loader.name=filename;<br>
+preloads.insert_last(loader);<br>
+return true;<br>
+}<br>
+<br>
+// The following function resets all of the preloads.<br>
+<br>
+void reset_preloads()<br>
+{<br>
+preloads.resize(0);<br>
+<br>
+// Call the garbage_collect function to ensure that all data is cleaned up immediately.<br>
+// Comment out this call if you don't want this extra delay here.<br>
+<br>
+garbage_collect();<br>
+}<br>
+<br>
+If you use this code, you simply have to call the preload_add function multiple times to load all of your sounds when appropriate. reset_preloads is a convenience function that not only resets the global array, but also ensures that the data is actually unloaded from memory by running a full garbage collection cycle. If you use the sound pool, it is a good idea to call the destroy_all method in it before unloading the preloads so that the garbage collector can do its work more effectively. Note that a full garbage collection cycle might take some time depending upon the behavior of your script, so you may want to test how severe this is and then determine if it is appropriate to do at this point in time. It is generally a good idea to invoke the garbage collector at the end of a game round, though.<br>
+<h2>Call wait often</h2>
+Knowing when to use the wait function is absolutely crucial for the performance of your game. When you call wait, you give the computer a chance to do other things. Windows is a multitasking operating system, which means that all the programs that are running at any given time share the resources of the hardware. wait should be called, usually with a parameter of 5, in any loop that runs for an extended period of time such as the game's main loop. Failing to do this will result in a CPU usage of 100% for the game process. This in turn will cause general instability of the operating system in many cases, and will make most laptop fans go haywire.<br>
+<br>
+wait also performs other useful tasks such as keeping the game window's internal event queue up to date, and invoking the garbage collector in small increments. This means that if you fail to call wait in a script loop that generates garbage, which is to say creates and destroys some resource in each iteration, the garbage collector will be full of data without getting a sporting chance to clean it up effectively. BGT has a safety mechanism which kicks in if the garbage collector is close to overflowing, but this forces the engine to run a full collection cycle which is generally not what you want during gameplay. In short, wait not only gives the CPU a rest; it also keeps the engine running smoothly. Use it!<br>
+<h2>Avoid streams when possible</h2>
+Streams are very tempting to use because they start playing the sound very quickly, and there is not a great amount of memory overhead for them if compared to loaded sounds. However, streams should be used with care. While certainly tempting, they have one serious flaw. A stream achieves its quick starting time by only loading a little piece of the data into memory and then beginning to play it. While this first piece is playing, the stream is busy loading the next little chunk. As soon as the first piece has finished, the second one begins playing and the third is then loaded and prepared for playback. This sounds simple, but can cause a lot of issues when it comes to performance if too many streams are playing at once. If you have an Ogg Vorbis sound that is encrypted, the engine needs to perform the following steps for each and every individual chunk of data:<br>
+1. Read it from disk into memory. Disk reading and writing is, as stated above, one of the slowest processes in an operating system (Windows included).<br>
+2. Decrypt it. This is generally pretty fast, but it still adds to the overall processing time quite a bit when done many times.<br>
+3. Decode the decrypted data from Ogg Vorbis back to raw audio samples. This also takes a bit of time as the Ogg Vorbis format is quite complex.<br>
+4. Finally feed the decoded data to the audio device which involves copying more memory.<br>
+<br>
+All of these things combined result in a fairly costly operation as far as CPU cycles are concerned. It generally works fine when you have just a few streams going, but if this number grows you will start to notice high CPU usage as well as occasional stuttering of other sounds or even little repeating chunks in those streams that may not get enough processing time to load their next chunk before the previous one has finished. Therefore, you only want to use streams for sounds that are very long and that do not play right in the middle of a fast, action packed game level. As a rule of thumb, it is better to use more memory rather than more processing power. Load sounds as much as possible and take advantage of the cloning feature outlined above. Streams have their place, but consider what happens in the background before deciding to use them.<br>
+<h2>Use the reserve method in the array</h2>
+If you have an array to which you know you'll be adding and removing a lot of elements using insert_last, insert_at and friends, it is a good idea to reserve memory in advance. Each time an insert method is called, it will allocate just enough memory to store the new item. Similarly, each time a remove method is called it will free the memory for the given item directly. This may seem like a good thing, but can actually hurt performance a great deal because memory allocation takes time. Therefore, allocating more memory than you actually need is a common optimization strategy in order to avoid many small allocations along the way. The reserve method will allocate memory for the requested number of items internally, without actually resizing the array. In other words it is possible to have an array with 0 elements in it, but plenty of memory reserved for future use. This means that the next time you call insert_last for instance, it will not allocate any new memory but will simply place the newly created item in the already reserved memory.<br>
+<br>
+The following script will show you the difference between inserting one item at a time without reserving memory, versus reserving memory and then inserting items:<br>
+<br>
+void main()<br>
+{<br>
+timer counter;<br>
+int[] list;<br>
+int[] list2;<br>
+for(int i=0;i&lt;100000;i++)<br>
+list.insert_last(i);<br>
+alert("First result", "Time elapsed without reserved memory: " + counter.elapsed + " milliseconds.");<br>
+list.resize(0);<br>
+counter.restart();<br>
+list2.reserve(100000);<br>
+for(int i=0;i&lt;100000;i++)<br>
+list2.insert_last(i);<br>
+alert("Second result", "Time elapsed with reserved memory: " + counter.elapsed + " milliseconds.");<br>
+}<br>
+<br>
+On my machine, the results are as follows:<br>
+<br>
+Time elapsed without reserved memory: 2012 milliseconds.<br>
+<br>
+Time elapsed with reserved memory: 12 milliseconds.<br>
+<br>
+In short, an optimization well worth your time!<br>
+<h2>Perform as few string comparisons as possible</h2>
+Comparing a couple of strings may seem like a trivial operation, but if done extensively you will certainly be using more processing power than you need to. Consider the following script:<br>
+<br>
+void main()<br>
+{<br>
+<br>
+// Set up a timer to measure performance.<br>
+<br>
+timer counter;<br>
+counter.restart();<br>
+<br>
+string some_data="hello";<br>
+<br>
+for(int i=0;i&lt;100000;i++)<br>
+{<br>
+if(some_data=="ball")<br>
+{<br>
+// Do something.<br>
+}<br>
+}<br>
+alert("Result", "The operation took " + counter.elapsed + " milliseconds.");<br>
+}<br>
+<br>
+On my machine, this takes an average of about 40 milliseconds. It may be argued that this is not a representative test case for real world usage, and certainly the test itself isn't but the comparison of strings can easily reach this quantity in a large game if used extensively. Now, consider the following changed code:<br>
+<br>
+void main()<br>
+{<br>
+<br>
+// Set up a timer to measure performance.<br>
+<br>
+timer counter;<br>
+counter.restart();<br>
+<br>
+int some_data=5;<br>
+<br>
+for(int i=0;i&lt;100000;i++)<br>
+{<br>
+if(some_data==5)<br>
+{<br>
+// Do something.<br>
+}<br>
+}<br>
+alert("Result", "The operation took " + counter.elapsed + " milliseconds.");<br>
+}<br>
+<br>
+This takes about 6 milliseconds on average on my system. A big difference, in other words. This goes to show that while both operations seem trivial, the latter is significantly faster than the former. It can thus be concluded that, if at all possible, use integers rather than strings at all times. If defining enemy types, for instance, don't use strings such as "robot", "alien" or "monster", use enums or constant integers instead. While perhaps not immediately noticeable, the performance difference will benefit you in the long run as your code expands.<br>
+<h2>Clean up your garbage</h2>
+The usefulness of invoking the garbage collector explicitly was briefly outlined in the section dealing with cloned sounds, but it does not hurt to reiterate this one more time. If you have a point in your game where latency is not a problem such as during a game over sequence or before the main menu is started after a game round, it is a very good idea to call the garbage_collect function explicitly to clean up all the memory that has not yet been freed by the incremental garbage collection process. This is not only beneficial in terms of memory usage, but also in terms of performance because the incremental garbage collection processor has less work to do. For more information on what the garbage collector does and why it is important to be aware of it, see the help topic for the garbage_collect function in the reference.<br>
+<h2>Conclusion</h2>
+Performance is always a relative thing. You can be as brief, or as thorough as you like. The above tips are meant to serve as some general guidance to avoid common mistakes and pitfalls that you often encounter during development. The gameplay is the important thing, but do spend time on performance. Your users will thank you for it and so will your own processor.<br>
+</body>
+</html>

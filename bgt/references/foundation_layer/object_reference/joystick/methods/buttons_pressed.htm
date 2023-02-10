@@ -1,0 +1,80 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>buttons_pressed</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This function returns a list of all the buttons on the joystick that have just been pressed.<br>
+<br>
+int[] buttons_pressed()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array with the buttons that have just been pressed, or an empty array if no buttons have been pressed since the last call or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between buttons_down and buttons_pressed is that buttons_pressed will only return a list of the buttons that the user has just pushed down, while buttons_down will return a list of the buttons that are currently being held down regardless of whether the same buttons have been reported as being down in a previous call.<br>
+<br>
+Please note that buttons_pressed and button_pressed use the same joystick state, so if a call to buttons_pressed is made right before a call to button_pressed, none of the buttons returned by buttons_pressed will be reported as just having been pushed down by button_pressed. The same holds true for the reverse senario.<br>
+<br>
+The joystick object supports up to 128 buttons, ranging from 0 to 127. However the actual maximum button is determined by the buttons property for the given device, meaning that the allowed range is from 0 to buttons minus 1.<br>
+<br>
+It is important to remember when mapping functions to joystick buttons that devices can vary greatly between models, supporting anything between 3 and 15 buttons, and therefore it is always a good idea to map the most common activities to buttons with lower numbers.<br>
+<br>
+Example:<br>
+<pre>
+// Speak the button codes of any buttons that are pressed, and exit if the user presses escape.
+
+void main()
+{
+show_game_window("buttons Pressed Test");
+tts_voice speech;
+joystick stick;
+int[] list;
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+while(key_pressed(KEY_ESCAPE)==false)
+{
+list=stick.buttons_pressed();
+for(int i=0;i&lt;list.length();i++)
+{
+if(i==0)
+{
+speech.speak_interrupt(list[i]);
+}
+else
+{
+speech.speak(list[i]);
+}
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

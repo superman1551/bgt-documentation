@@ -1,0 +1,52 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>send_unreliable</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will send an unreliable packet to a given peer.<br>
+<br>
+bool send_unreliable(uint peer_id, string packet, int channel)<br>
+<br>
+Parameters:<br>
+peer_id<br>
+The unique ID of the peer that is to receive the message.<br>
+packet<br>
+The message to be sent.<br>
+channel<br>
+The channel that the message should be sent on.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method sends an unreliable packet to a given peer, or to all connected peers if the peer ID is set to 0.<br>
+<br>
+Unreliable packets are by far the quickest way of getting data across to another person. An unreliable packet will be sent at the maximum speed provided by the connection, but is not guaranteed to arrive at the destination. It is, however, guaranteed to be properly sequenced if it does arrive. Unreliable packets are useful when you have data that needs to be sent out very frequently, but you only really care about the most recent data. You are not particularly interested in another player's position from 2 seconds ago, for instance, but rather you want to know where they are at this very moment.<br>
+<br>
+For more information about the differences between unreliable and reliable packets, as well as information about how to sequence packets using channels, see the main network chapter.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>remove_at</title>
+</head>
+<body>
+<br>
+<b>array object</b><br>
+<br>
+This method will remove an existing value at a specified position in an array.<br>
+<br>
+void remove_at(int position)<br>
+<br>
+Parameters:<br>
+position<br>
+The index of the element to remove.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+Once the value has been removed the array will be automatically resized to reflect the change.<br>
+<br>
+Example:<br>
+<pre>
+string[] names(6);
+
+void main()
+{
+names[0]="Damien";
+names[1]="Philip";
+names[2]="Percival";
+names[3]="Byron";
+names[4]="Humphrey";
+names[5]="Edmund";
+names.remove_at(5);
+for(uint counter=0; counter&lt;names.length(); counter++)
+{
+alert("Names", "Element "+counter+" contains the name "+names[counter]+".");
+}
+}
+</pre>
+</body>
+</html>

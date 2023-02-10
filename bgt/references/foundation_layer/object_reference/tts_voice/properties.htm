@@ -1,0 +1,42 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+int volume<br>
+This determines how loudly the voice will speak. 0 is the original volume, and -100 is completely silent. This is set to -1 on error. Please note that volume is not automatically set to 0 when it loads, but will instead reflect the volume that is set in the control panel.<br>
+<br>
+int rate<br>
+This is the speed at which the voice will speak. Values range from -10 (slowest) to 10 (fastest), where 0 is normal. This is set to -1 on error. Please note that rate is not automatically set to 0 when it loads, but will instead reflect the speed that is set in the control panel.<br>
+<br>
+int pitch<br>
+This is the pitch at which the voice will speak. Values range from -10 (lowest) to 10 (highest, where 0 is normal. This is set to -1 on error. The pitch is always 0 initially. Please note that some text-to-speech engines do not support pitch, in which case this property has no effect.<br>
+<br>
+bool active<br>
+This is set to true if Sapi was initialised successfully, and to false otherwise. This property cannot be modified from the script.<br>
+<br>
+bool speaking<br>
+This is set to true when Sapi is speaking, and to false when it is not, or if an error has occurred. This property cannot be modified from the script.<br>
+</body>
+</html>

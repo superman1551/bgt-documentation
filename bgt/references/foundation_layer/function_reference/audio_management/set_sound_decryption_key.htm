@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>set_sound_decryption_key</b><br>
+<br>
+This function sets the global decryption key that is used to try and decrypt an encrypted sound for playback.<br>
+<br>
+bool set_sound_decryption_key(string key, bool force_encryption)<br>
+<br>
+Parameters:<br>
+key<br>
+The key that is to be used. This may be either a string or a numeric value.<br>
+force_encryption<br>
+A boolean (either true or false) that tells the engine whether to allow loading of sounds that are not encrypted.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function sets the decryption key that the BGT engine will use when trying to decrypt a sound that has previously been encrypted. The key must match exactly that which was used when originally encrypting the sound, or it will fail to load.<br>
+<br>
+It is perfectly legal to call this function more than once in your game. Sounds that are already loaded will not be affected, any changes are only seen the next time you attempt to load a sound.<br>
+<br>
+If the force_encryption parameter is set to true, any sound that BGT finds not to be encrypted will fail to load. This is useful if you do not wish users to replace your sounds with new files, as these new files would not be encrypted using your key and would thus not load. If this parameter is set to false, both encrypted and unencrypted sounds will work equally well.<br>
+<br>
+Example:<br>
+<pre>
+// Set a decryption key, and tell the engine not to load sounds that have not been encrypted.
+
+void main()
+{
+set_sound_decryption_key("please don't shoot me", true);
+}
+</pre>
+</body>
+</html>

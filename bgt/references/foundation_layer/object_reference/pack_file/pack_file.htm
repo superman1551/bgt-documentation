@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pack_file</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+The pack_file object is used to package several files into one.<br>
+<br>
+pack_file()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+A pack file is generally useful if you have a lot of files that you wish to distribute as one file on disk. This most commonly applies to sounds, but can include other data such as game level layouts etc.<br>
+<br>
+When a pack_file object is first created, it will not be active. To activate it you must call either the "create" or the "open" method on the object, specifying a file that should be associated with it. You may call these methods again at any time if you wish to associate another pack with the object, at which point the old association (if any) will be cleared. This, in short, allows you to reuse the same pack_file object for manipulating more than one pack.<br>
+<br>
+Please note that storing files inside a pack in no way enhances security. If you wish to protect your files from being tampered with or read by others, use the encryption functions on them before adding them to the pack.<br>
+<br>
+Example:<br>
+<pre>
+// Create a pack file and add some test files.
+
+void main()
+{
+pack_file test;
+test.create("pack.dat");
+test.add_file("test1.txt","t1");
+test.add_file("test2.txt","t2");
+test.add_file("test3.txt","t3");
+test.close();
+}
+</pre>
+</body>
+</html>

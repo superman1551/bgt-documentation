@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>load</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will load a sound into memory for playback.<br>
+<br>
+bool load(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The file to open. If the sound is stored on disk this can be either an absolute path, a relative path or the file name on its own. Absolute paths are not applicable however, if the sound is being loaded from a pack file (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The location in which the engine searches for the file specified in the filename parameter is determined by a call to the "set_sound_storage" function. By default it will look on the users hard drive and in the directory where the program is stored, unless an absolute path is specified such as "C:\\Windows\\media\\ding.wav". If the engine has been set up to look inside a pack file then only a file name such as "creature.ogg" or a relative path such as "sounds\\monster.ogg" can be specified.<br>
+<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+A loaded sound is completely put into memory when it is first created. This means that more of the system memory is taken up, but this also lowers the CPU usage considerably as all the audio data is available at all times. Loaded sounds should be used for most things that are meant to play quickly and/or often such as footsteps, gunshots, character noises and the like.<br>
+<br>
+The engine uses a technique to try and ensure that the least possible amount of memory is used when the same sound is loaded into more than one object, which is often the case with the previously mentioned sounds. For instance, if you have 50 enemies for which you have two footsteps each, 100 footstep sounds will not be loaded into memory even though you get 100 completely independent sound objects.<br>
+<br>
+Example:<br>
+<pre>
+// Load a sound into memory and play it.
+
+void main()
+{
+sound test;
+test.load("c:\\windows\\media\\ding.wav");
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

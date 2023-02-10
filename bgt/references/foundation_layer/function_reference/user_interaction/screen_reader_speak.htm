@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>screen_reader_speak</b><br>
+<br>
+This function speaks some text using a screen reader.<br>
+<br>
+bool screen_reader_speak(int reader, string text)<br>
+<br>
+Parameters:<br>
+reader<br>
+A value representing one of the four supported screen readers (see remarks).<br>
+text<br>
+The text that is to be spoken.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function supports four available screen readers, each of which are identified by a number, as follows:<br>
+<ul>
+<li>JAWS (1) - Jaws for Windows (<a href="http://www.freedomscientific.com">Freedom Scientific</a>)</li>
+<li>WINDOW_EYES (2) - Window Eyes (<a href="http://www.gwmicro.com">GWMicro</a>)</li>
+<li>SYSTEM_ACCESS (3) - System Access (<a href="http://www.serotek.com">Serotek</a>)</li>
+<li>NVDA (4) - Non Visual Desktop Access (<a href="http://www.nvda-project.org">NVDA Project</a>)</li>
+</ul>
+Please note that this function does not print anything on screen, merely uses an internal API provided by the screen reader in order to speak the text.<br>
+Please note that the screen reader must be running and all dependencies correctly installed in order for this function to work correctly. If these steps are not met, the function will return false and no text will be spoken. See Appendix F for information about dependencies.<br>
+<br>
+Example:<br>
+<pre>
+// Get Jaws to speak some text.
+
+void main()
+{
+screen_reader_speak(JAWS, "Hi. Bet ya didn't know I could say things on my own without a screen, did you?");
+}
+</pre>
+</body
+</html>

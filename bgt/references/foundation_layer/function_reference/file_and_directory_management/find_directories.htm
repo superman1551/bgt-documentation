@@ -1,0 +1,66 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>find_directories</b><br>
+<br>
+This function returns all directories found matching a specified search pattern.<br>
+<br>
+string[] find_directories(string search)<br>
+<br>
+Parameters:<br>
+search<br>
+The search pattern that is to be used when looking for directories.<br>
+<br>
+Return value:<br>
+Returns an array of directory names that match the specified search pattern, or an empty array on failure.<br>
+<br>
+Remarks:<br>
+Wildcards are accepted in the search term. An asterisk (* sign) indicates 0 or more unknown characters while a question mark (? sign) represents up to 1 unknown character.<br>
+<br>
+Please note that this function will only find directories. To find files use the find_files function.<br>
+<br>
+If an empty string is passed as a parameter, the function will assume the search term "*" which is to say all folders in the current directory.<br>
+<br>
+This function will accept absolute or relative paths.<br>
+<br>
+The search term is not case sensitive.<br>
+<br>
+Please note that the path may not end in a trailing slash or backslash.<br>
+<br>
+Example:<br>
+<pre>
+// Find all directories on drive C.
+
+void main()
+{
+string[] test;
+test=find_directories("C:\\*");
+for(uint counter=0; counter&lt;test.length(); counter++)
+{
+alert("array", "array "+counter+"="+test[counter]);
+}
+}
+</pre>
+</body>
+</html>

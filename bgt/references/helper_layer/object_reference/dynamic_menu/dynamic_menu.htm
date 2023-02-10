@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>dynamic_menu</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+The dynamic_menu object is stored in dynamic_menu.bgt in the BGT include directory, and is used to create an audio or Microsoft Sapi 5 text to speech (TTS) based menu.<br>
+<br>
+dynamic_menu()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The dynamic_menu object allows you to create a menu by adding options and then starting the menu and letting the user choose one of the options you have added. You can then act based on the information that the menu passes back to you.<br>
+<br>
+It is perfectly legal to have both audio and tts items in one and the same menu.<br>
+<br>
+Example:<br>
+<pre>
+//Make a simple menu.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu my_menu;
+int menu_result;
+my_menu.allow_escape=true;
+my_menu.wrap=true;
+my_menu.add_item("start_game.wav");
+my_menu.add_item_tts("test speakers");
+my_menu.add_item("exit.wav");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

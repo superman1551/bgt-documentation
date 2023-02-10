@@ -1,0 +1,39 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+int desperation_factor<br>
+This is a number between 0 and 9. It outweighs the cost to reach a particular square, so that the generated path may be more costly (which is usually the same as more dangerous) but shorter if the desperation factor is high. With a low desperation factor, the pathfinder will try to avoid squares that have a higher risk to them. For instance, if the desperation factor is 8 and the user callback returns a risk of 9 for a particular square, the final cost for this square will be 1. Similarly if the desperation factor is 8 and the callback returns 5, the final cost is 0. The desperation factor is set to 0 by default.<br>
+<br>
+bool allow_diagonals<br>
+This determines whether diagonal paths are allowed. The default is false.<br>
+<br>
+int search_range<br>
+The search range is used to limit the area in which the pathfinder searches, which may be compared with a field of vision for the entity following the path. If this is set to 0, the entire map will be searched. If the number is greater than 0, the pathfinder will only find a path if the number of required steps is less than or equal to it. This is set to 0 by default.<br>
+<br>
+bool active<br>
+Returns true while a map is set up (e.g. between calls to the create_map method and the destroy_map method), or false otherwise. This property cannot be modified from the script.<br>
+</body>
+</html>

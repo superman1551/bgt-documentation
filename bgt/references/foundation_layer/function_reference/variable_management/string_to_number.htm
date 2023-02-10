@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_to_number</b><br>
+<br>
+This function converts the given string into a number.<br>
+<br>
+double string_to_number(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string to convert.<br>
+<br>
+Return value:<br>
+The number stored in the string  on success, 0 on failure.<br>
+<br>
+Remarks:<br>
+When converting a string to a number the function will ignore any spaces that may appear before the actual number, as well as any additional text that may come after the last numeric character that can be interpreted. The function will also include any plus or minus sign appearing in the beginning of the string, as well as any decimals that are present.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+string my_string="-35.6";
+double my_number=string_to_number(my_string);
+}
+</pre>
+</body>
+</html>

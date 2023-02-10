@@ -1,0 +1,69 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This method explicitly opens a joystick device on the user's system.<br>
+<br>
+bool set(int index)<br>
+<br>
+Parameters:<br>
+index<br>
+The index of the device to open (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The index corresponds to the list returned by list_joysticks, and is zero-based, ranging from 0 to joysticks minus 1.<br>
+<br>
+If no joystick is explicitly opened, the engine will automatically open the user's preferred joystick as set in control panel. This is done when the joystick object instance is first created.<br>
+<br>
+Example:<br>
+<pre>
+// Enumerate the list of joysticks and display information on the first available.
+
+void main()
+{
+joystick stick;
+show_game_window("Joystick Test");
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+string[] names=stick.list_joysticks();
+for(int i=0;i&lt;names.length();i++)
+alert("Joystick " + (i+1), names[i]);
+stick.set(0);
+if(stick.active==false)
+{
+alert("Error", "Could not open the joystick device.");
+exit();
+}
+alert("Information", "Buttons: " + stick.buttons + "\nSliders: " + stick.sliders + "\nPovs: " + stick.povs);
+}
+</pre>
+</body>
+</html>

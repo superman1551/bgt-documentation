@@ -1,0 +1,120 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>restart</title>
+</head>
+<body>
+<br>
+<b>timer object</b><br>
+<br>
+This method will restart the timer.<br>
+<br>
+bool restart()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method resets the timer and makes it start again from the very beginning. If it has previously been paused with a call to the pause method, it will automatically be resumed.<br>
+<br>
+Example:<br>
+<pre>
+// Play ding every 250MS using two buffers to avoid cutting the sound off as quickly, and let user press escape to quit and p to pause/unpause timer.
+
+void main()
+{
+sound ding1;
+sound ding2;
+show_game_window("Timer Test");
+
+ding1.load("C:\\Windows\\media\\ding.wav");
+ding2.load("C:\\Windows\\media\\ding.wav");
+if(ding1.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+if(ding2.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+
+// We pan the two buffers a little bit so that they can be distinguished.
+ding1.pan=-20;
+ding2.pan=20;
+
+int current_buffer=1;
+bool paused=false;
+
+ding1.play();
+
+timer counter;
+
+while(true)
+{
+if(key_pressed(KEY_ESCAPE))
+{
+exit();
+}
+if(key_pressed(KEY_P))
+{
+if(paused==true)
+{
+paused=false;
+counter.resume();
+}
+else
+{
+counter.pause();
+paused=true;
+}
+}
+if(counter.elapsed>=250)
+{
+counter.restart();
+if(current_buffer==1)
+{
+current_buffer=2;
+if(ding2.playing==true)
+{
+ding2.stop();
+}
+ding2.play();
+}
+else
+{
+current_buffer=1;
+if(ding1.playing==true)
+{
+ding1.stop();
+}
+ding1.play();
+}
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

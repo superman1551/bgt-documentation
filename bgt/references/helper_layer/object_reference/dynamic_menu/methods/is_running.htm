@@ -1,0 +1,102 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>is_running</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will check to see if the menu is running.<br>
+<br>
+bool is_running()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This is especially useful in menu callbacks if you only want to perform a certain action while the menu is running.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu and use a callback. The callback will check the current position with a variable and play a sound if the position has changed. The callback will additionally check if the menu is running.
+
+#include "dynamic_menu.bgt"
+
+sound movement;
+dynamic_menu menu;
+int menu_position;
+
+void main()
+{
+int menu_result;
+menu.allow_escape=true;
+menu.wrap=false;
+menu.set_callback(check_menu_events, "");
+menu.add_item_tts("Start game.");
+menu.add_item_tts("Test speakers.");
+menu.add_item_tts("Exit.");
+menu_result=menu.run("Please choose an option", true);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+
+int check_menu_events(dynamic_menu@ game_menu, string data)
+{
+if(!game_menu.is_running)
+{
+return -1;
+}
+if(game_menu.get_position()!=menu_position)
+{
+movement.load("menumove.wav");
+movement.play_wait();
+movement.close();
+menu_position=game_menu.get_position();
+}
+return 0;
+}
+</pre>
+</body>
+</html>

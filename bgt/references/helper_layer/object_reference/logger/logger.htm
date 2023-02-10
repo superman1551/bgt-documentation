@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>logger</title>
+</head>
+<body>
+<br>
+<b>logger object</b><br>
+<br>
+The logger object is contained in logger.bgt in the BGT include directory, and is used to write log files with relative ease.<br>
+<br>
+logger()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The logger class is useful for writing trace logs for debugging your game, or recording game statistics.<br>
+<br>
+Example:
+<pre>
+//Write a few log entries.
+
+#include "logger.bgt"
+
+logger test;
+
+void main()
+{
+test.header_text="Hello. This is the start of a log.";
+test.footer_text="This is the end of the log. Goodbye.";
+test.date_all_entries=true;
+test.overwrite_file=false;
+test.add_entry("Entry1.");
+wait(2000);
+test.add_entry("Entry2.");
+alert("Thanks.", "Log was written successfully.");
+test.add_entry("Logging successful.");
+test.write("test.log", true);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak_to_file</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will speak a given string into a Wave file, pausing the execution until the process is completed.<br>
+<br>
+bool speak_to_file(string filename, string text)<br>
+<br>
+Parameters:<br>
+filename<br>
+The name of the Wave file to be created.<br>
+text<br>
+The text to speak.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Speak some text into a file.
+
+tts_voice speech;
+
+void main()
+{
+speech.speak_to_file("speech.wav", "This is some text, which will be spoken into a file called speech.wav.");
+}
+</pre>
+</body>
+</html>

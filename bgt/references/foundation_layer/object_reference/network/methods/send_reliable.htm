@@ -1,0 +1,52 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>send_reliable</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will send a reliable packet to a given peer.<br>
+<br>
+bool send_reliable(uint peer_id, string packet, int channel)<br>
+<br>
+Parameters:<br>
+peer_id<br>
+The unique ID of the peer that is to receive the message.<br>
+packet<br>
+The message to be sent.<br>
+channel<br>
+The channel that the message should be sent on.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method sends a reliable packet to a given peer, or to all connected peers if the peer ID is set to 0.<br>
+<br>
+Reliable packets are always guaranteed to get through, and always in the proper order just like unreliable ones. This reliability comes at a cost, however. Since the internet is unreliable by nature, BGT needs to wait for an acknowledgement from the other person to say that the packet was in fact received. If no such acknowledgement is received within a reasonable amount of time, a new attempt to send the packet is made. The same procedure is repeated over and over again until an acknowledgement is received, or until enough time has elapsed to deem the connection as dead. This may cause considerable delays in the transmition as compared to unreliable packets, and should thus only be used for things where speed is not critical.<br>
+<br>
+For more information about the differences between unreliable and reliable packets, as well as information about how to sequence packets using channels, see the main network chapter.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

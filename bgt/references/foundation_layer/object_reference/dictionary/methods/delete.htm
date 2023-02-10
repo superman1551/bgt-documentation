@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>delete</title>
+</head>
+<body>
+<br>
+<b>dictionary object</b><br>
+<br>
+This method will attempt to delete a particular key and value pair.<br>
+<br>
+bool delete(string key)<br>
+<br>
+Parameters:<br>
+key<br>
+The key to look for.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+dictionary game_board; // Declare our dictionary.
+
+void main()
+{
+// Set our values.
+game_board.set("1", 2);
+game_board.set("2", 4);
+game_board.delete("1");
+}
+</pre>
+</body>
+</html>

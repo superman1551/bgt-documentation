@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>file_delete</b><br>
+<br>
+This function irreversibly deletes a given file.<br>
+<br>
+bool file_delete(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The name of the file to delete.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Please note that certain attributes on the file can cause the deletion to fail. Also, if the file is currently being used by another program, the operation will fail.<br>
+<br>
+This function works with both absolute and relative paths.<br>
+<br>
+Example:<br>
+<pre>
+// Delete the file C:\test\unusable.txt
+
+void main()
+{
+if(file_delete("C:\\test\\unusable.txt"))
+{
+alert("Information", "The file was deleted successfully.");
+}
+else
+{
+alert("Error", "The file could not be deleted.");
+}
+}
+</pre>
+</body>
+</html>

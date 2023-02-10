@@ -1,0 +1,64 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_split</b><br>
+<br>
+This function splits a string into an array based on a delimiter.<br>
+<br>
+string[] string_split(string source, string delimiter, bool require_full_delimiter)<br>
+<br>
+Parameters:<br>
+source<br>
+The string that is to be split.<br>
+delimiter<br>
+A string containning one or more characters that, when found in the source string, cause a new array entry to be made.<br>
+require_full_delimiter<br>
+A boolean value (either true or false) that decides whether the entire sequence of characters in the delimiter needs to be present in the source string for a new array entry to be made (see remarks).<br>
+<br>
+Return value:<br>
+An array with the result of the splitting operation. If no splits took place, an array with one element containing the entire source string is returned.<br>
+<br>
+Remarks:<br>
+This function is useful when dividing content, such as splitting up a longer text into individual words or sentenses. It returns an array containning the individual strings that were present in between the delimiters. Thus, the delimiters themselves are not stored in the array; only the content that remains if any.<br>
+<br>
+If the require_full_delimiter boolean is set to true, the entire delimiter string has to be found in the source string in order for a new array entry to be made. If it is set to false, a new array entry will be made as soon as any one of the characters in the delimiter string is found. Note however that multiple, empty entries will not be made if one or more delimiters appear after one another; you will always have data in every entry.<br>
+<br>
+Example:<br>
+<pre>
+// Split up sentenses into individual words using space, . , ! and ? as the delimiters.
+
+void main()
+{
+string my_string="This is a lengthy string, and its only purpose is to demonstrate splitting. Understand? Good!";
+alert("String to split", my_string);
+string[] output_array=string_split(my_string, " .,!?", false);
+alert("Found words", output_array.length() + " word(s) were in the string.");
+for(uint i=0;i < output_array.length();i++)
+{
+alert("Word " + (i+1) + "", output_array[i]);
+}
+}
+</pre>
+</body
+</html>

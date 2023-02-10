@@ -1,0 +1,48 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>setup_client</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will initialise and set up the network object in client mode.<br>
+<br>
+bool setup_client(int channels, int max_peers)<br>
+<br>
+Parameters:<br>
+channels<br>
+The number of channels that are used by the client. The maximum is 100.<br>
+max_peers<br>
+The maximum number of peers that the client can be connected with simultaneously. The maximum is 4000.<br>
+<br>
+Return value:<br>
+true if the client was set up successfully, false otherwise.<br>
+<br>
+Remarks:<br>
+This method is used to set up the network object in client mode. This means that it will not listen for any incoming connections.<br>
+<br>
+Please note that it is perfectly legal for a client to make more than one outgoing connection at once, hence the max_peers parameter.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

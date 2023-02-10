@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>open</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will open a file for reading or writing.<br>
+<br>
+bool open(string filename, string open_mode)<br>
+<br>
+Parameters:<br>
+filename<br>
+The file to open. This can be either an absolute path, a relative path or the file name on its own.<br>
+open_mode<br>
+The mode in which the file should be opened (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When specifying a filename, remember that both \ and / can be used to specify paths.<br>
+<br>
+The following is a list of valid open modes.<br>
+<ul>
+<li>"a"=append</li>
+<li>"r"=read</li>
+<li>"w"=write</li>
+</ul>
+<br>
+If the file does not exist and is opened in write or append mode, it will be created as long as the directory that should contain the file exists. If the file is being opened in read mode then both directory and file must exist for the operation to succeed.<br>
+<br>
+To open a file in binary mode, simply append b to the open mode string. For example, "wb" will open a file to be written in binary mode, while "rb" opens a file to be read in binary mode.<br>
+<br>
+Example:<br>
+<pre>
+// Write some text into a file.
+
+void main()
+{
+file test;
+test.open("c:\\test.txt", "w");
+test.write("I am a text file!");
+test.close();
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>log10</b><br>
+<br>
+This function returns the common (base-10) logarithm of x.<br>
+<br>
+double log10(double x)<br>
+<br>
+Parameters:<br>
+x<br>
+The number to convert.<br>
+<br>
+Return value:<br>
+Common logarithm of x, for values of x greater than zero. If x is 0 or less, the function will return 0.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+double param=1000.0;
+double result=log10(param);
+alert("log10 test", "log10 "+param+" is "+result+".");
+}
+</pre>
+</body>
+</html>

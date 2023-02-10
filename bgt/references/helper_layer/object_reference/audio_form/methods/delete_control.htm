@@ -1,0 +1,79 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>delete_control</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will delete a specified control.<br>
+<br>
+bool delete_control(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to delete.<br>
+<br>
+Return value:<br>
+true on success, false otherwise.<br>
+<br>
+Remarks:<br>
+none.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons. The delete button will delete the OK button.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int delete=form.create_button("&Delete Control");
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if(form.is_pressed(delete))
+{
+form.delete_control(ok);
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>find</title>
+</head>
+<body>
+<br>
+<b>array object</b><br>
+<br>
+This method finds a value in the array and returns the index.<br>
+<br>
+int find(uint start_index, ? value)<br>
+<br>
+Parameters:<br>
+start_index<br>
+The index to start searching from.<br>
+value<br>
+The value to find.<br>
+<br>
+Return value:<br>
+The position of the value on success, and -1 on failure.<br>
+<br>
+Remarks:<br>
+This method is overloaded, and can be called omitting the start_index parameter. If this is the case, start_index will be assumed to be 0.<br>
+The value parameter must match the data type being held by the array.<br>
+<br>
+Please note: To search an array of classes it is necessary for the class to overload the comparison operator.<br>
+<br>
+Example:<br>
+<pre>
+// Declare an array and find a value, displaying its index.
+
+void main()
+{
+string[] names(6);
+names[0]="Damien";
+names[1]="Philip";
+names[2]="Percival";
+names[3]="Byron";
+names[4]="Humphrey";
+names[5]="Edmund";
+names.sort_ascending(0, names.length());
+int index=names.find("Philip");
+if(index&lt;0)
+{
+alert("Uh-oh", "Why can't we find Philip?");
+}
+else
+{
+alert("Names", "Philip is positioned at index "+index);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>arc_cosine</b><br>
+<br>
+This function returns the principal value of the arc cosine of x, expressed in radians.<br>
+<br>
+double arc_cosine(double x)<br>
+<br>
+Parameters:<br>
+x<br>
+The value to calculate between -1 and 1.<br>
+<br>
+Return value:<br>
+Principal arc cosine of x, in the interval [0,pi] radians. If x is outside the valid range, the function will return 0.<br>
+<br>
+Remarks:<br>
+In trigonometrics, arc cosine is the inverse operation of cosine.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("arc_cosine test", "Arc Cosine of -1 is "+arc_cosine(-1)+".");
+alert("arc_cosine test", "Arc Cosine of 0 is "+arc_cosine(0)+".");
+alert("arc_cosine test", "Arc Cosine of 1 is "+arc_cosine(1)+".");
+}
+</pre>
+</body>
+</html>

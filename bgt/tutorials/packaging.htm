@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Packaging Files in Your Executable</title>
+</head>
+<body>
+<h1>Packaging Files in Your Executable</h1>
+It is possible to include a BGT pack file inside a compiled game executable. This means that you can ship an arbitrary number of files that you do not wish to store separately on disk, as part of the program itself. In order to do this, follow the steps below:<br>
+<br>
+1. Generate a pack file using the pack_file object in the engine. In this pack you store all the files that you wish to include in the final executable.<br>
+<br>
+2. In your script code, write:<br>
+<br>
+#include "packname.dat"<br>
+<br>
+Replace packname.dat with the name of the pack that you created in step 1. The engine automatically detects whether a given include file is a pack, or a regular script file. Note that you may not include more than one pack file in each BGT game.<br>
+<br>
+3. When it is time to access the pack file, simply specify * as the pack file name wherever the name of the original pack file would normally have been given. For example, at the start of the main function you might write:<br>
+<br>
+set_sound_storage("*");<br>
+<br>
+If you run this script from source, the sounds will be searched for in the pack file on disk just as if you had specified the name that you gave in the include statement. However, when this script is compiled into an executable it will refer to the contents of the pack file that is stored inside the program itself.<br>
+<br>
+You may access the contents of the pack directly using the pack_file object, as follows:<br>
+<br>
+pack_file pack;<br>
+pack.open("*");<br>
+<br>
+The same rule as above applies regarding execution of the script from source as opposed to when it is being run as an executable. In short, whenever a script is run from source the pack file that was included will be accessed directly on disk.<br>
+<br>
+4. You may now compile your script, and the given pack file will be included along with your compiled game code in the resulting executable. As mentioned above, * should be used wherever the real pack file name would have been specified if you wish to access the pack inside the program.<br>
+</body>
+</html>

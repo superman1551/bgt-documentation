@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>run</b><br>
+<br>
+This function runs an executable program.<br>
+<br>
+bool run(string filename, string command_line, bool wait_for_completion, bool background)<br>
+<br>
+Parameters:<br>
+filename<br>
+The name of the executable file to run.<br>
+command_line<br>
+The command line parameters that should be given to the program.<br>
+wait_for_completion<br>
+A boolean (true or false) that specifies whether or not the function should wait for the new executable to finish running before returning.<br>
+background<br>
+A boolean (true or false) that specifies whether or not the new program should be run in the background, e.g. display no window.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+No command line parameters should be specified as part of the executable name. Instead, those should be given as the second parameter only.<br>
+<br>
+This function works with both absolute and relative paths.<br>
+<br>
+Example:<br>
+<pre>
+// Run notepad.exe and wait for it to close.
+
+void main()
+{
+bool result=run("C:\\windows\\notepad.exe", "", true, false);
+if(result==false)
+{
+alert("Error", "notepad.exe could not be run.");
+exit();
+}
+alert("Goodbye", "Thank you for using notepad. Your satisfaction is not guaranteed.");
+}
+</pre>
+</body>
+</html>

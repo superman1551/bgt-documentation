@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>is_admin</b><br>
+<br>
+This function checks whether the game is being run with administrator privileges.<br>
+<br>
+bool is_admin()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true if the game is being run with administrator privileges, false otherwise.<br>
+<br>
+Remarks:<br>
+Many users of Windows XP and earlier tended to run as administrators all the time. This opened up a lot of security issues that virus makers could exploit. Therefore, with Windows Vista and above Microsoft made the user rights management a lot more prominent in the operating system. One example of this is the inclusion of UAC (user access control), which advises users when programs attempt to do things that could be considered harmful such as writing to certain directories on the file system. With this function you may check if the current user is running as an administrator, or alternatively if they have enabled administrative privileges for your process specifically.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+if(is_admin())
+{
+alert("Congratulations", "You are an administrator!");
+}
+else
+{
+alert("Sorry", "You don't appear to be privileged enough to be an administrator on this system.");
+}
+}
+</pre>
+</body>
+</html>

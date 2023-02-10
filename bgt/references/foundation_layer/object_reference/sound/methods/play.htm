@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>play</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will start the sound playback.<br>
+<br>
+bool play()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method returns immediately after the sound has started playing, it does not wait for the playback to finish. In order to determine when the sound has stopped, use the "playing" property.<br>
+<br>
+Example:<br>
+<pre>
+// Play a sound, and then manually wait for it to stop before exiting.
+
+void main()
+{
+sound ambience;
+ambience.load("ding.ogg");
+if(ambience.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+ambience.play();
+while(ambience.playing==true)
+{
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

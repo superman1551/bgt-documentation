@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>round</b><br>
+<br>
+This function rounds a value to its nearest equivalent based on the number of decimal places you specify.<br>
+<br>
+double round(double value, int decimal_places)<br>
+<br>
+Parameters:<br>
+value<br>
+The value to round.<br>
+decimal_places<br>
+The number of decimal places to round to.<br>
+<br>
+Return value:<br>
+The specified value rounded to the specified number of decimal places.<br>
+<br>
+Remarks:<br>
+This function will round the value up or down where appropriate. The decimal_places parameter controls how the function should round. A value greater than 0 specifies a number of decimal places, 0 specifies the nearest integer, and negative values will round to the nearest tens, hundreds, thousands etc.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("round test", "5.31 rounded to 1 decimal place is "+round(5.31, 1)+".");
+alert("round test", "5.37 rounded to 1 decimal place is "+round(5.37, 1)+".");
+alert("round test", "5.73 rounded to the nearest integer is "+round(5.73, 0)+".");
+alert("round test", "5.31 rounded to the nearest ten is "+round(5.31, -1)+".");
+}
+</pre>
+</body>
+</html>

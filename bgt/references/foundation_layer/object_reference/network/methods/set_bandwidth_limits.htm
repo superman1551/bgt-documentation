@@ -1,0 +1,48 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_bandwidth_limits</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will limit the incoming and outgoing bandwidth of the host.<br>
+<br>
+bool set_bandwidth_limits(double incoming_bandwidth, double outgoing_bandwidth)<br>
+<br>
+Parameters:<br>
+incoming_bandwidth<br>
+The number of incoming bytes to allow per second.<br>
+outgoing_bandwidth<br>
+The number of outgoing bytes to allow per second.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+BGT will continuously monitor the connection and try to detect bandwidth overflows dynamically, but this method gives fine control over exactly how much data that is sent and received to and from all peers every second. Setting the outgoing bandwidth to 4096, for instance, will cause BGT to stall delivery of reliable packets and strategically drop unreliable ones in order to try to prevent the outgoing bandwidth from ever exceeding 4 kb per second.<br>
+<br>
+Setting either of these parameters to 0 will cause BGT to rely entirely upon its dynamic bandwidth throttling, which is the default behavior.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

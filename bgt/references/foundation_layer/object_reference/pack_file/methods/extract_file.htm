@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>extract_file</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will extract a file from an open pack file back onto disk.<br>
+<br>
+bool extract_file(string internal_name, string file_on_disk)<br>
+<br>
+Parameters:<br>
+internal_name<br>
+The internal storage name of a file inside the pack.<br>
+file_on_disk<br>
+The filename to use when extracting back onto disk.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method will work on a pack file opened for reading.<br>
+<br>
+Example:<br>
+<pre>
+// Open a pack file and extract some files.
+
+void main()
+{
+pack_file test;
+test.open("pack.dat");
+test.extract_file("t1","test1.txt");
+test.extract_file("t2","test2.txt");
+test.extract_file("t3","test3.txt");
+test.close();
+}
+</pre>
+</body>
+</html>

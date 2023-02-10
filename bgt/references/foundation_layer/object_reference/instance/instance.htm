@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>instance</title>
+</head>
+<body>
+<br>
+<b>instance object</b><br>
+<br>
+The instance object is used to check whether a given game is already running.<br>
+<br>
+instance(string application_name)<br>
+<br>
+Parameters:<br>
+application_name<br>
+An optional unique name that is used internally for the game.<br>
+<br>
+Remarks:<br>
+This object is useful if you wish to prevent multiple instances of the same game from being opened at the same time.<br>
+<br>
+If the application_name argument is specified, it must be no more than 100 characters in length. If it is not specified, it will default to a hash of the game executable and hence will not work if trying to prevent an older version of a game from running alongside an updated copy.<br>
+<br>
+Note: This class will only work if the game is compiled.<br>
+<br>
+Example:<br>
+<pre>
+/*
+Write a script that checks for another instance of itself. To make this script work effectively you must run it at least twice within ten seconds of the first instance being started.
+*/
+
+void main()
+{
+instance the_game("instance_checker");
+if(the_game.is_already_running)
+{
+alert("Error", "This script is already running.");
+exit();
+}
+wait(10000);
+}
+</pre>
+</body>
+</html>

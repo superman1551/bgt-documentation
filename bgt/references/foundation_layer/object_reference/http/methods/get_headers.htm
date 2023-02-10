@@ -1,0 +1,92 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_headers</title>
+</head>
+<body>
+<br>
+<b>http object</b><br>
+<br>
+This method initiates the retrieval of only the http headers from a URL on the Internet.<br>
+<br>
+string get_headers(string url)<br>
+<br>
+Parameters:<br>
+url<br>
+The URL of the file on the Internet for which the headers should be retrieved.<br>
+<br>
+Return value:<br>
+A blank string on success, or an error description or blank string on failure (see remarks).<br>
+<br>
+Remarks:<br>
+This method will send what is known as a HEAD request. A HEAD request is identical to a GET request, with the only difference being that it merely retrieves the http headers from the server that would have been returned along with the content if a GET request with the same URL had been sent. This is useful when you wish to retrieve the size of a given file without downloading it, for instance.<br>
+<br>
+The URL given may contain so called GET parameters, which are used to pass small amounts of data to the server.<br>
+<br>
+The URL may not contain any special characters such as spaces or similar. If you wish to include such characters, always encode the URL by calling the url_encode function before attempting to retrieve it from the Internet.<br>
+<br>
+If the http server to which the URL points uses a port other than 80, you will need to include the port after the host name proceeded by a colon. The path on the server (if any) should then follow, proceeded by a slash. Such a URL might look like http://myserver.com:8080/myfile.html.<br>
+<br>
+If multiple requests are made with URL's pointing to the same server, the http object will attempt to keep the connection alive for a short while which results in a dramatic speed increase for subsequent requests.<br>
+<br>
+If the network subsystem fails to initialize, the get_last_error function will return -27 and the returned string will be blank.<br>
+<br>
+If an Internet related error occurs, the get_last_error function will return -29 and the returned string will contain a textual description of the error. This means that you should always call get_last_error after initiating a request.<br>
+<br>
+The http object is asynchronous, which means that it does not wait for any data before returning. To retrieve data from the server, you must continuously call the request method until the progress boolean property reports false. At this time, you may access the headers property to retrieve the result.<br>
+<br>
+Example:<br>
+<pre>
+// Retrieve the size of the BGT installer from blastbay.com, without downloading the file.
+
+void main()
+{
+http download;
+string result=download.get_headers("http://www.blastbay.com/bgt_english_installer.exe");
+if(get_last_error()!=0)
+{
+alert("Error", "An error occured.\r\nDescription: " + result + "");
+}
+else
+{
+while(download.progress)
+{
+download.request();
+wait(5);
+}
+string[] headers=string_split(download.headers, "\n", true);
+for(int i=0;i&lt;headers.length();i++)
+{
+if(i==headers.length()-1)
+break;
+string current_header=string_to_lower_case(headers[i]);
+if(current_header=="content-length")
+{
+uint size=string_to_number(headers[i+1]);
+alert("Size", "The file is " + size + " bytes.");
+exit();
+}
+}
+}
+alert("Error", "The size of the file could not be retrieved.");
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_button_attributes</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will set the primary and cancel attributes on a push button.<br>
+<br>
+bool set_button_attributes(int control_id, bool primary, bool cancel, bool overwrite=true)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to change.<br>
+primary<br>
+A boolean value indicating whether the button should be the primary or default.<br>
+cancel<br>
+A boolean value indicating whether the button is the cancel button.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+For a more detailed explanation on how the primary and cancel attributes work, please see the topic covering the create_button method.<br>
+<br>
+Please note that the method will only return false if the method is unable to function due to an error. If the method at least attempted to change the attributes, it will still return true. To check whether the attributes were changed, use the get_default_button and get_cancel_button methods.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+form.set_button_attributes(ok, true, false);
+form.set_button_attributes(cancel, false, true);
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

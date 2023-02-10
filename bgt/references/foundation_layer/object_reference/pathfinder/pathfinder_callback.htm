@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pathfinder_callback</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+This user callback is invoked by the pathfinder for each square that it needs to gather information about during a search operation.<br>
+<br>
+int pathfinder_callback(int x, int y, int parent_x, int parent_y, string user_data)<br>
+<br>
+Parameters:<br>
+x<br>
+The x coordinate of the square that the pathfinder is requesting information about.<br>
+y<br>
+The y coordinate of the square that the pathfinder is requesting information about.<br>
+parent_x<br>
+The x coordinate of the square from which the pathfinder went to reach the current square that it is now interested in.<br>
+parent_y<br>
+The y coordinate of the square from which the pathfinder went to reach the current square that it is now interested in.<br>
+user_data<br>
+The user data that was given in the call to the find method.<br>
+<br>
+Return value:<br>
+The function must return a value between 0 and 10. Values between 0 and 9 are walkable squares, where higher numbers indicate a greater risk associated with the given square. Returning 10 means that the square is unwalkable.<br>
+<br>
+Remarks:<br>
+This function is invoked for each square that the pathfinder looks at when determining the best path to the destination. It is thus very important that the function runs quickly, and that it does not wait for any events to occur or load resources from disk etc.<br>
+<br>
+The user data allows you to pass along special information to the callback that may be useful while searching. This string will often contain a number which identifies the entity for whom the search is being performed, so that the callback may enforce special rules for the type of creature in question etc.<br>
+<br>
+The parent coordinates are only useful in special circumstances. If, for instance, you are writing a two dimensional side scroller and you want the entity who follows the path to be allowed to move downwards but not upwards, you can check if the x coordinate is the same as the parent x coordinate and if the y coordinate is greater than the parent y coordinate. If this is the case, you can return 10 to indicate that the square is unwalkable.<br>
+<br>
+You may not call any methods of the pathfinder from within this callback function, except for the cancel method.<br>
+<br>
+Example:<br>
+See the main pathfinder chapter and the pathfinding tutorial.<br>
+</body>
+</html>

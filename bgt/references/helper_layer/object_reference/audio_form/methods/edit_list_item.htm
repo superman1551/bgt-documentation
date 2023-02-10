@@ -1,0 +1,85 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>edit_list_item</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will edit an item in a listbox.<br>
+<br>
+bool edit_list_item(int control_id, string new_option, int position)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID of the listbox.<br>
+new_option<br>
+The new text for the item.<br>
+position<br>
+The position of the item to edit.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a listbox.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int list=form.create_list("&People", 0);
+form.add_list_item(list, "Joseph", -1);
+form.add_list_item(list, "Samuel", -1);
+form.add_list_item(list, "Percival", 1);
+form.add_list_item(list, "William", -1);
+form.add_list_item(list, "Edward", 0);
+form.edit_list_item(list, "Damien", 0);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

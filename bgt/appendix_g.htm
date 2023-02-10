@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Appendix G</title>
+</head>
+<body>
+<br>
+<b>BGT Command Line Options</b><br>
+<br>
+When you choose an item in the BGT context menu by right clicking on a script file, what happens internally is that bgt.exe is executed with a particular command line option. This means that by passing these options manually you can accomplish the same tasks as the context menu does. Each option starts with a - (dash) character. The following command line options are available:<br>
+<h2>Executing a script</h2>
+You may execute a script simply by passing its name in quotes. No special options need to be specified.<br>
+<br>
+bgt.exe "path/to/my/script.bgt"<br>
+<h2>Compiling a script</h2>
+The -c and -C commands are used to compile scripts. -c compiles a debug build, and -C compiles a release build. If only -c or -C is specified, a dialog asking for a script to compile will appear. Optionally you may include a filename within quotes after the command, which will result in that script being compiled directly.<br>
+<br>
+bgt.exe -c<br>
+Shows a dialog box asking for a script to compile, and makes a debug build of it.<br>
+<br>
+bgt.exe -C<br>
+Shows a dialog box asking for a script to compile, and makes a release build of it.<br>
+<br>
+bgt.exe -c"path/to/my/script.bgt"<br>
+Compiles a debug build of the specified script.<br>
+<br>
+bgt.exe -C"path/to/my/script.bgt"<br>
+Compiles a release build of the specified script.<br>
+<h2>Launching the registration manager</h2>
+You may launch the registration manager by passing the -r command.<br>
+<br>
+bgt.exe -r<br>
+</body>
+</html>

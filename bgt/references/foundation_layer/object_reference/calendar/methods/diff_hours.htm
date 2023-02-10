@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>diff_hours</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method returns the number of hours between two dates.<br>
+<br>
+double diff_hours(calendar@ object)<br>
+<br>
+Parameters:<br>
+object<br>
+The handle to another valid calendar object.<br>
+<br>
+Return value:<br>
+The difference between the current calendar's date and the date of the passed calendar object handle in hours.<br>
+<br>
+Remarks:<br>
+Unlike diff_years, this method returns an integer representation of the difference.<br>
+<br>
+Example:<br>
+<pre>
+// Find out the number of hours between October 7, 1767 and now.
+
+void main()
+{
+calendar test;
+calendar now;
+test.set(1767, 10, 7, 9, 0, 0);
+double diff=test.diff_hours(now);
+alert("diff_hours", "There are "+diff+" hours between October 7, 1767 and now.");
+}
+</pre>
+</body>
+</html>

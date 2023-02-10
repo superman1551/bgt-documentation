@@ -1,0 +1,101 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>generate_all_combinations</title>
+</head>
+<body>
+<br>
+<b>combination object</b><br>
+<br>
+This algorithm generates all combinations of a given size from a set, including repetitions in all possible orders.<br>
+<br>
+bool generate_all_combinations(int items, int combination_size)<br>
+<br>
+Parameters:<br>
+items<br>
+The number of items in the set. This must be at least 2.<br>
+combination_size<br>
+The number of items in each combination. Since we include repetitions, this must be at least 2 but can be greater than items.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When enumerating combinations with two items in each from a set of three items, the nine possible combinations that this algorithm generates are:<br>
+<br>
+[ 0, 0 ]<br>
+[ 0, 1 ]<br>
+[ 0, 2 ]<br>
+[ 1, 0 ]<br>
+[ 1, 1 ]<br>
+[ 1, 2 ]<br>
+[ 2, 0 ]<br>
+[ 2, 1 ]<br>
+[ 2, 2 ]<br>
+<br>
+Example:<br>
+<pre>
+// We have a basket and an unlimited quantity of three types of fruit. The basket may only contain two fruits at any given time.
+// Enumerate all the combinations of fruit that the basket could possibly contain.
+// Note: This same algorithm can be used for other things such as getting all the possible outcomes of rock, paper and sizzors.
+
+void main()
+{
+int combination_size=2;
+// This is the number of items that we want in each combination.
+
+int items=3;
+// This is the number of items we have all in total, which is to say our different types of fruit.
+
+combination process;
+
+if(process.generate_all_combinations(items, combination_size)==false)
+{
+alert("Error", get_last_error_text());
+exit();
+}
+
+int[] list;
+// This is the array which will be filled with each combination.
+
+int count=0;
+// This simply keeps track of how many combinations we've generated so far. It is not really needed.
+
+while(process.next(list))
+{
+count+=1;
+
+// At this point, we have a new combination. We print it out in an alert box as a comma separated string.
+string data;
+for(int i=0;i&lt;list.length();i++)
+{
+if(i>0)
+data+=", ";
+data+=list[i];
+}
+alert("Combination " + count, data);
+}
+
+// We're done, so let's display how many combinations we found before we quit.
+alert("Result", count + " combinations were generated from a set of " + items + " items, with " + combination_size + " items in each combination.");
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_len</b><br>
+<br>
+This function returns the length of the string.<br>
+<br>
+double string_len(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be evaluated.<br>
+<br>
+Return value:<br>
+A double with the length of the string.<br>
+<br>
+Remarks:<br>
+If an empty string is passed, the function will return 0.<br>
+<br>
+An alternative method to string_len is to call the length method on the string variable in question, remembering that a string is an array of characters. This function has been implemented for convenience and completeness.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_len test", string_len("Hello, I am a string!")); //output should be 21
+}
+</pre>
+</body>
+</html>

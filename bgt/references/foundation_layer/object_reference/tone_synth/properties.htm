@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+double volume<br>
+This determines how loudly subsequently generated notes will be played. 0 is the original volume, and -100 is completely silent. This number may contain decimals, but will be rounded internally if needed and so absolute values should not be relied upon. This property can be modified from the script. This is set to -1 on error.<br>
+<br>
+double tempo<br>
+This is used to set the speed of the song. Values are given in beats per minute. Default value is 120. This is set to -1 on error.<br>
+<br>
+double pan<br>
+This controls the stereo panning (left to right) of subsequently generated notes. -100 is far left, 0 is the middle, and 100 is far right. The default value is 0. This number may contain decimals, but will be rounded internally if needed and so absolute values should not be relied upon. This property can be modified from the script. This is set to -1 on error.<br>
+<br>
+double note_transpose<br>
+Allows subsequently generated notes to be transposed so that they play in a different key. Default value is 0, I.E. note C remains C. This is set to -1 on error.<br>
+<br>
+double freq_transpose<br>
+Allows frequencies to be transposed so that they play at different frequencies. Default value is 0, I.E. 262 remains 262. This is set to -1 on error.<br>
+<br>
+double waveform_type<br>
+Determines the type of tone that will be generated. 1=sawtooth, 2=square, 3=sine and 4=triangle. Default value is 1. This is set to -1 on error.<br>
+<br>
+double position<br>
+The position of the cursor in beats. This property cannot be directly modified from the script, however it can be modified by using the seek, rest and rewind functions. This is set to -1 on error.<br>
+<br>
+double position_ms<br>
+The position of the cursor in milliseconds. This property cannot be directly modified from the script, however it can be modified by using the seek_ms, rest_ms and rewind_ms functions. This is set to -1 on error.<br>
+<br>
+double length<br>
+The length of the current data in beats, or -1 on error. This property cannot be modified from the script.<br>
+<br>
+double length_ms<br>
+The length of the current data in milliseconds, or -1 on error. This property cannot be modified from the script.<br>
+<br>
+bool reverb<br>
+A boolean specifying whether reverb should be used. This is set to false by default. Please note that reverb is applied individually to each tone that is generated, in order to allow for maximum flexibility. It may therefore take a long time to add reverb to a complex piece. This processing time is mostly affected by the setting of the reverb_decay property (see below).<br>
+<br>
+double reverb_room_size<br>
+A value between 0 and 100 specifying the auditory room size of the reverb which controls its depth. A room size of 80, for instance, would simulate the reverb in a very large room, such as a hall. This is set to 50 by default.<br>
+<br>
+double reverb_damping<br>
+A value between 0 and 100 that controls the damping of the reverb. The higher the value, the more muffled the reverb will become. This is useful for producing effects comparable to that of a cave. This is set to 50 by default.<br>
+<br>
+double reverb_dry_level<br>
+A value between 0 and 100 representing the volume of the original signal. This is set to 35 by default. 50 represents the original volume.<br>
+<br>
+double reverb_wet_level<br>
+A value between 0 and 100 representing the volume of the reverberated signal. This is set to 15 by default.<br>
+<br>
+double reverb_decay<br>
+The room size determines how long it takes for the reverberation to finish naturally. However, the decay may be used to end the reverberation prematurely and get a smooth fade. In short, it controls how much time the reverberation is actually allowed to continue for after the original signal has ended. This is specified in milliseconds, and is set to 2500 by default.<br>
+</body>
+</html>

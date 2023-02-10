@@ -1,0 +1,111 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>call</title>
+</head>
+<body>
+<br>
+<b>library object</b><br>
+<br>
+This method will call a specified function from within the associated DLL library, returning a handle to a dictionary containing the results of the call.<br>
+<br>
+dictionary@ call(string function_signature, ? list_of_parameters)<br>
+<br>
+Parameters:<br>
+function_signature<br>
+The function signature expected by the library.<br>
+list_of_parameters<br>
+The list of parameters expected by the specified function signature.<br>
+<br>
+Return value:<br>
+A handle to a dictionary containing the results of the call. If the call failed, the dictionary will be empty (see remarks).<br>
+<br>
+Remarks:<br>
+Similarly to calling functions in BGT, the list of parameters are passed according to the function signature provided in the first parameter, and are separated by commas.<br>
+<br>
+If the call was successful, the function will return a handle to a dictionary containing all the results of the call. Since some parameters may actually be modified by the library, I.E. if they are passed as pointers (see below), the dictionary will provide the return value as key 0, and the parameters we passed to the DLL as the number of the parameter (see the example for how this works in practice).<br>
+<br>
+At present, it is only possible to call DLL's that export a C style interface either using stdcall or cdecl, which the absolute majority of them do. All the Windows API DLL's, for instance, use stdcall and export C interfaces.<br>
+<br>
+The function signature you provide should match that stored in the library for it to succeed.<br>
+<br>
+Below is a list of datatypes that the function signature can currently process.<br>
+<ul>
+<li>char*: Equivalent to a BGT string. Internally, this is a pointer to an array of characters (see below).</li>
+<li>char: The same as int8 in BGT.</li>
+<li>unsigned char: The same as uint8 in BGT.</li>
+<li>short, int, long: The same as in BGT.</li>
+<li>unsigned short, unsigned int, unsigned long: The same as ushort, uint and ulong in BGT.</li>
+<li>BOOL: This is a Windows datatype that is the same size as a long.</li>
+<li>Handles: The Windows API has several different handle datatypes. These can all be processed as an int, as they are pointers. If a handle needs to be passed as null, the null keyword can be used in the same way as in BGT.</li>
+</ul>
+Sometimes, DLL's may expect and/or return what are called pointers. Put simply, a pointer is a special type of variable in C which provides the location in memory of a particular piece of data. If you are familiar with object handles in BGT, then you can apply a similar concept to pointers in C. If a function expects a pointer, then you give it the variable type, followed by a star sign (*). For example, to pass a pointer to an int you would use int*. To pass a string, you would use char*, since a string is a pointer to an array of characters.<br>
+<br>
+if a parameter you are passing is smaller than the type that the function expects based on the signature string, it will be converted if possible. For instance, let's say the function takes an int and you pass a short from the script, it will automatically be converted to an int internally before it is passed. However, implicit type conversions are only attempted if the parameter in question is not a pointer.<br>
+<br>
+Theoretically, function signatures can contain parameters with multiple pointers, such as int**, int*** etc. At present, only one level of indirection is supported. This means that only one pointer, such as int*, can be used for any one parameter.<br>
+<br>
+If for some reason the call fails the parsing sequence, a runtime error will be triggered.<br>
+<br>
+Example:<br>
+<pre>
+// Retrieve the computer name and display it in a message box, all with DLL's.
+
+// Define the information constant.
+const int win32_mb_icon_information=0x00000040;
+
+void main()
+{
+
+// Declare some variables.
+library dll; // This will do all the nifty work.
+dictionary@ dll_result; // This will contain the result of the call.
+string name; // This will hold our computer name.
+
+/*
+Since the DLL expects us to allocate our own memory for the string, we will resize the string to a decent length so that the DLL can fill it.
+*/
+name.resize(500);
+
+// Load the library.
+dll.load("kernel32.dll");
+
+// Call the function that will retrieve our computer name. It takes the string that is to hold the computer name, and its length.
+@dll_result=dll.call("int GetComputerNameA(char*, int*);", name, name.length());
+
+// Unload the library.
+dll.unload();
+
+// Retrieve the modified computer name. Since the string that we passed was the first parameter, we retrieve this with key 1.
+dll_result.get("1", name);
+
+// Remove the remaining null characters.
+name=string_replace(name, "\0", "", true);
+// Now we create a message box with the information.
+
+// Load the library containing the MessageBox function.
+dll.load("user32.dll");
+
+// Call the MessageBox function.
+dll.call("int MessageBoxA(int, char*, char*, int);", 0, "The name assigned to this computer is "+name+".", "Information", win32_mb_icon_information);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>position_sound_custom_2d</b><br>
+<br>
+This function is contained within sound_positioning.bgt in the BGT include directory, and is used to position an object based on the player's position in an x/y-based grid, allowing the default pan, volume and pitch to be changed.<br>
+<br>
+void position_sound_custom_2d(sound@ handle, int listener_x, int listener_y, int source_x, int source_y, float pan_step, float volume_step, float behind_pitch_decrease, float start_pan, float start_volume, float start_pitch)<br>
+<br>
+Parameters:<br>
+handle<br>
+the handle of a sound to position.<br>
+listener_x<br>
+The X position of the player on the game board.<br>
+listener_y<br>
+The Y position of the player on the game board.<br>
+source_x<br>
+The X position of the object on the game board.<br>
+source_y<br>
+The Y position of the object on the game board.<br>
+pan_step<br>
+The value that specifies how much the sound should pan when the object and/or listener position changes.<br>
+volume_step<br>
+The value that specifies how much the sound's volume will change when the object and/or listener position changes.<br>
+behind_pitch_decrease<br>
+The amount to decrease the pitch by that will simulate the object sound behind the listener, relative to the current pitch.<br>
+start_pan<br>
+The starting pan of the sound.<br>
+start_volume<br>
+The starting volume of the sound.<br>
+start_pitch<br>
+The starting pitch of the sound.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+This function will simulate a listener moving towards or away from an object in an X/Y-based environment. This means that the user may walk forwards, backwards, left or right away from the sound. To simulate the object's position behind the listener, the pitch can be changed to notify the player.<br>
+<br>
+It is important to remember that the listener values simulate the position of a person, and the source simulates the position of the object that is making the sound. If the X and Y values are the same, the sound will be central and at full volume. If the X values change, the pan and volume values will change. If the Y value is changed, the volume will change.<br>
+<br>
+Example:<br>
+<pre>
+//Put the machine on X 20, Y 5, allowing the user to use arrow keys to hear the effect.
+
+#include "sound_positioning.bgt"
+
+int p_position_x=0, p_position_y=0; //declare and assign the player's positions
+int m_position_x=20, m_position_y=5; //declare and assign the machine's position
+int f_position_x=40, f_position_y=10; //declare and assign the boundaries of the grid
+sound machine; //sound of the machine
+
+void main()
+{
+machine.load("sounds/machine.wav");
+if(machine.active==false)
+{
+alert("Error", "sounds/machine.wav could not be loaded.");
+}
+show_game_window("Sound position test");
+position_sound_custom_2d(machine, p_position_x, p_position_y, m_position_x, m_position_y, 1, 1, 10, 0, -1, 90);
+machine.play_looped();
+while(true)
+{
+if(key_pressed(KEY_LEFT))
+{
+if(p_position_x > 0)
+{
+p_position_x--;
+position_sound_custom_2d(machine, p_position_x, p_position_y, m_position_x, m_position_y, 1, 1, 10, 0, -1, 90);
+}
+}
+if(key_pressed(KEY_RIGHT))
+{
+if(p_position_x < f_position_x)
+{
+p_position_x++;
+position_sound_custom_2d(machine, p_position_x, p_position_y, m_position_x, m_position_y, 1, 1, 10, 0, -1, 90);
+}
+}
+if(key_pressed(KEY_UP))
+{
+if(p_position_y < f_position_y)
+{
+p_position_y++;
+position_sound_custom_2d(machine, p_position_x, p_position_y, m_position_x, m_position_y, 1, 1, 10, 0, -1, 90);
+}
+}
+if(key_pressed(KEY_DOWN))
+{
+if(p_position_y > 0)
+{
+p_position_y--;
+position_sound_custom_2d(machine, p_position_x, p_position_y, m_position_x, m_position_y, 1, 1, 10, 0, -1, 90);
+}
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

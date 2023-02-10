@@ -1,0 +1,36 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+string prepend<br>
+This will be the string that will be prepended to any number file that is loaded. This is useful, for example, if your numbers are stored in a separate directory, or have a prefix on the filenames.<br>
+<br>
+string append<br>
+This will be the string that will be appended to any number file that is loaded. The default is .wav, so it is only necessary to change this if your numbers have a different extension.<br>
+<br>
+bool include_and<br>
+This boolean decides whether the word "and" should be inserted in the appropriate places in the output. If set to true, you must make a file called and.wav, unless the extention (e.g. the append property) is something other than .wav. The default value is false.<br>
+</body>
+</html>

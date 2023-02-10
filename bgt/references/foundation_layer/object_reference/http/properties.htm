@@ -1,0 +1,39 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>http object</b><br>
+<br>
+bool progress<br>
+This is set to true if an operation is in progress, and false if it has completed or if an error has occurred. This property cannot be modified from the script.<br>
+<br>
+string return_code<br>
+A string representing The server response which is given before data starts appearing. 200 ok represents success. This property cannot be modified from the script.<br>
+<br>
+string headers<br>
+A string representing the raw http headers returned by the server. These will normally not be needed unless you have some specific reason for wanting to see them. This property cannot be modified from the script.<br>
+<br>
+string user_agent<br>
+A string giving the browser name and version that is reported to the server from the client. The default is BGT/1.0. If you set it to an empty string, it will be returned to the default again. This can be both set and retrieved.<br>
+</body>
+</html>

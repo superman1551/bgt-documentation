@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>get_last_error</b><br>
+<br>
+This function retrieves the error code set by the last engine function or object method that you called.<br>
+<br>
+int get_last_error()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+One of the BGT error codes, see appendix B for a full list.<br>
+<br>
+Remarks:<br>
+Many engine functions and object methods cannot give any specific information about an error that it encountered via its return value, such as the input_box function which returns an empty string if an error occurs. This, however, can also happen if the user just clicks OK which makes it impossible to distinguish these two conditions from one another. This is when the get_last_error function comes in handy. It will return an error code that the engine function or object method specified before returning, which allows you to determine with much greater exactitude what went wrong.<br>
+<br>
+The get_last_error function will return 0 if no error occured in the last call. This means that the error is reset for every new call to an engine function or object method, so you should retrieve the error code before making any other calls.<br>
+<br>
+The error code returned by the get_last_error function is not affected by calls to any of your own functions or methods.<br>
+<br>
+Example:<br>
+<pre>
+// Generate an input box, and check whether the user pressed cancel by calling get_last_error.
+
+void main()
+{
+string name=input_box("Name", "Please type in your name");
+if(name=="")
+{
+if(get_last_error()==-12)
+{
+alert("OK","If you wish to press cancel, then I will trouble you no further. Goodbye!");
+exit();
+}
+alert("OK","If you wish not to disclose that personal precious information, then I will trouble you no further. Goodbye!");
+exit();
+}
+alert("Hello!", "Hello "+name+", nice to meet you!");
+}
+</pre>
+</body>
+</html>

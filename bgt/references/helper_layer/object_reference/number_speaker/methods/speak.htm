@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+This method will speak a number from -999999999 to 999999999.<br>
+<br>
+int speak(double the_number)<br>
+<br>
+Parameters:<br>
+the_number<br>
+The number to speak.<br>
+<br>
+Return value:<br>
+0 on success, -1 on failure.<br>
+<br>
+Remarks:<br>
+The speak method will look for sounds in accordance with the values stored in the prepend and append properties, and ascertain the best sound files to load by performing a number of searches based on the number at hand.<br>
+<br>
+This function will return immediately when called, allowing the script to do other things while the number is being spoken. It is therefore necessary to call the speak_next method continuously to ensure that the numbers are spoken as smoothly and fluently as possible.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a number using speak and speak_next.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+number_speaker test;
+test.prepend="numbers/";
+test.speak(1056);
+while(test.speak_next()==1)
+{
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

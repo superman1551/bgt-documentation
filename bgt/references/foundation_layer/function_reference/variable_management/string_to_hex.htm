@@ -1,0 +1,49 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_to_hex</b><br>
+<br>
+This function returns the hexadecimal equivalent of a string.<br>
+<br>
+string string_to_hex(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be converted.<br>
+<br>
+Return value:<br>
+A string containing the hexadecimal equivalent of the given string, or an empty string on error.<br>
+<br>
+Remarks:<br>
+Given the nature of a hexadecimal string, the converted string will be twice the length of the source string. Therefore care must be taken if converting considerably large strings.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_to_hex test", string_to_hex("A frog is bouncing in my food!"));
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>get_characters</b><br>
+<br>
+This function traps any characters that are sent to the game window.<br>
+<br>
+string get_characters()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+A string containing any printable characters that have been pressed inside the game window since the last call.<br>
+<br>
+Remarks:<br>
+This function only traps printable characters such as letters, numbers, punctuation, symbols, etc. All other keys such as tab, control, escape and enter are ignored.<br>
+<br>
+The function will return any characters pressed since the last call, up to 1KB, or 1024 characters. If the 1025th character is pressed, the first character is deleted and the whole queue of data is pushed to make room for the new entry.<br>
+<br>
+Example:<br>
+<pre>
+// Give the user five seconds to do some typing and display the result.
+
+timer wait_time;
+
+void main()
+{
+alert("Waiting", "You have five seconds to type some text.");
+show_game_window("Typing test");
+while(true)
+{
+wait(5);
+if(wait_time.elapsed>=5000)
+{
+wait_time.pause();
+alert("Thanks", "Thanks for waiting for me. You typed "+get_characters()+". Goodbye.");
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

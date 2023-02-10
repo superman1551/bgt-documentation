@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_distance</b><br>
+<br>
+This function calculates the syntactical similarity between two strings.<br>
+<br>
+int string_distance(string first_string, string second_string)<br>
+<br>
+Parameters:<br>
+first_string<br>
+The first string.<br>
+second_string<br>
+The second string.<br>
+<br>
+Return value:<br>
+The distance between the two strings on success (see remarks), or -1 on failure.<br>
+<br>
+Remarks:<br>
+This function uses what is known as the Levenshtein distance algorithm to measure the similarity between two arbitrary strings, by calculating how many changes that would be necessary to turn the one string into the other. The number of required operations thus becomes the similarity between the two strings. The similarity between the strings "man" and "mandy" will be 2, for instance, since all that is required in order to turn man into mandy is adding a d and a y to the end of the former. Similarly, turning car into bar requires the substitution of c to b which is considered to be one operation, and as a result the similarity is 1. The three permissible operations are addition, subtraction (e.g. removing a character), and substitution (which is to say replacing one character with another).<br>
+<br>
+Please note that this function uses a considerable amount of memory, and should thus not be called on longer strings.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("Similarity", "The similarity between the words \"man\" and \"mandy\" is " + string_distance("man", "mandy") + ".");
+}
+</pre>
+</body>
+</html>

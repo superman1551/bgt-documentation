@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>close</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will close any file associated with the object.<br>
+<br>
+bool close()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Closing a file is useful when you want to release the current file that is associated with the object in order to save resources, while still keeping the object alive for future use. This method is executed automatically when a file object is destroyed, so you need not worry about calling it to clean up after yourself at the end of your script for example if you do not wish to. This method is also executed if you call the open method on a file object that already has a file associated with it.<br>
+<br>
+Example:<br>
+<pre>
+// Open a file, write some text and close it.
+
+void main()
+{
+file test;
+test.open("c:\\test.txt", "w");
+test.write("I am a text file!");
+test.close();
+}
+</pre>
+</body>
+</html>

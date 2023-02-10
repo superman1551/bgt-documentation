@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>url_encode</b><br>
+<br>
+This function encodes a string to be URL compatible.<br>
+<br>
+string url_encode(string url)<br>
+<br>
+Parameters:<br>
+url<br>
+The URL string to encode.<br>
+<br>
+Return value:<br>
+The encoded string on success, or the passed string on failure.<br>
+<br>
+Remarks:<br>
+The url_encode function converts special characters that cannot be used on their own to specially adapted combinations that represent that character that are legal. Therefore it is important to use this function when using any of the HTTP functions for them to work properly.<br>
+<br>
+Example:<br>
+<pre>
+// Encode a URL.
+
+void main()
+{
+alert("encoded url",url_encode("http://www.mysite.com/files/my program (v1.0).exe")); // Reads http%3a%2f%2fwww.mysite.com%2ffiles%2fmy+program+%28v1.0%29.exe
+}
+</pre>
+</body>
+</html>

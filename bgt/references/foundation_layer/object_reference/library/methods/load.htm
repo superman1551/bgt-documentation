@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>load</title>
+</head>
+<body>
+<br>
+<b>Library object</b><br>
+<br>
+This method will load a DLL library.<br>
+<br>
+bool load(string library_filename)<br>
+<br>
+Parameters:<br>
+library_filename<br>
+The filename of the DLL to open, with or without extension.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When specifying the filename, either an absolute or relative path can be used. If no absolute path is specified, the DLL will be searched for in the script directory, followed by the system directory, followed by the Windows directory. If the DLL cannot be found in any of these locations, the method will return false.<br>
+<br>
+Example:<br>
+<pre>
+// Show a message box using the conventional Windows MessageBox function.
+
+const int win32_mb_icon_information=0x00000040; // The value as written in the MSDN.
+
+void main()
+{
+library dll;
+dll.load("user32.dll");
+
+// The MessageBox parameter takes a window handle, the text, the title, and the flags.
+dll.call("int MessageBoxA(int, char*, char*, int);", 0, "I am a message box using user32.dll.", "Hey there", win32_mb_icon_information);
+}
+</pre>
+</body>
+</html>

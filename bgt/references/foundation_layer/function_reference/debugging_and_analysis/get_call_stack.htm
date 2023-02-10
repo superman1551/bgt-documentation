@@ -1,0 +1,79 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>get_call_stack</b><br>
+<br>
+This function returns information about the functions that are currently on the stack, as a formatted string.<br>
+<br>
+string get_call_stack()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+A string containing information about the functions that are on the call stack (see remarks).<br>
+<br>
+Remarks:<br>
+The call stack is a list of the functions that are being executed recursively. The function will return the stack size, and various information about each function, including the script file and line number from which the function will continue executing once control is returned to it.<br>
+<br>
+Please note that only function names can be retrieved if this function is called in a release build of your game.<br>
+<br>
+Example:<br>
+<pre>
+/*
+This example is deliberately written to be tedious to follow, and thus showing the usefulness of tracing the stack.
+*/
+
+class dummy
+{
+void first_dummy_method()
+{
+second_dummy_method();
+}
+
+void second_dummy_method()
+{
+clipboard_copy_text(get_call_stack());
+}
+}
+
+void main()
+{
+second();
+}
+
+int second()
+{
+third();
+return 0;
+}
+
+void third()
+{
+dummy temp;
+temp.first_dummy_method();
+}
+</pre>
+</body>
+</html>

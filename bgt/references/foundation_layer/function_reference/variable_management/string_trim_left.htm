@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_trim_left</b><br>
+<br>
+This function truncates a specified number of characters from the left hand side of a string.<br>
+<br>
+string string_trim_left(string the_string, uint count)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be extracted from.<br>
+count<br>
+The number of characters to remove.<br>
+<br>
+Return value:<br>
+Returns the string with so many characters removed from the left.<br>
+<br>
+Remarks:<br>
+If position is less than 1, the string is returned in its entirety. If position is greater than the string's length, a blank string will be returned.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_trim_left test", string_trim_left("Hello, I am a string!", 7)); //output should be I am a string!
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>play_wait</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+This method will start the sound playback and wait for it to finish before returning.<br>
+<br>
+bool play_wait()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method will pause the entire script until the sound has finished playing, regardless of its length. If you wish to do other things such as check for keystrokes while the sound is playing, call the "play" method instead and use the property called "playing" to determine when the sound has stopped.<br>
+<br>
+Example:<br>
+<pre>
+// Load a sound into memory, play it and close it.
+
+void main()
+{
+sound test;
+test.load("c:\\windows\\media\\ding.wav");
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

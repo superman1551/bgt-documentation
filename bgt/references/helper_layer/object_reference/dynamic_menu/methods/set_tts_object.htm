@@ -1,0 +1,88 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_tts_object</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method allows you to specify an existing tts_voice object to be used for any Sapi 5 spoken output in the menu.<br>
+<br>
+bool set_tts_object(tts_voice@ handle)<br>
+<br>
+Parameters:<br>
+handle<br>
+A handle to an existing tts_voice object that is to be used for all subsequent Sapi 5 output.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method is useful when you are using Sapi 5 spoken output in the menu and wish to preserve any settings such as rate, volume etc of the voice. The object that you specify in this function will be used for all subsequent text strings spoken by Sapi 5. If you do not call this method and still use Sapi output, an internal tts_voice object with the default settings will be used instead.<br>
+<br>
+Note that even if you specify an explicit tts_voice object with this method, Sapi will not be used if the speech mode is not 0.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu with redirected Sapi.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+tts_voice my_voice;
+my_voice.rate=120;
+dynamic_menu my_menu;
+int menu_result;
+my_menu.allow_escape=true;
+my_menu.wrap=false;
+my_menu.set_tts_object(my_voice);
+my_menu.add_item_tts("Start game.");
+my_menu.add_item("Test speakers.");
+my_menu.add_item_tts("Exit.");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

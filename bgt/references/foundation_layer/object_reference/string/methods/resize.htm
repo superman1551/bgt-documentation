@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>resize</title>
+</head>
+<body>
+<br>
+<b>string object</b><br>
+<br>
+This method resizes a string.<br>
+<br>
+void resize(uint new_length)<br>
+<br>
+Parameters:<br>
+new_length<br>
+The new length of the string. A value of 0 means the string is reset completely.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+If the new_length parameter is greater than the current length, the relevant number of null characters will be added to the string. If the value is less, the string is truncated from right to left.<br>
+<br>
+Example:<br>
+<pre>
+// Declare a string and display its values.
+
+void main()
+{
+string hello;
+hello="Hello";
+hello.resize(hello.length()-1);
+for(uint counter=0; counter&lt;hello.length(); counter++)
+{
+alert("Hello", "Hello now reads "+hello);
+}
+}
+</pre>
+</body>
+</html>

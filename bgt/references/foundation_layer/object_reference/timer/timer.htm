@@ -1,0 +1,123 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>timer</title>
+</head>
+<body>
+<br>
+<b>timer object</b><br>
+<br>
+The timer object is used to measure elapsed time in milliseconds.<br>
+<br>
+timer()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+Timer objects are mostly used inside loops in order to make something happen after a certain amount of time like a missile hitting its target, or continuously with a specified interval such as enemy movement.<br>
+<br>
+The idea is to set up a timer object and then check the value of the elapsed property over and over again until it has reached or exceeded the expected number of milliseconds. You never want to check if the elapsed property matches the expected value exactly, as it is very likely that the timer goes past it by 1 or 2 milliseconds since your script usually needs to wait at least 1 millisecond in every loop cycle as to avoid using 100 % of the processor's CPU. This does not apply to shorter loops that execute quickly, only to long-running ones such as the main game loop. In short, always check whether the elapsed property is equal to or greater than your intended millisecond amount rather than exactly equal to it.<br>
+<br>
+Please note that despite their high precision, timer objects do not slow down the script execution even when stored in large quantities. Thus, it is perfectly acceptable to use hundreds or even thousands of timers at once without concern.<br>
+<br>
+The timer will start running instantly when it is first created. If you have one or more timers as global variables, then this will happen while the script is still initializing. Thus, it might be a good idea to call the restart method on these timers if you need to be sure exactly when the counting starts at a later point in your script.<br>
+<br>
+Example:<br>
+<pre>
+// Play ding every 250MS using two buffers to avoid cutting the sound off as quickly, and let user press escape to quit and p to pause/unpause timer.
+
+void main()
+{
+sound ding1;
+sound ding2;
+show_game_window("Timer Test");
+
+ding1.load("C:\\Windows\\media\\ding.wav");
+ding2.load("C:\\Windows\\media\\ding.wav");
+if(ding1.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+if(ding2.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+
+// We pan the two buffers a little bit so that they can be distinguished.
+ding1.pan=-20;
+ding2.pan=20;
+
+int current_buffer=1;
+bool paused=false;
+
+ding1.play();
+
+timer counter;
+
+while(true)
+{
+if(key_pressed(KEY_ESCAPE))
+{
+exit();
+}
+if(key_pressed(KEY_P))
+{
+if(paused==true)
+{
+paused=false;
+counter.resume();
+}
+else
+{
+counter.pause();
+paused=true;
+}
+}
+if(counter.elapsed>=250)
+{
+counter.restart();
+if(current_buffer==1)
+{
+current_buffer=2;
+if(ding2.playing==true)
+{
+ding2.stop();
+}
+ding2.play();
+}
+else
+{
+current_buffer=1;
+if(ding1.playing==true)
+{
+ding1.stop();
+}
+ding1.play();
+}
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

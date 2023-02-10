@@ -1,0 +1,43 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>destroy</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method destroys a host.<br>
+<br>
+bool destroy()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method will return the host to its initial uninitialized state, and destroy all its peers. Before it is destroyed, the host calls disconnect_peer_forcefully on all the connected peers, in order to inform them of its action in the majority of cases so that they do not simply time out. Since this does not guarantee that the remote peers are notified, it may not be sufficient and you will want to disconnect every peer manually before destroying the host if you are concerned about the possibility of some of the remote peers having to time out.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

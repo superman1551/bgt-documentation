@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>force</title>
+</head>
+<body>
+<br>
+<b>timer object</b><br>
+<br>
+This method forces the timer to an absolute millisecond count.<br>
+<br>
+bool force(double milliseconds)<br>
+<br>
+Parameters:<br>
+milliseconds<br>
+The number of milliseconds to set the timer to.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method sets the elapsed time to an absolute value, in milliseconds. If the timer has previously been paused with a call to the pause method, it will automatically be resumed.<br>
+<br>
+Example:<br>
+<pre>
+// Create a timer and set it to make it seem as though 10 seconds have elapsed.
+
+void main()
+{
+timer test;
+test.force(10000);
+alert("Result", test.elapsed + " milliseconds have now elapsed.");
+}
+</pre>
+</body>
+</html>

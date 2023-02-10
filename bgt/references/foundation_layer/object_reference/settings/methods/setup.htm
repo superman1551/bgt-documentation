@@ -1,0 +1,70 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>setup</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will set the product and company if applicable to a game and allocate a store in the Windows registry for saving data.<br>
+<br>
+bool setup(string company, string product, bool all_users)<br>
+<br>
+Parameters:<br>
+company<br>
+The name of the company if applicable.<br>
+product<br>
+The name of the product.<br>
+all_users<br>
+A boolean specifying whether the settings should be applicable for all user accounts on the system or the currently logged on user only.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+All registry information created by BGT is stored in HKEY_LOCAL_MACHINE\Software\Games or HKEY_CURRENT_USER\Software\Games.<br>
+<br>
+The company and product parameters may be at most 128 bytes long, must contain at least 1 alphabetic character and no unprintable characters.<br>
+<br>
+If a company is supplied, the store will be located in the key company\product within the games key. If the company parameter is empty, the product key will be directly in the games subkey.<br>
+<br>
+If all_users is false, HKEY_CURRENT_USER is accessed as opposed to HKEY_LOCAL_MACHINE which is used if all_users is true.<br>
+<br>
+If an application is not running with administrative privileges and you have set up the settings to affect all users, this method will return false, the last_error flag will be set and no reading, writing or deleting of values will be possible.<br>
+<br>
+Example:<br>
+<pre>
+// Store a value in the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+game_data.write_number("music_volume", -5.0);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>disconnect_peer_forcefully</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will disconnect a connected peer immediately.<br>
+<br>
+bool disconnect_peer_forcefully(uint peer_id)<br>
+<br>
+Parameters:<br>
+peer_id<br>
+The unique ID of the peer to disconnect.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method will disconnect a peer immediately, without doing any kind of verification with the remote peer. No disconnect event is generated after this call, instead an unreliable disconnection notification is sent out and the peer is then reset immediately. Since the notification is not guaranteed to arrive, it may be that the remote peer times out on its own eventually. Thus, this method should only be used when you do not have the time to wait for the proper disconnection procedure to be performed.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

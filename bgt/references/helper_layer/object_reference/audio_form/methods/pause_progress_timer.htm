@@ -1,0 +1,91 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pause_progress_timer</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will pause an active speech timer of a progress bar.<br>
+<br>
+bool pause_progress_timer(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID of the progress bar you wish to pause.<br>
+<br>
+Return value:<br>
+true on success, false otherwise.<br>
+<br>
+Remarks:<br>
+This function must be called once you have finished using the progress bar.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a dummy progress bar.
+
+#include "form.bgt"
+
+audio_form form;
+int dummy_counter;
+
+void main()
+{
+dummy_counter=0;
+form.create_window("Example Form", true);
+int dummy=form.create_progress_bar("&Copying", 5, false);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+form.activate_progress_timer(dummy);
+while(true)
+{
+form.monitor();
+wait(5);
+dummy_counter++;
+if(dummy_counter>=250)
+{
+if(form.get_progress(dummy)>=100)
+{
+form.pause_progress_timer(dummy);
+}
+else
+{
+form.set_progress(dummy, form.get_progress(dummy)+1);
+}
+dummy_counter=0;
+}
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

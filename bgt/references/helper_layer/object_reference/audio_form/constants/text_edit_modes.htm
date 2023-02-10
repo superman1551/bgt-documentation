@@ -1,0 +1,34 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Text Edit Modes</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+These constants are used in conjunction with the edit_text method.<br>
+<ul>
+<li>edit_mode_replace (0) - The remainder of the text will be deleted and replaced with the substitute in the new_text parameter.</li>
+<li>edit_mode_trim_to_length (1) - If the position of the edit and the length of the new text means the old text may become longer, the remainder of the replacement is truncated to fit the current length of the original.</li>
+<li>edit_mode_append_to_end (2) - All the replacement text is added in the specified position of the original regardless of length, unless the replacement means the new text may go over the maximum length of a control.</li>
+</ul>
+</body>
+</html>

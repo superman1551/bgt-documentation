@@ -1,0 +1,158 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Pathfinder Tutorial</title>
+</head>
+<body>
+<h1>Pathfinder Tutorial</h1>
+<h1>Contents</h1>
+<ul>
+<li><a href="#1">1. Introduction</a></li>
+<li><a href="#2">2. What does the pathfinder do?</a></li>
+<li><a href="#3">3. Specifying the size of the map</a></li>
+<li><a href="#4">4. Setting a callback function</a></li>
+<li><a href="#5">5. Putting it all together</a></li>
+<li><a href="#6">6. Exercises</a></li>
+</ul>
+<h2><a name="1">1. Introduction</a></h2>
+Mazes, or maps, abound in games, and this would include audiogames as well. If you have played a sidescroller before, you will have navigated a maze with the four primary directions of right, left, up, and down. A first person shooter, on the other hand, will usually present you with a type of map in which up and down are not so relevant; instead, you usually walk forward with the up arrow key and turn around with the left and right arrow keys.<br>
+<br>
+Both cases are examples of two-dimensional maps, in which positions are given by two coordinates, usually called x and y. In the case of a sidescroller, increasing the value of x might mean moving right, and increasing the value of y might mean moving up. We say that the x axis points right and the y axis points upward. In the first person shooter we might have the x axis pointing east and the y axis pointing north.<br>
+<br>
+Part of the challenge of most map-oriented games is navigation. The player listens for the location of an object, turns in that direction, walks forward, finds a dead end, backtracks, tries another route, and so on. As game developers we sometimes wish to bestow the same kind of intelligence, or appearance of it, upon entities other than the player. We want our enemy robots to chase the player, skillfully circumventing acid pools as they do so. We want our peasants to go about their daily business without bumping into walls. And as the game world changes, we want its inhabitants to be smart enough to correct their course.<br>
+<h2><a name="2">2. What does the pathfinder do?</a></h2>
+Simply put, the pathfinder object finds a path from a source point to a destination point on your game map. The path is represented as an array of vectors, in other words, a list of points.<br>
+<h2><a name="3">3. Specifying the size of the map</a></h2>
+Before the pathfinder can even begin its work, it needs to know the size of the game map. You specify this by calling the create_map method, as in the following code:<br>
+<br>
+void main()<br>
+{<br>
+pathfinder holmes;<br>
+holmes.create_map(10, 5);<br>
+// More code here.<br>
+}<br>
+<br>
+This would tell the pathfinder that your game map has a width of 10 and a height of 5 squares. In other words, your x coordinates will be in the range from 0 to 9, while your y coordinates will be in the range from 0 to 4.<br>
+<h2><a name="4">4. Setting a callback function</a></h2>
+If you are new to BGT, or indeed new to programming, you may not have seen the concept of a callback function before, so a brief explanation is in order.<br>
+<br>
+Imagine the following situation: you are still at the office, and you know that upon arriving home you have only twenty minutes to catch a train, so you call home to ask a family member to pack a suitcase for you. Five minutes later your family member calls you back to ask whether you wish to take the black tie or the red tie with you, to which you respond that you would like the red one. Another ten minutes later she calls you back once again to inquire if she should prepare a meal before you leave, to which you respond that you probably don't have enough time. Another twenty minutes later she calls you back yet again to ask how long you will be away.<br>
+<br>
+Let us now translate this into programming terminology. Asking a family member to pack your suitcase means calling a method called pack_my_suitcase on an object of class family_member, like so:<br>
+<br>
+void main()<br>
+{<br>
+family_member matilda;<br>
+matilda.pack_my_suitcase(); // Impolite but to the point.<br>
+}<br>
+<br>
+Now, what if Matilda needs more information to fulfill your request? Let us define a function to take care of her questions:<br>
+<br>
+string my_callback(string inquiry)<br>
+{<br>
+if(inquiry == "Tie color?")<br>
+{<br>
+return "Red.";<br>
+}<br>
+else if(inquiry == "Prepare meal?")<br>
+{<br>
+return "Nope.";<br>
+}<br>
+else if(inquiry == "Time away?")<br>
+{<br>
+return "Three days.";<br>
+}<br>
+else // We don't understand the question.<br>
+{<br>
+return "Beats me.";<br>
+}<br>
+}<br>
+<br>
+Finally, let's modify our main function to tell Matilda about our callback function so she can call it if necessary:<br>
+<br>
+void main()<br>
+{<br>
+family_member matilda;<br>
+matilda.set_callback_function(my_callback);<br>
+matilda.pack_my_suitcase(); // Impolite but to the point.<br>
+}<br>
+<br>
+Just like in our real-life scenario above, Matilda will call our my_callback function repeatedly until she has gathered all required information. Note that we never call my_callback directly; we simply provide it in case Matilda might need to call it. Providing a callback function is indeed very much like leaving a phone number in case there are any questions. We never call our phone number directly, but it gets called by another entity if that other entity deems it necessary.<br>
+<br>
+Let us now apply what we just learned to the pathfinder object. Up until now we have told it only the size of our map. If we now ask it to find a path between two locations, it cannot perform this operation without asking us a lot of questions because it doesn't know anything about our map except its size; in particular, it has no idea where walls are blocking the path, doors might need to be opened first, or acid pools might make travel hazardous if not impossible. In short, we need to provide a callback function which tells the pathfinder how difficult it is to get from one square to an adjacent square. The pathfinder will always decide on the least difficult path, adding up the difficulties along the way.<br>
+<br>
+Let us look at how such a callback function might be defined:<br>
+<br>
+int maze_callback(int x, int y, int parent_x, int parent_y, string user_data)<br>
+{<br>
+if(maze[x][y]==1)<br>
+{<br>
+return 10;<br>
+}<br>
+return 0;<br>
+}<br>
+<br>
+The pathfinder calls this function when it would like to know how difficult it is to get to the square at coordinates x and y. In addition, the pathfinder will also provide the coordinates of the square it is coming from, called parent_x and parent_y. This is useful when some squares are easier to reach from one direction than another. A one-way door, for instance, might be very easy to pass through from left to right, but impossible to pass through from right to left. A brick, for example, would find it very easy to go down while having a hard time going up. Finally, our callback function receives a string called user_data, and we will see shortly where this is coming from.<br>
+<br>
+What does our callback actually return? We hinted at this a few paragraphs ago by saying that it returns the difficulty of getting to one square from an adjacent square. This difficulty, otherwise known as cost, or risk, is simply an int in the range 0 to 10. A value of 0 means there is absolutely no risk or cost associated, while a value of 10 means it is impossible to go there, just as impossible as walking through a wall unless you happen to be a ghost, or possibly Chuck Norris. So 0 means free right of passage, while 10 means no way. Of course, some paths are neither completely clear nor impossible to take, and these will have cost values greater than 0 but less than 10. For example, you might assign a value of 2 to shallow water, a value of 6 to deep water, and a value of 9 to fire.<br>
+<br>
+In our running example, the callback function simply consults an array called maze to see if there is a wall at the location in question. If so, it returns 10, indicating that it is impossible to go there. Otherwise it returns 0, indicating the way is clear.<br>
+<br>
+Of course we need to tell the pathfinder about our callback function. The following code demonstrates this:<br>
+<br>
+void main()<br>
+{<br>
+pathfinder holmes;<br>
+holmes.create_map(10, 5);<br>
+holmes.set_callback_function(maze_callback);<br>
+// More code here.<br>
+holmes.destroy_map();<br>
+// Maybe even more code here which doesn't need pathfinding.<br>
+}<br>
+<br>
+As you can see, we tell the pathfinder about our callback by calling its set_callback_function method. This method takes a single parameter, which is the callback function itself, in this case, maze_callback. If you are curious how we managed to pass a function to another function, consult the language tutorial about the funcdef keyword. Note that this is entirely optional; you don't need to know how it works in order to use it. Such are the joys of well-designed programming languages.<br>
+<br>
+In the code above, we seized the opportunity to introduce yet another method, called destroy_map. This method will free some memory that the pathfinder uses internally to calculate paths, and so it is recommended you call destroy_map when you won't need the pathfinder for some time, and then call create_map once more if you need it again. For the technically interested, this memory is also freed as soon as the pathfinder object is destroyed. It is, however, entirely safe to ignore the previous sentence if it doesn't make sense to you. Object creation and destruction are covered in great detail in the language tutorial.<br>
+<h2><a name="5">5. Putting it all together</a></h2>
+Now that we covered the infrastructure, let's do some real pathfinding! It is time you studied the source code example given in the pathfinder chapter of the BGT reference. You might want to copy it to a file on your hard drive in order to experiment with it, and to be able to have it open in another window while you continue reading.<br>
+<br>
+You might begin by mindfully reading the code top to bottom to see which components you recognize. Can you find where the pathfinder object is created, and the map size is defined? Can you spot the callback function, where it is defined, and where it is passed to the pathfinder object?<br>
+<br>
+The program is well-commented so you should have no trouble figuring out what it does. You might call it a maze solver. It lets you walk around a grid using the arrow keys, placing and removing walls along the way. Finally, you can define a starting location, move to the destination location, and let the solver do its magic. What you will hear is a list of directions from start to destination. Now, I wish I would have had something like this when I was playing Zork.<br>
+<br>
+Let us look at the statement that actually asks the pathfinder to find a path for us:<br>
+<br>
+vector[] path=holmes.find(start_x, start_y, x, y, "");<br>
+<br>
+The find method takes as arguments the starting coordinates, the destination coordinates, and finally a string called user_data. This string is not used in the example, and so it is left empty. As it happens, this is the exact string which gets passed to the user_data parameter of your callback function. This might be useful when you want the callback function to behave differently depending on the circumstances, or indeed depending on the reason why a path needs to be found.<br>
+<br>
+The find method returns an array of vectors. For the purposes of the pathfinder, a vector is simply a pair of x and y coordinates, i.e. a point on your map. So the elements of the array make up the route of travel from starting point to destination. If no path could be found, the find method will return an empty array.<br>
+<h2><a name="6">6. Exercises</a></h2>
+<ol>
+<li>Modify the example such that the user can place acid pools at arbitrary locations on the map. An acid pool is not entirely impossible to walk through, but since it is quite an unpleasant experience the solver should minimize contact with them.</li>
+<li>Now let's add another kind of hazard. Modify the example such that the user can place puddles of water at arbitrary locations on the map. Such puddles are much less inconvenient than acid pools, but the solver should still avoid them if possible, except, of course, if this involves walking through acid instead.</li>
+<li>Can you modify the callback function such that moving east is more difficult than moving west, and moving north is more difficult than moving south?</li>
+<li>Can you make the feature of exercise 3 optional, but still use only one callback function?</li>
+<li>Make a ghost which can pass through walls, but only when going east.</li>
+<li>In a first-person shooter, how might you code an enemy who chases the player? How can you ensure the enemy is smart enough to correct its course when the player moves?</li>
+<li>Look up the desperation_factor property of the pathfinder object in the reference. Can you see how this would be useful? Consider the example of enemies becoming more desperate when the player approaches the end of the level. What other scenarios can you think of?</li>
+</ol>
+</body>
+</html>

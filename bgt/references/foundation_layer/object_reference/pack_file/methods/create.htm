@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>create</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will create a pack file and open it in write mode.<br>
+<br>
+bool create(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The file to create.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If the file already exists, it will be overwritten.<br>
+<br>
+Example:<br>
+<pre>
+// Create a pack file and add some test files.
+
+void main()
+{
+pack_file test;
+test.create("pack.dat");
+test.add_file("test1.txt","t1");
+test.add_file("test2.txt","t2");
+test.add_file("test3.txt","t3");
+test.close();
+}
+</pre>
+</body>
+</html>

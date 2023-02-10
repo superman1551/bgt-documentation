@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>http</title>
+</head>
+<body>
+<br>
+<b>http object</b><br>
+<br>
+The http object is used to perform advanced http functions asynchronously.<br>
+<br>
+http()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The http object provides the same functionality as the functions url_get and url_post, as well as some further methods and properties that allow for more advanced functionality. The biggest difference is that it performs in the background while the rest of your script can work on other things.<br>
+<br>
+Example:<br>
+<pre>
+// Download the BGT installer to a file in the background.
+
+void main()
+{
+http download;
+file bgt;
+string binary=download.get("http://www.blastbay.com/bgt_english_installer.exe");
+if(get_last_error()&lt;0)
+{
+alert("Error", "There was an error downloading the file.\nError description: " + binary + "\nPlease try again later.");
+exit();
+}
+bgt.open("bgt_english_installer.exe","wb");
+if(bgt.active==false)
+{
+alert("Error", "The output file could not be opened.");
+exit();
+}
+while(download.progress)
+{
+binary+=download.request();
+if(binary.length()>=8192)
+{
+bgt.write(binary);
+binary="";
+}
+wait(5);
+}
+if(binary!="")
+{
+bgt.write(binary);
+}
+bgt.close();
+}
+</pre>
+</body>
+</html>

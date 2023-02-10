@@ -1,0 +1,73 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_checkbox_mark</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will set the checked or unchecked state of a checkbox.<br>
+<br>
+bool set_checkbox_mark(int control_id, bool checked)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to change.<br>
+checked<br>
+A boolean value indicating whether the control should be checked. A value of true means the checkbox will be checked, while a value of false means the checkbox will not be checked.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a checkbox that changes state after its creation.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int checkbox=form.create_checkbox("&Change me", true);
+form.set_checkbox_mark(checkbox, false);
+int ok=form.create_button("OK");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

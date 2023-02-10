@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write_wave_file</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method writes the current data to a wave file.<br>
+<br>
+bool write_wave_file(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The filename to write to.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The filename can either be an absolute or relative path. The file may take a while to be created, depending on the complexity of the piece.<br>
+<br>
+Example:<br>
+<pre>
+// Write a B major chord to a wave file.
+
+tone_synth synth;
+
+void main()
+{
+synth.note("B3, D#4, Gb4", 4);
+synth.write_wave_file("wave.wav");
+}
+</pre>
+</body>
+</html>

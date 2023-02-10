@@ -1,0 +1,66 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pov_centered</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This method checks whether a particular pov is centered on the joystick.<br>
+<br>
+bool pov_centered(int pov)<br>
+<br>
+Parameters:<br>
+pov<br>
+The index of the pov to check (see remarks).<br>
+<br>
+Return value:<br>
+true if the selected pov is centered, false if not or if an error has occurred.<br>
+<br>
+Remarks:<br>
+The joystick object supports up to four povs, ranging from 1 to 4, though the actual maximum depends on the povs property for the given device.<br>
+<br>
+Example:<br>
+<pre>
+// Check each pov on the joystick to see if it is centered. Wait two seconds for the script to work out what is central when it opens.
+
+void main()
+{
+joystick stick;
+show_game_window("Joystick Test");
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+show_game_window("Pov Center Example");
+wait(2000);
+for(int counter=1; counter&lt;=stick.povs; counter++)
+{
+if(stick.pov_centered(counter))
+{
+alert("pov", "pov "+counter+" centred.");
+}
+}
+}
+</pre>
+</body>
+</html>

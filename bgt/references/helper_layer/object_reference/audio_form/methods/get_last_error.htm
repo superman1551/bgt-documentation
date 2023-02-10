@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_last_error</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will return the error code for the last operation.<br>
+<br>
+int get_last_error()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The Error code of the previous operation.<br>
+<br>
+Remarks:<br>
+Every time a method is called, the error is reset. Therefore you must call the get_last_error method directly after the call to the method you are checking.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and cause a deliberate error.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+form.get_text(ok);
+alert("Information", "The error code is "+form.get_last_error());
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

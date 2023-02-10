@@ -1,0 +1,281 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Game Programming in Practice Part II</title>
+</head>
+<body>
+<h1>Windows Attack</h1>
+<h1>Contents</h1>
+<ul>
+<li><a href="#1">1. Introduction</a></li>
+<li><a href="#2">2. The name of the game</a></li>
+<li><a href="#3">3. Sound design</a></li>
+<li><a href="#4">4. Game state</a></li>
+<li><a href="#5">5. The sound pool</a></li>
+<li><a href="#6">6. The game loop</a></li>
+<li><a href="#7">7. Auxiliary functions</a></li>
+<li><a href="#8">8. The virus class</a></li>
+<li><a href="#9">9. The main function</a></li>
+<li><a href="#10">10. Exercises</a></li>
+</ul>
+<h2><a name="1">1. Introduction</a></h2>
+Welcome to the second installment of Game Programming in Practice, a series of tutorials in which you learn about core BGT concepts by seeing how they are used. As you follow these tutorials you create actual games while the syntax, structure, and techniques of BGT programming become second nature to you.<br>
+<br>
+Let me take this opportunity to remind you that errors are an integral part of programming. They happen to the best of us, and rather than seeing them as frustrating stumbling blocks, you will do much better considering them as opportunities to test and even improve your logical skills.<br>
+<br>
+Finally, remember to take frequent breaks. Stepping back from a problem for a while and returning to it refreshed might make all the difference.<br>
+<br>
+With these formalities stored safely in the back of your mind, let's get going!<br>
+<h2><a name="2">2. The name of the game</a></h2>
+In this tutorial you will create a game called Windows Attack. If you have ever had trouble with computer viruses in the past, you will be delighted to know that this game finally lets you take sweet revenge.<br>
+<br>
+Here is the basic idea: You are an antivirus program which must target and destroy approaching computer viruses before they reach and infiltrate the system!<br>
+<br>
+Let's flesh out this basic idea until it becomes a real game.<br>
+<br>
+Computer viruses will fall towards your system from above, making noise as they approach. Your job is to target a virus with the left and right arrow keys until its sound is in the center of your stereo field, then hit the space bar to trigger your deadly digital destruction device of doom. If you make it in time, you will score some points depending on how well you performed. However, if a virus has made it all the way down, it will do some damage to your system. Now, the system can only stand so much damage until it crashes with the dreaded blue screen of death, at which point the game will be over.<br>
+<h2><a name="3">3. Sound design</a></h2>
+<h6>Exercise</h6>
+Based on the game's description in section 2, can you come up with a list of required sounds?<br>
+<br>
+Here is the list I created:<br>
+<ul>
+<li>A start sound (start.wav)</li>
+<li>The sound a virus makes while falling (virus_fall.wav)</li>
+<li>The sound a virus makes when landing (virus_land.wav)</li>
+<li>The sound a virus makes when it is destroyed (virus_hit.wav)</li>
+<li>The sound of your deadly digital destruction device of doom (gun.wav)</li>
+<li>An end sound (game_over.wav)</li>
+</ul>
+You may save yourself most of the bother of sound design by simply using some of the standard Windows sounds, or you may record or download a unique collection of sounds for your game. In any case, I strongly recommend that you use the filenames I listed above as they will be used later on in this tutorial. It is a good idea to create a new, empty folder for your project at this point and then copy your sound files into this folder. While you are at it, now is also a good time to create the file windows_attack.bgt. This will contain the entire source code for Windows Attack and will keep us busy for the rest of this tutorial.<br>
+<h2><a name="4">4. Game state</a></h2>
+Every game has a game state, which is all the information required to continue the game. For example, the game state for chess would primarily consist of the positions of all the pieces on the board and also the information whose turn it is. For Uno, the game state would consist of each player's hand and the order of cards in the stock and discard piles, along with each player's current score and the information whose turn it is to discard.<br>
+<h6>Exercise</h6>
+From the description of Windows Attack in section 2, identify the game state.<br>
+<br>
+Here is the solution I came up with:<br>
+- Player's horizontal position on the board<br>
+- Viruses on the board, along with the current height of each virus<br>
+- Player's current score<br>
+- Player's current number of lives<br>
+<br>
+Let us translate this into code:<br>
+<br>
+// Game state<br>
+int player_position; // Current horizontal position of player<br>
+virus@[] board; // Locations without viruses will contain null<br>
+int lives; // Game over if this falls to zero during play<br>
+int score; // Current score<br>
+<br>
+If you have completed the first tutorial in this series or read some of the BGT language tutorial, understanding the above code won't be much of a problem for you. Let us pause briefly, however, to inspect the most complicated of the lines above:<br>
+<br>
+virus@[] board; // Locations without viruses will contain null<br>
+<br>
+The name of the variable declared here is board, and the data type is virus@[]. This is best understood when reading it from right to left: The brackets tell us that this is an array, the @ sign indicates it is an array of handles, and the word virus specifies the type of object to which the handles will refer. The virus class will be defined later in this tutorial.<br>
+<br>
+It is a useful habit to define a function which initializes the game state so that whenever we wish to start a new game, we need only call this function and can rest assured that each game begins in a well-defined initial state.<br>
+<br>
+Here is that function for Windows Attack:<br>
+<br>
+const int board_size = 21;<br>
+const int initial_lives = 3;<br>
+void initialize()<br>
+{<br>
+player_position = (board_size-1) / 2; // Center of board<br>
+board.resize(board_size);<br>
+for(int i=0; i&lt;board_size; i++)<br>
+{<br>
+@board[i] = null;<br>
+}<br>
+lives = initial_lives;<br>
+score = 0;<br>
+}<br>
+<br>
+You might argue that it is unnecessary to explicitly set all the board locations to null. After all, null is exactly the value with which handle variables get initialized. However, remember that we might want to play multiple games in one session, and so the board might still contain leftover viruses from the previous game. The lesson here is that a little extra housekeeping never hurts and leads to well-defined states at key points in the flow of your program.<br>
+<br>
+Also, note that we have defined constants for the board size and initial number of lives. In general, it makes sense to define constants for values which will eventually be fixed but which you might change from time to time in your development process. It is of course perfectly valid to write all constants as literal numbers, but the advantage of a named constant is that you can change its value at the point of its definition and the change will apply to every point in your source code where the constant is used. As a general rule, any value which is used more than once in your source code should be given a name.<br>
+<h2><a name="5">5. The sound pool</a></h2>
+In the first part of this series of tutorials, you learned that sounds are played using sound objects, and that the number of sound objects you need is the number of sounds your game will play simultaneously. For small projects like Memory Train you will usually manage the creation, utilization and destruction of those sound objects in your own code. But when matters start to become more complex, such as when lots of sounds need to be created or repositioned in response to events in the game world, managing all the sound objects yourself can be a nuisance. For these situations, BGT contains a powerful helper class called sound_pool. It is called a pool because it can manage a large collection of sound objects and use them as needed. For example, when you order the sound pool object to play a sound, it will look through its pool of sound objects to find one which is currently inactive, and only if none can be located will a new sound object be created.<br>
+<br>
+All this may sound dreadfully complicated at first, but the good news is that the sound pool class is incredibly easy to use because you do not need to concern yourself with most of its technical intricacies. You simply order it to play the right sound at the right time and place, and the sound pool will take care of the rest.<br>
+<br>
+Another killer feature of the sound pool is that it can automatically position the sounds for you. You simply tell it the coordinates of your sound sources and your listener, which will usually be the player, and once again, the sound pool will take care of the rest.<br>
+<br>
+<h6>Exercise</h6>
+Consult the BGT reference about the sound_pool class and familiarize yourself with its methods.<br>
+<br>
+One potentially confusing aspect of the sound pool is its use of so-called sound slots, so let us address them right away to prevent you from forming the wrong model about them.<br>
+<br>
+When you ask the sound pool to play a sound, for example by calling the play_2d method, it will return a number called a sound slot. The sound slot is simply a number which the sound pool has assigned to the sound, in much the same way as the government assigns social security cards to citizens when they get their first jobs. The government uses social security numbers to quickly find or update a person's data. That's why they ask you for this number whenever you call them. In much the same way, when you ask the sound pool class to update a sound which is already playing, you will need to provide the sound slot which was returned to you when you initially started the sound. If some of this doesn't seem to make sense, just read on, and all will be revealed.<br>
+<h2><a name="6">6. The game loop</a></h2>
+We already dealt with the initialization of the game state. Let us now turn to the game itself while it is in progress.<br>
+<br>
+Traditionally, this is expressed as a loop which drives the action and which is therefore sometimes called a driver loop. The job of the driver loop is to run until the game is over and to orchestrate the flow of the various components of the game. In other words, the driver loop is responsible for the movement of time. Let's see what this would look like:<br>
+<br>
+sound_pool pool;<br>
+void game_loop()<br>
+{<br>
+timer virus_act_timer;<br>
+timer virus_spawn_timer;<br>
+while(lives &gt; 0) // We loop until the game is over<br>
+{<br>
+player_act(); // Check if player pressed a key and let him move or shoot<br>
+if(virus_act_timer.elapsed &gt;= 200) // Viruses move 5 times a second<br>
+{<br>
+viruses_act();<br>
+virus_act_timer.restart();<br>
+}<br>
+if(virus_spawn_timer.elapsed &gt;= 3000) // New virus every 3 seconds<br>
+{<br>
+virus_spawn();<br>
+virus_spawn_timer.restart();<br>
+}<br>
+wait(5); // Be nice to other apps on this machine<br>
+}<br>
+}<br>
+<h2><a name="7">7. Auxiliary functions</a></h2>
+Our game loop references a number of functions which we still have to define. First, there is player_act, the function which allows the player to move and to shoot at viruses.<br>
+<br>
+void player_act()<br>
+{<br>
+if(key_pressed(KEY_LEFT) and player_position&gt;0)<br>
+{<br>
+player_position--;<br>
+}<br>
+else if(key_pressed(KEY_RIGHT) and player_position &lt; (board_size-1))<br>
+{<br>
+player_position++;<br>
+}<br>
+if(key_pressed(KEY_SPACE)) // Shoot<br>
+{<br>
+shoot(); // Let's do this in its own function as it is more complex<br>
+}<br>
+if(key_pressed(KEY_ESCAPE)) // Exit game<br>
+{<br>
+lives = 0; // Simulate game over<br>
+}<br>
+pool.update_listener_2d(player_position, 0);<br>
+}<br>
+<br>
+void shoot()<br>
+{<br>
+if(@board[player_position] is null) // Missed<br>
+{<br>
+pool.play_stationary("gun.wav", false); // Centered, not looping<br>
+}<br>
+else // Hit<br>
+{<br>
+board[player_position].die(); // We tell the virus it has died<br>
+score++; // Player gets a point<br>
+@board[player_position] = null; // No more virus at this position<br>
+}<br>
+}<br>
+<br>
+Now, let us define the function viruses_act, which gives each virus currently on the board a chance to move.<br>
+<br>
+void viruses_act()<br>
+{<br>
+for(int i=0; i&lt;board_size; i++)<br>
+{<br>
+if(@board[i] !is null)<br>
+{<br>
+board[i].act();<br>
+}<br>
+}<br>
+}<br>
+<br>
+Finally, let us define the function virus_spawn, which randomly selects a location on the board and, if the location is still vacant, places a new virus there.<br>
+<br>
+void virus_spawn()<br>
+{<br>
+int location = random(0, board_size-1);<br>
+if(@board[location] is null) // Check if it is vacant<br>
+{<br>
+virus newbie(location); // Create a new virus<br>
+@board[location] = @newbie; // Register it with the game board<br>
+}<br>
+}<br>
+<h2><a name="8">8. The virus class</a></h2>
+As if the previous two sections hadn't been code-intensive enough, let's complete the picture by defining the virus class.<br>
+<br>
+class virus<br>
+{<br>
+int height; // Height above ground. When this falls to zero the virus lands<br>
+int falling_sound; // Stores the sound slot for the falling sound loop<br>
+int location; // Location of virus on the game board<br>
+virus(int location) // Constructor<br>
+{<br>
+this.location = location;<br>
+height = 20;<br>
+falling_sound = pool.play_2d("virus_fall.wav", player_position, 0, location, height, true);<br>
+}<br>
+void act()<br>
+{<br>
+height--;<br>
+if(height&lt;=0) // Virus has landed<br>
+{<br>
+pool.destroy_sound(falling_sound);<br>
+pool.play_2d("virus_land.wav", player_position, 0, location, 0, false);<br>
+lives--;<br>
+@board[location] = null;<br>
+}<br>
+else<br>
+{<br>
+pool.update_sound_2d(falling_sound, location, height);<br>
+}<br>
+}<br>
+void die()<br>
+{<br>
+pool.destroy_sound(falling_sound);<br>
+pool.play_2d("virus_hit.wav", player_position, 0, location, height, false);<br>
+}<br>
+}<br>
+<h2><a name="9">9. The main function</a></h2>
+Our mission is almost complete. We have defined the game state and its initialization, and we have specified the game loop along with all its helper functions. Let us conclude by defining the main function which will set all of it in motion.<br>
+<br>
+void main()<br>
+{<br>
+show_game_window("Windows Attack");<br>
+sound start_sound;<br>
+start_sound.load("start.wav");<br>
+tts_voice voice;<br>
+voice.speak("Welcome to Windows Attack!");<br>
+start_sound.play_wait();<br>
+initialize();<br>
+game_loop();<br>
+pool.destroy_all();<br>
+sound game_over_sound;<br>
+game_over_sound.load("game_over.wav");<br>
+game_over_sound.play_wait();<br>
+voice.speak_wait("Game over! Your score was " + score);<br>
+}<br>
+<br>
+Now, the only thing left to do is to place the line<br>
+#include "sound_pool.bgt"<br>
+at the beginning of your source code to bring the sound_pool class into the compilation.<br>
+<h2><a name="10">10. Exercises</a></h2>
+<ol>
+<li>Assemble the code fragments from this tutorial into a working version of Windows Attack.</li>
+<li>Modify your game so that instead of simply exiting when the game is over, it asks if the player would like to play again, and continues accordingly.</li>
+<li>Modify your game to offer multiple difficulty levels.</li>
+<li>Modify your game so that every minute it spawns a supervirus. A supervirus is different in that it requires three shots to take down, but if taken down it will provide the player one extra life.</li>
+</ol>
+</body>
+</html>

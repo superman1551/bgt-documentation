@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>edit_text</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will edit text in an input box or status bar.<br>
+<br>
+bool edit_text(int control_id, string new_text, int position, int edit_mode)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID of the listbox.<br>
+new_text<br>
+The new text for the edited section.<br>
+position<br>
+The zero-based starting position for the edit.<br>
+edit_mode<br>
+One of the three available edit modes (see the text edit mode constants for further information).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with an input box that edits when the change button is pressed.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("test",true);
+int text=form.create_input_box("Type here", "This is a default text", "", 0, true, false);
+int btn1=form.create_button("&Change",true,false);
+int btn2=form.create_button("E&xit",false,true);
+while(true)
+{
+form.monitor();
+if(form.is_pressed(btn1))
+{
+form.edit_text(text, "document", 18, edit_mode_append_to_end);
+}
+if(form.is_pressed(btn2))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

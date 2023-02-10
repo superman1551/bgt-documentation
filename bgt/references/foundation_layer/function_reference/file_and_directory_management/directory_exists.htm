@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>directory_exists</b><br>
+<br>
+This function checks whether a given directory exists.<br>
+<br>
+bool directory_exists(string directory_name)<br>
+<br>
+Parameters:<br>
+directory_name<br>
+The name of the directory to search for.<br>
+<br>
+Return value:<br>
+true if the directory exists, false otherwise.<br>
+<br>
+Remarks:<br>
+This function works with both absolute and relative paths.<br>
+<br>
+Please note that the path may not end in a trailing slash or backslash, and may not contain wildcards.<br>
+<br>
+Example:<br>
+<pre>
+// Check if the Windows directory exists.
+
+void main()
+{
+if(directory_exists("C:\\windows"))
+{
+alert("Information", "Windows directory exists. I'd be slightly concerned if it didn't.");
+}
+else
+{
+alert("Oops", "You broke Windows! Hang on though, how on earth is it running?");
+}
+}
+</pre>
+</body>
+</html>

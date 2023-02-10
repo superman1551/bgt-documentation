@@ -1,0 +1,70 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>list_joysticks</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This method returns an array containing the names of all connected and available joysticks on the user's system.<br>
+<br>
+string[] list_joysticks()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array containing the names of all available joysticks on success, or an empty list on failure or if no joysticks are available.<br>
+<br>
+Remarks:<br>
+The entries in this list are useful if you wish to give the user a choice as to what joystick that should be used. You may use an index in this list when calling the set method to activate  a given joystick.<br>
+<br>
+Please note that the contents of this list are retrieved from a cache, as opposed to being reenumerated each time this method is called. This is to prevent joystick ID's from being invalidated if the user should plug out an existing joystick or plug in a new one during the execution of your game. To refresh this list, call the refresh_joystick_list method.<br>
+<br>
+Example:<br>
+<pre>
+// Enumerate the list of joysticks and display information on them.
+
+void main()
+{
+joystick stick;
+show_game_window("Joystick Test");
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+string[] names=stick.list_joysticks();
+for(int i=0;i&lt;names.length();i++)
+{
+alert("Joystick " + (i+1), names[i]);
+stick.set(i);
+if(stick.active==false)
+{
+alert("Error", "Could not open the joystick device.");
+continue;
+}
+alert("Information", "Buttons: " + stick.buttons + "\nSliders: " + stick.sliders + "\nPovs: " + stick.povs);
+}
+}
+</pre>
+</body>
+</html>

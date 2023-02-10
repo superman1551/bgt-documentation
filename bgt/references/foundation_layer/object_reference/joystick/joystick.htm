@@ -1,0 +1,105 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>joystick</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+The joystick object enables games to communicate with joysticks that are connected to the user's system.<br>
+<br>
+joystick()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+When this object is constructed, the engine automatically attempts to open the joystick device that the user has set as their preferred one in the control panel. If you want the user to be able to choose, use the list_joysticks method and then the set method. If you want to account for users unplugging and plugging in joysticks while the program is running, call the refresh_joystick_list method and then call list_joysticks again before selecting a new one with the set method.<br>
+<br>
+Joysticks generally support many different types of axies. To make calculations easier, all of these have been set to have a range between -1000 and 1000. See the properties chapter for more details on what axies are available and what each one does. Note that forward movement of any y axis on a stick will be represented by a negative number, and backward movement by a positive number. This is in accordance with how the same movement would be shown on a graph.<br>
+<br>
+Please note: The joystick object currently does not support force feedback.<br>
+<br>
+Example:<br>
+<pre>
+// This is a simple and rather unrealistic truck simulation.
+
+/*
+This program plays an engine sound and allows the user to move it around with a joystick. Escape is pressed to close the program.
+*/
+
+void main()
+{
+show_game_window("Joy Truck");
+joystick stick;
+if(stick.active==false)
+{
+alert("Error", "No joystick seems to be attached.");
+exit();
+}
+sound truck;
+truck.load("engine.wav");
+if(truck.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+truck.play_looped();
+while(key_pressed(KEY_ESCAPE)==false)
+{
+
+// Retrieve the current coordinates of the stick. Remember, the range is between -1000 and 1000.
+double x=stick.x;
+double y=stick.y;
+
+/*
+Now we have to scale these absolute values to be suitable for pan and pitch.
+X represents pan, and y represents pitch.
+Note that for the pitch to increase when the stick is pushed forward, we must reverse y.
+If it is positive it must be made negative, and if it is negative it must be made positive.
+*/
+
+// By dividing x by 25, we get a range that is between -40 and 40.
+x/=25;
+
+// Reverse the Y coordinate.
+if(y<0)
+y=absolute(y);
+else
+y=0-y;
+
+// Now put y into the positive range (between 0 and 2000, and then divide it by 10.
+y+=1000;
+y/=10;
+
+// We don't want the pitch to go lower than 20.
+if(y<20)
+y=20;
+
+// Now we have our values, so we can assign them to their respective properties in our truck sound object.
+truck.pan=x;
+truck.pitch=y;
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

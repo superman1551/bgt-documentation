@@ -1,0 +1,63 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_size</title>
+</head>
+<body>
+<br>
+<b>dictionary object</b><br>
+<br>
+This method returns the number of elements in the dictionary.<br>
+<br>
+uint get_size()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The number of elements present in the dictionary, or 0 if the dictionary is empty or if an error occurs.<br>
+<br>
+Remarks:<br>
+This method returns the number of key/value pairs in the dictionary. Therefore if the dictionary had a value named "value" linked to a key named "key", the size would return 1.<br>
+<br>
+Example:<br>
+<pre>
+// Create a dictionary and display its size.
+
+void main()
+{
+int value=-1;
+dictionary names;
+names.set("Damien", 0);
+names.set("Philip", 1);
+names.set("Percival", 2);
+names.set("Byron", 3);
+names.set("Humphrey", 4);
+alert("Count", "The dictionary contains " + names.get_size() + " entries.");
+string[] keys=names.get_keys();
+for(int counter=0; counter&lt:keys.get_size(); counter++)
+{
+names.get(keys[counter], value);
+alert("Names", keys[counter]+" contains the value "+value+".");
+}
+}
+</pre>
+</body>
+</html>

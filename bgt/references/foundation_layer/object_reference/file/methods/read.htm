@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>read</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will read a specified number of characters or bytes in a file.<br>
+<br>
+string read(double count)<br>
+<br>
+Parameters:<br>
+count<br>
+An optional number of characters/bytes to read. If this parameter is not passed or if it is set to 0, the remainder of the file will be read from the cursor.<br>
+<br>
+Return value:<br>
+A string containing the retrieved data on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+If the file is opened in text mode, the number given in the count parameter specifies the number of characters that will be read. If, on the other hand, the file is opened as binary, then this parameter specifies the number of bytes instead.<br>
+<br>
+Example:<br>
+<pre>
+// Read a file and display its content in an alert box.
+
+void main()
+{
+file test;
+test.open("test.txt", "r");
+alert("test.txt contents", test.read());
+}
+</pre>
+</body>
+</html>

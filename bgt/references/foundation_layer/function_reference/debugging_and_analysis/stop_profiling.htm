@@ -1,0 +1,97 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>stop_profiling</b><br>
+<br>
+This function stops the BGT profiler and prevents it from gathering statistics until it is restarted with the start_profiling function (see remarks).<br>
+<br>
+bool stop_profiling()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The BGT profiler follows the code's execution chain and times each function that is called throughout the game. The profiler will then write a log of all the accumulated statistics, which include the overall length of time each function took to execute throughout the game's lifetime, and a percentage based on this. This is useful for checking to see if any functions need further optimisation in order to improve overall performance and speed. For more information about optimising your code, please consult the tutorial that deals with optimization strategies.<br>
+<br>
+For the profiler to work accurately, you should call start_profiling at the start of your script (usually in main) before any other function is called, and call generate_profile immediately before your game is due to exit.<br>
+<br>
+This function resets all previously gathered statistics without writing out a log file with the results first.<br>
+<br>
+Please note that when you profile debug builds or source code, the results are considerably more accurate as compared with release builds. In debug builds and when running source code, some execution speed is sacrificed for the benefit of being able to diagnose performance bottlenecks and other problems more easily. This is not the case with release builds which means that the results that the profiler produces, while not entirely inaccurate, should not be relied upon.<br>
+<br>
+Example:<br>
+<pre>
+/*
+Write a series of functions that will take different speeds and have the profiler give us some information. Stop the profiler on the quickest function.
+lets_go and lets_finish_here will of course show varying results depending on how long it takes the user to close the message box.
+
+*/
+
+void main()
+{
+start_profiling();
+lets_go();
+lets_do_some_more();
+lets_finish_here();
+}
+
+void lets_go()
+{
+alert("Hi!", "This program demonstrates the use of the BGT profiler.");
+}
+
+void lets_do_some_more()
+{
+string test;
+for(int counter=0; counter&lt;13579000; counter++)
+{
+test+="a";
+if(counter%1000==0)
+{
+test="";
+}
+}
+another_loop();
+}
+
+void another_loop()
+{
+stop_profiling();
+for(int counter=0; counter&lt;13500000; counter++)
+{
+int check=1000;
+}
+}
+
+void lets_finish_here()
+{
+alert("Finished.", "The profiler will now generate the log.");
+generate_profile("profiler.log");
+}
+</pre>
+</body>
+</html>

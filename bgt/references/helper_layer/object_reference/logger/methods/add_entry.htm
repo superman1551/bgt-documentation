@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_entry</title>
+</head>
+<body>
+<br>
+<b>logger object</b><br>
+<br>
+This method will add an entry to a log.<br>
+<br>
+void add_entry(string the_entry)<br>
+<br>
+Parameters:<br>
+the_entry<br>
+The text to add as an entry.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+If the date_all_entries property is set to true, it will use the combination date_format+": "+the_entry to add the text, replacing all the date controllers into actual date and time components.<br>
+<br>
+Example:<br>
+<pre>
+//add some text to a log.
+
+#include "logger.bgt"
+
+logger test;
+
+void main()
+{
+test.add_entry("text1");
+test.write("test.log", true);
+}
+</pre>
+</body>
+</html>

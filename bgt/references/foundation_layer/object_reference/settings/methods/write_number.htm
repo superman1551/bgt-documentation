@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write_number</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will write a numeric value to the registry.<br>
+<br>
+bool write_number(string value_name, double content)<br>
+<br>
+Parameters:<br>
+value_name<br>
+The name of the value to write.<br>
+content<br>
+The data to write to the specified value.<br>
+<br>
+Return value:<br>
+True on success, false on failure.<br>
+<br>
+Remarks:<br>
+Please note: You may not store more than 50 values in the registry for a given product.<br>
+<br>
+Example:<br>
+<pre>
+// Write a user's score to the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+success=game_data.write_number("userscore", 17408);
+if(!success)
+{
+alert("Error", "Could not write userscore.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

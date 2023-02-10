@@ -1,0 +1,2101 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Language Tutorial</title>
+</head>
+<body>
+<h1>Language Tutorial</h1>
+<h1>Contents</h1>
+<ul>
+<li><a href="#1">Introduction</a></li>
+<li><a href="#2">How does BGT work?</a>
+<ul>
+<li><a href="#2.1">The Process of Game Creation</a></li>
+<li><a href="#2.2">BGT Engine</a></li>
+<li><a href="#2.3">BGT Compiler</a></li>
+</ul></li>
+<li><a href="#3">Language syntax</a>
+<ul>
+<li><a href="#3.1">Statements</a></li>
+<li><a href="#3.2">Blocks</a></li>
+<li><a href="#3.3">Expressions</a></li>
+<li><a href="#3.4">Commenting</a></li>
+</ul></li>
+<li><a href="#4">Printing Text on the Screen</a></li>
+<li><a href="#5">Variables</a>
+<ul>
+<li><a href="#5.1">Variables; What Are They?</a></li>
+<li><a href="#5.2">Declaring and assigning variables</a></li>
+<li><a href="#5.3">Integral Variables and Bad Peaches</a></li>
+<li><a href="#5.4">Floating point variables</a></li>
+<li><a href="#5.5">String Variables</a></li>
+<li><a href="#5.6">Constants</a></li>
+<li><a href="#5.7">Summary</a></li>
+</ul></li>
+<li><a href="#6">Functions</a></li>
+<li><a href="#7">Conditional Statements</a>
+<ul>
+<li><a href="#7.1">If statements</a></li>
+<li><a href="#7.2">Switch and Case</a></li>
+</ul></li>
+<li><a href="#8">Loops</a>
+<ul>
+<li><a href="#8.1">While loops</a></li>
+<li><a href="#8.2">Do while loops</a></li>
+<li><a href="#8.3">For loops</a></li>
+<li><a href="#8.4">Break and Continue</a></li>
+</ul></li>
+<li><a href="#9">Arrays and dictionaries</a></li>
+<li><a href="#10">Objects and classes</a></li>
+<li><a href="#11">Advanced object techniques</a>
+<ul>
+<li><a href="#11.1">Objects in a nutshell</a></li>
+<li><a href="#11.2">Inheritance</a></li>
+<li><a href="#11.3">Interfaces</a></li>
+<li><a href="#11.4">Operator overloading</a></li>
+</ul></li>
+<li><a href="#12">Handles to functions</a></li>
+<li><a href="#13">Using multiple scripts</a></li>
+<li><a href="#14">Final notes</a></li>
+</ul>
+<br>
+<h2><a name="1">1. Introduction</a></h2>
+Welcome to the BGT language tutorial! This tutorial assumes that you know nothing about BGT but that you have plenty of motivation to sit down and learn. The tutorial will cover everything from the very basics to the more advanced aspects of the language, and it is my intent that after you've finished reading it you should be able to dive directly into the function reference and the example games and, of course, start building things on your own in due time. So put your feet up on the table, relax, and get ready for... BGT!<br>
+<h2><a name="2">2. How does BGT work?</a></h2>
+BGT essentially contains two components, one which runs your game, and one which turns your game into a separate program that your end users will work with. We will cover these components in more detail. First, however, you must be wondering, how do I create a game in the first place?<br>
+<h3><a name="2.1">2.1. The Process of Game Creation</a></h3>
+The BGT engine is initially a blank piece of software with the core functionality of an audiogame, such as manipulating sounds, timers, files, and checking for user input. The difference between BGT and an audiogame written in an all-purpose programming language is that BGT reads from one or more files that you write. These files simply instruct BGT as to what to do. For example, you may play a logo sound, while checking for a keystroke to interrupt it, and then create a menu.<br>
+This is all done by writing scripts. These are written using a special set of rules (known as the language syntax). This helps BGT to understand exactly what tasks you want it to perform.<br>
+We will cover these rules in another section. First though, allow me to tell you about BGT!<br>
+<h3><a name="2.2">2.2. BGT Engine</a></h3>
+BGT is the core component. This is the program that reads the script, and performs the tasks outlined by you. This is provided so you can easily test your games. Without this, you would not be able to notice any problems or errors until you come to finalising the game.<br>
+<h3><a name="2.3">2.3. BGT Compiler</a></h3>
+Whereas the BGT engine literally opens the script and runs it instantly, the compiler is used to finalise the script. Though the function of the compiler is not instantly recognisable to all, it does have a very important function. As the game's creator, only you and other people like you will have the BGT engine installed on their machine. True, you could in theory redistribute the engine and the BGT script, but that is not always appropriate. There may be times, for example, when your script contains private login information, either to access sounds or servers, or even allow other users to change the game you have been working on. To prevent this, we use the BGT compiler. This takes the script file, and turns it into a distributable executable program.<br>
+Your end user can then simply run this program on their machine, not having to worry about what goes on behind the scenes.<br>
+<h2><a name="3">3. Language syntax</a></h2>
+OK then, enough rambling, let's get started.<br>
+There are some points I must raise before we start any programming:<br>
+<h3><a name="3.1">3.1. Statements</a></h3>
+A statement is simply a single instruction that BGT will follow. Each statement is separated by a semicolon character. It can then be further separated by a new line character if you wish.<br>
+<h3><a name="3.2">3.2. Blocks</a></h3>
+To make your code more readable, both to you and to the BGT engine, we use blocks of code to separate one situation from another. These are simply a group of statements enclosed in special characters. If you are checking status information, such as whether a sound is playing, whether a timer has reached a certain point in time, we may want to do different things. If we want to repeat a section of code over and over again, we have to tell BGT when to stop checking or repeating. To do this, we use blocks.<br>
+Blocks of code are enclosed in braces, that is to say, { and } characters.<br>
+<h3><a name="3.3">3.3. Expressions</a></h3>
+Expressions are usually special purpose statements, and are usually the starting point for a block of code. An expression usually consists of a keyword, followed by the expression code, enclosed in parentheses. Keywords are words such as if, while and do, that tell the engine to do something specific. In the case of if, check whether a given expression is true, in the case of while and do, asks the compiler to repeat a block of code over and over until the expression conditions are met. Conditional statements and the act of repeating a block of code will be covered later on in this tutorial.<br>
+It must be mentioned here that expressions do not contain a semicolon, as we are not giving the engine a direct instruction, but rather a condition in which the instruction is to be carried out.<br>
+<h3><a name="3.4">3.4. Commenting</a></h3>
+When you are writing code, remembering of course that code is called code because of its fantastic ability to go from being english to symbolic to sometimes downright confusing in years to come, it is always good practice to add comments, either to explain potentially confusing sections, or to add information such as authorship, date, revision, etc. The process of adding comments is easy.<br>
+A comment can be anything at all. It does not have to conform to any rules but your own. You might write plain english, you might write a line of duff code that you have tried with and decide to figure out the error later, you might write your own cryptic code to stop other people from understanding your notes. Either way, it is up to you. It can be as short as a character, to as long as the bible, providing that your computer contains enough disk space to save the file and enough internal memory to read it.<br>
+To add a short comment, use // (two forward slash signs) to inform BGT to ignore all remaining text on that line. You could write a comment telling the engine how much you hated it, and it would not bat an eyelid, partly because it hasn't got an eyelid to bat, but more importantly because it completely skips that section until the start of the next line.<br>
+To add a long comment, use /* (a forward slash followed by a star). This is known as a block comment. This is where you can have fun and paste the bible in before the code if you so wish. When you have finished your sermon, rant, note, introductory message or address book, you finish off with */ (a star followed by forward slash). BGT will skip any text enclosed in the block comment symbols.<br>
+<h2><a name="4">4. Printing Text on the Screen</a></h2>
+One of the very first things that one usually starts with when learning a new language, is to print some text on the screen. It's about as simple as you can get, but all the same it has proven to be a very effective method to familiarize oneself with the syntax of a language and its style of operation. Enough said, let's go printing!<br>
+<br>
+void main()<br>
+{<br>
+alert("Hello", "I am a BGT script!");<br>
+}<br>
+<br>
+The above script may appear somewhat confusing at first glance, but it's really not that bad. Let's dissect it piece by piece.<br>
+<br>
+void main()<br>
+<br>
+This tells the compiler that we are using the main function, which is the first block of code that is executed when a script starts. We will cover functions later on, but it is essential that you remember to create this function when making a script.<br>
+<br>
+{<br>
+<br>
+You may remember from the previous section that a block of code is always enclosed in braces. A function is one of these situations.<br>
+<br>
+alert(<br>
+<br>
+This is the name of a function provided by the BGT engine, which displays a simple message on the screen with a title and some text. The alert function has two parameters, the first one is the title and the second one is the message that is to be shown. When calling a function you always specify its parameters (if any) between a left and a right parenthesis, and separate the parameters with a comma.<br>
+<br>
+"Hello",<br>
+<br>
+This is the first parameter that is given to the alert function, a chunk of text which will be the title of the message.<br>
+<br>
+"I am a BGT script!");<br>
+<br>
+This is another chunk of text written inside quotes, the second parameter to the alert function which specifies the actual text that is to be shown. This is also the last parameter to the function, which can be seen by the right parenthesis that indicates the end of a function call. The semicolon after the parenthesis indicates the end of the statement.<br>
+<br>
+}<br>
+<br>
+This tells the compiler that we have finished our main function now.<br>
+<br>
+When writing out text like this, you always have to surround it with quotes. This is to make things easier for the script interpreter, as it may otherwise confuse your text with actual BGT code.<br>
+<br>
+Look at the script one more time, and keep in mind the explanations that you just read.<br>
+<br>
+void main()<br>
+{<br>
+alert("Hello", "I am a BGT script!");<br>
+}<br>
+<br>
+Hopefully things should be a little clearer now. If you're still in the dark, then read the above paragraphs over again a few times before you move on just to make sure you’ve grasped the fundamental concept.<br>
+<h2><a name="5">5. Variables</a></h2>
+<h3><a name="5.1">5.1. Variables; What Are They?</a></h3>
+If you were awake enough in the math’s lessons to grasp the basics of equations, understanding variables should be a piece of cake. But for those of you who fell asleep or, like me, decided that it was much more entertaining to play Hangman in the back of the classroom, here's a simple explanation that should solve the mystery.<br>
+<br>
+To put it very simply, a variable is like a basket that contains something. A variable could tell you the health of a player in an action game, the current price of fish, or that the meaning of life is 42. Basically it can contain any value that you give to it, and you can retrieve and mess around with that value as much as you like. BGT supports five basic types of variables, two of which we shall experiment with in this chapter. The supported types are integral variables, floating point variables, string variables, boolean variables and object variables. But before we go on to learn about all these different types, there is one thing that we will have to cover.<br>
+<h3><a name="5.2">5.2. Declaring and assigning variables</a></h3>
+To set a variable, you first have to tell BGT what type of variable you are looking to use, followed by a name that you will use to refer to your variable the next time you come to change or read from it.<br>
+All variables must have a name. No exceptions. A variable name can contain letters from a to z including capitals, the numbers 1 through 0, and underlines. However, the name of a variable must never begin with a number even though it's perfectly legal to have numbers anywhere else in the name.<br>
+<br>
+Consider the following example:<br>
+<br>
+string your_name;<br>
+<br>
+This tells BGT we want a variable of type string, called your_name. When you come to read this code back, you will know that your_name is likely to hold the player's name. Again, we have a semicolon at the end to denote the end of a statement.<br>
+<br>
+We now have a blank variable. To make this variable usable we need to give this a value. We can do this using one of two methods. If you have predetermined the contents of the variable, I.E. a message that may be displayed to the user, you may assign the value on the same line as the declaration, like so:<br>
+<br>
+string winning_message="Congratulations! You have won the game!";<br>
+<br>
+This tells BGT:<br>
+<ul>
+<li>Create a variable of type string. Strings will be covered in greater detail in the String Variables section.</li>
+<li>Call it winning_message.</li>
+<li>Assign the value "Congratulations! You have won the game!" to winning_message.</li>
+<li>End of statement</li>
+</ul>
+<br>
+A variable can be assigned a new value at any point in the current block of code. Please note that if you don't assign a value to a variable, but instead just declare it like:<br>
+<br>
+type x;<br>
+<br>
+type can be any type of primitive variable supported by BGT (see below). Objects work differently, but this will be covered later. If you have a declaration like this without an initial value being given to the variable, then it will have an undefined value. In other words it may be anything, depending on the type of the variable. It will just contain whatever happened to be stored in that memory location at the time when the variable was created, and therefore you should never use a variable when it is not yet initialized with a value. The BGT script compiler will try to warn you when it sees that you are doing this, but it cannot do so accurately in every situation. Therefore you should always give your variables initial values when you create them unless you can ensure with 100% certainty that the variable will be given a meaningful value before it is used.<br>
+<br>
+Now that we have discussed how to set up our variables, we can learn about the different types and changing and comparing them.<br>
+<h3><a name="5.3">5.3. Integral Variables and Bad Peaches</a></h3>
+Integral variables are those that contain a basic integer, that is to say, a whole number. These variables do not allow decimal points.<br>
+You can perform arithmetic operations on them like plus, minus, times and divided by. BGT also supports more complex mathematical functions, should you ever need them. If you're curious, here comes an example of how integral variables can be used in the real world.<br>
+<br>
+int apples=5;<br>
+int bananas=2;<br>
+int oranges=8;<br>
+int fruit_basket=apples+bananas+oranges;<br>
+<br>
+Here, you see four variables. One called apples, another called bananas, a third called oranges and finally one called fruit_basket. But when we gave a value to fruit-basket we didn't actually specify a value directly, instead we added the values of the three fruit type variables together to get the total number of fruit in the basket. Let's have fun and look at a slightly extended version of this example.<br>
+<br>
+int apples=5;<br>
+int bananas=2;<br>
+int oranges=8;<br>
+int fruit_basket=apples+bananas+oranges+1;<br>
+<br>
+Why did I put +1 in the end? Because there was a peach in there as well, but it had gone bad so I didn't bother to give it its own variable. Also it clearly demonstrates how easy it is to mix variables and literal numbers in expressions, which technically allows you to write extremely powerful formulae if you wish.<br>
+<br>
+Now we're going to elaborate a little bit and do some more calculations with these variables. Let's say that we want to find out how many fruit that would be in the basket if only half the oranges were put in it, plus the bad peach. We could do the following:<br>
+<br>
+int apples=5;<br>
+int bananas=2;<br>
+int oranges=8;<br>
+int fruit_basket=apples+bananas+oranges+1;<br>
+int robbed_basket=fruit_basket-(oranges/2);<br>
+<br>
+Now guess what value the variable called robbed_basket will have? That's right, 12. The basket contained 16 fruit all in total, 8 of which were oranges. We then took away half the oranges, and so we ended up with 12.<br>
+<br>
+But look one more time at the line where the robbed_basket variable gets its value. See that we have put part of the calculation between a left and a right parenthesis? In this case it does not mean that we're calling some kind of function, here it simply has the same purpose as in regular arithmetic which is to make sure that the expression is calculated in the right order. This way, you can compute advanced mathematical expressions and be sure that the result is always what you expected. That is assuming that you wrote the expression correctly to begin with, which is slightly outside the scope of this tutorial.<br>
+<br>
+I am going to give you one last example of how numeric variables can be manipulated. This one has no practical use; it is merely meant to show the flexibility of the numeric variables, and how they can be used to perform calculations not allowed in regular math. Take a look at the following...<br>
+<br>
+int x=3;<br>
+x=x*3;<br>
+int y=8;<br>
+int z=x/y;<br>
+z+=x-1;<br>
+x*=z+4;<br>
+<br>
+As you can see, just a bunch of meaningless calculations that do not serve any other purpose than to attempt to demonstrate some of the possibilities you have when working with numbers in the BGT language.<br>
+<br>
+One new thing that you will notice, however, is the use of += and *=. This means that, in the case of *= the value on the right side in the mathematical expression should be taken times the current value of the variable. So for instance:<br>
+<br>
+int x=5;<br>
+x*=3;<br>
+<br>
+Now x will have the value of 15, since 5*3 is 15. You can use all the numeric operators which is to say +, -, * and / in the same way.<br>
+There is one additional arithmetical operator you may wish to use, the Modulus operator. This is represented by a percentage sign (%), and can also be used with the = sign. The Modulus divides two numbers and gives you the remaining value. For example:<br>
+<br>
+int x=11;<br>
+x%=3;<br>
+<br>
+In this case x will be the equivalent of 2, since 11 divided by 3 equals 3, with 2 left over. That 2 is the result of the Modulus.<br>
+<br>
+There are two further time saving operators you may wish to use. These are known as the autoincrement and autodecrement operators. These are ++ and -- (two plus, or two minus signs). These are good for loop counters, etc.<br>
+When we write the following line:<br>
+<br>
+x++;<br>
+<br>
+We are telling BGT to increment the counter by 1. This does two things. It saves time for you as the writer, and speeds up the program. If you are increasing one variable once, you may not notice the change. If, on the other hand, you are constantly changing a counter, you will notice a difference. 
+Although an integral variable is one type, you can specify the potential permitted range of the variable. The two you will usually be interested in are short, a 16 bit (2 byte) integer ranging from -32768 to 32767, and long, a 32 bit (4 byte) long integer, ranging from -2147483648 to 2147483647.<br>
+In other situations, though more occasional, you may wish to use unsigned integers. These are integers which do not allow negative numbers, therefore doubling the maximum limit.<br>
+A full list of keywords relating to integers follows:<br>
+<ul>
+<li>int8: An 8 bit (1 byte) integer, ranging from -128 to 127.</li>
+<li>int16: A 16 bit (2 byte) integer, ranging from -32768 to 32767.</li>
+<li>int32: A 32 bit (4 byte) integer, ranging from -2147483648 to 2147483647.</li>
+<li>uint8: An 8 bit (1 byte) unsigned integer, ranging from 0 to 255.</li>
+<li>uint16: A 16 bit (2 byte) unsigned integer, ranging from 0 to 65535.</li>
+<li>uint32: A 32 bit (4 byte) unsigned integer, ranging from 0 to 4294967295.</li>
+<li>int: Alias of int32.</li>
+<li>short: Alias of int16.</li>
+<li>long: Alias of int32.</li>
+<li>uint: Alias of uint32.</li>
+<li>ushort: Alias of uint16.</li>
+<li>ulong: Alias of uint32.</li>
+</ul>
+<h3><a name="5.4">5.4. Floating point variables</a></h3>
+Floating point variables are very similar to the variables that you are familiar with if you've worked with equations, they contain a number. No more, and no less. The floating point variables can be with or without decimals.<br>
+All floating point variables are signed, meaning they can be positive or negative numbers.<br>
+Supported types are:<br>
+<ul>
+<li>Float: Single precision 32 bit floating point</li>
+<li>Double: Double precision 64 bit floating point</li>
+</ul>
+<br>
+If you do not know what values will be going in your variable, it is probably best to use doubles, since they support the widest range, allowing positive and negative numbers, and integers and real numbers, I.E. numbers with decimals.<br>
+One other thing to mention is that, if, for any reason, the value of a numeric variable attempts to go over its limit, the compiler will issue a warning and the variable will reset to the minimum supported value, so it is essential that you keep track of any changes that occur to your variables.
+<h3><a name="5.5">5.5. String Variables</a></h3>
+String variables are very different from the numeric ones that we just explored. They are very useful however, and we shall soon see why. A string variable can contain text, which is to say a string of single characters that will form something interesting; hence the name, string. A string can hold the name of the player, a path on the harddrive or the content of a file, or anything else you like. When using string values you must always surround them with quotes, so that the interpreter doesn't get confused as to what is BGT code and what is part of your string. Does that ring a bell? That's right... The alert function that we used in our very first example works with strings!<br>
+<br>
+I think the best way to get the hang of strings, is to see them in action. So here we go...<br>
+<br>
+string my_name="John Doe";<br>
+alert("My name is", my_name);<br>
+<br>
+As you see here, the first parameter to the alert function is still given in the same way as we did in the first example, but the difference comes in the second parameter. Instead of specifying something between quotes to display in the message box, we gave the name of the string variable that we just made. The result? That "John Doe" is printed out in the message box with the title "My name is". Yes, it's that simple!<br>
+<br>
+Now why did we not surround my_name with quotes in the second parameter to alert? Because that would print out "my_name" literally rather than taking the value of a variable called my_name, and we don't really want that.<br>
+<br>
+Let's try doing something more fancy with strings shall we?<br>
+<br>
+string my_name="John Doe";<br>
+string message_string="My name is " + my_name + " and don't you ever forget it!";<br>
+alert("Important information", message_string);<br>
+<br>
+What? What on earth is this " + my_name + " stuff? Well, " + variable_name + " simply inserts the value of a variable into a string. So the printout in the message box will be:<br>
+<br>
+My name is John Doe and don't you ever forget it!<br>
+<br>
+And as you may have guessed, the variable between the two plus signs does not necessarily have to be another string. Let's illustrate this with an extended example...<br>
+<br>
+string my_name="John Doe";<br>
+int age=23;<br>
+string message_string="My name is " + my_name + ", I'm " + age + " years old and don't you ever forget it!";<br>
+alert("Important information", message_string)<br>
+<br>
+The printout? As you probably expect, it'll simply be:<br>
+<br>
+My name is John Doe, I'm 23 years old and don't you ever forget it!<br>
+<br>
+Did you notice how we also used an integer?<br>
+Any variable with any data type can be placed in a string variable, as long as the result of that variable can be converted into a string.<br>
+Of course, you can construct the message string inside the actual call to the alert function; you do not have to make a separate variable for it if you don't want to. You could do the following...<br>
+<br>
+string my_name="John Doe";<br>
+int age=23;<br>
+alert("Important information", "My name is " + my_name + ", I'm " + age + " years old and don't you ever forget it!");<br>
+<br>
+Naturally the printout will be the same, the script is just one line shorter.<br>
+<br>
+Let's have some fun with the John Doe example code, and make it do something slightly more interesting. Look at the following snippet and see if you can figure out what it does.<br>
+<br>
+string my_name="John Doe";<br>
+int age=random(5, 50);<br>
+string message_string="My name is " + my_name + ", I'm " + age + " years old and don't you ever forget it!";<br>
+alert("Important information", message_string);<br>
+<br>
+You guessed it. The random function which is also provided by the BGT engine, generates a random number in a range that you specify. In this case, we requested a number between 5 and 50 which means that John Doe will tell us a different age every time we ask him. The first time I ran this on my machine it said that John Doe was 25, the second time it assured me that he was 36 and the third time it claimed that he was 18... Talk about a pathological liar!<br>
+<br>
+Leaving John Doe to contemplate his proper age in peace, we will look at yet another example of how strings can be added together.<br>
+<br>
+string string1="I am a ";<br>
+string string2="string!";<br>
+string string3=string1 + string2;<br>
+string string4=string1 + "nice " + string2;<br>
+<br>
+The above example shows how simple it is to add strings together, both variables and literal values. While string1 and string2 are literal values stored in variables, string3 is the result of those two variables added together and string4 is the two variables added together again but with a literal value in the middle. You can combine variables and literal values in any way you like, which is quite useful in a large number of applications as you will undoubtedly discover if you use the strings in BGT often.<br>
+<br>
+As we saw in the previous section, one could do the following with a numeric variable:<br>
+<br>
+int x=10;<br>
+x+=15;<br>
+<br>
+Which of course gives x the final value of 25. Now, you'll be happy to know that you can do the same thing with strings. The following code is perfectly legal:<br>
+<br>
+string my_string="Hello there";<br>
+my_string+=" my friend.";<br>
+<br>
+Of course, my_string will now contain the text "Hello there my friend.". You cannot, as you may have guessed, use any of the other numeric operators like -, * and / in the same way for strings as they would not fill any function in this case.<br>
+There is also another important thing to know about strings. In order to be able to use special characters, we must use what is called an escape character. This is a designated character that tells the compiler that the next character should not be treated as a literal character, but rather as a code for the character that should be used. The escape character used in BGT is a backslash.<br>
+The following is a list of the characters to be used after the escape character and what they truly represent:<br>
+<ul>
+<li>\=\</li>
+<li>"="</li>
+<li>n=new line</li>
+<li>r=return</li>
+<li>t=tab</li>
+</ul>
+<br>
+Here are a few examples:<br>
+<br>
+string string1="this\tis\ta\tstring\tusing\ttabs\tinstead\tof\tspaces.";<br>
+string string2="this is a\r\nmultiline\r\nstring.";<br>
+string string3="My current directory is \"c:\\program files\\bgt\\my_game\\my_script.bgt\"";<br>
+<br>
+Notice how the multiline string uses the r and n characters to create a new line. This is the character sequence used by Windows.<br>
+<h3><a name="5.6">5.6. Constants</a></h3>
+A constant is basically the same as a regular variable, with one main difference. Once a constant is assigned a value it cannot be changed at runtime. Its value remains the same throughout the program's lifetime, hence the name constant, as opposed to a variable whose value can change, i.e. vary, at any time.<br>
+The purpose of a constant is mainly for readability, and to save time.<br>
+You declare a constant the same way you do with any variable, with the addition of the keyword const before the data type.<br>
+Take the following example:<br>
+<br>
+const string snd_ext=".wav";<br>
+sound gun;<br>
+sound beep;<br>
+sound ambience;<br>
+sound music;<br>
+gun.load("sounds/gun"+snd_ext);<br>
+beep.load("sounds/beep"+snd_ext);<br>
+ambience.stream("sounds/wind"+snd_ext);<br>
+music.stream("sounds/music"+snd_ext);<br>
+<br>
+The advantage here is, if your game got a lot larger and you decided to convert to the ogg format, you simply change the snd_ext constant assignment to ".ogg". Then all your sound assignments, if they use the constant, are changed to that value without having to go and change each individual sound.<br>
+Also, the BGT engine comes with certain constants. In the documentation accompanying each function there is a mention whenever a certain constant is meant to be used. The constant is then passed to the function by its name, however what is really happening is that a certain value such as a number or a string gets passed behind the scenes. You only use the constant name to make things easier for yourself, you could just as well have written out the number itself and still ended up with working code. However, when opening a file in writing mode for instance, the name "file_write" makes a lot more sense than the number 2.<br>
+<br>
+There is also a special type of constant called an enum. This is short for enumeration, and therefore can only hold numeric, integer values. These are useful for grouping constants together, enabling better code management. Here is an example:<br>
+<br>
+enum movement<br>
+{<br>
+left=-1,<br>
+right=1<br>
+}<br>
+<br>
+enum weapon<br>
+{<br>
+fist,<br>
+club,<br>
+slingshot,<br>
+gun,<br>
+bomb<br>
+}<br>
+<br>
+What we have done here, is to create two sets of enumerations, one called movement, one called weapon. In each enumeration we have supplied the interpreter with a comma separated list of constants and, in the case of our movement example, their corresponding values. For example, we assigned the name left to -1, and right to 1. In the case of weapon, however, we gave no values. This is because the interpreter can automatically assume our values. If no values are given, the first constant will be assigned value 0, and every one after that will be increased by 1. This is useful here, since we can concentrate purely on deciding what weapons we want. It also has the added bonus that if we want to add an extra weapon in the future, there is no number juggling to do.<br>
+<br>
+Please note that enums have to be defined globally; they cannot be defined inside a function.<br>
+<h3><a name="5.7">5.7. Summary</a></h3>
+Let's take a quick look at what we've covered in this chapter, along with some additional hints.<br>
+<br>
+<ul>
+<li>Variables are like baskets that can hold data of different types.</li>
+<li>A constant is a variable whose value cannot be changed at runtime.</li>
+<li>Integral variables can hold positive or negative numbers, depending on whether you declare them as signed or unsigned, but only without decimals.</li>
+<li>Floating point variables can hold positive or negative numbers, with or without decimals.</li>
+<li>You can perform arithmetic operations on numeric variables such as 3+5=8, both by using variables referenced by their name as well as literal values.</li>
+<li>If you do not know the values that will be stored in a numeric variable it is best to use a double.</li>
+<li>Always keep track of your variables, or you may end up with unexpected results if the limit is exceeded.</li>
+<li>Strings are a list of characters that form something useful.</li>
+<li>You can assemble strings to form new ones by combining variables referenced by their name, with literal values in quotes.</li>
+<li>Adding two numeric variables together, both of which with the value of 1, will be 2.</li>
+<li>Adding two string variables together, both of which with the value of "1" (do notice the quotes), will be 11.</li>
+<li>Variables are one of the core fundamentals of game development, and programming in general for that matter.</li>
+<li>Variables and constants in BGT are case sensitive. Therefore, you have to refer to them exactly how you declared them or how they appear in the documentation.</li>
+</ul>
+<h2><a name="6">6. Functions</a></h2>
+We have already seen several examples of calls to functions. In our very first example we called the alert function when we wanted to print a message on the screen. Now, I think it's time to go a little more in depth in regards to functions as they are used in literally every game on the market. A function is a chunk of code that can be referred to by a name. For instance, you could have a function called jump which makes the player, yes, jump. Whenever you wanted the player to jump you would then call this function and the code inside it would be executed. Functions are a great help because they not only allow you to structure your program in a more logical way, they also allow you to reuse the same section of code multiple times without having to actually write or paste it each and every time you want it to execute.<br>
+<br>
+All the functions that we have been calling so far have been part of the BGT engine itself, but you can also make your own functions to accomplish things. In actual fact, there is one function that you must create before the engine will even accept your code. The main section of your code goes here. This is where additional functions are called, either functions from the BGT engine, from other scripts that are included, or from your own functions contained in the current script. Because this function is where all your main code is stored, this function is called main. We had a brief look at this function when we discussed printing a message to the screen.<br>
+As usual, we will see how it's done in practice before you are showered yet again with a new large chunk of theoretical jibberish.<br>
+<br>
+void main()<br>
+{<br>
+alert("Test", "We are now using the main function.");<br>
+}<br>
+<br>
+You do not need to call this function yourself, since the engine uses this function as a starting point.<br>
+The word "void" indicates that a function has no return type. We will discuss returning later on in this chapter. You then have the name of the function and finally a list of parameters between parentheses. The main function takes no parameters, and so the parameter list is empty. Inside the function we just display another alert box and then we tell the BGT interpreter that our function is finished by using a right brace character. It's that simple! Almost...<br>
+<br>
+In order to be useful, a lot of functions need to take parameters. The random function in the BGT engine, for instance, needs to take a minimum and a maximum number that it is allowed to generate. Your own functions can also take parameters, and they are placed between the left and the right parenthesis when you make the function. Let us take a look at a function that adds two numbers together, and then returns the value to the caller.<br>
+<br>
+void main()<br>
+{<br>
+int x=add_numbers(3, 5);<br>
+alert("Wow", "3 + 5 is... " + x + "!");<br>
+}<br>
+int add_numbers(int first, int second)<br>
+{<br>
+int result=first+second;<br>
+return result;<br>
+}<br>
+<br>
+This example introduces several new things. First of all it shows how you can receive parameters in your functions. You do this by specifying variable names when you create the function, in this case I chose first and second for the two numbers. Then, whenever you call this function the two parameters that you pass to it are placed in the two corresponding variables. This means that the variable called first receives the first parameter, and the one called second receives the second one. Of course, you may name your function parameters anything you like as long as they are legal variable names. We also see how a function can give a value back to the caller by using the return statement. The return statement will interrupt the function completely and return the value or variable given after the space, which the caller can then capture by assigning the return value of the function to a new variable as we saw in the very beginning of the example. In our case we used the variable x to get our value back from the function, and then we printed it out in a normal alert box.<br>
+You may have also noticed that we did not start the function declaration with the word "void", but with the word "int". The word void is a keyword only used at the start of functions to tell the engine that this function does not return any data, though the return keyword can be used on its own to break out of a function, I.E. prematurely terminate its execution. Because we return the result of an addition sum, we tell the engine that we wish to return an int.<br>
+A function declaration starts with the required data type for the return, as covered in variables, with the additional keyword of void. We then give our function a name. Straight after that, are our parameters, separated by commas and enclosed in parentheses. You then open a brace, as a function is a block of code.<br>
+You can not only return variables from a function, literal values are perfectly fine as well. We show this, of course, with another example.<br>
+<br>
+void main()<br>
+{<br>
+string x=string_magic();<br>
+alert("Result", "The string given is: " + x + ".");<br>
+}<br>
+string string_magic()<br>
+{<br>
+return "wow";<br>
+}<br>
+<br>
+This, as you may have noticed, is a completely pointless function. It takes no parameters, and it just returns a literal string. It is, however, of the utmost importance that you understand the concept of functions completely before you start writing proper games. For this reason, I'll treat you to yet another example. Let us go back to our highly interesting number adding function but with a bit of a twist.<br>
+<br>
+void main()<br>
+{<br>
+alert("Wow", "3 + 5 is... " + add_numbers(3, 5) + "!");<br>
+}<br>
+int add_numbers(int first, int second)<br>
+{<br>
+return first+second;<br>
+}<br>
+<br>
+The output is exactly the same as before, our script is just two lines shorter. The only thing we have done is to remove two variables that were not quite necessary but probably made things a little easier to follow. Instead of assigning the return value of the function to our x variable we print it directly in the call to the alert function. So as you can see, it is no problem having a function call inside another function call. You may nest as many function calls as you wish, until it reaches 10000 calls at which point the BGT interpreter won't be very happy with you. We will take a look at the string_magic function example once again, but with yet another twist. We will not include the main function in all examples, just as long as you know that any code that doesn't belong in another function goes in void main.<br>
+<br>
+//main function<br>
+alert("Result", string_magic() + string_magic() + string_magic());<br>
+string string_magic()<br>
+{<br>
+return "wow";<br>
+}<br>
+<br>
+Yes, I know, pointless again. The output from this script is "wowwowwow". It just shows yet another way in which you can call a function from inside a call to yet another function and so on. It is also okay to call a function inside the body of another function. A function can even call itself, but be careful with this as it may cause a so called stack overflow where too many nested function calls are done on top of each other if you write your script incorrectly. The limit for this is, as mentioned previously, 10000 nested calls.<br>
+<br>
+All variables that are declared at the top of the script before the first function appears, are considered global ones. They can be accessed from inside any function throughout the script. However, new variables that are declared inside a function are local only to that function. This means that if you have a local variable that stores some information and then the function exits, that variable will be lost unless it is used as the function's return value. Thus, any information that you wish to access in more than one function should be stored in one or more public variables unless you wish to pass them as parameters between all your functions which is not generally recommended.<br>
+You should know by now that any big chunk of theory is usually followed by an example, so here we go.<br>
+<br>
+// Let's make a few global variables.<br>
+<br>
+string my_name="John Doe";<br>
+int number_of_fingers=5;<br>
+void main()<br>
+{<br>
+my_first_function();<br>
+}<br>
+void my_first_function()<br>
+{<br>
+//The variables that we make now are local.<br>
+int number_of_hands=2;<br>
+int number_of_pets=13;<br>
+<br>
+//Now we are modifying the global variable my_name from inside this function.<br>
+my_name="Rodney";<br>
+}<br>
+<br>
+I grant you that this was a very silly example, but it serves its purpose none the less. As you saw, all the variables that were declared at the top of the script were accessible from inside our function while the ones declared inside it are only accessible from the function itself. Thus, it would not have been legal to modify the value of number_of_pets inside another function unless, of course, you declared one with the same name there.<br>
+<br>
+A function can only ever return one value. It would be pointless to do the following:<br>
+<br>
+int my_function()<br>
+{<br>
+return 3;<br>
+return 5;<br>
+}<br>
+<br>
+As mentioned before, the return keyword will return the value, if any, destroy all the function variables and disregard any further code in that function. Thus, the function would only return 3. However, there is a way to solve this should you need to return multiple values.<br>
+Parameters are usually passed into a function by value. This means that, if you passed a variable as a parameter to your function, the interpreter will read the value of that variable and pass that to the function. Here is an example.<br>
+<br>
+//main function<br>
+int x=5;<br>
+my_function(x);<br>
+<br>
+The interpreter would create a variable of type int called x and assign the number 5 to it. It would then check the value of x, which subsequently is 5, and call my_function, passing 5 as the parameter.<br>
+<br>
+However, parameters can also be passed to the function by reference. Instead of the interpreter reading our variable and passing it to the function, the variable itself will be passed. This means that if the function then modifies the variable, the modification will also apply to the original. In this way, we can easily return more than one value from a function by modifying our variables by reference. Another example:<br>
+<br>
+//Global variables<br>
+<br>
+int x=1;<br>
+int y=2;<br>
+<br>
+//Main function<br>
+my_function(x, y);<br>
+<br>
+void my_function(int &out first, int &out second)<br>
+{<br>
+first=5+5;<br>
+second=5*5;<br>
+}<br>
+<br>
+You may be wondering why we used void? This is because, as explained before, we are returning values by way of our parameters, and not the function itself. If you checked the value of x and y now, they are no longer 1 and 2, they are 10 and 25.<br>
+The other thing you may have noticed is after the data types of our parameters, we put &out (the ampersand sign followed immediately by the word out). The ampersand tells the interpreter that we are about to specify how the parameter will be passed. If no & (ampersand) sign is found, the interpreter will assume the &in flag, which means we are passing parameters by value.<br>
+When we pass parameters by reference, you are required to pass a variable rather than a constant. The interpreter won't stop you passing a constant, but it will issue a warning stating that any changes that are made will be lost.<br>
+<br>
+It must be noted that No function declaration can be duplicated, as this would serve no purpose. However, a function can be declared multiple times so long as the parameters are different for each declaration. This is called an overloaded function, and is shown with yet more examples.<br>
+<br>
+//main function<br>
+string text=my_function("Daniel", 5);<br>
+<br>
+int my_function(int first, int second)<br>
+{<br>
+return first+second;<br>
+}<br>
+string my_function(string your_name, int number)<br>
+{<br>
+return "Hello there, "+your_name+". There are "+number+" people waiting for you downstairs.";<br>
+}<br>
+<br>
+Because we called my_function with a string as our first parameter, the interpreter will call our second my_function declaration.<br>
+<br>
+It is also possible to give your function arguments default values. This simply means that you don't have to pass the full set of parameters that the function expects, but instead you pass just a few and the function then gets called with default values for the other optional ones. An example follows:<br>
+<br>
+void main()<br>
+{<br>
+print("Hello!", 10, 20, 30);<br>
+print("Hello again!", 10);<br>
+}<br>
+<br>
+void print(string title, int value1=0, int value2=0, int value3=0)<br>
+{<br>
+alert(title, "Value 1 is " + value1 + ", value 2 is " + value2 + ", and value 3 is " + value3 + ".");<br>
+}<br>
+<br>
+Here we declare a function called print, which takes four arguments. The first one is a string which is used for the title of the message that we display, and this argument is mandatory. We see this because it has no default value given after the argument name. For the other three values, however, we have an = sign after the name and then a value that will be the default if this argument is not specified by the caller. We see in our example that the first call to print specifies all four parameters, where as the second call only specifies two of them. Therefore, in the second message that is displayed, the last two integers are set to 0.<br>
+<br>
+It is possible to have as many optional parameters as you wish in a given function. However, note that it is not possible to have a mandatory parameter after an optional one. All mandatory parameters must come before the first optional parameter, or else the compiler will be placed in an impossible situation should you pass too few parameters when there are mandatory ones left.<br>.
+<br>
+It is very important that you fully understand these concepts before you go on with this tutorial. At this point, I suggest that you go and study some of the things in the function reference and see if they make complete sense. If they do not, you may want to read this chapter over again until everything falls into place.<br>
+<h2><a name="7">7. Conditional Statements</a></h2>
+So far, we have only explored variables in the sense that we have given them known values. Although very often in a program you will need to be able to do things without having to know the exact value of a variable. As an example you may want to make the player's heart start beating fast when their health is below 20 %. For this, we have to use something called conditional statements.<br>
+<h3><a name="7.1">7.1. If statements</a></h3>
+If statements work in exactly the same principal as they do in everyday language. You may say to your mother, "If I am unwell, please inform my father." Although computer programs cannot do tasks as complicated as this, they can do computer tasks based on the same logic.<br>
+If statements are useful if you have a simple condition or set of conditions that need to be acted upon depending on the situation.<br>
+<br>
+An if statement in BGT might look like this:<br>
+<br>
+if(health < 21)<br>
+{<br>
+// Play the heart beating sound.<br>
+}<br>
+<br>
+What is happening here is that when the interpreter arrives at the if statement it will check to see if it is true, which is to say if the health variable has a value lower than 21. If it does, it will execute the code that is between the if statement and the closing right brace that you see below. You can also do:<br>
+<br>
+if(health < 21)<br>
+{<br>
+// Play the heart beating sound.<br>
+}<br>
+else<br>
+{<br>
+// Do something else if the health is not below 21.<br>
+}<br>
+<br>
+In this case, two things may happen. If the value of health is lower than 21, then the first code section is executed. However if the condition is not true, the other section of code which is to say the one that is between the word else and the } statement will be executed instead. In short, this allows you to make one thing happen if a condition is true and another if it is not.<br>
+Another point of interest: if there is only one thing to be done when your if condition is true, you do not have to use the braces. Here is an example:<br>
+<br>
+//single action condition with braces<br>
+<br>
+if(health<21)<br>
+{<br>
+//Play heart beating sound<br>
+}<br>
+<br>
+//single action condition without braces<br>
+<br>
+if(health<21)<br>
+//Play heart beating sound<br>
+<br>
+//multiple action condition with braces<br>
+<br>
+if(health<21)<br>
+{<br>
+//Play heart beating sound<br>
+alert("Alert!", "You are about to die..."); //show a message<br>
+}<br>
+<br>
+It is important to remember that multiple actions must contain the braces. In fact, it is recommended to use braces in all situations for easier code management, so that there are no mistakes. It will then make it easier if you wish to add any further actions inside that if statement in the future.<br>
+<br>
+In the previous section, I told you that any variables that were declared inside a function were local only to that function. The same holds true for if statements. Any variables declared from within the if statement are local to that statement, and cannot be used outside. It is not an everyday occurrence that a variable is declared from within an if statement, but it may prove handy at some point. The same goes for any block of code, including loops.<br>
+Of course, there are many other checks that you can perform. Below is a complete list:<br>
+<br>
+<ul>
+<li>if(x == y) - This is true if x is equal to y. You can perform this check on any type of variable.</li>
+<li>if (x != y) - This is true if x is not equal to y. You can perform this check on any type of variable.</li>
+<li>if(x < y) - This is true if x is lower than y. You can perform this check only on numeric variables.</li>
+<li>if(x <= y) - This is true if x is lower than or equal to y. You can perform this check only on numeric variables.</li>
+<li>if(x > y) - This is true if x is higher than y. You can perform this check only on numeric variables.</li>
+<li>if(x >= y) - This is true if x is higher than or equal to y. You can perform this check only on numeric variables.</li>
+<li>if(!x) - this is true if x is false. This can only be used on boolean variables.</li>
+</ul>
+<br>
+You may be wondering why we use two equal signs when checking if x is equal to y? This is because with one equal sign we would be assigning the value of y to x, which is not exactly what we want. So saying:<br>
+<br>
+if(x=y)<br>
+<br>
+is thus both illogical and incorrect.<br>
+<br>
+Let us illustrate all this with a more practical example. We will once again return to John Doe and his problems to decide his own age, however this time we will print out whether or not he is a minor based on the random number that is generated. Going back to an earlier example, take a look at the following code snippet one more time.<br>
+<br>
+string my_name="John Doe";<br>
+int age=random(5, 50);<br>
+string message_string="My name is " + my_name + ", I'm " + age + " years old and don't you ever forget it!";<br>
+alert("Important information", message_string);<br>
+<br>
+Familiar? Good, because it won't be for long... Now try to guess what will happen when we do the following.<br>
+<br>
+string my_name="John Doe";<br>
+int age=random(5, 50);<br>
+string message_string="My name is " + my_name + ", I'm " + age + " years old which means that I am ";<br>
+if(age<18)<br>
+{<br>
+message_string+="a minor!";<br>
+}<br>
+else<br>
+{<br>
+message_string+="of full age!";<br>
+}<br>
+alert("Important information", message_string);<br>
+<br>
+The above code is really very simple, but we will go through it step by step to make sure that it is 100 % clear. First, we make the variable called my_name which in this case is entirely unnecessary, but it was part of the original example so we allowed it to stay. Then, we generate a random number between 5 and 50 and assign it to the variable called age. After this, we make the string that will contain our final message. You will notice that the sentense is not complete, and little wonder since we are about to complete it inside an if statement. If age is lower than 18 we add some text on to the string that says that John Doe is a minor. If it is not, then the other code section is executed which instead makes the string claim that John is of full age. Finally, of course, we print it out in our good old message box. Try running this code, and see if you understand the logic behind the printed result.<br>
+<br>
+It is, as you probably already figured out, perfectly possible to have an if statement inside another if statement. This allows you to make something happen only if several conditions are met. You can also perform multiple comparisons within if statements. We will explore this a little later in this chapter.<br>
+<br>
+Now that we've seen how if statements are used, it's time for me to introduce you to a new type of variable... The boolean. A boolean can only hold two values, true or false. These values are often used in if statements, like this for example:<br>
+<br>
+bool has_weapon=true;<br>
+if(has_weapon==true)<br>
+{<br>
+// Do something.<br>
+}<br>
+<br>
+The words true and false are not names of any predefined variables or constants, they are actual keywords in the language. For this reason, you could not say:<br>
+<br>
+false=5;<br>
+<br>
+Since false is already used as a keyword. On the other hand, when working with boolean variables you could do something like:<br>
+<br>
+bool has_weapon=true;<br>
+if(has_weapon)<br>
+{<br>
+// Do something.<br>
+}<br>
+<br>
+This may look strange at first glance since we do not actually specify any condition that is supposed to be met, but since has_weapon is a boolean variable and has the value true the code inside the if statement will execute because the entire expression will come out as true. Similarly, if has_weapon had been set to false the code inside the if statement would not have been executed since the whole expression would thus be false.<br>
+<br>
+To demonstrate the different uses of boolean variables along with other variable types, we will look at a simple usage example for the functions called key_down and key_pressed. These functions are used for checking the state of certain keys. Take a look at the following piece of code:<br>
+<br>
+if(key_pressed(KEY_F4))<br>
+{<br>
+if(key_down(KEY_LMENU))<br>
+{<br>
+alert("Fine!", "If you want to be boring and exit this program then by all means do so. Bye.");<br>
+exit();<br>
+}<br>
+else<br>
+{<br>
+alert("Um...", "Are you, by any chance, trying to close the program down?");<br>
+}<br>
+}<br>
+<br>
+Here we check if two different conditions are true and act based on what we find. First of all we check if the f4 key is pressed. If this is true, we check if the alt key is being held down. If this is true as well, we assume that the user is closing the program down. If this is not true, we display a taunting message because they forgot to hold alt down.<br>
+<br>
+Finally, we have two closing braces so that all the if statements are closed properly. You may nest as many if and else statements as you want and in any way you like, as long as you balance them out with the proper braces in the right places.<br>
+<br>
+Is there a way to test that more than one condition is true, I hear you ask? Yes there is. The logical operators allow you to check multiple conditions in an if statement.<br>
+Take the following example. We will again check for Alt+F4, but this time, no messages will be displayed. We will just simply exit.<br>
+<br>
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))<br>
+{<br>
+exit();<br>
+}<br>
+<br>
+Two main things that you may notice here. For a start, our if statement contains three sets of parentheses. One enclosing the whole if statement, and another two sets enclosing each condition. This is purely for readability purposes. We could have just as easily said<br>
+<br>
+if(key_down(KEY_LMENU)&&key_pressed(KEY_F4))<br>
+<br>
+and received the same result.<br>
+The other thing you will have noticed is the && (double ampersand) symbol. This represents the word and. In other words, it tells the engine that if the Alt key is held down and the F4 key is pressed, exit.<br>
+Here is another example:<br>
+<br>
+if((key_down(KEY_LMENU))||(key_pressed(KEY_F4)))<br>
+{<br>
+exit();<br>
+}<br>
+<br>
+This serves no real purpose in this example. It tells the engine to exit if the alt key or the f4 key is pressed. This could, however, be useful if you have assigned two keys to one function, for example the down and right arrows moving you one option down in a menu.<br>
+The final operator, which we have briefly mentioned, is the negation operator. This is written as an ! (exclamation mark). This reverses the result of a condition. For example:<br>
+<br>
+if(!key_down(KEY_LMENU))<br>
+<br>
+Instead of checking that key_down(KEY_LMENU)==true, it will instead check if it is false.<br>
+Please note that this operator is not used to compare values. This simply reverses the effects of a given condition. To use our above example:<br>
+<br>
+if(!key_down(KEY_LMENU))<br>
+<br>
+Notice that there is only one condition, and one check. This literally reverses the state of a value, as opposed to comparing the falseness of two values. For example, if the user is pressing the Alt key, the function returns true. Therefore the negation operator turns this into false. To check that a given value is equal (true) or different (false) to another value, you would write:<br>
+<br>
+if(my_var1!=my_var2)<br>
+<br>
+This would make more sense, both logically and gramatically. Because the exclamation mark represents negation, in other words not, and equals is self explanatory, that translates into English literally as: if my_var1 is not equal to my_var2. Rather than directly reversing the result like the negation operator, this will itself return true if the condition is false, I.E. if the two variables are not equal.<br>
+<h3><a name="7.2">7.2. Switch and Case</a></h3>
+Switch...case statements are very similar to if statements, except they are used to lay out numerous or more complicated checks.<br>
+Here is an example:<br>
+<br>
+Int health;<br>
+double energy;<br>
+<br>
+switch(health)<br>
+{<br>
+case 100:<br>
+energy=100;<br>
+break;<br>
+case 90:<br>
+energy=89;<br>
+break;<br>
+case 80:<br>
+energy=78;<br>
+break;<br>
+case 70:<br>
+energy=67;<br>
+break;<br>
+case 60:<br>
+energy=56;<br>
+break;<br>
+//additional values go here<br>
+}<br>
+<br>
+The keyword switch is used to start a case statement and is followed by the variable to be checked inside parentheses. Each condition is introduced by the keyword case. The body of the switch statement is enclosed in braces.<br>
+At the end of each case in a switch statement, you will generally use the statement break to finish that case.<br>
+If you omit the break statement at the end of a case, execution will continue into the next case. Although this can sometimes be useful, it is something to be aware of.<br>
+Another keyword that can be used is default. This performs a task for any other condition not met by the case statement. Taking our above example, we could make our player's energy decrease more realistic by doing the following:<br>
+<br>
+switch(health)<br>
+{<br>
+case 100:<br>
+energy=100;<br>
+break;<br>
+case 90:<br>
+energy=89;<br>
+break;<br>
+case 80:<br>
+energy=78;<br>
+break;<br>
+//additional values go here<br>
+default:<br>
+energy-=0.5;<br>
+}<br>
+<br>
+This means now that every time this case statement is executed, it will set our energy to a predetermined value every time our health reaches a number divisible by 10, and just subtracts 0.5 off in all other circumstances.<br>
+Notice that even a default case still has a break. You can put the cases in any order you wish.<br>
+<br>
+The expression inside the switch condition can be any expression that results in a value, so long as the result is numeric. For example, you could have:<br>
+<br>
+switch(number % 100)<br>
+<br>
+However, each case inside the switch, must be a constant: you cannot put expressions such as:<br>
+<br>
+case n < 5:<br>
+<br>
+or<br>
+<br>
+case number:<br>
+<br>
+If you do, the compiler will signal an error.<br>
+<br>
+Also, you cannot have more than one case with the same value, or more than one default case.<br>
+<br>
+As always, switch...case statements can be nested if necessary.<br>
+<h2><a name="8">8. Loops</a></h2>
+After having experimented a bit with if statements it is only fitting that you should be introduced to the concept of loops, as they are fairly similar. A loop is a section of code that is executed over and over again until a certain condition is true. They are used extensively in games, for example you will want a loop that continuously checks for certain keystrokes and whether some particular events have occured and so on.<br>
+There are three ways in which to perform a loop, each of which we will discuss in this chapter.<br>
+<h3><a name="8.1">8.1. While loops</a></h3>
+Take a look at the following code example.<br>
+<br>
+while(key_pressed(KEY_ESCAPE)==false)<br>
+{<br>
+wait(5);<br>
+}<br>
+<br>
+Confusing? No problem, we will go through it bit by bit. The first line is really the most complicated one. First you have the word "while", which means that a loop should begin here. After that you have the condition that needs to be met for the loop to RUN. In this case, we use the function called key_pressed to check if the escape key has been pressed, and make the loop run while that function reports that the key is not in fact being pressed. In short, the loop will continue to run until the user presses escape. The code between the while statement and closing brace is then executed over and over again, and after each execution the condition is tested once again to see if it is now true. If it is, the code after the closing brace will begin executing instead. In our loop we only make the program wait for 5 milliseconds, which basically pauses execution for a very short time between every check of our condition. If we didn't include this line, the processor's CPU would begin running at 100 % which is not really what we want. So in any loop that runs for a longer period of time you should always have a short pause, and 5 milliseconds is usually a good compromise between speed and CPU usage.<br>
+<br>
+But let's say that you wanted to perform a particular task x number of times, would a loop be the right option? Certainly. Here is a quick example that shows how you can make something happen 1000 times.<br>
+<br>
+int x=0;<br>
+while(x<1000)<br>
+{<br>
+// Put your code here.<br>
+x++;<br>
+}<br>
+<br>
+We start by making a variable called x and giving it a value of 0. Then we begin our loop, and tell it to execute while x is lower than 1000. After this we insert any code that we want to execute, and finally we increase x by 1. This way, x will be incremented by 1 every loop cycle so that it finally has the value 1000. When it does, the next check of our condition will obviously be false since x is no longer lower than 1000. Effectively, we have then executed our code 1000 times with x going from 0 to 999. We could of course have given x an initial value of 1 and let the loop run while it was lower than 1001, or by all means while it was lower than or equal to 1000 (see the chapter on if statements for details), but there is a particular reason why we chose to start at 0 which will be explained further in the next chapter.<br>
+Here is another example. We will display the numbers 0 to 10 in a message box.<br>
+int x=0;<br>
+string numbers="";<br>
+while(x<=10)<br>
+{<br>
+numbers+=x;<br>
+if(x<10)<br>
+{<br>
+numbers+=" ";<br>
+}<br>
+x++;<br>
+}<br>
+alert("Printing numbers 0 to 10", numbers);<br>
+<br>
+The loop executes while x is less or equal to 10, in other words, until x is 11.<br>
+<br>
+We could slightly shorten this code, as follows:<br>
+<br>
+int x=0;<br>
+string numbers="";<br>
+while(x<=10)<br>
+{<br>
+numbers+=x++;<br>
+if(x<=10)<br>
+{<br>
+numbers+=" ";<br>
+}<br>
+}<br>
+alert("Printing numbers 0 to 10", numbers);<br>
+<br>
+Here, we have changed x in exactly the same place as we checked it. X will change after its value has been checked (notice the ++ operator on x).<br>
+We also slightly changed our if condition to check if x is less than or equal to 10. This is because otherwise the spaces would stop from 9 upwards, since x is being increased before the if condition is checked.<br>
+<h3><a name="8.2">8.2. Do while loops</a></h3>
+We have looked at while loops, now it's time to show you something very similar. Let's start off with waiting for the user to press escape again:<br>
+<br>
+do<br>
+{<br>
+wait(5);<br>
+}<br>
+while(!key_pressed(KEY_ESCAPE));<br>
+<br>
+There are two points of interest here. First, the line that says do tells BGT where the loop starts. The block of code, again enclosed in braces, is the section of code that is to repeat while the condition is true. Finally, there is one additional line after the close brace which tells the interpreter which conditions should be met in order for the loop to continue.<br>
+You may notice that in this while statement, there was an exclamation mark before the condition. This tells it to repeat the loop as long as the condition is false. In short, the following two lines mean exactly the same thing:<br>
+<br>
+while(key_pressed(KEY_ESCAPE)==false)<br>
+<br>
+while(!key_pressed(KEY_ESCAPE))<br>
+<br>
+It is important to remember that after the while statement of a do while loop, there is a semicolon, since this is the equivalent of giving an instruction. Do the above, while this condition is met.<br>
+There is one notable difference between a while loop and a do while loop. A while loop checks the condition first, meaning that the code could effectively be totally skipped if the condition is not met. However with a do while loop, the condition is not specified until the end of the loop, which means the code is always executed at least once.<br>
+<h3><a name="8.3">8.3. For loops</a></h3>
+The for loop is the most powerful of the loops, and is used mainly for counting. Essentially, it combines the various parts of loop control into one statement.<br>
+Consider the while loop in the above examples. Before we started the loop, the variable was initialised to a starting value (in our examples, it was 0). Then, we had the while condition at the top of the while loop. Finally, just before the closing brace of the while, we re-initialised x ready for next time around.<br>
+In a for loop, these three stages are packaged into one line:<br>
+<br>
+for(int x=0; x<=10; x++)<br>
+{<br>
+//loop code goes here.<br>
+}<br>
+<br>
+There are three sections in a for statement:<br>
+First, we initialise a variable to a starting value. Here, we chose 0. Although we created the variable from within the loop, it is perfectly legal to use an existing variable, as if you were modifying its value anywhere from the script.<br>
+Second, we tell it upon what conditions our loop will continue to run. In our case, if x is less than 10.<br>
+Lastly, we tell it how to reassign the variable ready for the next cycle of the loop. Although we increased x by 1 as would be the case in most other languages, the reassignment expression can be anything you like. Take a look at the following code.<br>
+<br>
+for(x=1; x<1000; x*=2)<br>
+{<br>
+//code goes here<br>
+}<br>
+<br>
+Every cycle of the loop will now multiply the current value of x by 2.<br>
+<h3><a name="8.4">8.4. Break and Continue</a></h3>
+There are two last possible scenarios that we need to cover. Sometimes you will want a lot of things to occur continuously, but you may not know exactly when you want the loop to stop or you may want to stop it for several different reasons that can't all be used as the condition. In this case, you might do something like the following:<br>
+<br>
+while(true)<br>
+{<br>
+if(something==true)<br>
+{<br>
+break;<br>
+}<br>
+if(something_else==true)<br>
+{<br>
+break;<br>
+}<br>
+if(yet_another_variable==true)<br>
+{<br>
+continue;<br>
+}<br>
+// more code here...<br>
+wait(5);<br>
+}<br>
+<br>
+There are three new things here. The first thing is on line 1, where we don't exactly have a condition for our loop. All we say is "while(true)", which doesn't really make a lot of sense at first glance. However, it's not so strange because true, of course, is always true which means that the loop will never end simply because the condition can never be false. So in short, we have created an endless loop. Naturally we don't want the loop to go on forever; we do want to stop it at some point, but we do it from inside the loop itself. The above three if statements check for conditions that don't actually exist, so if you ran this script it would give you an error. What I am trying to show is that you may, at your own discression, break out of the loop for any reason and at any time using the break statement that you see inside the first two if's. We briefly saw the break statement in action when looking at the switch...case statements. The break statement basically forces the loop to terminate and begins executing the code that comes after it. As mentioned before this is very useful when you want to exit the loop for a number of reasons, or when you don't know exactly when it should stop.<br>
+It must be noted that, if the loops are nested, the break statement will only break out of the loop it is declared in.<br>
+<br>
+The other keyword you saw in the third if statement is continue. Again, this keyword can be used anywhere from inside a loop. The continue keyword tells the interpreter to skip the remainder of that cycle and move onto the next. This is useful, for example, when you are reading from a file and there are certain things, like blank lines that need to be skipped.<br>
+<h2><a name="9">9. Arrays and dictionaries</a></h2>
+So far, we have seen the basic uses of variables. We have seen how they can be manipulated, and how they are used in a general programming context. There is, however, a great issue that you will undoubtedly discover sooner or later, and that's the incredibly large amount of different variables that you would have to keep track of even in a middle-sized game. Imagine if you will, that you have a game board with 50 squares on it. The user is supposed to roll a pair of dice, their position increases by the resulting amount, and then you want to check what should happen on the square that the player lands on. For the purposes of this simple example we will assume that the variable representing a square can have 3 values; 1, 2, and 3. These values can mean anything that you want, of course. 1 could mean that the user goes back three squares, 2 could mean that they get to remain where they've landed and 3 could mean that they get to move forward three squares. Now let us try and construct part of this game board quickly. We will let the first square be number 0 rather than number 1, for reasons which will become clear shortly.<br>
+<br>
+int board0=2;<br>
+int board1=2;<br>
+int board2=2;<br>
+int board3=2;<br>
+int board4=1;<br>
+int board5=2;<br>
+int board6=2;<br>
+int board7=2;<br>
+int board8=2;<br>
+int board9=3;<br>
+int board10=2;<br>
+int board11=2;<br>
+int board12=2;<br>
+int board13=2;<br>
+int board14=1;<br>
+...<br>
+<br>
+Let us stop there, as you will undoubtedly be furious at the amount of paper that you will have wasted if you printed out this tutorial. You will, after looking at this example, agree that the code is incredibly repetitive and tedious? Let's say instead that this was a side scrolling game and the different numbers represented ground, fire and water and the like, you might have had 300 squares instead if the level was a large one. Imagine the joy of writing out 300 such lines as you saw above... It's just not practical. Not only does it take ages to write the actual contents of the grid or board, but you would have to have 300 if statements in order to establish which of the 300 variables should be examined after the player moved to a new square. Can you say nightmare? I thought so. Luckily, there is an easy enough solution... Arrays.<br>
+<br>
+An array is, simply put, a list of variables. The array itself has a name like any other variable, but it contains different values that you can refer to by index. An array can be as small or as large as you need it to be. As always, we will look at an example to wet our apetite.<br>
+<br>
+int[] board(50);<br>
+for(int x=0; x<50; x++)<br>
+{<br>
+board[x]=2;<br>
+}<br>
+<br>
+Wait, wait... Many new things here. Let's go through the code line by line as usual. The first line tells the engine to create a new array, which is to say a list of variables, of type int. The square brackets following int tells the engine that this variable is an array. The array is then assigned to the variable called board, so that we have a way of referring to entries inside the array later. The number inside the parentheses tells the engine to give this array 50 entries. On the next line we use a for loop to make a new variable called x, and then start a loop that will run while x is lower than 50. On the line after that, something very interesting happens. Here we assign a value of two to an entry in the board array. This entry is not specified with a literal value in this case, however. It could certainly have been, but it makes much more sense to use a loop since we then do not need to specify each individual entry explissitly as, of course, we would then be nearly as badly off as with the individual variables in the previous example. You will observe that the index of the array, which is to say the entry in the list to access, is specified between a left and a right bracket and not with a left and a right parenthesis, which you might have expected. On the last line we simply tell the engine that our loop ends here. What we have done is to go through the entire list of 50 items, automatically assigning a value of 2 to each one. After this we only have to assign values manually to those entries in the list that are supposed to be something other than 2. Quite a bit simpler than the nightmare example from earlier, right? I thought so.<br>
+<br>
+Now you may also have understood the reason for our specifying the first square on the board in the original example as 0 rather than 1. This is simply because the first index in an array is always 0, never 1. So if you have an array with 100 entries and you wish to loop through it to perform some task, you would start at 0 and go up to 99. If you try to access an entry in an array which is out of range, you will get a runtime error. This means that the interpreter will not complain until the array is evaluated, therefore it is absolutely essential that you test the game at regular intervals, especially any array related sections, otherwise you may find you receive some rather angry players on your back.<br>
+<br>
+You can treat an array entry just like a regular variable, which means that you can use it in if statements and loops and anything else that you can do with normal variables, with the only difference that you specify an index in the array rather than a unique variable name.<br>
+<br>
+You may also have arrays with multiple dimensions, in order to make things such as an x-y grid or even x-y-z. For example, if you want to make a chess board you could do the following:<br>
+<br>
+int[][] chessboard;<br>
+<br>
+Multidimensional arrays are, to put it simply, arrays of arrays. There is a current limitation in the array usage that prevents you from specifying the size of each dimension in a multidimensional array. To do this with our chess board, for instance, we must manually resize the first dimension and then use a loop to also resize each entry in the second dimension, as follows:<br>
+<br>
+chessboard.resize(8);<br>
+for(int i=0; i<8; i++)<br>
+{<br>
+chessboard[i].resize(8);<br>
+}<br>
+<br>
+At this point, we have an array called chessboard which is 8 by 8 in size. Please note that you cannot put this resizing code in the global scope, it must be in a function such as main where as the actual declaration of the chess board may still be global.<br>
+<br>
+To access an element in an array with multiple dimensions you use the same exact method as when you accessed elements before, just with the different dimensions specified between brackets. To access the square in the upper left corner of our chess board, for instance, one could write:<br>
+<br>
+chessboard[0][0]=5;<br>
+<br>
+And to access the square in the lower left corner, you would do the following:<br>
+<br>
+chessboard[0][7]=5;<br>
+<br>
+The same goes for a board with three dimensions. If you wanted a board which was 3 by 3 by 3, you would declare and initialize it like this:<br>
+<br>
+int[][][] board;<br>
+board.resize(3);<br>
+for(int i1=0; i1<3; i1++)<br>
+{<br>
+board[i1].resize(3);<br>
+for(int i2=0; i2<3; i2++)<br>
+{<br>
+board[i1][i2].resize(3);<br>
+}<br>
+}<br>
+<br>
+You could then access an element by saying:<br>
+<br>
+board[2][0][1]=10;<br>
+<br>
+By using an array with three dimensions you could, for example, represent a grid with x, y and z coordinates. This would be a true 3d game with left, right, back, forward, up, and down movement.<br>
+<br>
+At this time, the BGT engine supports arrays with up to 4 dimensions.<br>
+<br>
+Arrays are used for many different things. As a matter of fact, a string itself is an array, though it doesn't look it on the outside. Each element of a string array, is a single character.<br>
+Here is an example:<br>
+<br>
+string my_string="This is a string.";<br>
+alert("my_string","my_string entry number 2 is the letter "+my_string[2]);<br>
+<br>
+This would return the letter i. Remember that arrays always start with 0, therefore entry 2 holds character 3.<br>
+As strings can be used as function parameters and return values, so can arrays. However there may be times when you don't know your array's length, either because it is a returned string or array, or because a loop is always changing values depending on certain conditions. No problem. An array holds two special functions to allow you to check or change your array. Length is self explanatory. It returns the length of the array. Please note that this does not mean the final element number. If you are using this method as the condition of a loop you need to check that your counter is less than that of length, as shown in the below example, which will display every character of the string in a message box:<br>
+<br>
+string my_string="string";<br>
+for(uint my_counter=0; my_counter < my_string.length(); my_counter++)<br>
+{<br>
+alert("my_string","my_string["+my_counter+"]="+my_string[my_counter]);<br>
+}<br>
+<br>
+Notice that to obtain the length we say my_string.length(). This is because the function length() is stored within the variable. This is known as a method. We will discuss methods in more detail in the next chapter. Also you will have noticed that I used a variable of type uint rather than int. This is because the length method returns an uint as opposed to an int or a double. It is always recommended to have signed and unsigned integers matching, otherwise the compiler will flag a warning when you attempt to run your script.<br>
+There is a final method that is used to control an array. it is called resize, and is used to, you guessed it, resize an array, either adding new elements or removing elements. It takes one parameter, the number of elements that the new array should contain. Note that, like length, you are declaring the actual number of elements that should be present, not the number of the last element. For example:<br>
+<br>
+string my_string="this is a string.";<br>
+my_string.resize(4);<br>
+<br>
+This will resize the array down to 4 elements, ending on entry 3. Note that when you resize an array to smaller than its original value, 
+entries are removed from right to left, I.E. from the last element backwards. Therefore the resulting string will be "this".<br>
+<br>
+It is possible to specify exactly which values will go into an array at the point where the array is defined. To do so, simply put an equals sign after the name of the array, and follow it with a list of values in braces. It sounds more complicated than it is. For example, let us define an array of integers and initialize it with some meaningful values, all in the same line of code:<br>
+<br>
+uint[] primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };<br>
+<br>
+There is a slight limitation with arrays, and this is that they can only store values of the same data type. You could not, for example, have one entry with the value 45, and another with the value "hello". However, this can be resolved with another type of variable, known as dictionaries. A dictionary is what is called an object with methods, which I touched upon briefly in our last example. More on this in the next chapter.<br>
+<br>
+Dictionaries are another way to declare variables. However, unlike standard variables, you declare the variable name using a string, and it can store any value. Therefore, you could have a dictionary holding several variables, all with a name and a value, such as the boards we described in our examples above. Let us now use the same example, this time using dictionaries.<br>
+<br>
+dictionary board;<br>
+for(int x=0; x<50; x++)<br>
+{<br>
+board.set(x, 2);<br>
+}<br>
+<br>
+Again, lots of new things to discuss. The first line simply declares a dictionary, which we refer to as board. The next line then starts a loop, like we did with the array, from 0 to 49. The line after that tells the interpreter to create an entry in the dictionary, called the current value of x, and assign the number 2 to that entry.<br>
+This has certain advantages over arrays, since you could in theory store values of x and y coordinates, like so:<br>
+<br>
+dictionary board;<br>
+for(int x=0; x < 4; x++)<br>
+{<br>
+for(int y=0; y < 4; y++)<br>
+{<br>
+board.set(x+","+y, 2);<br>
+}<br>
+}<br>
+<br>
+We accomplish this by using a nested loop to increase both counters and assign the initial value of 2 to each square. Notice that we are using two values separated by a comma inside our name string. This just makes it easier for us to separate the squares from one another, as the dictionary object just sees it as a string; it has no idea what the name might mean to us. In practice, all that is happening is that a string with a unique name is assembled which is to say our square numbers separated by comma.<br>
+<br>
+Similarly, to retrieve the value of a certain square, you may do the following:<br>
+<br>
+int square_value;<br>
+board.get("2,2", square_value);<br>
+<br>
+The second parameter of the get method is passed by reference, meaning the value is stored in the variable that we pass it. If my meaning is unclear, refer back to the functions section which contains detailed information about the use of parameters.<br>
+<br>
+As well as being able to set and retrieve values in dictionaries, you can also change, and even delete them:<br>
+<br>
+if(board.exists("2,2"))<br>
+{<br>
+board.delete("2,2");<br>
+}<br>
+<br>
+This tells the interpreter to look in the dictionary called board for "2,2". If it finds it, this value is then deleted. This cannot be done with standard variables.<br>
+<br>
+It is very important that you check the existence of a dictionary entry. If you delete or check an entry that doesn't exist, this will not cause any syntax or runtime errors to occur, but the variable you are attempting to use to retrieve the value will not change.<br>
+<br>
+You can also use the delete_all method to delete all assignments from the dictionary.<br>
+<br>
+Please note that dictionaries are significantly slower than arrays and regular variables, so use them with care.<br>
+<h2><a name="10">10. Objects and classes</a></h2>
+Objects are a very powerful and absolutely essential feature when making games with the BGT engine, so be sure to read this chapter very carefully. An object is a regular variable, but with special functionality. You can think of an object as a variable that contains other variables inside itself, as well as functions that do something with that particular object. Another name for an object is a class. To make things a little more clear, we will begin with an example.<br>
+<br>
+sound ambience;<br>
+ambience.load("curry.ogg");<br>
+<br>
+This example does several things. It tells the engine that we want a new object of type sound, that we want the object to be assigned to a variable that we call ambience, and finally it calls a function within the ambience variable, specifying the filename of the sound to open.<br>
+<br>
+When an object is created, it can take a list of parameters which largely determine how the object will behave. It is also possible for objects to take no parameters at all, which the sound and timer are good examples of. The timer object would be created as follows:<br>
+<br>
+timer jumptime;<br>
+<br>
+Once an object has been created, you may begin using it. An object has what is called properties, which are basically variables that are stored inside the object and which are used both to get and set various pieces of information during the lifetime of the object. The sound object, for instance, has a property called volume. This determines how loudly the sound will play, and can be modified in real-time. Here is an example of how to create a sound object with a sound that is opened as a stream, and then how to set its volume to -6 decibel which which is to say about half of the original amplitude:<br>
+<br>
+sound ambience;<br>
+ambience.stream("curry.wav");<br>
+ambience.volume=-6;<br>
+<br>
+Pretty simple, right? It is of course also possible to check the value of a property in our object, like this:<br>
+<br>
+if(ambience.volume>-10)<br>
+{<br>
+// Do something<br>
+}<br>
+<br>
+In this case, we do something if the volume is greater than -10 decibel. Some properties cannot be modified but only checked, while others can only be modified at certain times but not at others. You will find all the information about this in the properties list for each object in the object reference.<br>
+<br>
+Objects also have what is called methods. A method is simply a function like any other that you will find in the BGT engine, with the only difference that it works exclusively with a particular object. To go back to the sound object, there is a method called play_wait which starts the sound playback and then waits for it to finish before returning. In fact, the load and stream functions we experimented with earlier are also good examples of methods.<br>
+Let us extend the previous example to include playing the sound as well as setting its volume.<br>
+<br>
+sound ambience;<br>
+ambience.stream("curry.wav");<br>
+ambience.volume=-6;<br>
+ambience.play_wait();<br>
+<br>
+Familiar? Good, as we are basically just calling a function but one that operates on our specific copy of the sound object, called ambience in this case. play_wait takes no parameters, but many other object methods do in which case they are specified between a left and a right parenthesis just like in a regular function call.<br>
+<br>
+It is perfectly possible to make two versions of the same object, in which case they will work completely independently of each other. If you make two sound objects for example and then call play on both, you will get both sounds playing at the same time.<br>
+<br>
+You may want to pass objects around various functions of your own. To do this, it is essential that you pass handles, and not the object itself. A handle is essentially a reference to the original object. To do this, you would do something like the following:<br>
+<br>
+sound@ play_sound(string filename)<br>
+{<br>
+sound the_sound;<br>
+the_sound.load(filename);<br>
+the_sound.play();<br>
+return the_sound;<br>
+}<br>
+void main()<br>
+{<br>
+show_game_window("My Game");<br>
+sound@ ambience=play_sound("curry.wav");<br>
+ambience.volume=-6;<br>
+@ambience=null;<br>
+}<br>
+<br>
+In short, when you declare an object handle, you put an @ (at) sign after the variable type. You can then use this variable as if it were a standard object, the only difference being that you are referencing the original variable. When you want to change the value of your handle, for example to make it point to another object of the same type, you simply put the @ (at) sign before the variable name.<br>
+You can destroy a handle by setting its value to null. This is the object equivalent to 0. With this in mind, though you cannot manually destroy the contents of an object, a way to work around this is to set all your global objects as handles, and only use the objects themselves in functions. This way, although the objects themselves are local variables, they have global variables still referring to them. Therefore the object will always remain usable until its last handle is destroyed.<br>
+<br>
+You can also make your own objects, also known as classes, with their own methods and properties. For example, you could make a class for an enemy, as follows:<br>
+<br>
+class enemy<br>
+{<br>
+int health;<br>
+int speed;<br>
+int position;<br>
+void fire_weapon()<br>
+{<br>
+//weapon code goes here<br>
+}<br>
+void move(int direction)<br>
+{<br>
+//movement code goes here<br>
+}<br>
+}<br>
+<br>
+The only new line here is the first one, but it is only the same as declaring a variable, with the slight difference that you have to tell the engine how to make that class. In this case, our enemy class has three properties, health, speed and position, and two methods, fire_weapon and move. However, we need not change the position property directly, since the move function will do that for you, along with any other code that you put in there. It is important for this reason that you document which methods and properties should or should not be touched.<br>
+To use our class we would then write:<br>
+<br>
+enemy robot;<br>
+<br>
+Then our class would be ready for use, just like the objects provided in BGT.<br>
+<br>
+robot.move(right); //assuming that right is a constant<br>
+robot.fire_weapon(); //makes the robot fire his weapon<br>
+<br>
+There is a slight problem though. The enemy's health hasn't been assigned a value. This means that every time we declared an enemy variable, we would have to set every health to 100. This is easily solved with the constructor and destructor functions.<br>
+The constructor function simply instructs the engine how our properties should be set up, and/or performs any other tasks that we might want to have done whenever a new instance of our class is created. The constructor function is optional, and is declared with the same name as the class. The destructor function is called when our class instance is destroyed. It can be used to do any necessary clean-up work. The destructor is also optional, and is declared in a similar fashion as the constructor but with a ~ (tilde) sign prepending the class name. Finally, both the constructor and destructor functions are the only functions which do not declare a return type; not even void.<br>
+Let us extend our enemy class to include a constructor:<br>
+<br>
+class enemy<br>
+{<br>
+int health;<br>
+int speed;<br>
+int position;<br>
+enemy()<br>
+{<br>
+health=100;<br>
+position=0;<br>
+speed=300;<br>
+}<br>
+void fire_weapon()<br>
+{<br>
+//weapon code goes here<br>
+}<br>
+void move(int direction)<br>
+{<br>
+//movement code goes here<br>
+}<br>
+}<br>
+<br>
+Now, every time we declare a variable of type enemy, its properties will always be set correctly.<br>
+<br>
+Note that it is also possible to write the following:<br>
+<br>
+class enemy<br>
+{<br>
+int health=100;<br>
+int speed=300;<br>
+int position=0;<br>
+void fire_weapon()<br>
+{<br>
+//weapon code goes here<br>
+}<br>
+void move(int direction)<br>
+{<br>
+//movement code goes here<br>
+}<br>
+}<br>
+<br>
+In this case, we don't actually implement a constructor because the properties are given default values directly in their declaration. However, the constructor may need to do other work so we will stick to using it in the future as well.<br>
+<br>
+To make your class more portable you can use parameters for your constructor, rather than expecting the user of the class to modify the properties directly. We show this with our rapidly growing enemy class:<br>
+<br>
+class enemy<br>
+{<br>
+int health;<br>
+int speed;<br>
+int position;<br>
+enemy(int init_health, int init_speed, int init_pos)<br>
+{<br>
+health=init_health;<br>
+position=init_pos;<br>
+speed=init_speed;<br>
+}<br>
+void fire_weapon()<br>
+{<br>
+//weapon code goes here<br>
+}<br>
+void move(int direction)<br>
+{<br>
+//movement code goes here<br>
+}<br>
+}<br>
+<br>
+Now to declare our enemy, we would write the following:<br>
+<br>
+enemy robot(100, 300, 0);<br>
+<br>
+This would set the properties of our enemy object instance to the values that we specified. That way you can create enemies of varying strengths, speeds and randomly scattered on the game board. Note that since we define only one constructor which takes parameters, it is no longer possible to declare our enemy without specifying these parameters (see below for more information on automatic default constructors).<br>
+<br>
+As I mentioned in the functions section, functions can have the same name, so long as the parameters are different. This also holds true for class methods, including the constructor, but not the destructor. This means, that if you wanted to allow your enemy to be set with different values, you could have a constructor where the user must specify the parameters, but you could also have a constructor where no parameters have to be given. This way, you can decide whether to declare your enemies with parameters or not. The compiler will then find the constructor that matches your parameters (if any), and call it for you. We will now demonstrate this with our enemy code. I will not include the class properties or methods, I will simply use our constructors.<br>
+<br>
+class enemy<br>
+{<br>
+//properties go here<br>
+//constructor without parameters<br>
+enemy()<br>
+{<br>
+health=100;<br>
+position=0;<br>
+speed=300;<br>
+}<br>
+//constructor with parameters:<br>
+enemy(int init_health, int init_speed, int init_pos)<br>
+{<br>
+health=init_health;<br>
+position=init_pos;<br>
+speed=init_speed;<br>
+}<br>
+//class methods go here<br>
+}<br>
+<br>
+Of course, you could put your class methods wherever you liked, however it made logical sense to put our constructor at the top of our class, since this is the first function it calls.<br>
+Now to declare our enemy, since we have two constructors, we could either do<br>
+<br>
+enemy robot;<br>
+<br>
+or<br>
+<br>
+enemy robot(200, 150, 0);<br>
+<br>
+The first declaration would simply give us an enemy with his default values. However, our second declaration gives our enemy twice the strength and speed of our first. Although 150 is half the value of 300, we are telling the program the time in which it takes him to move, not how fast he moves in a given time.<br>
+<br>
+if you do not define a constructor in your script, the compiler will automatically make an empty one for you that takes no parameters. This means that by default, we could declare any of our classes as you saw above with no argument list. However, if you define a constructor that takes parameters, the default one is no longer automatically implemented. It is only implemented automatically by the script compiler if there is no constructor at all specified by you. Therefore, if you want a default constructor (which is to say a constructor that takes no arguments), as well as a constructor that does take arguments, you must implement both explicitly just like in the example above.<br>
+<br>
+Please note that, as mentioned earlier in this tutorial, primitive variables (which is to say variables that are not objects), will contain undefined values if you don't give them initial values explicitly. This applies not only to global variables and variables inside functions and methods, but also to properties in classes. If you declare an object like:<br>
+<br>
+enemy robot;<br>
+<br>
+Then the default constructor (if present) will be invoked implicitly, so unlike with primitive variables such as int and float, the contents of the robot variable is not at all undefined. The constructors are supposed to initialize the properties used internally by the class, however. That does not happen automatically. In short, you must make sure that all the properties that you use in a class are initialized to meaningful values before they are used - just like you do with primitive variables outside of classes. The constructors are a good location in which to do this. Alternatively you can give the properties initial values when they are declared, just like you would with global variables or local function variables.<br>
+<br>
+Destructors more or less work in the same manner as constructors, except that they are called when your class is destroyed. This is usually either when its last reference is destroyed, or when the program exits. Here is our basic enemy once more, with a single constructor taking no arguments, and a destructor:<br>
+<br>
+class enemy<br>
+{<br>
+//properties go here<br>
+enemy()<br>
+{<br>
+health=100;<br>
+position=0;<br>
+speed=300;<br>
+}<br>
+~enemy()<br>
+{<br>
+alert("glory!","your enemy is dead!");<br>
+}<br>
+//methods go here<br>
+}<br>
+<br>
+It would be pointless to run this example. In fact, if you implemented this example into a game, once you exited the game you would get message boxes left right and centre telling you your enemy was dead, because the interpreter is destroying all active objects and therefore calling their destructor functions, if any are present. Just like with the constructor, the compiler will make an empty destructor for you by default if you choose not to create one yourself. This means that you only need to define one explicitly if you wanted to perform some specific action when the class was destroyed.<br>
+<h2><a name="11">11. Advanced object techniques</a></h2>
+The previous chapter has given you just enough information to begin using objects productively in your game creation endeavors. This chapter will extend your arsenal of object-oriented techniques. Note that the concepts introduced here are considered advanced, and you may well decide to skip this chapter on your first pass through this tutorial.<br><br>
+<h3><a name="11.1">11.1. Objects in a nutshell</a></h3>
+Before we delve into advanced concepts, let us briefly take stock of what you already know about objects. Here is a quick rundown of object-oriented terminology. If anything appears unclear, you may wish to reread the previous chapter as it lays the foundations for this one.<br>
+<br>
+An object can be imagined as a box with variables and functions living inside it. The variables inside an object are called properties, and the functions inside an object are called methods.<br><br>
+
+Every object belongs to a class, or type, and an object's class determines which properties and methods the object has. For example, a sound object, belonging to the sound class, will always have a play method because the sound class says so.<br><br>
+
+Whenever an object is created, a special function called a constructor is executed. Likewise, whenever an object is destroyed, a special function called a destructor is executed. Constructors and destructors are defined by the object's class. A class may provide multiple constructors with different parameters. However, it is not allowed for a class to have more than one destructor.<br>
+<h3><a name="11.2">11.2. Inheritance</a></h3>
+Imagine you are creating a game in which the player character may meet different kinds of animals, and let us assume you have written a class to represent birds in your game. The bird class might look something like the following:<br><br>
+
+
+class bird<br>
+{<br>
+void walk()<br>
+{<br>
+// Walking code for birds goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for birds goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for birds goes here.<br>
+}<br>
+}<br>
+<br>
+// Let's create a few birds<br>
+void main()<br>
+{<br>
+bird sparrow;<br>
+bird dove;<br>
+bird eagle;<br>
+sparrow.run();<br>
+dove.walk();<br>
+eagle.fly(); // Takes us up where we belong :-)<br>
+}<br>
+<br><br>
+
+Now, in an effort to make the game more realistic, we come up with the idea that the sparrow in the above code should actually be able to sing. How might we go about this?<br><br>
+
+One approach might be to modify our bird class by adding a sing method. The obvious problem is that this would give every bird, not just the sparrow, the ability to sing. Even in a game world, doves should still coo, and eagles should still cry. After all, it was realism which prompted the addition of the sing method in the first place.<br><br>
+
+Our second approach would be to create an additional class for sparrows which is identical to the bird class in every way but one: it has a sing method. Here is the corresponding code for both classes, in full:<br><br>
+
+
+class bird<br>
+{<br>
+void walk()<br>
+{<br>
+// Walking code for birds goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for birds goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for birds goes here.<br>
+}<br>
+}<br>
+<br>
+class sparrow<br>
+{<br>
+void walk()<br>
+{<br>
+// Walking code for sparrows goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for sparrows goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for sparrows goes here.<br>
+}<br>
+void sing()<br>
+{<br>
+// Singing code for sparrows goes here.<br>
+}<br>
+}<br>
+<br><br>
+
+This approach indeed solves our problem because now sparrows can sing but birds in general cannot. There are a few disadvantages though:<br><br>
+
+<ol>
+<li>Our code has become lengthy and repetitive.</li>
+<li>Our code has become harder to maintain. Imagine you would like to fix a bug in the fly method for all birds. In our running example you would need to change two fly methods, one for the bird class, the other one for the sparrow class. It is easy enough to fix the one but then to forget fixing the other. In such a scenario, even though you are sure you fixed the bug, you will soon find out that it still persists. Even worse, your customers might be the ones to find out. Now assume you had created classes for cooing doves and crying eagles in the same way. A bug in the fly method would then have to be fixed in four places. Forget just one, and the bug will remain. Testing might even suggest it was fixed because the bug occurs for some kinds of birds and not for others.</li>
+<li>Suppose your game ended up containing an array of birds, like so:<br>
+bird[] aviary(50);<br>
+You would have no way of putting a sparrow into the aviary because all elements of an array must share a common data type.
+</ol>
+
+Wouldn't it be wonderful if we had a way to define a class for sparrows which inherits all the functionality from the bird class and simply adds the sing method? And wouldn't it be even better if BGT somehow knew that a sparrow is just another kind of bird so that we could place a sparrow into an array of birds? You will be delighted to know that such a way exists in BGT. It is called class inheritance.<br><br>
+
+Suppose we have defined the bird class as above. Now we can define the sparrow class as follows:<br><br>
+
+
+class sparrow : bird<br>
+{<br>
+void sing()<br>
+{<br>
+// Singing code for sparrows goes here.<br>
+}<br>
+}<br>
+<br>
+// Let's make some birds<br>
+void main()<br>
+{<br>
+bird b1;<br>
+bird b2;<br>
+sparrow s;<br>
+s.fly(); // Works because every sparrow is also a bird<br>
+s.sing(); // Works because s is a sparrow<br>
+bird@[] aviary = { b1, b2, s };<br>
+}<br>
+<br><br>
+
+In the above code, the sparrow class inherits from the bird class. We call sparrow a derived class, or subclass, and we call bird a base class, or superclass. These are all just different ways of expressing the same fact, and we take the liberty to use them interchangeably because all of them are in common use.<br><br>
+
+To define a derived class, you follow the class name with a colon after which you write the name of the base class, as demonstrated above. The derived class will inherit all properties and methods defined in the base class. It is as if every sparrow object contained a hidden bird object. After all, part of being a sparrow is being a bird. In this zen-like statement, by the way, is contained the entire concept of inheritance.<br><br>
+
+It is important to note that our aviary is an array of bird handles rather than an array of birds. When treating a sparrow as a bird, it is vital that we use a handle. Consider the following code:<br><br>
+
+
+sparrow s; // A sparrow is created<br>
+bird@ b1 = s; // Through the handle b1, we can treat s as a bird<br>
+b1.fly(); // This works, and is equivalent to saying s.fly();<br>
+s.sing(); // This works because s is a sparrow<br>
+b1.sing(); // Does not work because, although b1 points to a sparrow, we are treating it as a bird<br>
+bird b2 = s; // Makes a new bird<br>
+<br><br>
+
+That last line above is actually more complex than you might think. It creates a new bird b2 from the data contained in s, but b2 will not be a sparrow. You might say that b2 contains the birdness of s but not the sparrowness. This is quite different from b1 because b1 is not a copy of s but merely a handle through which s can be treated as a bird. b1 and s are names for the same object in memory, but b2 is another bird altogether.<br><br>
+
+Not only can a derived class add methods to a base class but it can also modify the behavior of existing methods. Let's say we wanted to give sparrows their own unique fly method. The sparrow class would then look like the following:<br><br>
+
+
+class sparrow : bird<br>
+{<br>
+void sing()<br>
+{<br>
+// Singing code for sparrows goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for sparrows goes here.<br>
+}<br>
+}<br>
+<br>
+void main()<br>
+{<br>
+bird b; // Create a bird<br>
+sparrow s; // Create a sparrow<br>
+bird@[] aviary = { b, s }; // Put handles to both of them into the same aviary<br>
+aviary[0].fly(); // Calls the fly method of the bird class<br>
+aviary[1].fly(); // Calls the fly method of the sparrow class<br>
+}<br>
+<br><br>
+
+Here we have modified the behavior of a method by defining, in the derived class, a method of the same name and with the same parameters (none in this case). We say that the fly method in the sparrow class overrides the one in the bird class.<br><br>
+
+Notice how inheritance provides a way to give equal treatment to objects of different types. To our aviary, the sparrow is just another bird. This concept is called polymorphism. The word comes from Greek and means "of different form." In this case it refers to the fact that we give equal treatment to objects which are different in form, or type, or class. In our running example, polymorphism is possible because our two classes, bird and sparrow, are related by inheritance. Of course we could not place any arbitrary bird into an array of sparrows for the simple reason that not every bird is a sparrow. On the contrary, we could neither store a sound object in an array of birds, nor could we store a bird object in an array of sounds, because bird and sound are unrelated.<br><br>
+
+While properties and methods are inherited, constructors are not. However, since every sparrow object contains a hidden bird object, two constructors need to be executed when a sparrow is created. Just as a house is built from the foundations upwards, it is the base class constructor which executes first. The opposite applies when an object is destroyed. In this case, the destructors are called from the derived class upwards, so the sparrow destructor will come first. You can memorize this by reminding yourself that destroying something is the opposite of creating it.<br><br>
+
+Another way of looking at it is to imagine that the first thing a derived class constructor does is to call a parameterless base class constructor. This happens automatically, and in most cases is just what you want. There are cases, however, when you would rather call another constructor in the base class. For this scenario, BGT has a special keyword called super. You can use the super keyword just like the name of a function, only it refers to a constructor of the base class.<br><br>
+
+Suppose the bird class had an additional constructor which would take the bird's wingspan as parameter:<br><br>
+
+
+class bird<br>
+{<br>
+double wingspan;<br>
+bird(double wingspan)<br>
+{<br>
+this.wingspan = wingspan;<br>
+}<br>
+void walk()<br>
+{<br>
+// Walking code for birds goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for birds goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for birds goes here.<br>
+}<br>
+}<br>
+<br><br>
+
+The above code uses the "this" keyword which you may not have seen before. Anywhere within the body of a class definition, the keyword "this" can be used to refer to the object currently considered. In case of a constructor, this would of course be the object currently created. In the above case the keyword is necessary because there are two things to which the name wingspan could possibly refer to, one of them a property of the object to create, the other a constructor parameter. If we had merely written<br>
+wingspan = wingspan;<br>
+then we would have assigned the constructor parameter called wingspan to its own value, a valid but pointless operation.<br><br>
+
+Now we can modify the sparrow class so that it calls our new constructor:<br><br>
+
+
+class sparrow : bird<br>
+{<br>
+sparrow()<br>
+{<br>
+super(3); // Call base constructor with parameter of 3<br>
+}<br>
+void sing()<br>
+{<br>
+// Singing code for sparrows goes here.<br>
+}<br>
+}<br>
+<br><br>
+
+In this way we have specified that a sparrow is always created with a wingspan of 3. The elegance of this approach is that we did not have to touch the wingspan property directly but could instead use code which was present in the base class. As you may have realized by now, code reuse is what object-oriented programming is all about.<br><br>
+
+Let us add classes for eagles and doves just to demonstrate how easy it is. And while we are at it, we will give each bird a make_sound method which causes it to produce its characteristic sound. Here is our entire code, in full:<br><br>
+
+
+class bird<br>
+{<br>
+double wingspan;<br>
+bird(double wingspan)<br>
+{<br>
+this.wingspan = wingspan;<br>
+}<br>
+void walk()<br>
+{<br>
+// Walking code for birds goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for birds goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for birds goes here.<br>
+}<br>
+void make_sound()<br>
+{<br>
+// Code for generic bird sound goes here.<br>
+}<br>
+}<br>
+<br>
+class sparrow : bird<br>
+{<br>
+sparrow()<br>
+{<br>
+super(3);<br>
+}<br>
+void sing()<br>
+{<br>
+alert("How beautiful!", "The sparrow sings a little melody.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+sing(); // Could have used the "this" keyword but didn't have to<br>
+}<br>
+}<br>
+<br>
+class eagle : bird<br>
+{<br>
+eagle()<br>
+{<br>
+super(20);<br>
+}<br>
+void cry()<br>
+{<br>
+alert("How atmospheric!", "The last eagle cries over the last crumbling mountain.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+cry();<br>
+}<br>
+}<br>
+<br>
+class dove : bird<br>
+{<br>
+dove()<br>
+{<br>
+super(8);<br>
+}<br>
+void coo()<br>
+{<br>
+alert("How unnerving!", "A dove coos its love song in a language only doves find lovely.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+coo();<br>
+}<br>
+}<br>
+<br>
+// Let's make some birds<br>
+void main()<br>
+{<br>
+sparrow s;<br>
+eagle e;<br>
+dove d;<br>
+bird@[] aviary = { s, e, d };<br>
+for(uint i=0; i&lt;aviary.length(); i++)<br>
+{<br>
+aviary[i].fly();<br>
+aviary[i].make_sound(); // Each according to its kind<br>
+}<br>
+}<br>
+<br><br>
+
+You might wish to run this code to watch polymorphism in action. Notice how our for loop just tells every bird to make its characteristic sound, and each bird behaves quite differently. If later on we added another kind of bird to our aviary, the for loop could remain unchanged. This leads to the fascinating observation that old code can call new code.<br><br>
+
+A tool is only really powerful in the hands of a person who knows not just how, but also when to use it. In the case of inheritance, a good approach is the following: Use inheritance when not using it would require you to maintain several identical copies, or similar variations, of the same code. Use inheritance when modelling real-world concepts which are themselves hierarchical. Finally, use inheritance when objects of very similar but not absolutely identical types will be given equal treatment. With some practice you will recognize those situations early on in the design phase before you have even written the first line of code. The art and science of what this paragraph talks about is called object-oriented design, just in case you would like to do some research on it.<br><br>
+
+A tool is even more powerful in the hands of a person who, in addition to knowing when to use it, also knows when not to use it. So we close this section with a word of warning about inheritance. While it is certainly a powerful technique which has many valid uses, many programmers, when first learning about it, get carried away by its elegance and conclude that finding just the right class hierarchy must be the solution to every possible problem of software design. If you aren't careful, your class hierarchies may increase beyond the reasonable limits because you would like them to cover just about every subclass imaginable. For example, we might have defined separate classes for every kind of eagle or dove known to science. BGT will uncomplainingly let us extend our class hierarchies to arbitrary unfathomable depths. But unless our game will be about ornithology (the branch of zoology that studies birds), the two-level hierarchy presented above will probably be more than enough. If the truth be told, in most cases even a single bird class should suffice. Or to quote Python inventor Guido van Rossum: "Simple is better than complex. Complex is better than complicated."<br>
+<h3><a name="11.3">11.3. Interfaces</a></h3>
+In the previous section you learned about the powerful concept called polymorphism. One way to achieve polymorphism is through inheritance because BGT allows us to refer to an object via a handle to its base class. Inheritance makes sense when classes share a lot of code or lots of conceptual similarities. Sparrow and dove, for example, share all the code for walking, flying, and running, and in addition they are conceptually similar due to the fact that they are both birds.<br><br>
+
+It is possible, however, to conceive of scenarios in which objects share neither a lot of code nor lots of conceptual characteristics but still might be given equal treatment. Consider the concept of a sound source. Looking at the last code example of the previous section, you will find that a bird may be called a sound source. After all, it has a make_sound method. Now let us invent another kind of sound source, one which is almost entirely unlike any bird.<br><br>
+
+
+class musical_instrument<br>
+{<br>
+uint complexity;<br>
+musical_instrument(uint complexity)<br>
+{<br>
+this.complexity = complexity;<br>
+}<br>
+void make_sound()<br>
+{<br>
+alert("Info", "You hear the sound of music.");<br>
+}<br>
+}<br>
+<br>
+class drum : musical_instrument<br>
+{<br>
+drum()<br>
+{<br>
+super(2);<br>
+}<br>
+void make_sound()<br>
+{<br>
+alert("Info", "You hear the steady beating of a drum.");<br>
+}<br>
+}<br>
+<br><br>
+
+Birds and musical instruments are different in every way but one---they are both sound sources. But this similarity alone warants the idea of giving them equal treatment, for example by storing handles to them in an array of sound sources.<br><br>
+
+One way of achieving this would be to implement bird and musical_instrument as derived classes with a common base class which we call sound_source. In the previous section we formulated some criteria for when inheritance might be useful. Let us see if they apply to birds and musical instruments:<br><br>
+
+Use inheritance when not using it would require you to maintain several identical copies, or similar variations, of the same code. This is certainly not the case because bird and musical_instrument share no code whatsoever except a common method name.<br><br>
+
+Use inheritance when modelling real-world concepts which are themselves hierarchical. This is clearly a borderline case. One might argue that since both a bird and a musical instrument are sound sources, there is some form of hierarchy between the concepts. In practice, however, the concept of a sound source is so abstract in relation to the concepts of musical instruments and birds that we do not perceive this hierarchy in our everyday thinking.<br><br>
+
+Finally, use inheritance when objects of very similar but not absolutely identical types will be given equal treatment. Note the expression "very similar." Birds and musical instruments are not even considered remotely similar in everyday discourse.<br><br>
+
+Try as we might, it seems we cannot create a good case in favor of inheritance. But there is another way of expressing similarity in one respect for types which are dissimilar in every other respect.<br><br>
+
+A bird and a musical_instrument share a common method signature. By the word signature we refer to a combination of name and parameters, so what we mean is that both classes have a method of the same name and with the same parameters, none in this case. Another way of putting this is stating that bird and musical_instrument implement the same interface consisting of a parameterless method called make_sound. Here is the code which defines this interface:<br><br>
+
+
+interface sound_source<br>
+{<br>
+void make_sound();<br>
+}<br>
+<br><br>
+
+Note the semicolon that immediately follows the parentheses after make_sound. In an interface definition we do not include the bodies of methods. An interface is merely a list of method signatures, and if a class contains methods with the given signatures of an interface, we say that the class implements that interface. The whole point is that an object can be manipulated through a handle to one of its interfaces.<br><br>
+
+We have to tell BGT that the bird class and the musical_instrument class both implement the sound_source interface. The syntax for this is exactly the same as for inheritance, so instead of<br>
+class bird<br>
+we write<br>
+class bird : sound_source<br>
+and instead of<br>
+class musical_instrument<br>
+we write<br>
+class musical_instrument : sound_source<br><br>
+
+Here is a code example for everything we have learned about inheritance and interfaces:<br><br>
+
+
+interface sound_source<br>
+{<br>
+void make_sound();<br>
+}<br>
+class bird : sound_source<br>
+{<br>
+double wingspan;<br>
+bird(double wingspan)<br>
+{<br>
+this.wingspan = wingspan;<br>
+}<br>
+void walk()<br>
+{<br>
+// Walking code for birds goes here.<br>
+}<br>
+void run()<br>
+{<br>
+// Running code for birds goes here.<br>
+}<br>
+void fly()<br>
+{<br>
+// Flying code for birds goes here.<br>
+}<br>
+void make_sound()<br>
+{<br>
+// Code for generic bird sound goes here.<br>
+}<br>
+}<br>
+<br>
+class sparrow : bird // Note that this automatically implements sound_source<br>
+{<br>
+sparrow()<br>
+{<br>
+super(3);<br>
+}<br>
+void sing()<br>
+{<br>
+alert("How beautiful!", "The sparrow sings a little melody.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+sing(); // Could have used the "this" keyword but didn't have to<br>
+}<br>
+}<br>
+<br>
+class eagle : bird<br>
+{<br>
+eagle()<br>
+{<br>
+super(20);<br>
+}<br>
+void cry()<br>
+{<br>
+alert("How atmospheric!", "The last eagle cries over the last crumbling mountain.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+cry();<br>
+}<br>
+}<br>
+<br>
+class dove : bird<br>
+{<br>
+dove()<br>
+{<br>
+super(8);<br>
+}<br>
+void coo()<br>
+{<br>
+alert("How unnerving!", "A dove coos its love song in a language only doves find lovely.");<br>
+}<br>
+void make_sound()<br>
+{<br>
+coo();<br>
+}<br>
+}<br>
+<br>
+class musical_instrument : sound_source<br>
+{<br>
+uint complexity;<br>
+musical_instrument(uint complexity)<br>
+{<br>
+this.complexity = complexity;<br>
+}<br>
+void make_sound()<br>
+{<br>
+alert("Info", "You hear the sound of music.");<br>
+}<br>
+}<br>
+<br>
+class drum : musical_instrument<br>
+{<br>
+drum()<br>
+{<br>
+super(2);<br>
+}<br>
+void make_sound()<br>
+{<br>
+alert("Info", "You hear the steady beating of a drum.");<br>
+}<br>
+}<br>
+<br>
+void main()<br>
+{<br>
+sparrow s;<br>
+eagle e;<br>
+dove d;<br>
+bird@[] aviary = { s, e, d };<br>
+for(uint i=0; i&lt;aviary.length(); i++)<br>
+{<br>
+aviary[i].fly();<br>
+aviary[i].make_sound(); // Each according to its kind<br>
+}<br>
+drum my_drum;<br>
+sound_source@[] my_sound_sources = { d, s, my_drum };<br>
+for(uint j=0; j&lt;my_sound_sources.length(); j++)<br>
+{<br>
+my_sound_sources[j].make_sound();<br>
+}<br>
+}<br>
+<br>
+Note that, while a class may inherit from at most one other class directly, it may implement any number of interfaces. If you wish to express that a class called c implements the three interfaces i1, i2, and i3, you simply separate the interface names by commas, like so:<br><br>
+
+
+class c : i1, i2, i3<br>
+{<br>
+}<br>
+<br><br>
+
+Interfaces and inheritance are not mutually exclusive, so a class may implement certain interfaces as well as inheriting from another class. So to express that class c1 inherits from class c2 as well as implementing interfaces i1, i2, and i3, you would write:<br><br>
+
+
+class c1 : c2, i1, i2, i3<br>
+{<br>
+}<br>
+<h3><a name="11.4">11.4. Operator overloading</a></h3>
+This section, although having a complex-sounding title, is in fact much simpler than the two previous sections about inheritance and interfaces. Operator overloading is what programmers call "syntactic sugar." It sweetens up your life and leads to very readable and elegant code if used correctly, but you can do entirely without it if you so desire. It is, in other words, an optional convenience feature.<br>
+<br>
+Let us write a simple class for representing three-dimensional vectors. In case you need a refresher, a three-dimensional vector is simply a combination of three numbers. For example, (3, 4, 5) is a three-dimensional vector. We say that a vector is composed of three numbers, and the three numbers are the components of the vector. By convention, when dealing with a three-dimensional vector, we call its first component the x component, its second the y component, and its third the z component. So (3, 4, 5) has, for instance, a y component of 4. In mathematics, vectors are commonly used to describe locations in space. For example, (3, 4, 5) can be interpreted as follows: From a fixed location called the origin, go three meters to the right, four meters forward, and then fly five meters upward. And don't you start arguing with a mathematician that gravity won't let you---after all, this is not physics class. Then again, I shouldn't have brought meters into this. In games, by the way, vectors can play an important role because they are very adequate for describing where things are, how fast they move, and how quickly they accelerate. They can even describe which way something or someone is facing. So never underestimate a vector even though it's just three numbers.<br>
+<br>
+Vectors can be added, and the way to add them is to add the individual components. For example, adding (3, 4, 5) to (5, 4, 3) gives us (8, 8, 8).<br>
+<br>
+A vector can be multiplied by a number called a scalar, and the way to do that is to multiply the individual components by the scalar. For example, multiplying (3, 4, 5) by 6 gives us (18, 24, 30).<br>
+<br>
+Finally, vectors can be compared for equality. The rules say that two vectors are equal when their individual components are equal such that the two vectors share equal x, y, and z components. For example, (3, 4, 5) is equal to (3, 4, 5) but not to (4, 5, 3).<br>
+<br>
+Let us translate into code what we know about vectors:<br>
+<br>
+class test_vector<br>
+{<br>
+double x;<br>
+double y;<br>
+double z;<br>
+test_vector(double x, double y, double z)<br>
+{<br>
+this.x = x;<br>
+this.y = y;<br>
+this.z = z;<br>
+}<br>
+double get_x()<br>
+{<br>
+return x;<br>
+}<br>
+double get_y()<br>
+{<br>
+return y;<br>
+}<br>
+double get_z()<br>
+{<br>
+return z;<br>
+}<br>
+string to_string()<br>
+{<br>
+return "(" + x + ", " + y + ", " + z + ")";<br>
+}<br>
+test_vector add_to(test_vector@ other)<br>
+{<br>
+return test_vector(x+other.x, y+other.y, z+other.z);<br>
+}<br>
+test_vector multiply_by_scalar(double scalar)<br>
+{<br>
+return test_vector(x*scalar, y*scalar, z*scalar);<br>
+}<br>
+bool is_equal_to(test_vector@ other)<br>
+{<br>
+return x==other.x && y==other.y && z==other.z;<br>
+}<br>
+}<br>
+<br>
+void main()<br>
+{<br>
+test_vector v1(3, 4, 5);<br>
+test_vector v2(5, 4, 3);<br>
+test_vector@ v3 = v1.add_to(v2);<br>
+alert("For your information", v1.to_string() + " + " + v2.to_string() + " = " + v3.to_string());<br>
+test_vector@ v4 = v1.multiply_by_scalar(6);<br>
+alert("For your information", "6 * " + v1.to_string() + " = " + v4.to_string());<br>
+if(v1.is_equal_to(v2))<br>
+{<br>
+alert("For your information", v1.to_string() + " and " + v2.to_string() + " are equal.");<br>
+}<br>
+else<br>
+{<br>
+alert("For your information", v1.to_string() + " and " + v2.to_string() + " are not equal.");<br>
+}<br>
+}<br>
+<br>
+Observe the clumsy expression v1.add_to(v2) which we used to add two vectors. A real timesaver would be a possibility to define addition of vectors in such a way that we could simply write v1+v2 and have BGT automatically do the right thing. This is indeed possible and is called operator overloading. An operator is a symbol which stands for an operation. For example, the plus symbol "+" stands for addition. Overloading is the process of extending the meaning of a symbol. For example, the meaning of the plus operator in BGT is to add numbers and strings. Now we will extend, or overload, the plus operator so that it carries the additional meaning of adding vectors.<br>
+<br>
+The way to overload an operator in BGT is to define a method with a special name. For example, to overload the plus operator we would define a method called opAdd, and to overload the star operator, we would define a method called opMul. While we're at it, we can even overload the double equals (==) operator (==) by defining a method called opEquals. Incidentally, we have already defined all three of those methods, so we simply have to rename them. Here is the revised code with operator overloading:<br>
+<br>
+class test_vector<br>
+{<br>
+double x;<br>
+double y;<br>
+double z;<br>
+test_vector(double x, double y, double z)<br>
+{<br>
+this.x = x;<br>
+this.y = y;<br>
+this.z = z;<br>
+}<br>
+double get_x()<br>
+{<br>
+return x;<br>
+}<br>
+double get_y()<br>
+{<br>
+return y;<br>
+}<br>
+double get_z()<br>
+{<br>
+return z;<br>
+}<br>
+string to_string()<br>
+{<br>
+return "(" + x + ", " + y + ", " + z + ")";<br>
+}<br>
+test_vector opAdd(test_vector@ other)<br>
+{<br>
+return test_vector(x+other.x, y+other.y, z+other.z);<br>
+}<br>
+test_vector opMul(double scalar)<br>
+{<br>
+return test_vector(x*scalar, y*scalar, z*scalar);<br>
+}<br>
+test_vector opMul_r(double scalar)<br>
+{<br>
+return this*scalar;<br>
+}<br>
+bool opEquals(test_vector@ other)<br>
+{<br>
+return x==other.x && y==other.y && z==other.z;<br>
+}<br>
+}<br>
+<br>
+void main()<br>
+{<br>
+test_vector v1(3, 4, 5);<br>
+test_vector v2(5, 4, 3);<br>
+test_vector@ v3 = v1 + v2;<br>
+alert("For your information", v1.to_string() + " + " + v2.to_string() + " = " + v3.to_string());<br>
+test_vector@ v4 = 6 * v1;<br>
+alert("For your information", "6 * " + v1.to_string() + " = " + v4.to_string());<br>
+if(v1 == v2)<br>
+{<br>
+alert("For your information", v1.to_string() + " and " + v2.to_string() + " are equal.");<br>
+}<br>
+else<br>
+{<br>
+alert("For your information", v1.to_string() + " and " + v2.to_string() + " are not equal.");<br>
+}<br>
+}<br>
+<br>
+A careful reader may have noticed at this point that I cheated by also defining a method called opMul_r. Many of the magical method names used for operator overloading, such as opAdd or opMul, also have counterparts with _r appended. The r stands for reverse, and all it does is tell BGT that we wish to overload the same operator but with operands swapped. In this case, the method opMul defines what happens when an expression like v*5 is evaluated for a vector v, and the method opMul_r defines what happens when an expression like 5*v is evaluated.<br>
+<br>
+We can categorize operators by their number of operands. Operand is the technical term for a value upon which an operator acts. For example, in the expression x+y we have + as the operator and x and y as operands.<br>
+<br>
+An operator with only one operand is called a unary operator. To overload a unary operator, you define a method with no parameters because the only operand is the object itself. Here are the two magic method names for the unary operators which can be overloaded:<br>
+<br>
+<ul>
+<li>opNeg overloads -</li>
+<li>opCom overloads ~</li>
+<li>opPreInc overloads ++ (prefixed)</li>
+<li>opPreDec overloads -- (prefixed)</li>
+<li>opPostInc overloads ++ (postfixed)</li>
+<li>opPostDec overloads -- (postfixed)</li>
+</ul><br>
+<br>
+Next we come to the binary operators and a somewhat longer list. A binary operator, as you may have guessed, is one which acts upon two operands. To overload a binary operator we define a method which takes one parameter because the other operand is the object itself. Here is the list of magic method names in all its glory:<br>
+<br>
+<ul>
+<li>opAdd and opAdd_r overload +</li>
+<li>opSub and opSub_r overload -</li>
+<li>opMul and opMul_r overload *</li>
+<li>opDiv and opDiv_r overload /</li>
+<li>opMod and opMod_r overload %</li>
+<li>opAnd and opAnd_r overload &amp;</li>
+<li>opOr and opOr_r overload |</li>
+<li>opXor and opXor_r overload ^</li>
+<li>opShl and opShl_r overload &lt;&lt;</li>
+<li>opShr and opShr_r overload &gt;&gt;</li>
+<li>opUshr and op_Ushr_r overload &gt;&gt;&gt;</li>
+</ul><br>
+<br>
+The following operators are also binary but they are considered different as they are the so-called assignment operators of BGT. An assignment operator is one which changes the value of a variable or property. For example, when we write the simple statement<br>
+i = 5;<br>
+we have used the assignment operator =. Here is the corresponding list:<br>
+<br>
+<ul>
+<li>opAssign overloads =</li>
+<li>opAddAssign overloads +=</li>
+<li>opSubAssign overloads -=</li>
+<li>opMulAssign overloads *=</li>
+<li>opDivAssign overloads /=</li>
+<li>opModAssign overloads %=</li>
+<li>opAndAssign overloads &=</li>
+<li>opOrAssign overloads |=</li>
+<li>opXorAssign overloads ^=</li>
+<li>opShlAssign overloads &lt;&lt;=</li>
+<li>opShrAssign overloads &gt;&gt;=</li>
+<li>opUshrAssign overloads &gt;&gt;&gt;=</li>
+</ul><br>
+<br>
+Next we will cover what is known as the index operator. You have probably already seen how it is used only at that time you may not have been aware of the fact that it is an operator. It is the syntax you use for retrieving an element from an array by following the array name with a pair of brackets within which you specify an index. For example, if we had defined an int array called a, the expression a[3] would be an instance of using the index operator.<br>
+<br>
+To overload the index operator, we define a method called opIndex. It takes the index as parameter and returns the value at the given index. Here is an overloaded index operator for the vector class:<br>
+<br>
+double&amp; opIndex(int i)<br>
+{<br>
+if(i==0)<br>
+{<br>
+return x;<br>
+}<br>
+else if(i==1)<br>
+{<br>
+return y;<br>
+}<br>
+else if(i==2)<br>
+{<br>
+return z;<br>
+}<br>
+}<br>
+<br>
+An important detail to notice about the above code is the return type. Rather than merely returning double, this method is returning something called double&amp;. Recall that we discussed the &amp; symbol before when we introduced the concept of references. This method returns a reference to a double.<br>
+<br>
+Returning a value by reference is a way to tell BGT not to make a copy of the value but instead return its location, or address, as if a handle had been used. An additional advantage of a reference, however, is that it can be used on the left side of an assignment. This means we can now change the y component of a vector v by writing<br>
+v[1] = 42;<br>
+<br>
+Six operators are left. All of them are binary, and all of them calculate a yes/no answer to a specific question about the relation between two values. This is why we call them relational operators. Another common term for them is comparison operators because they are commonly used to compare values.<br>
+<br>
+We begin with the equality operators == and != which answer the question whether two values are equal or not equal, respectively. To overload those two operators we need only define the single method opEquals. It must take exactly one parameter, and it must also return a bool value.<br>
+<br>
+The four remaining operators are &lt;, &lt;=, &gt;, and &gt;= which answer the question whether the first operand is less than, less than or equal to, greater than, and greater than or equal to the second operand, respectively. All four of them can be overloaded in one fell swoop by defining a method called opCmp. This method should take exactly one parameter, and it should return an int value according to the following rules:<br><br>
+<ul>
+<li>Return zero if the two operands are equal.</li>
+<li>Return a negative number if the first operand is less than the second.</li>
+<li>Return a positive number if the first one is greater than the second.</li>
+</ul>
+<h2><a name="12">12. Handles to functions</a></h2>
+As you have learned in the two previous chapters, handles provide a way of passing values back and forth without making copies of them. Instead of the actual value we merely pass a handle which is, in effect, much like a street address. It is not the value itself but it contains all the information required for finding the value.<br><br>
+
+It is indeed possible to store and pass a handle to a function. This is a two-step process. The first step is to define a type for the kind of function you are going to refer to via handles. By kind of function we mean the same concept which we previously defined as signature. Any two functions taking the same number and types of parameters and returning the same type of value are said to share the same signature, and thus can be referred to as the same kind of function.<br><br>
+
+Here is how to define a function type:<br><br>
+
+
+funcdef void my_function_type();
+<br><br>
+
+The second step is to use the function type just as you would use any other type when working with handles. Just as with any other type, the at sign (@) is used to denote a handle. The following example illustrates how to pass a function via its handle to another function:<br><br>
+
+
+funcdef void my_function_type();<br>
+<br>
+void do_n_times(my_function_type@ what, uint n)<br>
+{<br>
+for(uint i=0; i&lt;n; i++)<br>
+{<br>
+what();<br>
+}<br>
+}<br>
+<br>
+void print_a_message()<br>
+{<br>
+alert("Message", "The answer is 42.");<br>
+}<br>
+
+void main()<br>
+{<br>
+do_n_times(print_a_message, 3);<br>
+}<br>
+<br><br>
+
+The interesting part of this source code is the function do_n_times. It takes a handle to a function and a number as parameters, and its effect is to execute the given function the given number of times.
+<br><br>
+
+Handles to functions are especially useful when writing code which you know will execute some external function at some point, but you have no way of knowing, at the time of writing, which function will be executed. It might not even be the same function for every run of your program. In most cases, you will even know the function's signature, just not the actual implementation behind it. Should you be faced with a problem of that kind, remember that your code need not be hard-wired to execute any particular function but may instead use a handle to any function the user of your code may wish to define.<br>
+<h2><a name="13">13. Using multiple scripts</a></h2>
+One very useful feature of BGT is the ability to combine multiple scripts into one program. This can be handy if you are writing a large game, since it is very time consuming to look through one script for a certain function. Therefore, we have the ability to categorise our functions spanning multiple scripts, such as a script for menu functions, a script for the player, a script for the AI, another for sound management, etc. In this way, your main script may only be 200 lines long, for example, instead of 1500.<br>
+To use multiple scripts, you have to include them in your main script with the following statement:<br>
+<br>
+#include "scriptname.bgt"<br>
+<br>
+When this happens, the engine will read this script as if it were part of the main script, and any variables, functions or classes that you use can either be present in the main script or in one of your includes. Because of this, it is not necessary to add a main function in included scripts, since once the compiler gathers the data from all the included scripts, the main function is going to be in your main script. Therefore if you put the main function in other included scripts you would have multiple void main() functions and the compiler will flag an error.<br>
+When you include a script specifying a relative path, it will first search for the script in the current working directory. That will usually be the directory in which your script is stored. If the script cannot be found, it will look in the BGT includes directory. If the script still cannot be found, the engine will raise an error.<br>
+The end user does not need these include files, since all your included scripts will be packaged in with your program once it is compiled.<br>
+<h2><a name="14">Final notes</a></h2>
+Well, that's more or less everything. If you have gotten this far, then you should have everything you need to get started. At this point, I would strongly recommend thinking about everything you have learned and going back and re-reading any sections or parts that don't make sense to you. Play around with the examples provided in the tutorial so you become familiar with them, and then feel free to make your games known to the world. The BGT help file comes complete with a full set of reference guides for functions and objects, with fully functional examples, which you can refer to at any point if you are stuck.<br>
+All I can do now is wish you the best of luck, and happy coding. Hope to see your first hit available soon!<br>
+</body>
+</html>

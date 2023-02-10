@@ -1,0 +1,91 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_item_name</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will retrieve the name for an item.<br>
+<br>
+string get_item_name(int item<br>
+<br>
+Parameters:<br>
+item<br>
+The item to retrieve the data from.<br>
+<br>
+Return value:<br>
+The item name on success, or a blank string on failure or if no data is set.<br>
+<br>
+Remarks:<br>
+Item names are handy when you do not know in what order items may appear, or indeed if certain items will appear at all. For instance, if the game is not registered you may want an option to register the game, and remove this option if the user has purchased a copy. If you do this using the numeric return value from the run or run_extended method, you will need to calculate what number all of the other items will have, based on whether the register item is there or not. This can quickly become unmanageable if you have multiple items that are dynamic in this fashion.<br>
+<br>
+To circumvent this problem, it is a good idea to assign a unique name to each item. Then you are able to call this method with the return value from the run or the run_extended method as the item number, and retrieve the name that you assigned to it when you added it to the menu. Therefore, if you assign the name "exit" to a given item, it does not matter in what order the items appear; you can always find exit based on its name.<br>
+<br>
+Note that the item name is not in any way related to the sound filename, or the text that is to be spoken by a given synthetic voice. The item name is purely intended for lookups in the code, and are never shown to the user.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu where all the items use names.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu my_menu;
+int menu_result;
+my_menu.allow_escape=true;
+my_menu.wrap=false;
+my_menu.add_item("start_game.wav", "start");
+my_menu.add_item("test_speakers.wav", "test");
+my_menu.add_item("exit.wav", "exit");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+
+// Now we get the name for the item, and figure out what to do based on that.
+// Note that, to demonstrate the usefulness of this, we don't actually check for the items in the order they were added!
+string name=my_menu.get_item_name(menu_result);
+if(name=="test")
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(name=="exit")
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+if(name=="start")
+{
+alert("Option", "Option selected was start game.");
+}
+}
+</pre>
+</body>
+</html>

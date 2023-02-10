@@ -1,0 +1,97 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>position_sound_1d</b><br>
+<br>
+This function is contained within sound_positioning.bgt in the BGT include directory, and is used to position an object based on the player's position in a sidescrolling environment.<br>
+<br>
+void position_sound_1d(sound@ handle, int listener_x, int source_x, float pan_step, float volume_step)<br>
+<br>
+Parameters:<br>
+handle<br>
+the handle of a sound to position.<br>
+listener_x<br>
+The position of the player on the game board.<br>
+source_x<br>
+The position of the object on the game board.<br>
+pan_step<br>
+The value that specifies how much the sound should pan when the object and/or listener position changes.<br>
+volume_step<br>
+The value that specifies how much the sound's volume will change when the object and/or listener position changes.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+This function will automatically adjust the volume and pan of a sound by comparing the values of listener_x and source_x and calculating the final change using pan_step and volume_step, simulating a person moving towards or away from the source of a sound, usually a physical object, such as a monster or river.<br>
+<br>
+It is important to remember that the listener value simulates the position of a person, and the source simulates the position of the object that is making the sound. If these values are the same, the sound will be central and at full volume. If the listener position is lower than that of the object, the sound will be panned to the right at an appropriate volume. If the listener value is higher than that of the object, the listener has passed the object and the sound will therefore come from the left, etc.<br>
+<br>
+Example:<br>
+<pre>
+//Put a machine on square 20, allowing the player to use the arrow keys to walk left and right, hearing the effect.
+
+#include "sound_positioning.bgt"
+
+int p_position=0, m_position=20, f_position=40; //declare and assign player, machine and finishing positions respectively.
+sound machine; //sound of the machine.
+
+void main()
+{
+machine.load("sounds/machine.wav");
+if(machine.active==false)
+{
+alert("Error", "sounds/machine.wav could not be loaded.");
+}
+show_game_window("Sound position test");
+position_sound_1d(machine, p_position, m_position, 1, 1);
+machine.play_looped();
+while(true)
+{
+if(key_pressed(KEY_LEFT))
+{
+if(p_position > 0)
+{
+p_position--;
+position_sound_1d(machine, p_position, m_position, 1, 1);
+}
+}
+if(key_pressed(KEY_RIGHT))
+{
+if(p_position < f_position)
+{
+p_position++;
+position_sound_1d(machine, p_position, m_position, 1, 1);
+}
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_to_lower_case</b><br>
+<br>
+This function converts all upper case characters in a string to lower case.<br>
+<br>
+string string_to_lower_case(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be processed.<br>
+<br>
+Return value:<br>
+Returns a string with all upper case letters converted to lower case, or the original string on failure.<br>
+<br>
+Remarks:<br>
+All punctuation and lower case characters present in the source string will be kept in tact.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("String_to_lower_case test", string_to_lower_case("I will be converted to lower case."));
+}
+</pre>
+</body>
+</html>

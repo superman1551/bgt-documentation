@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>arc_tangent</b><br>
+<br>
+This function returns the principal value of the arc tangent of x, expressed in radians.<br>
+<br>
+double arc_tangent(double x)<br>
+<br>
+Parameters:<br>
+x<br>
+The number to calculate.<br>
+<br>
+Return value:<br>
+Principal arc tangent of x, in the interval [-pi/2,+pi/2] radians.<br>
+<br>
+Remarks:<br>
+In trigonometrics, arc tangent is the inverse operation of tangent.<br>
+<br>
+Notice that because of the sign ambiguity, a function cannot determine with certainty in which quadrant the angle falls only by its tangent value.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("arc_tangent test", "Arc tangent of -1 is "+arc_tangent(-1)+".");
+alert("arc_tangent test", "Arc tangent of 0 is "+arc_tangent(0)+".");
+alert("arc_tangent test", "Arc tangent of 1 is "+arc_tangent(1)+".");
+}
+</pre>
+</body>
+</html>

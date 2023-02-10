@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_minutes</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will add a number of minutes to the minute property.<br>
+<br>
+bool add_minutes(int minutes)<br>
+<br>
+Parameters:<br>
+minutes<br>
+The number of minutes to add.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+A negative value in the minutes parameter will subtract minutes from the current minute.<br>
+<br>
+Any number of minutes can be added or subtracted. The rest of the time will adjust accordingly.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and add 60 minutes.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.add_minutes(60);
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

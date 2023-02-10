@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>stop</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will stop the voice from speaking and reset the text buffer.<br>
+<br>
+bool stop()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method is here for greater ease of use. The exact same task can be accomplished by passing an empty string to any of the interrupt functions. This stops the speech and completely clears the text buffer, so any other text that is ready to be spoken is deleted.<br>
+<br>
+Example:<br>
+<pre>
+// Speak some text and stop it midway through.
+
+tts_voice speech;
+
+void main()
+{
+speech.speak("I should be stopping round about now.");
+wait(500);
+speech.stop();
+}
+</pre>
+</body>
+</html>

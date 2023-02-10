@@ -1,0 +1,63 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>question</b><br>
+<br>
+This function displays a message box on the user's screen with a title and text, as well as a yes and a no button.<br>
+<br>
+double question(string title, string text)<br>
+<br>
+Parameters:<br>
+title<br>
+The title of the window.<br>
+text<br>
+The text that is to be shown.<br>
+<br>
+Return value:<br>
+1 for yes, 2 for no, or 0 on failure.<br>
+<br>
+Remarks:<br>
+This function is useful when you want to ask the user a simple question. The script execution will pause until the user clicks on either the yes or the no button.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+int answer = question("Question", "Would you like to open my fruit basket?");
+if(answer==0)
+{
+alert("Wait!", "I'm afraid something went horribly wrong here!");
+}
+if(answer==1)
+{
+alert("Great!", "I'll show you in a minute, just hang on...");
+}
+if(answer==2)
+{
+alert("Oh well", "I sure don't mind, all the more for me to consume on my own.");
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>run</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will run the menu with the options that you have specified.<br>
+<br>
+double run(string intro, bool is_intro_tts)<br>
+<br>
+Parameters:<br>
+intro<br>
+The sound file to play or the intro text that will be spoken using Microsoft Sapi before the options are revealed. If the sound is stored on disk this can be either an absolute path, a relative path or the file name on its own. Absolute paths are not applicable however, if the sound is being loaded from a pack file (see remarks).<br>
+is_intro_tts<br>
+A boolean specifying whether the intro string is a filename or text to be spoken. If set to true, the string will be spoken using Microsoft Sapi 5. If set to false, the string is assumed to be a filename that the menu class will load and play.<br>
+<br>
+Return value:<br>
+A double value indicating which option was selected in the menu, or -1 if there was an error. If the allow_escape property is set to true, the method will return 0 if the Escape key was pressed.<br>
+<br>
+Remarks:<br>
+If the intro_tts parameter is set to false, the location in which the engine searches for the file specified in the intro parameter is determined by a call to the "set_sound_storage" function. By default it will look on the users hard drive and in the directory where the program is stored, unless an absolute path is specified such as "C:\\Windows\\media\\ding.wav". If the engine has been set up to look inside a pack file then only a file name such as "creature.ogg" or a relative path such as "sounds\\monster.ogg" can be specified.<br>
+<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+If an empty string is given for the intro parameter, no menu intro will be heard.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu my_menu;
+int menu_result;
+my_menu.allow_escape=true;
+my_menu.wrap=false;
+my_menu.add_item("start_game.wav");
+my_menu.add_item("test_speakers.wav");
+my_menu.add_item("exit.wav");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

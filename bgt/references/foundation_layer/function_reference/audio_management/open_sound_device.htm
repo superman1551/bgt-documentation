@@ -1,0 +1,80 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>open_sound_device</b><br>
+<br>
+This function opens an audio device for playing sounds.<br>
+<br>
+bool open_sound_device(int device_id)<br>
+<br>
+Parameters:<br>
+device_id<br>
+The ID of the device to be opened.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The device ID is 0-based, and matches the allotted index in the array returned by the list_sound_devices function.<br>
+<br>
+To use a different device to the default, the device must be opened before any call to the load or stream methods in the sound object. If this is not done, the default device that is selected in the Control Panel will be used.<br>
+<br>
+The engine runs off one master device only, and the device cannot be changed once it has been opened (either by an explicit call to this function or implicitly when either the stream or load method of any sound object is called for the first time).<br>
+<br>
+Example:<br>
+<pre>
+// Play a sound and explicitly specify a device.
+
+void main()
+{
+sound test;
+string[] devices;
+bool success;
+devices=list_sound_devices();
+if(devices.length()==0)
+{
+alert("Error", "No devices can be found on your system.");
+exit();
+}
+if(devices.length()==1)
+{
+alert("Information", "Only one device can be found on your system and will now be used.");
+}
+success=open_sound_device(devices.length()-1);
+if(!success)
+{
+alert("Error", "Device number " + devices.length() + " could not be opened, so reverting back to the default.");
+}
+test.load("c:/windows/media/ding.wav");
+if(!test.active)
+{
+alert("Error", "Cannot find one of your windows sounds.");
+exit();
+}
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

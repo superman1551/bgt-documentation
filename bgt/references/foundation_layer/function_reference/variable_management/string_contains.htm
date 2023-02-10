@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_contains</b><br>
+<br>
+This function searches a string for a specific text and, if found, returns the position where the text starts.<br>
+<br>
+int string_contains(string the_string, string the_search, int occurrence)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be searched.<br>
+the_search<br>
+The text to search for within the string.<br>
+occurrence<br>
+The occurrence of the text to return (starting at 1).<br>
+<br>
+Return value:<br>
+The position in the source string where the search string was found on success, or -1 if there was an error or the text could not be found.<br>
+<br>
+Remarks:<br>
+Please note that the position returned is 0 based.<br>
+<br>
+The search is case sensitive, meaning that Name is different from name, for instance.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_contains test 1", "string_contains="+string_contains("Hello, I am a string!", "ring", 1)); //output should be 16.
+alert("string_contains test 2", "string_contains="+string_contains("Hello, I will bring you a string!", "ring", 2)); //output should be 28.
+alert("string_contains test 3", "string_contains="+string_contains("Hello, I am a string!", "Ring", 1)); //output should be -1, as Ring is different from ring.
+}
+</pre>
+</body>
+</html>

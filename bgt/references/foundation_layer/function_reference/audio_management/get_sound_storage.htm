@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>get_sound_storage</b><br>
+<br>
+This function gets the location of the pack file in which the engine will look for sound files loaded through the sound object.<br>
+<br>
+string get_sound_storage()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The name on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+If an empty string is returned by this function, it means that the engine will not look for sounds in a pack file but will attempt to locate requested files on disk instead. This is the default behavior.<br>
+<br>
+If the function returns *, it means that the engine will attempt to look for sounds in a pack file that has been included into the program itself. For more information on how this is done, see the tutorial on packaging files with your executable.<br>
+<br>
+Example:<br>
+<pre>
+// Tell the engine to look for sound files in a file called sounds.dat, and then print this.
+
+void main()
+{
+set_sound_storage("sounds.dat");
+alert("Sound storage", "The sound storage is " + get_sound_storage() + ".");
+}
+</pre>
+</body>
+</html>

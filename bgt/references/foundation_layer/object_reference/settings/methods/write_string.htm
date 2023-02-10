@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write_string</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will write a string value to the registry.<br>
+<br>
+bool write_string(string value_name, string content)<br>
+<br>
+Parameters:<br>
+value_name<br>
+The name of the value to write.<br>
+content<br>
+The data to write to the specified value.<br>
+<br>
+Return value:<br>
+True on success, false on failure.<br>
+<br>
+Remarks:<br>
+Please note: You may not store more than 50 values in the registry for a given product. The data length for each value may not exceed 2048 bytes.<br>
+<br>
+Example:<br>
+<pre>
+// Write a user's name to the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+success=game_data.write_string("username", "Percival Bailey");
+if(!success)
+{
+alert("Error", "Could not write username.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Appendix H</title>
+</head>
+<body>
+<br>
+<b>Debug Versus Release Builds</b><br>
+<br>
+When you compile a BGT script, you can choose whether to compile it as a release or as a debug build. Release builds are different from debug builds in the following ways:<br>
+<br>
+<ul>
+<li>1. Debug builds store a lot of additional information about your script such as the names of the files on your system that the code is contained in, line numbers, etc. This is good for debugging as the engine is able to provide you with very detailed information when an error occurs, but is not a good thing when you release your work to the public because more details about your code can be deciphered. The actual source code that you wrote is not stored anywhere, but it is a little easier for a person with malicious intentions to extract more information based on this debugging data. Release builds therefore exclude this information, resulting in a smaller executable that is harder to reverse engineer. However, debugging with a release build is close to impossible because so much vital information is missing. In other words you should use debug builds while you are testing, and release builds when it is time to ship your game to the masses.</li>
+<li>2. Debug builds contain additional code to make the results from the script profiler significantly more accurate. Release builds exclude this, resulting in a performance increase but rendering the profiler almost useless. Thus, you should use debug builds when you want to profile your code and release builds when you want the extra speed.</li>
+</ul>
+<br>
+When you run a BGT script from source, it is automatically run in debug mode.<br>
+</body>
+</html>

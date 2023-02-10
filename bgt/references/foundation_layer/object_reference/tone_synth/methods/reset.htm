@@ -1,0 +1,72 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>reset</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method deletes and resets all data that is being held by the synth.<br>
+<br>
+bool reset()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When calling this methid, all notes are removed from the arrangement and all settings are reset to their default values.<br>
+<br>
+Example:<br>
+<pre>
+// Make a C major chord in the bass and a spread out C major chord as the melody.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+
+//chord
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+
+//melody
+synth.waveform_type=3;
+synth.note("C5", 0.666);
+synth.rest(0.666);
+synth.note("E5", 0.666);
+synth.rest(0.666);
+synth.note("G5", 0.666);
+synth.rest(0.666);
+synth.note("C6", 2);
+
+//write wave file and reset.
+synth.write_wave_file("synth.wav");
+synth.reset();
+}
+</pre>
+</body>
+</html>

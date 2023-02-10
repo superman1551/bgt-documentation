@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>disconnect_peer_softly</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will disconnect a connected peer once all previously queued packets have been sent out, giving them a guaranteed notification in the end.<br>
+<br>
+bool disconnect_peer_softly(uint peer_id)<br>
+<br>
+Parameters:<br>
+peer_id<br>
+The unique ID of the peer to disconnect.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function will send out a disconnection request, after first having taken the time to send any packets that may previously have been queued. This means that the disconnection may happen some time in the future and that other packets may be received by the remote peer before the disconnection notification, although this notification is still guaranteed to arrive in the end.<br>
+<br>
+When this function returns, the disconnection is not yet complete. Only when an event of type disconnect that contains the peer ID in question has been received, is the disconnection successful.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

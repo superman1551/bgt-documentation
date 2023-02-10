@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>hide_game_window</b><br>
+<br>
+This function hides the main window of your game on the user's screen.<br>
+<br>
+bool hide_game_window()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When the game window is invisible, the user is not able to set focus to it. This means that you will not be able to accept keyboard input before you call the show_game_window function.<br>
+<br>
+Example:<br>
+<pre>
+// Display the window for 3 seconds, hide it for 3 seconds, display it again for 3 seconds with another title and then exit.
+
+void main()
+{
+show_game_window("An Appalling Alien Attack");
+wait(3000);
+hide_game_window();
+wait(3000);
+show_game_window("Another Appalling Alien Attack");
+wait(3000);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>sound_pool</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+The sound_pool object is stored in sound_pool.bgt in the BGT include directory. It provides a convenient way of managing sounds in an environment, both with 1 and 2 dimensions. It attempts to abstract the task of simulating auditory environments by hiding some of the more intricate details in simpler method calls, and does not require the manipulation of any sound objects directly.<br>
+<br>
+sound_pool(int number_of_items)<br>
+<br>
+Parameters:<br>
+number_of_items<br>
+An optional parameter specifying the number of sounds to allocate in the game world. If this parameter is not passed, the sound pool will be given a default allocation of 100 sounds.<br>
+<br>
+Remarks:<br>
+This object uses the functions found in sound_positioning.bgt to do the actual sound adjustments, so modifying these functions will affect the entire system.<br>
+<br>
+Please note that a non-looping sound source will be cleaned up once it has finished playing, in order to keep memory usage to an absolute minimum at all times.<br>
+<br>
+This object is very useful for playing sounds of a dynamic nature, for example when you don't know at the time of the game design how many sounds you are ultimately going to need. When you call one of the play methods, the class will attempt to find a free slot in which to play the sound. This can be used for anything from playing overlapping gunshots when the player fires rapidly, to footsteps that need to play quickly without cutting out the previous one, to sounds of things that are occuring dynamically in the environment, etc. Making good use of sound pools can significantly speed up your development time as well as increase the over-all performance of your game.<br>
+<br>
+Example:<br>
+<pre>
+//a mini sidescroller using the sound_pool class
+
+#include "sound_pool.bgt"
+
+sound_pool sound_environment;
+timer walk_timer;
+
+int player_position;
+
+const int left=-1;
+const int right=1;
+
+const int boundary=200;
+
+void main()
+{
+show_game_window("sound_pool example");
+sound_environment.max_distance=70;
+for(int counter=1; counter<15; counter++)
+{
+sound_environment.play_1d("sounds/sound"+counter+".wav", 0, random(0, boundary), true);
+}
+while(true)
+{
+check_input();
+wait(5);
+}
+}
+
+void check_input()
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+if(key_down(KEY_LEFT))
+{
+walk(left);
+}
+if(key_down(KEY_RIGHT))
+{
+walk(right);
+}
+}
+
+void walk(int direction)
+{
+if((direction<=left)&&(player_position<=0))
+{
+return;
+}
+if((direction>=right)&&(player_position>=boundary))
+{
+return;
+}
+if(walk_timer.elapsed<350)
+{
+return;
+}
+walk_timer.restart();
+player_position+=direction;
+sound_environment.update_listener_1d(player_position);
+}
+</pre>
+</body>
+</html>

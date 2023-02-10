@@ -1,0 +1,85 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_item_tts</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will add an item to a menu using Microsoft Sapi 5.1 or a screen reader as its output.<br>
+<br>
+int add_item_tts(string text_to_speak, string name="")<br>
+<br>
+Parameters:<br>
+text_to_speak<br>
+The text to add as an option.<br>
+name<br>
+An optional name intended to be used for lookups (see remarks).<br>
+<br>
+Return value:<br>
+The position in the menu of the new item (starting at 1) on success, -1 on failure.<br>
+<br>
+Remarks:<br>
+By default, a temporary tts-voice object will be created in order to speak any menu items directed to Sapi if the speech mode is 0. To change this, you may specify an already existing tts_voice object to be used wherever Sapi output is desired, by calling the set_tts_object method.<br>
+<br>
+Item names are handy when you do not know in what order items may appear, or indeed if certain items will appear at all. For a more thorough description of item names and their uses, please see the get_item_name method chapter.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu using Microsoft Sapi 5.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu my_menu;
+int menu_result;
+my_menu.add_item_tts("Start game.");
+my_menu.add_item_tts("Test speakers.");
+my_menu.add_item_tts("Exit.");
+menu_result=my_menu.run("choose an option.", true);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

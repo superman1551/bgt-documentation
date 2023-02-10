@@ -1,0 +1,47 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>request</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method is used to request events from the outside world.<br>
+<br>
+network_event request()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+Returns a <a href="../network_event/network_event.htm">network_event</a> object containing all the information about the event received.<br>
+<br>
+Remarks:<br>
+This method is used to poll the network for any events that are received from the outside, so that they can be properly handled by your application.<br>
+<br>
+To access the data that the request method returns, simply access the properties of the network_event object as you would any other object properties. If no event was found or if an error occured, a network_event object with the type property set to event_none and all the other properties set to their default values is returned.<br>
+<br>
+You must be sure to call this method continuously in your game as soon as you begin dealing with one or more remote peers. Failing to do so will cause the communication to lag.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

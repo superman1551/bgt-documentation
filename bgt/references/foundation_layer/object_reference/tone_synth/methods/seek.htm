@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>seek</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method moves the cursor to any position in beats.<br>
+<br>
+bool seek(double new_position)<br>
+<br>
+Parameters:<br>
+new_position<br>
+The position to seek to, in beats.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Whereas the rest and rewind methods seek relative to your current position, this seeks to an actual position of the piece. Therefore if you specify the position as 1.5, the cursor will move to position 1.5 as opposed to 1.5 beats previous or after the current position.<br>
+<br>
+Example:<br>
+<pre>
+// Write a chord, two melody notes, then rewind to add some more.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+synth.waveform_type=3;
+synth.note("C5", 2);
+synth.rest(2);
+synth.note("C6", 2);
+synth.seek(0.666);
+synth.note("E5", 0.666);
+synth.rest(0.666);
+synth.note("G5", 0.666);
+synth.rest(0.666);
+synth.write_wave_file("synth.wav");
+}
+</pre>
+</body>
+</html>

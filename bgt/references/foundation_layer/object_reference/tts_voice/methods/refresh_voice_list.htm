@@ -1,0 +1,80 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>refresh_voice_list</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will refresh the list of available voices that is cached by this instance of the tts_voice object.<br>
+<br>
+bool refresh_voice_list()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method is present for the sake of completeness and does not normally need to be called explicitly. It is useful if you want your game to handle the rare case when users install or uninstall voices while the game is running and already speaking text using text to speech.<br>
+<br>
+Each instance of the tts_voice object holds a cache of the voices that are available on the system, at the time when the instance was created. This is done in order to keep the list intact so that the user does not unintentionally specify an index corresponding to a different voice, in case the list of voices should happen to change during the lifetime of the object instance.<br>
+<br>
+Example:<br>
+<pre>
+// Refresh the list of voices continuously, and print a message if the list changes.
+
+tts_voice speech;
+
+timer recheck;
+
+void main()
+{
+show_game_window("Voice searcher");
+
+string[] voice_list=speech.get_voice_names();
+recheck.restart();
+while(key_pressed(KEY_ESCAPE)==false)
+{
+if(recheck.elapsed&gt;=1000)
+{
+speech.refresh_voice_list();
+recheck.restart();
+string[] new_list=speech.get_voice_names();
+if(new_list.length()==voice_list.length())
+continue;
+if(new_list.length()&lt;voice_list.length())
+{
+alert("Terror!", "One or more voices have disappeared from your system! Forever! Honor their memory.");
+}
+else
+{
+alert("Joy!", "One or more new voices now live in your machine! Welcome them warmly!");
+}
+voice_list=new_list;
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

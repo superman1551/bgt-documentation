@@ -1,0 +1,83 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_speech_mode</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will set the speech output for the menu.<br>
+<br>
+bool set_speech_mode(int speech_output)<br>
+<br>
+Parameters:<br>
+speech_output<br>
+The type of speech output to use.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The speech_output parameter can be 0 to use Sapi, or it can correspond to one of the four screen readers that are currently supported in BGT.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu using the Jaws screen reader.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu my_menu;
+int menu_result;
+my_menu.add_item_tts("Start game.");
+my_menu.add_item_tts("Test speakers.");
+my_menu.add_item_tts("Exit.");
+install_keyhook();
+my_menu.set_speech_mode(JAWS);
+menu_result=my_menu.run("choose an option.", true);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+</pre>
+</body>
+</html>

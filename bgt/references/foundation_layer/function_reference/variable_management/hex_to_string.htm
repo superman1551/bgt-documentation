@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>hex_to_string</b><br>
+<br>
+This function converts a string of hexadecimal numbers into standard text.<br>
+<br>
+string hex_to_string(string the_hexadecimal_sequence)<br>
+<br>
+Parameters:<br>
+the_hexadecimal_sequence<br>
+The string of hexadecimal numbers that will be converted.<br>
+<br>
+Return value:<br>
+A string containing the standard text equivalent of the given hexadecimal data, or an empty string on error.<br>
+<br>
+Remarks:<br>
+Hexadecimal numbers range from 0 to 9, and then a (or A) to f (or F) to represent numbers 10 to 15. If other characters are used then a blank string is returned.<br>
+<br>
+The converted string will be half the length of the given data.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("hex_to_string test", hex_to_string("412066726F6720697320626F756E63696E6720696E206D7920666F6F6421"));
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>reset_all_forced_keys</b><br>
+<br>
+This function causes all keys to reset their state of being forced to pass control back to the user.<br>
+<br>
+bool reset_all_forced_keys()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true if the keys' states are reset successfully, false if an error occurs.<br>
+<br>
+Remarks:<br>
+Forcing keys is useful for controlling certain aspects of games. For example, if you wanted a game to completely replay itself in the player's style, you might record the code and length of each key pressed in a previous game, and code the replay so that all the keys are forced up or down at the right moments, thereby completely simulating the player's actions.<br>
+<br>
+This function should be called after the use of either the force_key_down or force_key_up function. To reset the state of any key individually, use the reset_forced_key function.<br>
+<br>
+Example:<br>
+<pre>
+/*
+This is a small example that plays the Windows ding every second while the space bar is pressed. If the f key is pressed, the script will force the space key down, thereby triggering the ding to play whether the space bar is physically pressed or not. Pressing the r key will reset the state.
+*/
+
+void main()
+{
+sound ding;
+timer time;
+ding.load("c:/windows/media/ding.wav");
+show_game_window("Ding Test");
+while(true)
+{
+if((time.elapsed&lt;1000)||(!key_down(KEY_SPACE)))
+{
+if((key_pressed(KEY_ESCAPE))||((key_down(KEY_LMENU))&&(key_pressed(KEY_F4))))
+{
+exit();
+}
+if(key_pressed(KEY_F))
+{
+force_key_down(KEY_SPACE);
+}
+if(key_pressed(KEY_R))
+{
+reset_all_forced_keys();
+}
+wait(5);
+continue;
+}
+time.restart();
+ding.play();
+}
+}
+</pre>
+</body>
+</html>

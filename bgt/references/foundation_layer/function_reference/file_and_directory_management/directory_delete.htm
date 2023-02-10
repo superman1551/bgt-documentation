@@ -1,0 +1,64 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>directory_delete</b><br>
+<br>
+This function irreversibly deletes the specified directory, including any files and directories that may be present within it.<br>
+<br>
+bool directory_delete(string directory_name)<br>
+<br>
+Parameters:<br>
+directory_name<br>
+The name of the directory to delete.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Please note that certain attributes on files or directories can cause the deletion to fail. Also, if a file inside the directory is currently being used by another program, the operation will fail when it gets to this file. This means that the folder will end up in a half deleted state with some files and directories gone and others remaining.<br>
+<br>
+IMPORTANT! Be very careful when using this function, as it deletes not only the directory specified but all the files and directories that may be present inside it as well. Thus, calling it with a directory path such as C:\Windows may have disastrous results.<br>
+<br>
+This function works with both absolute and relative paths.<br>
+<br>
+Please note that the path may not end in a trailing slash or backslash, and may not contain wildcards.<br>
+<br>
+Example:<br>
+<pre>
+// Delete the directory C:\test
+
+void main()
+{
+if(directory_delete("C:\\test"))
+{
+alert("Information", "The directory was deleted successfully.");
+}
+else
+{
+alert("Error", "The directory could not be deleted.");
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_progress</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will return the value of a progress bar.<br>
+<br>
+int get_progress(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID to retrieve the progress from.<br>
+<br>
+Return value:<br>
+The progress value on success, or -1 on failure.<br>
+<br>
+Remarks:<br>
+This method will only function on progress bars.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a dummy progress bar.
+
+#include "form.bgt"
+
+audio_form form;
+int dummy_counter;
+
+void main()
+{
+dummy_counter=0;
+form.create_window("Example Form", true);
+int dummy=form.create_progress_bar("&Copying", 0, false);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+dummy_counter++;
+if(dummy_counter>=250)
+{
+form.set_progress(dummy, form.get_progress(dummy)+1);
+dummy_counter=0;
+}
+if(form.is_pressed(ok))
+{
+alert("Information", "The current value of the progress bar is "+form.get_progress(dummy));
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

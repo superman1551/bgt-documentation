@@ -1,0 +1,70 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>keys_pressed</b><br>
+<br>
+This function returns a list of all the keys on the keyboard that have just been pressed.<br>
+<br>
+int[] keys_pressed()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array with the keys that have just been pressed, or an empty array if no keys have been pressed since the last call or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between keys_down and keys_pressed is that keys_pressed will only return a list of the keys that the user has just pushed down, while keys_down will return a list of the keys that are currently being held down regardless of whether the same keys have been reported as being down in a previous call.<br>
+<br>
+Please note that keys_pressed and key_pressed use the same keyboard state, so if a call to keys_pressed is made right before a call to key_pressed, none of the keys returned by keys_pressed will be reported as just having been pushed down by key_pressed. The same holds true for the reverse scenario.<br>
+<br>
+Example:<br>
+<pre>
+// Speak the key codes of any keys that are pressed, and exit if the user presses escape.
+
+void main()
+{
+show_game_window("Keys Pressed Test");
+tts_voice speech;
+int[] list;
+while(key_pressed(KEY_ESCAPE)==false)
+{
+list=keys_pressed();
+for(uint i=0;i&lt;list.length();i++)
+{
+if(i==0)
+{
+speech.speak_interrupt(list[i]);
+}
+else
+{
+speech.speak(list[i]);
+}
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

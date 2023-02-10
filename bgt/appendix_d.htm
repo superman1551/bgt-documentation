@@ -1,0 +1,40 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Appendix D</title>
+</head>
+<body>
+<br>
+<b>Script Properties</b><br>
+<br>
+These are properties used to determine the current script information.<br>
+<br>
+<ul>
+<li>SCRIPT_COMPILED - Boolean (true if the script is a compiled executable, false otherwise).</li>
+<li>SCRIPT_CURRENT_LINE - Integer (the line that is currently being executed, relative to the current script file).</li>
+<li>script_current_file - String (the full path and filename of the script that is currently being executed). If the property is retrieved from within a compiled game, the path is that of the source file on the original development machine.</li>
+<li>SCRIPT_CURRENT_FUNCTION - String (the full declaration of the function that is currently being executed).</li>
+<li>SCRIPT_EXECUTABLE - String (the full path of the script executable file. If the script is not compiled, this is the location of bgt.exe).</li>
+<li>COMMAND_LINE - String (the command line parameters given to a compiled BGT game executable. This is always empty for non-compiled scripts).</li>
+<li>BGT_VERSION - Double (the version of BGT that is being used to run the script.</li>
+<li>BGT_REVISION - Integer (the revision relative to the current version of BGT that is being used to run the script.</li>
+</ul>
+</body>
+</html>

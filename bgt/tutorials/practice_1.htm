@@ -1,0 +1,663 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Game Programming in Practice Part I</title>
+</head>
+<body>
+<h1>Memory Train</h1>
+<br>
+In this first tutorial we will develop a game called "Memory Train." No, it will not involve motorized strolls down Memory Lane, and neither will we deal with wagonloads of microchips. This game will train your memory, hence the title.<br>
+<h1>Contents</h1>
+<br>
+<ul>
+<li><a href="#1">1. An overview of the game creation process</a></li>
+<li><a href="#2">2. Designing Memory Train</a></li>
+<li><a href="#3">3. Implementing Memory Train</a>
+<ul>
+<li><a href="#3.1">3.1 Preparations</a></li>
+<li><a href="#3.2">3.2 The smallest possible BGT script</a></li>
+<li><a href="#3.3">3.3 A script that does something</a></li>
+<li><a href="#3.4">3.4 Making decisions</a></li>
+<li><a href="#3.5">3.5 A menu for Memory Train</a></li>
+<li><a href="#3.6">3.6 Sound and speech</a></li>
+<li><a href="#3.7">3.7 Time</a></li>
+<li><a href="#3.8">3.8 Keyboard input</a></li>
+<li><a href="#3.9">3.9 The main function</a></li>
+<li><a href="#3.10">3.10 Keyboard practice</a></li>
+<li><a href="#3.11">3.11 Playing a tone</a></li>
+<li><a href="#3.12">3.12 Playing the game</a></li>
+<li><a href="#3.13">3.13 Playing a sequence</a></li>
+<li><a href="#3.14">3.14 Testing the player's memory</a></li>
+<li><a href="#3.15">3.15 Putting it all together</a></li>
+</ul></li>
+</ul>
+<br>
+<h2><a name="1">1. An overview of the game creation process</a></h2>
+<br>
+The story of every game begins with an idea, an initial metaphorical spark in the designer's brain. This is the one creative impulse out of which the entire project evolves. It is vital that we hold on to that initial idea throughout the entire process of designing, implementing, and testing. Only when we hold on to that first creative impulse will we later be able to determine if we are still on track and take corrective measures if it turns out that we are not. Such an initial idea will usually fit into one small paragraph of text, often a single sentence.<br>
+<br>
+Before we dive into programming tasks, let us talk briefly about the process that leads from that initial idea to the finished game. This process involves a number of activities, including gameplay design, story design, sound design, implementation, and testing. For the purposes of describing the game creation process, let us assume that each of these activities is carried out by another person.<br>
+<br>
+The central role is played by the gameplay designer because her job is to create the high-level design of how the game will operate. If we were to design a card game, for instance, the gameplay designer would primarily concern herself with creating the rules of the game. Here are some questions the gameplay designer would need to ask herself: How many cards does the game use? Will it be a trump game? Will there be suits and ranks? How will the score be determined? How long should the typical game take? Will it be possible to play against the computer? Against a human opponent at the same computer? Over the network? All of these questions can be answered without drawing a single picture, without recording a single sound effect, and without writing a single line of code.<br>
+<br>
+In determining the high-level design, the gameplay designer generates the input required by most of the other team members. For example, the programmer needs to know the exact rules of the game in order to be able to translate them into code.<br>
+<br>
+Eventually, the combined effort of programmer and sound designer will culminate in a finished prototype. This is in turn closely inspected by the gameplay designer to ensure that the finished product will meet her expectations. In case the prototype does not live up to the gameplay designer's expectations, the appropriate changes will be performed by the various team members and a new prototype is created. This loop continues until the gameplay designer determines that the resulting prototype is in fact the game she designed. Finally, as with any piece of software, the game will have to go through the various stages of alpha and beta testing to ensure its quality. Alpha testing is performed behind closed doors by a dedicated team of testers, while beta testing is performed by potential customers volunteering to give your product a try before it is finally released.<br>
+<br>
+<h2><a name="2">2. Designing Memory Train</a></h2>
+<br>
+For this project the initial idea is as follows:<br>
+<br>
+The objective in our game is to repeat sequences of tones which get more complex as the game progresses.<br>
+<br>
+Here's how it works: The game is played using the arrow keys, and each of the four arrow keys is associated with a specific tone. When the game begins, the computer randomly plays one of the four tones, and the player has to hit the corresponding arrow key. Next, the computer plays that first tone again and then adds a second tone, and the player has to hit the two corresponding arrow keys in sequence. If the player gets it right, the computer adds yet a third tone, and the player has to repeat all three tones in sequence by hitting the corresponding keys. This process continues until the player makes a mistake by either pressing the wrong key or failing to react within a certain amount of time. When the player makes a mistake the computer will play a special sound after which the final score will be announced. The final score is the number of tones which the player was able to repeat in sequence.<br>
+<br>
+Here's an example:<br>
+The computer plays the tone for the up arrow key.<br>
+The player hits the up arrow key.<br>
+The computer plays the tones for up arrow and left arrow, one after the other.<br>
+The player hits up arrow then left arrow.<br>
+The computer plays the tones for up arrow, left arrow, left arrow.<br>
+The player hits up arrow, left arrow, left arrow.<br>
+The computer plays the tones for up, left, left, down.<br>
+The player presses up arrow, right arrow, thereby making a mistake.<br>
+The game ends, and the final score is 3 points because the longest sequence the player successfully repeated consisted of three tones.<br>
+<br>
+A key aspect of successfully playing this game is memorizing which arrow key is tied to which tone. To make this as easy as possible we will implement a keyboard practice mode in which the player can press the arrow keys and listen to the tones they generate without any time constraints. To enter this practice mode, the player selects the appropriate option from a menu. Not only will this make our game look considerably more professional but it will also allow me to explain how to create menus in BGT. And if you thought it would end there, let me inform you that our menu will also have background music.<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+Reread the above game design and create a list of the sounds the game will contain.<br>
+<br>
+Here is my solution to the above exercise:<br>
+- Four sounds for the four different tones<br>
+- An error sound to play when the player makes a mistake<br>
+- A music loop to play when the menu is active<br>
+<br>
+Since this is a tutorial about programming rather than sound design, you will need to create the sounds that you wish to use for the game. In the below code, we have selected the filenames that we use for each of these sounds. The four tones are named 1.wav, 2.wav, 3.wav and 4.wav, the error sound is named error.wav, and the music loop is named, appropriately enough, music.wav.<br>
+<br>
+<h2><a name="3">3. Implementing Memory Train</a></h2>
+<br>
+<h3><a name="3.1">3.1 Preparations</a></h3>
+<br>
+It is almost time to actually start programming! But before diving into source code, let us get some preliminaries out of the way.<br>
+<br>
+Given the fact that you are reading this tutorial, it is quite likely that you have already installed BGT on your computer. But just in case you haven't, now is the time to do so.<br>
+<br>
+Next, please create a new, empty directory for this project, and place the sounds you created inside this directory.<br>
+<br>
+Finally, open your favorite text editor and create an empty text file called memory_train.bgt in the newly created directory. Some text editors, including Notepad, have a tendency to add a .txt extension to any file name that does not already end in .txt. A tried and tested remedy for this is to include the file name in double quotes. Another way to prevent the automatic .txt extension is to choose "all files" in the file type field before clicking the "Save" button.<br>
+<br>
+<h3><a name="3.2">3.2 The smallest possible BGT script</a></h3>
+<br>
+If you have studied the language tutorial, you will know that every BGT script contains one or more functions. The word "function" comes from the Latin "functio" which means "execution" or "performance." In programming, a function is some code that performs a well-defined task.<br>
+<br>
+A function, in performing its task, can call other functions to carry out subtasks. The important thing to keep in mind here is that when one function calls another, the calling function is not finished. This leads to the rather peculiar fact that several functions may be executing at the same time but only one of them is in control. As an example from daily life, let us assume that the function "get_dressed" has called the function "put_on_socks". Now the function "put_on_socks" is in control but the function "get_dressed" is not finished. Instead, it is patiently waiting in the wings for "put_on_socks" to finish. As soon as this happens, "get_dressed" is back in control and continues executing where it left off, which will be just after the call to "put_on_socks".<br>
+<br>
+I strongly urge you to reread the previous paragraph until you understand it completely. One of the main reasons why people find programming confusing is that they have misunderstood the concept of functions and function calls. In case you are still confused, the next time you put on your socks you will feel a warm glow inside and the concept of function calls will make perfect sense.<br>
+<br>
+As an added bonus, once a function finishes it may return a value to its caller. This is appropriately called the function's return value, or simply its result.<br>
+<br>
+It is well worth our time to take a look at the smallest BGT script which could possibly be written. For although it stops almost immediately after it starts and does exactly nothing in between, it yet provides the structure, or framework, of any other BGT script including Memory Train. Since it will eventually become part of Memory Train anyway, now is also the time to copy it into your memory_train.bgt file. Here it is, in full:<br>
+<br>
+void main()<br>
+{<br>
+}<br>
+<br>
+This defines a single function called main. The word "void" specifies that this function has no return value, which makes sense once you realize that it is the solitary function in this script and thus has nobody to return anything to. But its lack of a return value has a much more practical reason, and this has to do with the special significance of the name "main". The main function is special in that it is where execution of every BGT script begins, and the execution of every BGT script ends when the main function finishes. The two braces you see above embrace between themselves the entire execution of your script.<br>
+<br>
+<h3><a name="3.3">3.3 A script that does something</a></h3>
+<br>
+Let us now make our script actually do something by placing some instructions between those braces.<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+Find the <a href="../references/foundation_layer/function_reference/User_Interaction/alert.htm">alert</a> function in the BGT reference, and with the help of the reference modify your script to display a message box. The title of the message box should be "Important Information", and the message text should be "Hello, I am John Doe, and I am a programmer." Instead of John Doe, put your own name into the message.<br>
+<br>
+Hint on using the reference: The "alert" function is part of BGT's foundation layer.<br>
+<br>
+Your script should now look something like this:<br>
+<br>
+void main()<br>
+{<br>
+alert("Important Information", "Hello, I am Jane Smith, and I am a programmer.");<br>
+}<br>
+<br>
+To execute your script, simply save the file, locate it in Windows Explorer and hit enter on it. Note that this only works when BGT is installed.<br>
+<br>
+In case you didn't notice, the line:<br>
+alert("Important Information", "Hello, I am Jane Smith, and I am a programmer.");<br>
+is a function call. The function being called is "alert", and the calling function is "main". You can see that to call a function, we write its name, followed by a pair of parentheses in which we specify the information we would like to pass to the function, and finally a semicolon. In this case we pass two pieces of information to the "alert" function: a title and a message. There is a technical term for pieces of information passed to a function, by the way. They are called parameters.<br>
+<br>
+Let's see what happens if we add another function call. Our new script is as follows:<br>
+<br>
+void main()<br>
+{<br>
+alert("Important Information", "Hello, I am Jane Smith, and I am a programmer.");<br>
+alert("How many roads must a man walk down?", "The answer is 42.");<br>
+}<br>
+<br>
+When you run this script, you will notice that, as you might expect, it displays two message boxes, one after the other. This serves to illustrate the point I made above, namely, that the main function is not stopped when it calls the alert function. As soon as the alert function has finished doing its first job, control flows back into the main function which then proceeds to call the alert function again.<br>
+<br>
+<h3><a name="3.4">3.4 Making decisions</a></h3>
+<br>
+A BGT script can do much more than carry out instructions in sequence. Sooner or later our scripts must learn to make decisions based on what the user does. Only then can we develop interactive scripts, and interactivity is, after all, what differentiates a game from a play.<br>
+<br>
+Look at the following script:<br>
+<br>
+void main()<br>
+{<br>
+question("A personal question", "Do you believe in the flying spaghetti monster?");<br>
+}<br>
+<br>
+When you execute this script, it displays a message box similar to the one displayed by a call to alert. However, this time the solitary OK button is replaced by a Yes and a No button.<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+Read the entry on the <a href="../references/foundation_layer/function_reference/User_Interaction/question.htm">question</a> function in the BGT reference.<br>
+<br>
+Asking the user a question without reacting to the answer is pretty pointless, so we will now modify the script to make a decision based on which of the two buttons the user clicks. As you learned by consulting the reference, the "question" function returns a value of 1 for the Yes button, 2 for the No button, and 0 if an error occurs.<br>
+<br>
+To keep track of this return value, we will introduce a variable. A variable is a named container for a value. It is called variable because the value it contains may change.<br>
+<br>
+To define a variable, we write its type followed by its name followed by a semicolon, like so:<br>
+int answer;<br>
+<br>
+This defines a variable named "answer" which can hold a value of type "int". "int" is shorthand for "integer" and means a whole number, i.e. a number without a decimal point. If you would like to learn about the various other types supported by BGT, let me refer you to the <a href="Language_Tutorial.htm#5">language tutorial</a>.<br>
+<br>
+When we have defined a variable, we can assign a value to it by writing the name of the variable, an equals sign, the value we would like to assign, and finally a semicolon:<br>
+answer = 42;<br>
+<br>
+In our running example, we don't want to place the number 42 in our variable. Instead, we would like our variable to store the value that the "question" function returned. We achieve this by simply replacing our 42 with the call to the "question" function:<br>
+<br>
+void main()<br>
+{<br>
+int answer;<br>
+answer = question("A personal question", "Do you believe in the flying spaghetti monster?");<br>
+alert("Thank you!", "Your answer was " + answer + ". See you later.");<br>
+}<br>
+<br>
+If you try out this script, you will notice that you get different messages depending on which of the two buttons you choose. This is because the variable "answer" receives the value returned by the "question" function. So this is in fact our first interactive script.<br>
+<br>
+Note also how we used the plus sign to tie several things together into something larger:<br>
+"Your answer was " + answer + ". See you later."<br>
+Scanning this from left to right, we find some text in double quotes, a plus sign, a variable name, another plus sign, and some more text in double quotes. In this case, the plus signs serve to tie these three things together into the message we would like to display, like tying together three strings of pearls into a longer string of pearls. Programmers refer to a piece of text as a string because it is easily visualized as a string of characters. To use this term in context, we have just added a string, a number, and another string to form our message, which is itself a string.<br>
+<br>
+You might be wondering, if the plus sign is used for tying strings together, how would you add two numbers? The surprising answer is that the plus sign is used for that purpose as well. The plus sign is a symbol which may refer to different activities, depending on context. In technical terms, the plus sign is an overloaded operator.<br>
+<br>
+In our running example, our script is now able to react differently depending on which button the user clicks, but our reactions are not yet very meaningful. Wouldn't it be great if we could display completely different messages depending on the user's response? The following script does exactly that:<br>
+<br>
+void main()<br>
+{<br>
+int answer;<br>
+answer = question("A personal question", "Do you believe in the flying spaghetti monster?");<br>
+if(answer == 1)<br>
+{<br>
+alert("How interesting!", "Thank you for being that honest.");<br>
+}<br>
+else if(answer == 2)<br>
+{<br>
+alert("I thought so!", "Now don't tell me the invisible pink unicorn got you first.");<br>
+}<br>
+else<br>
+{<br>
+alert("Whoops!", "Something is dreadfully wrong here! Maybe it's the monster taking revenge.");<br>
+}<br>
+}<br>
+<br>
+This script uses the "if" statement to make a decision based on the value of the "answer" variable. If the value is 1, the first message is displayed. Otherwise, if the value is 2, the second message is displayed. Finally, if the value is neither 1 nor 2, the third message is displayed, indicating that an error has occurred.<br>
+<br>
+Keep in mind that the keyword "if" is always followed by a condition in parentheses, and that in this case the closing parenthesis is never, I repeat, never, followed by a semicolon.<br>
+<br>
+A condition is something which can either be true or false. This is in line with the usage of the word in every-day English. For example, the condition for going by train is that you are in possession of a valid ticket. If the condition is false you may not board the train.<br>
+<br>
+The condition to test whether two things are equal looks like this:<br>
+a == b<br>
+Note the use of a double equal sign. This is required because the single equal sign is already used for something else.<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+What is the single equal sign used for? Hint: The answer is contained earlier in this tutorial.<br>
+<br>
+Note that we have enclosed every branch of the above "if" statement in its own pair of braces. Strictly speaking, this is necessary only if a branch consists of multiple instructions. Since all three branches in the above script consist of a single instruction, namely, a call to "alert", we could just as well have written the following:<br>
+<br>
+void main()<br>
+{<br>
+int answer;<br>
+answer = question("A personal question", "Do you believe in the flying spaghetti monster?");<br>
+if(answer == 1)<br>
+alert("Ramen to you, then!", "Thank you for being that honest.");<br>
+else if(answer == 2)<br>
+alert("I thought so!", "Now don't tell me the invisible pink unicorn got you first.");<br>
+else<br>
+alert("Whoops!", "Something is dreadfully wrong here! Maybe it's the monster taking revenge.");<br>
+}<br>
+<br>
+Over the years of my programming career I have formed the habit of always including the braces from the start even in such cases where they are not strictly necessary. This way, when I add more statements at a later date I never have to worry about whether or not to add another pair of braces.<br>
+<br>
+Just so that you know, the braces in a function definition are mandatory. For instance, the definition of your main function will always contain braces even if the function consists of a single instruction---in fact, even if it should consist of no instructions at all!<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+Read the relevant parts of the <a href="Language_Tutorial.htm#7">language tutorial</a> to familiarize yourself with the various programming constructs for making decisions. In particular, pay close attention to the if, while, and for statements as they will be used in this tutorial.<br>
+<br>
+<h3><a name="3.5">3.5 A menu for Memory Train</a></h3>
+<br>
+In our quest for theoretical background we have digressed quite a bit from our original endeavor, which was to implement the game we designed in the previous chapter. Now is the time to get back to it.<br>
+<br>
+Let's go back to our simplest of scripts, which was this:<br>
+<br>
+void main()<br>
+{<br>
+}<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+The helper layer contains a helpful tool for creating menus. Can you find it in the reference?<br>
+<br>
+The tool we are after is called <a href="../references/helper_layer/object_reference/dynamic_menu/dynamic_menu.htm">dynamic_menu</a>. It allows us to easily put together a menu in which the player can select an item with the up and down arrow keys and activate it by pressing enter. As you undoubtedly know, such menus abound in audiogames, with typical menu items being "start game", "test speakers", "options", and "exit game".<br>
+<br>
+Let's take a moment to summarize what you already know about functions and variables.<br>
+<br>
+<ul>
+<li>A BGT script contains one or more functions.</li>
+<li>A function is a piece of code that performs a well-defined task. Note that code is just another word for program text.</li>
+<li>Every script contains a special function called "main". Execution of your script begins at the start of this function and ends when this function has finished executing.</li>
+<li>Functions can delegate subtasks to other functions.</li>
+<li>When function f asks function g to perform its task, we say that function f calls function g.</li>
+<li>When f calls g, f may pass some pieces of data to g. These pieces of data are called parameters.</li>
+<li>When g has finished, it may pass a single piece of data back to f. This is called a return value.</li>
+</ul>
+<br>
+A variable is a named container for a value which may change.<br>
+Every variable has a type, and while the value of a variable may change, the type never will. This means that an int variable will only ever store values of type int, and a string variable will only ever store strings. This may sound awfully restrictive, but it also means less work for the computer and fewer opportunities for programming errors. Besides, why should you want to use a single variable for vastly different purposes when you can have as many variables as you like?<br>
+<br>
+In this section we will go one step further and talk about a kind of variable which has other variables and functions living inside it. A value with variables and functions inside it is called an object, and a variable holding an object is called an object variable, just as a variable holding an int is called an int variable. If this all sounds just a bit confusing, let me assure you that it will quickly become second nature to you once you see it in action. In just a few paragraphs you will realize that objects are all about simplicity.<br>
+<br>
+Examine the following script:<br>
+<br>
+#include "dynamic_menu.bgt"<br>
+<br>
+void main()<br>
+{<br>
+show_game_window("Memory Train");<br>
+dynamic_menu menu;<br>
+menu.add_item_tts("Start game");<br>
+menu.add_item_tts("Keyboard practice");<br>
+menu.add_item_tts("Exit game");<br>
+menu.allow_escape = true;<br>
+menu.wrap = true;<br>
+menu.run("Please choose a menu item with the arrow keys, then hit enter to activate it.", true);<br>
+}<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+With the help of the reference, try to figure out what the above script will do. Test your hypothesis by running the script. Note: This script contains some constructs we have not covered yet, but they will all be explained below.<br>
+<br>
+Let's start with the elements you already recognize. First, you will immediately have noticed that this is your standard main function with a sequence of instructions between the braces. Next, examine the following line:<br>
+show_game_window("Memory Train");<br>
+This is some name followed by a pair of parentheses with some data between them, and finally a semicolon. What do we call such a thing? Yes, a function call.<br>
+<br>
+<h6>Exercise:</h6>
+How many parameters does the above function call have?<br>
+<br>
+<h6>Exercise:</h6>
+Find out what the function does.<br>
+<br>
+You may be wondering why we would want to display a window in the first place when our game will not have any visual elements. The answer is that on Microsoft Windows, any program that handles keyboard input should display a window. Our game will only be able to react to keyboard input when our game window is active. This will also allow the player to switch back and forth between our game and other running applications.<br>
+<br>
+Next, take a close look at the following line:<br>
+dynamic_menu menu;<br>
+<br>
+If this confuses you, it might be helpful to realize that this is structurally similar to something we have seen earlier:<br>
+int answer;<br>
+<br>
+Both of these statements are variable definitions. One of them defines a variable of type int and gives it the name "answer", the other one defines a variable of type dynamic_menu and gives it the name "menu". And just as int is a data type for numbers, dynamic_menu is a data type for menus. The word "dynamic" is used here meaning "flexible" because you, as game programmer, can decide which items the menu will contain.<br>
+<br>
+Let's go ahead and add some items to our menu:<br>
+menu.add_item_tts("Start game");<br>
+menu.add_item_tts("Keyboard practice");<br>
+menu.add_item_tts("Exit game");<br>
+<br>
+Notice the striking similarity to function calls? The only difference is that this time we are calling a function that lives inside our menu variable. Recall that an object is a value with variables and functions living inside it. In this case we have on our hands an object of type dynamic_menu.<br>
+<br>
+To call a function inside an object, we write the variable name, a full stop, and then the name of the function we are calling. This is followed by the usual pair of parentheses which, as we have learned, is part of every function call. A function inside an object is called a method. To use this term in context: add_item_tts is a method of the menu object.<br>
+<br>
+An object gets its methods from its type. Thus, to find out what methods an object provides we need only know what type, or class, the object belongs to. The "menu" object is of class dynamic_menu, so we need only consult the reference of dynamic_menu to find out about the available methods.<br>
+<br>
+<h6>Exercise:</h6>
+<br>
+The following statement defines an object variable:<br>
+file saved_game;<br>
+Which of the following statements are valid?<br>
+saved_game.open("test.dat", "w");<br>
+saved_game.print("Hello, world!");<br>
+saved_game.write("Hello again!");<br>
+saved_game.close();<br>
+saved_game.open("test2.dat");<br>
+<br>
+With the menu set up the way it is, we need to perform one more step to present it to the user:<br>
+<br>
+menu.run("Please choose a menu item with the arrow keys, then hit enter to activate it.", true);<br>
+<br>
+<h3><a name="3.6">3.6 Sound and speech</a></h3>
+<br>
+This section covers two additional building blocks required for putting Memory Train together. Let us begin with sound, which will be an essential feature of any audio game you will ever develop.<br>
+<br>
+In BGT, every sound is represented by a sound object. One way of visualizing a sound object is to picture it as a tape player with its various controls. For example, while your tape player probably has buttons labelled play, stop, and pause, as well as a volume knob or slider, the sound object has methods named play, stop, and pause, as well as a volume property. In addition, a program sometimes needs to check if a sound is still playing. To allow this, the sound object has a property called playing which will be true as long as the sound is playing, and will become false as soon as it has stopped. The following example illustrates how the sound object can be used:<br>
+<br>
+void main()<br>
+{<br>
+sound intro; // Creates the sound object.<br>
+intro.load("intro.wav"); // Loads the sound; equivalent to putting a tape into the player.<br>
+intro.play(); // Starts playing.<br>
+while(intro.playing)<br>
+{<br>
+// Do something while the intro is playing.<br>
+wait(5); // Give other Windows tasks 5 milliseconds time.<br>
+}<br>
+// The sound has stopped.<br>
+}<br>
+<br>
+Some games, including Memory Train, make use of a speech synthesizer on the player's computer. The way to do this in BGT is to use a tts_voice object, where tts stands for "text to speech." The two most interesting methods of tts_voice are speak and speak_wait. The speak method will begin speaking the string which was passed to it and will continue speaking in the background while your program may do other things. In comparison, the speak_wait method will additionally wait until the speech has stopped, and only then will your program continue with the next instruction.<br>
+<br>
+<h3><a name="3.7">3.7 Time</a></h3>
+<br>
+All but the simplest of games need to keep track of time in some way. BGT provides a timer object for this purpose. The most important features of the timer object are the restart method and the elapsed property. By calling the restart method, your program is able to reset the timer back to zero in much the same way as if you were restarting a stopwatch. The elapsed property will always contain the number of milliseconds since the timer was last restarted, or, if it was never restarted, elapsed will contain the number of milliseconds since the timer was created.<br>
+<br>
+It is considered good behavior for a Windows application to regularly wait for a few milliseconds. Not only does this give other processes in the system more time to execute their own tasks but it also increases the system's ability to save energy. In BGT, you can use the wait function to put your program to sleep for the specified number of milliseconds. Note that the time which actually passes may differ from the time you specified, so it is advised that you use a timer to check how many milliseconds have actually passed. When in doubt, do not use the wait function to time game events, but use a timer instead as timers are usually accurate to the millisecond.<br>
+<br>
+<h3><a name="3.8">3.8 Keyboard input</a></h3>
+<br>
+In order for your game to be able to respond to keyboard input, BGT contains two functions which let you check the status of any given key on the user's keyboard. Use the key_down function to find out if a given key is being held down at that moment. Note that key_down will return true as long as the key is being held down. If you are not interested in how long a key is being held but rather would like to be informed of every keypress just once, use the key_pressed function instead. When a key is held down, key_pressed will return true only the first time you check that particular key, and false on subsequent calls. Only if the key was released and is now being held down once more will key_pressed return true again.<br>
+<br>
+To find out which keys can be checked and how they are expressed in BGT, consult <a href="../Appendix_A.htm">appendix A</a> of the BGT help system.<br>
+<br>
+<h3><a name="3.9">3.9 The main function</a></h3>
+<br>
+Armed with a basic understanding of the fundamental features of BGT, we can now begin coding the bulk of Memory Train. Let us start with the main function which, as you learned earlier in this tutorial, is the heart of any BGT script. The responsibilities of the main function are as follows:<br>
+<ul>
+<li>1. It loads the various sounds required by the game into memory.</li>
+<li>2. It sets up the game menu.</li>
+<li>3. It speaks a short intro.</li>
+<li>4. It repeatedly runs the menu and executes the function the user has chosen.</li>
+<li>5. The repetition ends as soon as the user presses the escape key in the menu or chooses the "exit game" entry.</li>
+</ul>
+<br>
+While we are at it, we will also define some global variables the main function refers to. Our code now looks as follows:<br>
+<br>
+#include "dynamic_menu.bgt"<br>
+<br>
+// Sound objects.<br>
+sound music;<br>
+sound error_sound;<br>
+sound[] tone(4); // The four tones used for sequences.<br>
+<br>
+void main()<br>
+{<br>
+// Load the four tones.<br>
+tone[0].load("1.wav");<br>
+tone[0].volume = -10;<br>
+tone[1].load("2.wav");<br>
+tone[1].volume = -10;<br>
+tone[2].load("3.wav");<br>
+tone[2].volume = -10;<br>
+tone[3].load("4.wav");<br>
+tone[3].volume = -10;<br>
+<br>
+// Load the error sound.<br>
+error_sound.load("error.wav");<br>
+error_sound.volume = -10;<br>
+<br>
+// Load the music.<br>
+music.load("music.wav");<br>
+music.volume = -10;<br>
+<br>
+// Set up voice.<br>
+tts_voice voice;<br>
+<br>
+// Set up menu.<br>
+dynamic_menu menu;<br>
+menu.allow_escape = true;<br>
+menu.wrap = true;<br>
+menu.add_item_tts("Start game");<br>
+menu.add_item_tts("Keyboard practice");<br>
+menu.add_item_tts("Exit game");<br>
+<br>
+// Show game window and speak welcome message.<br>
+show_game_window("Memory Train");<br>
+voice.speak_wait("Welcome to Memory Train!");<br>
+<br>
+// Loop the music in the background before running the menu.<br>
+music.play_looped();<br>
+<br>
+int choice; // This stores the user's menu selections.<br>
+<br>
+do<br>
+{<br>
+choice = menu.run("Please choose a menu item with the arrow keys, then hit enter to activate it.", true);<br>
+if(choice==1)<br>
+{<br>
+music.stop();<br>
+play_round(); // We will define this function later.<br>
+music.play_looped();<br>
+}<br>
+else if(choice==2)<br>
+{<br>
+music.stop();<br>
+keyboard_practice(); // We will define this function later.<br>
+music.play_looped();<br>
+}<br>
+}<br>
+while(choice!=0 and choice!=3);<br>
+<br>
+// The user pressed escape or chose to exit.<br>
+voice.speak_wait("Thanks for playing.");<br>
+}<br>
+<br>
+<h3><a name="3.10">3.10 Keyboard practice</a></h3>
+<br>
+If the user chooses the keyboard practice item from the menu, our above main function will call a function named keyboard_practice. This has the following responsibilities:<br>
+<ul>
+<li>1. It speaks instructions on how to operate the keyboard practice mode.</li>
+<li>2. It waits for the user's keypresses.</li>
+<li>3. When an arrow key has been pressed, it plays the appropriate tone.</li>
+<li>4. When escape has been pressed, keyboard practice is aborted.</li>
+</ul>
+<br>
+Here is the code for the keyboard_practice function:<br>
+<br>
+void keyboard_practice()<br>
+{<br>
+tts_voice voice;<br>
+voice.speak_wait("Press the arrow keys to find out which key generates which tone.");<br>
+voice.speak_wait("Press escape to stop practicing.");<br>
+while(!key_pressed(KEY_ESCAPE))<br>
+{<br>
+if(key_pressed(KEY_LEFT))<br>
+{<br>
+play_tone(0);<br>
+}<br>
+else if(key_pressed(KEY_DOWN))<br>
+{<br>
+play_tone(1);<br>
+}<br>
+else if(key_pressed(KEY_RIGHT))<br>
+{<br>
+play_tone(2);<br>
+}<br>
+else if(key_pressed(KEY_UP))<br>
+{<br>
+play_tone(3);<br>
+}<br>
+wait(5);<br>
+}<br>
+}<br>
+<br>
+<h3><a name="3.11">3.11 Playing a tone</a></h3>
+<br>
+Notice how we introduced the play_tone function in the above code for keyboard_practice. The responsibility of play_tone is to play a single tone. Here is the corresponding code:<br>
+<br>
+void play_tone(int i)<br>
+{<br>
+tone[i].stop();<br>
+tone[i].play();<br>
+}<br>
+<br>
+This function first stops the tone in case it is already playing, then restarts playing it. By the way, if the expression tone[i] confuses you, this might be a good time to read up on the subject of arrays in the <a href="Language_Tutorial.htm#9">language tutorial</a>.<br>
+<br>
+<h3><a name="3.12">3.12 Playing the game</a></h3>
+<br>
+If the user chooses the "start game" item from our game menu, the main function calls the play_round function. This function is responsible for carrying out an entire round of play, after which the score is announced. Here is the code for play_round:<br>
+<br>
+void play_round()<br>
+{<br>
+// Initialize game state.<br>
+bool game_over = false; // The game will continue as long as this is false.<br>
+int[] sequence; // The running sequence.<br>
+int sequence_length = 0;<br>
+float time_between_tones = 500; // The initial speed at which tones are played, in milliseconds.<br>
+float time_between_inputs = 2000; // Maximum time to input next key before player gets bounced.<br>
+do<br>
+{<br>
+// Add another tone to the sequence.<br>
+sequence_length++;<br>
+sequence.resize(sequence_length);<br>
+sequence[sequence_length-1] = random(0,3);<br>
+// Play back the sequence from start to finish.<br>
+output_sequence(@sequence, time_between_tones);<br>
+// Let them repeat it if they can.<br>
+game_over = input_sequence(@sequence, time_between_inputs);<br>
+// Every time another five tones have been mastered:<br>
+// increase the speed ever so slightly.<br>
+if((sequence_length%5) == 0)<br>
+{<br>
+time_between_tones = time_between_tones*0.9;<br>
+// Make sure it does not fall below 150.<br>
+if(time_between_tones < 150)<br>
+{<br>
+time_between_tones = 150;<br>
+}<br>
+}<br>
+}<br>
+while(!game_over);<br>
+int score = sequence_length-1; // minus 1 because they failed on the last.<br>
+tts_voice voice;<br>
+voice.speak_wait("Your final score was " + score);<br>
+}<br>
+<br>
+<h3><a name="3.13">3.13 Playing a sequence</a></h3>
+<br>
+The output_sequence function plays a sequence of tones so that the player may try to memorize it. It requires two parameters, the sequence to output, and the time between the tones. This flexible approach was taken to enable the game to increase the speed over time. Here is the code for output_sequence:<br>
+<br>
+void output_sequence(int[]@ sequence, float time_between_tones)<br>
+{<br>
+timer clock;<br>
+int current;<br>
+for(uint i=0; i&lt;sequence.length(); i++)<br>
+{<br>
+// For every tone but the first, wait before playing.<br>
+if(i>0)<br>
+{<br>
+clock.restart();<br>
+while(clock.elapsed < time_between_tones)<br>
+{<br>
+wait(5);<br>
+}<br>
+}<br>
+current = sequence[i];<br>
+play_tone(current);<br>
+}<br>
+// Finally, wait for the last sound to subside.<br>
+while(tone[current].playing)<br>
+{<br>
+wait(5);<br>
+}<br>
+}<br>
+<br>
+<h3><a name="3.14">3.14 Testing the player's memory</a></h3>
+<br>
+The final puzzle piece is the input_sequence function. This function is responsible for testing if the player remembers the sequence correctly. If the player fails to press one of the arrow keys in a given time, or presses the wrong arrow key, this function will return true to indicate that the game is over. If, on the other hand, the player manages to replay the sequence correctly, then this function returns false, indicating that the game is to continue. Here is the code for input_sequence:<br>
+<br>
+bool input_sequence(int[] @sequence, float time_between_inputs)<br>
+{<br>
+timer clock;<br>
+for(uint i=0; i&lt;sequence.length(); i++)<br>
+{<br>
+// Do the following for every tone in the sequence:<br>
+clock.restart();<br>
+int input = -1; // Set it to something invalid.<br>
+while(clock.elapsed < time_between_inputs)<br>
+{<br>
+if(key_pressed(KEY_LEFT))<br>
+{<br>
+input = 0;<br>
+}<br>
+else if(key_pressed(KEY_DOWN))<br>
+{<br>
+input = 1;<br>
+}<br>
+else if(key_pressed(KEY_RIGHT))<br>
+{<br>
+input = 2;<br>
+}<br>
+else if(key_pressed(KEY_UP))<br>
+{<br>
+input = 3;<br>
+}<br>
+if(input>=0)<br>
+{<br>
+break; // Stop waiting because something was typed.<br>
+}<br>
+wait(5);<br>
+}<br>
+// Game is over if timed out or wrong key.<br>
+if(input!=sequence[i])<br>
+{<br>
+error_sound.play_wait();<br>
+return true;<br>
+}<br>
+// Play back successful tones as feedback<br>
+play_tone(input);<br>
+}<br>
+<br>
+// The player managed to replay the entire sequence.<br>
+// Wait one second to let them catch their breath.<br>
+clock.restart();<br>
+while(clock.elapsed < 1000)<br>
+{<br>
+wait(5);<br>
+}<br>
+return false;<br>
+}<br>
+<br>
+<h3><a name="3.15">3.15 Putting it all together</a></h3>
+<br>
+The complete source code for Memory Train is contained in the code fragments given in sections 3.9 to 3.14. In order to test the game, you can simply paste all of the code fragments into the file memory_train.bgt which you created earlier. To run the game, simply navigate to the file memory_train.bgt in Windows Explorer, then press enter to start.<br>
+<br>
+<h6>Final exercises:</h6>
+<br>
+<ul>
+<li>1. Extend the game to provide a two-player mode. Both players sit at the same keyboard. Player one uses the arrow keys to play, and player two uses the keys a, s, d, and w. In this variant, sequences are not randomly generated by the computer. Instead, player 1 starts with one tone, player 2 repeats the one tone and adds another, player 1 repeats the two tones and adds a third, etc. The game ends when one of the two players fails to press a key in time, presses the wrong key, or presses a key when it was not his or her turn. The player making the mistake loses, and the other player wins with a score equal to the longest sequence he typed.</li>
+<li>2. Extend the game so that it provides different difficulty levels. Note that this is both a design and an implementation exercise.</li>
+</ul>
+<br>
+</body>
+</html>

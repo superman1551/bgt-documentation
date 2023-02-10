@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>library</title>
+</head>
+<body>
+<br>
+<b>library object</b><br>
+<br>
+The library object is used to call functions stored in an external dynamic link library (DLL) file, such as those implementing the Windows API.<br>
+<br>
+library()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+Please note: The library object is still in an early stage, and should be considered beta. Use at your own risk. This does not apply to the rest of the features in this version of BGT, which are production quality. Note also that there are several missing features in the library interface, such as the ability to use C style structures. This will be addressed as soon as possible. This documentation will also be extended with a much more thorough description/tutorial.<br>
+<br>
+When a library object is first created, it will not be active. To activate it you must call the "load" method on the object, specifying the filename of a DLL that should be associated with it.<br>
+<br>
+When using this object, it is essential to exercise extra caution and to thoroughly read the reference for the library you are trying to access, since using this object incorrectly may cause the application to crash. It may also cause memory leaks and/or memory corruption, which would lead to very hard to find errors that would eventually cause crashes in a seemingly random location later.<br>
+<br>
+Example:<br>
+<pre>
+// Show a message box using the conventional Windows MessageBox function.
+
+const int win32_mb_icon_information=0x00000040; // The value as written in the MSDN.
+
+void main()
+{
+library dll;
+dll.load("user32.dll");
+
+// The MessageBox parameter takes a window handle, the text, the title, and the flags.
+dll.call("int MessageBoxA(int, char*, char*, int);", 0, "I am a message box using user32.dll.", "Hey there", win32_mb_icon_information);
+}
+</pre>
+</body>
+</html>

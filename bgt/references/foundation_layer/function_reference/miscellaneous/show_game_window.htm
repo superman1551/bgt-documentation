@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>show_game_window</b><br>
+<br>
+This function displays the main window of your game on the user's screen.<br>
+<br>
+bool show_game_window(string title)<br>
+<br>
+Parameters:<br>
+title<br>
+The title of the window.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Until this function is called your game window will be invisible, thus not allowing the user to set focus to it. This in turn means that you will not be able to accept keyboard input before you call this function, and so you will usually want to do this at the very beginning of your script.<br>
+<br>
+It is perfectly legal to call this function more than once during the course of your game's execution, should you wish to change the title of the window at any given time.<br>
+<br>
+Example:<br>
+<pre>
+// Display the window and wait for the user to close it.
+
+void main()
+{
+show_game_window("Another Appalling Alien Attack");
+while(true)
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

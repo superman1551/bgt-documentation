@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_years</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will add a number of years to the year property.<br>
+<br>
+bool add_years(int years)<br>
+<br>
+Parameters:<br>
+years<br>
+The number of years to add.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+A negative value in the years parameter will subtract years from the current year.<br>
+<br>
+In most cases, the month and date will not change. However, if the date is February 29, and the adjusted year property is not a leap year, the calendar will set the date to March 1.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and add a year.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.add_years(1);
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_overwrite_mode</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will set the overwrite mode of an input box.<br>
+<br>
+bool set_overwrite_mode(int control_id, bool overwrite)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to change.<br>
+overwrite<br>
+A boolean value indicating whether the control should have overwrite enabled or disabled.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If overwrite is enabled, new text that is entered into the control will overwrite old highlighted text rather than adding to it.<br>
+<br>
+Example:<br>
+<pre>
+// Make a form with a few input boxes, and change the overwrite mode with one of them.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int edit=form.create_input_box("Edit me.");
+int overwrite=form.create_input_box("Overwrite me.", "Overwrite me.");
+form.set_overwrite_mode(overwrite, true);
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

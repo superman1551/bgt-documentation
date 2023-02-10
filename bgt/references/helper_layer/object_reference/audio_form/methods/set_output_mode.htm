@@ -1,0 +1,82 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_output_mode</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will set the various outputs for the form.<br>
+<br>
+bool set_output_mode(int speech_output, bool beeping_progress_bar=false)<br>
+<br>
+Parameters:<br>
+speech_output<br>
+The type of speech output to use.<br>
+beeping_progress_bars<br>
+An optional parameter indicating whether progress bars should speak percentages or indicate them with beeps.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The speech_output parameter can be 0 to use Sapi, or it can correspond to one of the four screen readers that are currently supported in BGT.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a text field, and get Jaws to read the form.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+install_keyhook();
+form.set_output_mode(JAWS);
+form.create_window("Example Form", true);
+int test=form.create_input_box("Test", "test", "", 0, false, false);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+uninstall_keyhook();
+exit();
+}
+if(form.is_pressed(cancel))
+{
+uninstall_keyhook();
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+uninstall_keyhook();
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

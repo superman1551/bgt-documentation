@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_edge_fades</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method defines the amount of fade time for subsequently generated notes.<br>
+<br>
+bool set_edge_fades(double start_time, double end_time)<br>
+<br>
+Parameters:<br>
+start_time<br>
+The length of time that the note will fade in.<br>
+end_time<br>
+The length of time that the note will fade out.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+There should always be at least a slight fade in all the tones to avoid unwanted clicking.<br>
+<br>
+The fades can be useful for changing the characteristics of a sound. For example, changing the fade in changes the attack of the note, while changing the fadeout alters the decay. A longer fade in will create a smooth note attack, while a short fade in creates a sharper sound. A longer fadeout is useful for simulating a guitar or piano, while a shorter fadeout simulates an organ, etc.<br>
+<br>
+If either the fade in or fade out parameters exceed the length of the note, the fades will automatically readjust themselves to fit the note's length.<br>
+<br>
+These parameters are set in milliseconds, no function to set them in beats is available at this time.<br>
+<br>
+The default start time set by the engine is 8 milliseconds, and the default end time is 12 milliseconds.<br>
+<br>
+Example:<br>
+<pre>
+// Make a C major chord in the bass and a spread out C major chord as the melody, simulating a toy piano.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+synth.set_edge_fades(1, 5000); //the length will automatically adjust.
+
+//chord
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+
+//melody
+synth.waveform_type=3;
+synth.note("C5", 4);
+synth.rest(0.666);
+synth.note("E5", 4);
+synth.rest(0.666);
+synth.note("G5", 4);
+synth.rest(0.666);
+synth.note("C6", 4);
+synth.write_wave_file("synth.wav");
+}
+</pre>
+</body>
+</html>

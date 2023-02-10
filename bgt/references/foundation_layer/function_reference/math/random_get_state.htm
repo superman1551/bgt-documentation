@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>random_get_state</b><br>
+<br>
+This function retrieves the current state of the internal random number generator.<br>
+<br>
+string random_get_state()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+A string containing the current state of the random number generator on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+A computer can never be truly random. This is why the name of the family of algorithms that deal with randomness is pseudo random number generators. Pseudo random number generators work by taking an initial random seed from the user, which is supposed to be a unique data chunk. This is used by the generator to produce a subsequent series of numbers that seem to be random. However, if the same seed is passed to the generator it'll produce the same series of numbers each time. By saving and loading the current state of the random number generator, we can recreate the same series of random numbers starting from any given point in time. This is useful if you have a simulation based on randomness, for instance, and you wish to be able to recreate the exact same series of events.<br>
+<br>
+When BGT starts it automatically initializes the random number generator with a unique seed, so the initial state of the generator will be different each time the engine is launched. Therefore, if you wish to reproduce the same series of numbers you must remember the state from which you want to continue and explicitly set the generator to this state.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+
+// Begin by retrieving the state from the random number generator.
+string initial_state=random_get_state();
+
+// Generate three random numbers between 1 and 10.
+alert("Numbers", random(1, 10) + ", " + random(1, 10) + ", " + random(1, 10) + ".");
+
+// Restore the random number generator to the old state that we've saved.
+random_set_state(initial_state);
+
+// Generate three new random numbers between 1 and 10. Notice that they are the exact same as before.
+alert("Numbers", random(1, 10) + ", " + random(1, 10) + ", " + random(1, 10) + ".");
+}
+</pre>
+</body>
+</html>

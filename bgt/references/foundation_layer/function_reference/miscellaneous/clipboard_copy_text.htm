@@ -1,0 +1,49 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>clipboard_copy_text</b><br>
+<br>
+This function copies text to the clipboard.<br>
+<br>
+bool clipboard_copy_text(string text)<br>
+<br>
+Parameters:<br>
+text<br>
+The text that should be copied.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function will copy the specified text to the Windows clipboard, overwriting whatever is already there.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+clipboard_copy_text("Hello, I have been automatically copied!");
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>diff_years</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method returns the number of years between two dates.<br>
+<br>
+double diff_years(calendar@ object)<br>
+<br>
+Parameters:<br>
+object<br>
+The handle to another valid calendar object.<br>
+<br>
+Return value:<br>
+The difference between the current calendar's date and the date of the passed calendar object handle in years.<br>
+<br>
+Remarks:<br>
+The representation of the year difference includes decimals.<br>
+<br>
+Example:<br>
+<pre>
+// Find out the number of years between October 7, 1767 and now.
+
+void main()
+{
+calendar test;
+calendar now;
+test.set(1767, 10, 7, 9, 0, 0);
+double diff=test.diff_years(now);
+alert("diff_years", "There are "+diff+" years between October 7, 1767 and now.");
+}
+</pre>
+</body>
+</html>

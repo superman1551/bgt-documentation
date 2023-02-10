@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>number_to_hex_string</b><br>
+<br>
+This function converts a number to its corresponding hexadecimal string representation.<br>
+<br>
+string number_to_hex_string(double the_number)<br>
+<br>
+Parameters:<br>
+the_number<br>
+The number to convert.<br>
+<br>
+Return value:<br>
+A string containing the hexadecimal representation of the number, or an empty string on error.<br>
+<br>
+Remarks:<br>
+This function only works with positive numbers, without decimals. If the number contains decimals, these will simply be removed without rounding.<br>
+<br>
+Please note that the returned string uses lowercase letters. If you want the result to be compatible with the hex_to_string function for example, it is necessary to call string_to_upper_case on it first.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("number_to_hex_string test", number_to_hex_string(1000)); // Output should be 3e8.
+}
+</pre>
+</body>
+</html>

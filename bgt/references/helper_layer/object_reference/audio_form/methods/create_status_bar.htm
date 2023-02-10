@@ -1,0 +1,77 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>create_status_bar</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will create a status bar and return a control ID.<br>
+<br>
+int create_status_bar(string caption, string text)<br>
+<br>
+Parameters:<br>
+caption<br>
+The title of the status bar.<br>
+text<br>
+The text of the status bar.<br>
+<br>
+Return value:<br>
+A control ID that can be used to check the status of the control, or -1 on error.<br>
+<br>
+Remarks:<br>
+Prepending any letter in the caption string with an ampersand (&) sign will cause a shortcut to be created for the status bar. For example, &Operation will cause alt+o to be the shortcut for the status bar.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a status bar.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int status=form.create_status_bar("&Operation", "This program is working properly.");
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

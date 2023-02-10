@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>number_speaker</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+The number_speaker object is contained in number_speaker.bgt in the BGT include directory, and is used to assist in speaking numbers as naturally and smoothly as possible.<br>
+<br>
+number_speaker()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The number_speaker class will look for a sound file that matches the words in the number as closely as possible, separating the words with an underline. So if the number is 56, it will first look to see if there is a file called "fifty_six.wav". If this is not found, it'll look to see if there is a file called "fifty.wav" and another called "six.wav" and use those instead. In short this means that you are able to record as many numbers as you wish to make the spoken output sound as flawless as possible, or you may record only the necessary ones which is to say "zero.wav" to "nineteen.wav", "twenty.wav" to "ninety.wav" and then optionally "hundred.wav", "thousand.wav" and "million.wav". You may also make a file called "minus.wav" if you wish to distinguish between positive and negative numbers.<br>
+<br>
+Example:
+<pre>
+//speak a number using speak_wait.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+number_speaker test;
+test.speak_wait(1056);
+}
+</pre>
+</body>
+</html>

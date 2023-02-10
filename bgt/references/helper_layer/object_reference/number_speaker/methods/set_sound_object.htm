@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_sound_object</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+This method allows you to specify an existing sound object to be used for any auditory feedback in the number speaker.<br>
+<br>
+bool set_sound_object(sound@ handle)<br>
+<br>
+Parameters:<br>
+handle<br>
+A handle to an existing sound object that is to be used for all subsequent sound output.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The object that you specify in this function will be used for all subsequent auditory feedback provided to the user in the number speaker. If you do not call this method and still use sound output, an internal sound object will be used instead.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a number with redirected sound playback.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+sound my_sound;
+number_speaker number;
+number.set_sound_object(my_sound);
+number.speak_wait(500);
+}
+</pre>
+</body>
+</html>

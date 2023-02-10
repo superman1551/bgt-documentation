@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>exit</b><br>
+<br>
+This function exits the program.<br>
+<br>
+void exit()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+It is safe to call this function from anywhere within your script. All memory and resources that have been allocated for your game will be automatically released back to Windows. This also happens whenever a script finishes executing, so it is not necessary to call this function at the end of your code.<br>
+<br>
+Example:<br>
+<pre>
+// Display a message box and then exit.
+
+void main()
+{
+alert("Exiting program", "Thanks for playing! Ciao baby!");
+exit();
+}
+</pre>
+</body>
+</html>

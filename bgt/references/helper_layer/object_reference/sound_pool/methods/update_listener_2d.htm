@@ -1,0 +1,174 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>update_listener_2d</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method will update the position of the sounds according to the listener's new position on a 2d grid.<br>
+<br>
+void update_listener_2d(int listener_x, int listener_y)<br>
+<br>
+Parameters:<br>
+listener_x<br>
+The new X position of the listener on the grid.<br>
+listener_y<br>
+The new Y position of the listener on the grid.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+This method is used when the listener has moved, meaning that all of the currently active sounds in the pool will move. To move individual sounds, use the update_sound methods.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sound_environment;
+timer walk_timer;
+
+int player_x, player_y;
+int step;
+
+const string sound_extension=".wav";
+
+const int left=-1;
+const int right=1;
+
+const int forward=100;
+const int back=-100;
+
+const int x_boundary=200;
+const int y_boundary=200;
+
+void main()
+{
+show_game_window("sound_pool test");
+sound_environment.max_distance=70;
+sound_environment.behind_pitch=95;
+for(int counter=1; counter<15; counter++)
+{
+sound_environment.play_2d("sounds/sound"+counter+sound_extension, 0, 0, random(0, x_boundary), random(0, y_boundary), true);
+}
+while(true)
+{
+check_input();
+wait(5);
+}
+}
+
+void check_input()
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+if(key_down(KEY_LEFT))
+{
+walk(left);
+}
+if(key_down(KEY_RIGHT))
+{
+walk(right);
+}
+if(key_down(KEY_UP))
+{
+walk(forward);
+}
+if(key_down(KEY_DOWN))
+{
+walk(back);
+}
+}
+
+void walk(int direction)
+{
+bool change_y=false;
+if(direction>=forward)
+{
+direction=1;
+change_y=true;
+}
+if(direction<=back)
+{
+direction=-1;
+change_y=true;
+}
+if(direction<=left)
+{
+if(change_y==false)
+{
+if(player_x<=0)
+{
+return;
+}
+}
+else
+{
+if(player_y<=0)
+{
+return;
+}
+}
+}
+if(direction>=right)
+{
+if(change_y==false)
+{
+if(player_x>=x_boundary)
+{
+return;
+}
+}
+else
+{
+if(player_y>=y_boundary)
+{
+return;
+}
+}
+}
+if(walk_timer.elapsed<350)
+{
+return;
+}
+step++;
+if(step>6)
+{
+step=1;
+}
+walk_timer.restart();
+if(change_y==false)
+{
+player_x+=direction;
+}
+else
+{
+player_y+=direction;
+}
+sound_environment.play_stationary("sounds/steps/"+step+sound_extension, false);
+sound_environment.update_listener_2d(player_x, player_y);
+}
+</pre>
+</body>
+</html>

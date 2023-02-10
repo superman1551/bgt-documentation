@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>list_sound_devices</b><br>
+<br>
+This function lists all the devices that can be found on the system.<br>
+<br>
+string[] list_sound_devices()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array containing the friendly names of all available devices, or an empty array on failure.<br>
+<br>
+Remarks:<br>
+The devices will be listed in the order they appear in the Windows device list.<br>
+<br>
+Example:<br>
+<pre>
+// Enumerate all the devices on the system.
+
+void main()
+{
+string[] devices;
+devices=list_sound_devices();
+if(devices.length()==0)
+{
+alert("Error", "No devices can be found on your system.");
+exit();
+}
+for(uint i=0;i&lt;devices.length();i++)
+{
+alert("Device " + (i+1), devices[i]);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_file</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will add a file to the currently open pack file.<br>
+<br>
+bool add_file(string file_on_disk, string internal_name)<br>
+<br>
+Parameters:<br>
+file_on_disk<br>
+The filename stored on disk to add to the pack file.<br>
+internal_name<br>
+An internal storage name that should be used to refer to it inside the pack file.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The pack file must be opened in write mode with the create method for this operation to be successful.<br>
+<br>
+The internal_name parameter is simply used to refer to the file inside the pack. This can contain any characters and can be laid out in any format.<br>
+<br>
+Example:<br>
+<pre>
+// Create a pack file and add some test files.
+
+void main()
+{
+pack_file test;
+test.create("pack.dat");
+test.add_file("test1.txt","t1");
+test.add_file("test2.txt","t2");
+test.add_file("test3.txt","t3");
+test.close();
+}
+</pre>
+</body>
+</html>

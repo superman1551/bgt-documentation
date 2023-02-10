@@ -1,0 +1,293 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>network</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+The network object is used to allow games to be played online with other live players in a peer to peer environment.<br>
+<br>
+network()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+This object allows the creation of multiplayer games of any complexity. One player will usually act as a server while the rest connect to that server.<br>
+<br>
+The procedure when writing a networked game in BGT is to either set up a server and then wait for incoming connections, or to connect to a remote computer using its IP address and a designated port. Port numbers range from 1 to 65535, however most ports below 1000 are reserved and should thus be avoided. A server must be listening on the same port as the client uses when connecting to the server, in order for a connection to be successfully established.<br>
+<br>
+There are two components to the networking system in BGT. There is the network object itself, and an object called network_event, which contains information about a received event. This network event is filled in with information when a call is made to the request method, and you then examine the properties of this returned object in order to determine what has occured.<br>
+<br>
+As soon as you start using the network object, you must continuously call the request method in order to get events from the outside world. A server will receive an event when a new person has connected, for instance, and a client will receive an event when an attempted connection to a server has either succeeded or failed.<br>
+<br>
+Along with each event, you will get a so called peer ID. A peer ID is a unique number that identifies a peer. When a client attempts to connect to a server, for example, the connect method will return a peer ID immediately. This peer ID will then be in the process of connecting, and will not be active until a connect event has been received which contains the same ID. Similarly, when a server receives a new incoming connection event, this event will always contain a peer ID so that the server is able to uniquely identify this peer when sending data to and receiving data from it.<br>
+<br>
+Once a connection has been successfully established between two or more players, these players will begin passing data back and forth between one another by sending so called packets. A packet is basically a sequence of bytes given as a string. The packets will always arrive in the same order in which they were sent, meaning that you will never get an older packet after a newer one has already been delivered. You can send packets in one of two ways, reliably and unreliably.<br>
+<br>
+Unreliable packets are by far the quickest way of getting data across to another person. An unreliable packet will be sent at the maximum speed provided by the connection, but is not guaranteed to arrive at the destination. It is, however, guaranteed to be properly sequenced if it does arrive. Unreliable packets are useful when you have data that needs to be sent out very frequently, but you only really care about the most recent data. You are not particularly interested in another player's position from 2 seconds ago, for instance, but rather you want to know where they are at this very moment.<br>
+<br>
+Reliable packets are always guaranteed to get through, and always in the proper order just like unreliable ones. This reliability comes at a cost, however. Since the internet is unreliable by nature, BGT needs to wait for an acknowledgement from the other person to say that the packet was in fact received. If no such acknowledgement is received within a reasonable amount of time, a new attempt to send the packet is made. The same procedure is repeated over and over again until an acknowledgement is received, or until enough time has elapsed to deem the connection as dead. This may cause considerable delays in the transmition as compared to unreliable packets, and should thus only be used for things where speed is not critical.<br>
+<br>
+A problem arises when trying to send both unreliable and reliable packets at the same time. Since packets are required to be sequenced and reliable packets require verification before they are delivered, they will stall any unreliable packets that come after it in the sequence. Then, once the reliable packet is received the unreliable ones will arrive all at once. To prevent this, BGT uses channels. A channel is an independently sequenced queue of packets, meaning that you can send both reliable and unreliable packets at the same time on different channels without them blocking one another. Channels also allow you to structure your data more efficiently, by for example sending position updates on one channel and shooting events on another.<br>
+<br>
+Care should be taken when using multiple channels, to avoid a situation where one channel lags behind the others in time due to multiple reliable packets being stalled for example. Thus, if sequencing is important for a series of events, it may be necessary to put them on the same channel and wait for them to actually get through. Different channels are only beneficial when the usefulness of one packet is not strictly dependent on another packet having been delivered before it.<br>
+<br>
+Channels are 0 based, meaning that if you request a connection with 3 channels you may use channels 0, 1, and 2 when sending your data.<br>
+<br>
+When disconnecting from a remote peer, you have three methods to choose from. disconnect_peer_forcefully, disconnect_peer, and disconnect_peer_softly. More information about how each method works can be found in that method's chapter, but the choice of method all has to do with how and when you want the remote peer to be notified of your disconnection. After calling disconnect_peer or disconnect_peer_softly, you must keep checking for events on the host as the disconnection will not be complete until a disconnect event containing the peer ID in question has been received.<br>
+<br>
+Please note that BGT uses UDP for all of its network communication. Thus, for a server to be able to accept incoming connections on a particular port, this port must have been properly opened to allow incoming UDP traffic.<br>
+<br>
+Example 1 (server):<br>
+<pre>
+// Create a server that listens on port 10000, and sends back any messages it receives.
+
+network host;
+
+void main()
+{
+show_game_window("Game Server");
+tts_voice voice;
+if(host.setup_server(10000, 1, 100)==false)
+{
+voice.speak_wait("Error. The server could not be set up.");
+exit();
+}
+voice.speak("Welcome to the echo server. This server will accept up to 100 connections, and send back anything it receives.");
+network_event event;
+while(true)
+{
+event=host.request();
+if(event.type==event_connect)
+{
+voice.speak_interrupt("Peer number " + event.peer_id + " connected from " + host.get_peer_address(event.peer_id) + ".");
+voice.speak("Peers now connected: " + host.connected_peers + ".");
+}
+if(event.type==event_receive)
+{
+host.send_unreliable(event.peer_id, event.message, event.channel);
+}
+if(event.type==event_disconnect)
+{
+voice.speak_interrupt("Peer number " + event.peer_id + " just disconnected.");
+voice.speak("Peers now connected: " + host.connected_peers + ".");
+}
+if(key_down(KEY_LMENU) and key_pressed(KEY_F4))
+{
+voice.speak_interrupt("Exiting.");
+disconnect_everyone();
+// Just in case the voice hasn't finished speaking when this function returns, we wait for it to finish before actually exiting.
+while(voice.speaking==true)
+{
+wait(5);
+}
+exit();
+}
+wait(5);
+}
+}
+
+void disconnect_everyone()
+{
+
+/*
+This function first gets a list of all connected peers and disconnects them. Then it waits until it has received the same number of disconnect notifications as it sent out disconnect requests, and then returns. This may take some time, however, so we set up a timeout after which we return anyway.
+
+Note that we are not processing messages in this event loop. You will obviously want to do this if you have other connections to manage at the same time.
+*/
+
+timer timeout;
+uint[] peer_list=host.get_peer_list();
+int expected_disconnects=peer_list.length();
+for(uint i=0;i < peer_list.length();i++)
+{
+host.disconnect_peer(peer_list[i]);
+}
+network_event event;
+while(expected_disconnects>0)
+{
+event=host.request();
+if(event.type==event_disconnect)
+{
+expected_disconnects-=1;
+}
+if(timeout.elapsed>=1000)
+{
+break;
+}
+wait(5);
+}
+}
+</pre>
+<br>
+<br>
+Example 2 (client):<br>
+<pre>
+// Create a client that connects to a server, and gathers some statistics about the connection.
+
+network host;
+
+void main()
+{
+show_game_window("Game Client");
+tts_voice voice;
+uint server_id=0;  // This is used to store the ID of the remote peer that will be our server.
+if(host.setup_client(1, 1)==false)
+{
+voice.speak_wait("Error. The client could not be set up.");
+exit();
+}
+voice.speak("Client started.");
+voice.speak("Please enter the IP address or host name that you wish to connect to.");
+string address=input_box("Address", "Please enter the host name or address to connect to.");
+if(address=="")
+{
+voice.speak_interrupt_wait("Exiting.");
+exit();
+}
+voice.speak_interrupt("Connecting, please wait.");
+host.connect(address, 10000);
+network_event event;
+
+// In this loop, we just wait for either a connect or disconnect event as this is always the first thing that we'll get.
+
+while(true)
+{
+event=host.request();
+if(event.type==event_connect)
+{
+voice.speak_interrupt("The connection to " + host.get_peer_address(event.peer_id) + " succeeded!");
+server_id=event.peer_id;
+break;
+}
+if(event.type==event_disconnect)
+{
+voice.speak_interrupt_wait("The connection to " + host.get_peer_address(event.peer_id) + " failed. Exiting.");
+exit();
+}
+if(key_down(KEY_LMENU) and key_pressed(KEY_F4))
+{
+host.destroy();
+voice.speak_interrupt_wait("Exiting.");
+exit();
+}
+wait(5);
+}
+
+/*
+Since we got here, we know that we have an active connection and can begin gathering statistics. We do this by sending roughly 30 packets per second, for 10 seconds. Then, we disconnect and speak the statistics.
+*/
+
+timer message_trigger;
+timer total_time;
+int sent_messages=0;
+int received_messages=0;
+while(true)
+{
+event=host.request();
+if(event.type==event_disconnect)
+{
+host.destroy();
+voice.speak_interrupt_wait("The server died. Exiting.");
+exit();
+}
+if(event.type==event_receive)
+{
+received_messages+=1;
+}
+if(message_trigger.elapsed>=33)
+{
+message_trigger.restart();
+host.send_unreliable(server_id, "Hello!", 0);
+sent_messages+=1;
+}
+if(total_time.elapsed>=10000)
+{
+// The statistics are gathered, so we speak them.
+voice.speak_interrupt("Statistics: Messages sent, " + sent_messages + ". Messages received, " + received_messages + ". Average round trip time, " + host.get_peer_average_round_trip_time(server_id) + " milliseconds. Exiting.");
+disconnect_everyone();
+
+/*
+Just in case the voice hasn't finished speaking when this function returns, we wait for it to finish before actually exiting. We also allow the user to press alt+f4 since the message is pretty long.
+*/
+while(voice.speaking==true)
+{
+if(key_down(KEY_LMENU) and key_pressed(KEY_F4))
+{
+break;
+}
+wait(5);
+}
+exit();
+}
+if(key_down(KEY_LMENU) and key_pressed(KEY_F4))
+{
+voice.speak_interrupt("Exiting.");
+disconnect_everyone();
+// Just in case the voice hasn't finished speaking when this function returns, we wait for it to finish before actually exiting.
+while(voice.speaking==true)
+{
+wait(5);
+}
+exit();
+}
+wait(5);
+}
+}
+
+void disconnect_everyone()
+{
+
+/*
+This is the exact same function as the one found in the server, as it works equally well for both.
+
+This function first gets a list of all connected peers and disconnects them. Then it waits until it has received the same number of disconnect notifications as it sent out disconnect requests, and then returns. This may take some time, however, so we set up a timeout after which we return anyway.
+
+Note that we are not processing messages in this event loop. You will obviously want to do this if you have other connections to manage at the same time.
+*/
+
+timer timeout;
+uint[] peer_list=host.get_peer_list();
+int expected_disconnects=peer_list.length();
+for(uint i=0;i < peer_list.length();i++)
+{
+host.disconnect_peer(peer_list[i]);
+}
+network_event event;
+while(expected_disconnects>0)
+{
+event=host.request();
+if(event.type==event_disconnect)
+{
+expected_disconnects-=1;
+}
+if(timeout.elapsed>=1000)
+{
+break;
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

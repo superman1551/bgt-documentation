@@ -1,0 +1,73 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>file_decrypt</b><br>
+<br>
+This function decrypts a file previously encrypted by file_encrypt.<br>
+<br>
+bool file_decrypt(string input_file, string output_file, string encryption_key)<br>
+<br>
+Parameters:<br>
+input_file<br>
+The name of the file to decrypt.<br>
+output_file<br>
+The name of the file that will contain the decrypted data.<br>
+encryption_key<br>
+The key that will be used to decrypt the data. This must be the same key given when the file was encrypted.<br>
+<br>
+Return value:<br>
+true if the file was successfully decrypted, false otherwise.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Decrypt a sound file and play it.
+
+sound test;
+
+void main()
+{
+if(!file_exists("test.dat"))
+{
+alert("Error", "Cannot find test.dat.");
+return;
+}
+if(!file_decrypt("test.dat", "test.wav", "you_are_not_hacking_into_me"))
+{
+alert("Error", "Could not decrypt test.dat.");
+return;
+}
+test.load("test.wav");
+if(test.active==false)
+{
+alert("Error", "Cannot play decrypted sound. errorcode="+error);
+return;
+}
+test.play_wait();
+}
+</pre>
+</body>
+</html>

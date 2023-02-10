@@ -1,0 +1,177 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Appendix A</title>
+</head>
+<body>
+<br>
+<b>Keyboard Constants</b><br>
+<br>
+These constants are meant to be used in conjunction with the key_down and key_pressed functions, in order to specify which key to check for.<br>
+<br>
+<ul>
+<li>KEY_ESCAPE</li>
+<li>KEY_1</li>
+<li>KEY_2</li>
+<li>KEY_3</li>
+<li>KEY_4</li>
+<li>KEY_5</li>
+<li>KEY_6</li>
+<li>KEY_7</li>
+<li>KEY_8</li>
+<li>KEY_9</li>
+<li>KEY_0</li>
+<li>KEY_MINUS - on main keyboard</li>
+<li>KEY_EQUALS</li>
+<li>KEY_BACK - backspace</li>
+<li>KEY_TAB</li>
+<li>KEY_Q</li>
+<li>KEY_W</li>
+<li>KEY_E</li>
+<li>KEY_R</li>
+<li>KEY_T</li>
+<li>KEY_Y</li>
+<li>KEY_U</li>
+<li>KEY_I</li>
+<li>KEY_O</li>
+<li>KEY_P</li>
+<li>KEY_LBRACKET</li>
+<li>KEY_RBRACKET</li>
+<li>KEY_RETURN - Enter on main keyboard</li>
+<li>KEY_LCONTROL</li>
+<li>KEY_A</li>
+<li>KEY_S</li>
+<li>KEY_D</li>
+<li>KEY_F</li>
+<li>KEY_G</li>
+<li>KEY_H</li>
+<li>KEY_J</li>
+<li>KEY_K</li>
+<li>KEY_L</li>
+<li>KEY_SEMICOLON</li>
+<li>KEY_APOSTROPHE</li>
+<li>KEY_GRAVE - accent grave</li>
+<li>KEY_LSHIFT</li>
+<li>KEY_BACKSLASH</li>
+<li>KEY_Z</li>
+<li>KEY_X</li>
+<li>KEY_C</li>
+<li>KEY_V</li>
+<li>KEY_B</li>
+<li>KEY_N</li>
+<li>KEY_M</li>
+<li>KEY_COMMA</li>
+<li>KEY_PERIOD - . on main keyboard</li>
+<li>KEY_SLASH - / on main keyboard</li>
+<li>KEY_RSHIFT</li>
+<li>KEY_MULTIPLY - * on numeric keypad</li>
+<li>KEY_LMENU - left Alt</li>
+<li>KEY_SPACE</li>
+<li>KEY_CAPITAL</li>
+<li>KEY_F1</li>
+<li>KEY_F2</li>
+<li>KEY_F3</li>
+<li>KEY_F4</li>
+<li>KEY_F5</li>
+<li>KEY_F6</li>
+<li>KEY_F7</li>
+<li>KEY_F8</li>
+<li>KEY_F9</li>
+<li>KEY_F10</li>
+<li>KEY_NUMLOCK</li>
+<li>KEY_SCROLL - Scroll Lock</li>
+<li>KEY_NUMPAD7</li>
+<li>KEY_NUMPAD8</li>
+<li>KEY_NUMPAD9</li>
+<li>KEY_SUBTRACT - on numeric keypad</li>
+<li>KEY_NUMPAD4</li>
+<li>KEY_NUMPAD5</li>
+<li>KEY_NUMPAD6</li>
+<li>KEY_ADD - + on numeric keypad</li>
+<li>KEY_NUMPAD1</li>
+<li>KEY_NUMPAD2</li>
+<li>KEY_NUMPAD3</li>
+<li>KEY_NUMPAD0</li>
+<li>KEY_DECIMAL - . on numeric keypad</li>
+<li>KEY_OEM_102 - <> or \| on RT 102-key keyboard (Non-U.S.)</li>
+<li>KEY_F11</li>
+<li>KEY_F12</li>
+<li>KEY_F13 - (NEC PC98)</li>
+<li>KEY_F14 - (NEC PC98)</li>
+<li>KEY_F15 - (NEC PC98)</li>
+<li>KEY_KANA - (Japanese keyboard)</li>
+<li>KEY_ABNT_C1 - /? on Brazilian keyboard</li>
+<li>KEY_CONVERT - (Japanese keyboard)</li>
+<li>KEY_NOCONVERT - (Japanese keyboard)</li>
+<li>KEY_YEN - (Japanese keyboard)</li>
+<li>KEY_ABNT_C2 - Numpad . on Brazilian keyboard</li>
+<li>KEY_NUMPADEQUALS - = on numeric keypad (NEC PC98)</li>
+<li>KEY_PREVTRACK - Previous Track (KEY_CIRCUMFLEX on Japanese keyboard)</li>
+<li>KEY_AT - (NEC PC98)</li>
+<li>KEY_COLON - (NEC PC98)</li>
+<li>KEY_UNDERLINE - (NEC PC98)</li>
+<li>KEY_KANJI - (Japanese keyboard)</li>
+<li>KEY_STOP - (NEC PC98)</li>
+<li>KEY_AX - (Japan AX)</li>
+<li>KEY_UNLABELED - (J3100)</li>
+<li>KEY_NEXTTRACK - Next Track</li>
+<li>KEY_NUMPADENTER - Enter on numeric keypad</li>
+<li>KEY_RCONTROL</li>
+<li>KEY_MUTE - Mute</li>
+<li>KEY_CALCULATOR - Calculator</li>
+<li>KEY_PLAYPAUSE - Play / Pause</li>
+<li>KEY_MEDIASTOP - Media Stop</li>
+<li>KEY_VOLUMEDOWN - Volume -</li>
+<li>KEY_VOLUMEUP - Volume +</li>
+<li>KEY_WEBHOME - Web home</li>
+<li>KEY_NUMPADCOMMA - , on numeric keypad (NEC PC98)</li>
+<li>KEY_DIVIDE - / on numeric keypad</li>
+<li>KEY_SYSRQ</li>
+<li>KEY_RMENU - right Alt</li>
+<li>KEY_PAUSE - Pause</li>
+<li>KEY_HOME - Home on arrow keypad</li>
+<li>KEY_UP - UpArrow on arrow keypad</li>
+<li>KEY_PRIOR - PgUp on arrow keypad</li>
+<li>KEY_LEFT - LeftArrow on arrow keypad</li>
+<li>KEY_RIGHT - RightArrow on arrow keypad</li>
+<li>KEY_END - End on arrow keypad</li>
+<li>KEY_DOWN - DownArrow on arrow keypad</li>
+<li>KEY_NEXT - PgDn on arrow keypad</li>
+<li>KEY_INSERT - Insert on arrow keypad</li>
+<li>KEY_DELETE - Delete on arrow keypad</li>
+<li>KEY_LWIN - Left Windows key</li>
+<li>KEY_RWIN - Right Windows key</li>
+<li>KEY_APPS - AppMenu key</li>
+<li>KEY_POWER - System Power</li>
+<li>KEY_SLEEP - System Sleep</li>
+<li>KEY_WAKE - System Wake</li>
+<li>KEY_WEBSEARCH - Web Search</li>
+<li>KEY_WEBFAVORITES - Web Favorites</li>
+<li>KEY_WEBREFRESH - Web Refresh</li>
+<li>KEY_WEBSTOP - Web Stop</li>
+<li>KEY_WEBFORWARD - Web Forward</li>
+<li>KEY_WEBBACK - Web Back</li>
+<li>KEY_MYCOMPUTER - My Computer</li>
+<li>KEY_MAIL - Mail</li>
+<li>KEY_MEDIASELECT - Media Select</li>
+</ul>
+<br>
+</body>
+</html>

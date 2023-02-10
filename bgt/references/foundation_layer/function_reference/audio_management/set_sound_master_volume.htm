@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>set_sound_master_volume</b><br>
+<br>
+This function sets the master volume for the sound mixer.<br>
+<br>
+bool set_sound_master_volume(double volume)<br>
+<br>
+Parameters:<br>
+volume<br>
+The new value that is to be the master volume, between a maximum of 0 and a minimum of -100.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+The master volume works similar to the master fader on a mixing desk. It controls every sound that is played during the game and works independently of a sound object's volume control. This means that you can continue treating the volume of individual sound objects exactly the same as before, where 0 is always the maximum based on the current master volume. This can be useful if your game uses quiet TTS output and has a rather loud or busy soundscape.<br>
+<br>
+Please note that these functions do not apply to the Windows volume control, only sounds that are played from within the game itself.<br>
+<br>
+Example:<br>
+<pre>
+// Set the master volume to -30 and retrieve the new value.
+
+void main()
+{
+set_sound_master_volume(-30);
+alert("Sound master volume", "The sound master volume is " + get_sound_master_volume() + ".");
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>stop</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+This method stops any number that is currently being spoken.<br>
+<br>
+void stop()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+The speak_next method works in conjunction with the speak method, and is to be used continuously while the number is being spoken.<br>
+<br>
+This method works not only as a status indicator, but also as a trigger, checking and playing the numbers where necessary. Therefore, to ensure that the numbers are spoken as smoothly and as fluently as possible, it is essential that this check is performed at regular intervals, I.E. every 5 or so milliseconds.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a number using speak and speak_next, stopping it prematurely if the user presses space.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+number_speaker test;
+test.prepend="numbers/";
+test.speak(1056);
+while(test.speak_next()==1)
+{
+if(key_pressed(KEY_SPACE))
+test.stop();
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

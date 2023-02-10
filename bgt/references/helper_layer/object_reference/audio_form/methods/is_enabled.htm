@@ -1,0 +1,90 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>is_enabled</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method returns a value indicating whether the specified control is enabled.<br>
+<br>
+bool is_enabled(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to check.<br>
+<br>
+Return value:<br>
+true if the control is enabled, false if the control is disabled or if an error occurred.<br>
+<br>
+Remarks:<br>
+The enabled/disabled flag refers to whether the control may be manipulated in any way. If set to disabled, the audio feedback will announce this and the control is unusable. If you wish the control to be unreachable, use the visibility status instead.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+if(form.is_enabled(ok))
+{
+alert("Information", "The OK button is enabled.");
+}
+else
+{
+alert("Information", "The OK button is disabled.");
+}
+exit();
+}
+if(form.is_pressed(cancel))
+{
+if(form.is_enabled(cancel))
+{
+alert("Information", "The Cancel button is enabled.");
+}
+else
+{
+alert("Information", "The Cancel button is disabled.");
+}
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

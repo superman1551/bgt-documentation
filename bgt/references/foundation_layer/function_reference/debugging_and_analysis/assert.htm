@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>assert</b><br>
+<br>
+This function evaluates an expression and terminates the script execution if the result is false.<br>
+<br>
+bool assert(bool expression)<br>
+<br>
+Parameters:<br>
+expression<br>
+The expression to be evaluated.<br>
+<br>
+Return value:<br>
+true if the assertion evaluates to true, false otherwise.<br>
+<br>
+Remarks:<br>
+This function can be used when you want to be certain that a particular condition is true, and report a problem if it is not. This is useful mainly for debugging purposes, as the function shows up a message window with the exact line number and source file in which an assertion failure occurs. You are then able to determine the exact expression that failed, and where in the source code it's located.<br>
+<br>
+In the message window that appears when an assertion failure occurs, you are able to choose whether you wish to resume execution or exit the program altogether. If you resume execution, the return value from this function will be false. This allows you to check in the application itself whether or not a particular assertion call failed.<br>
+<br>
+Please note that this function does nothing if called from a release build of your game. It works only when the script is run from source, or when a debug build is used. When called from a release build, the function always returns true.<br>
+<br>
+Example:<br>
+<pre>
+// Chek a few expressions and finally cause an assertion failure to occur.
+
+void main()
+{
+int x=1;
+assert(x<3);
+x+=1;
+assert(x<3);
+x+=1;
+assert(x<3);  // We fail here.
+}
+</pre>
+</body>
+</html>

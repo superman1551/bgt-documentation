@@ -1,0 +1,186 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>play_2d</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method will play a sound that can move around according to the listener and source positions on a 2D grid.<br>
+<br>
+int play_2d(string filename, int listener_x, int listener_y, int sound_x, int sound_y, bool looping, bool persistent=false)<br>
+<br>
+Parameters:<br>
+filename<br>
+The filename to play.<br>
+listener_x<br>
+The X position of the listener on the grid.<br>
+listener_y<br>
+The Y position of the listener on the grid.<br>
+sound_x<br>
+The X position of the source object on the grid.<br>
+sound_y<br>
+The Y position of the source object on the grid.<br>
+looping<br>
+A boolean specifying whether the sound should loop or not.<br>
+persistent<br>
+An optional boolean specifying whether the sound should be persistent or not, meaning whether or not it should be automatically cleaned up after playback has finished. If this argument is not given, false is the default which means that the sound does get cleaned up.<br>
+<br>
+Return value:<br>
+Returns the slot where the sound is stored in the pool, -1 on error, or -2 if the sound is out of earshot.<br>
+<br>
+Remarks:<br>
+This method is useful for playing sounds specific to the game objects and characters, for example monsters, health boosters, teleporters, etc.<br>
+<br>
+A sound that is created with the persistent flag will not be cleaned up after it has finished playing, which otherwise is the default behavior. Instead, an explicit call must be made to destroy the sound. This is useful for non-looping sounds that you wish to be able to reliably manipulate with any of the functions that use slots to identify a particular sound. When set as persistent, a sound slot is guaranteed to stay valid regardless of playback status. This also means that you must be sure to destroy it when it is no longer in use, as that slot will otherwise be locked and not available for reuse by new sounds.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sound_environment;
+timer walk_timer;
+
+int player_x, player_y;
+int step;
+
+const string sound_extension=".wav";
+
+const int left=-1;
+const int right=1;
+
+const int forward=100;
+const int back=-100;
+
+const int x_boundary=200;
+const int y_boundary=200;
+
+void main()
+{
+show_game_window("sound_pool test");
+sound_environment.max_distance=70;
+sound_environment.behind_pitch_decrease=5;
+for(int counter=1; counter<15; counter++)
+{
+sound_environment.play_2d("sounds/sound"+counter+sound_extension, 0, 0, random(0, x_boundary), random(0, y_boundary), true);
+}
+while(true)
+{
+check_input();
+wait(5);
+}
+}
+
+void check_input()
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+if(key_down(KEY_LEFT))
+{
+walk(left);
+}
+if(key_down(KEY_RIGHT))
+{
+walk(right);
+}
+if(key_down(KEY_UP))
+{
+walk(forward);
+}
+if(key_down(KEY_DOWN))
+{
+walk(back);
+}
+}
+
+void walk(int direction)
+{
+bool change_y=false;
+if(direction>=forward)
+{
+direction=1;
+change_y=true;
+}
+if(direction<=back)
+{
+direction=-1;
+change_y=true;
+}
+if(direction<=left)
+{
+if(change_y==false)
+{
+if(player_x<=0)
+{
+return;
+}
+}
+else
+{
+if(player_y<=0)
+{
+return;
+}
+}
+}
+if(direction>=right)
+{
+if(change_y==false)
+{
+if(player_x>=x_boundary)
+{
+return;
+}
+}
+else
+{
+if(player_y>=y_boundary)
+{
+return;
+}
+}
+}
+if(walk_timer.elapsed<350)
+{
+return;
+}
+step++;
+if(step>6)
+{
+step=1;
+}
+walk_timer.restart();
+if(change_y==false)
+{
+player_x+=direction;
+}
+else
+{
+player_y+=direction;
+}
+sound_environment.play_stationary("sounds/steps/"+step+sound_extension, false);
+sound_environment.update_listener_2d(player_x, player_y);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak_next</title>
+</head>
+<body>
+<br>
+<b>number_speaker object</b><br>
+<br>
+This method is used to check the status of a number that is or has been spoken, and where necessary, starts playing the next one.<br>
+<br>
+int speak_next()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+0 if there are no more files to be played, 1 if there are more files yet to be played or if the last file has not yet finished playing, or -1 if an error occurs.<br>
+<br>
+Remarks:<br>
+The speak_next method works in conjunction with the speak method, and is to be used continuously while the number is being spoken.<br>
+<br>
+This method works not only as a status indicator, but also as a trigger, checking and playing the numbers where necessary. Therefore, to ensure that the numbers are spoken as smoothly and as fluently as possible, it is essential that this check is performed at regular intervals, I.E. every 5 or so milliseconds.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a number using speak and speak_next.
+
+#include "number_speaker.bgt"
+
+void main()
+{
+number_speaker test;
+test.prepend="numbers/";
+test.speak(1056);
+while(test.speak_next()==1)
+{
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>random</b><br>
+<br>
+This function generates a random number within a specified range.<br>
+<br>
+long random(long min, long max)<br>
+<br>
+Parameters:<br>
+min<br>
+The smallest number that can be generated.<br>
+max<br>
+The largest number that can be generated. This must be equal to or greater than min.<br>
+<br>
+Return value:<br>
+A random number between min and max on success, or 0 on failure.<br>
+<br>
+Remarks:<br>
+If max is less than or equal to min, min will be returned.<br>
+<br>
+The minimum number that can be generated is -999999999, and the maximum is 999999999.<br>
+<br>
+Example:<br>
+<pre>
+// Rolling a pair of dice.
+
+void main()
+{
+int die1=random(1, 6);
+int die2=random(1, 6);
+int total=die1 + die2;
+alert("Rolling dice", "You rolled a " + die1 + " and a " + die2 + ", for a total of " + total + "!");
+}
+</pre>
+</body>
+</html>

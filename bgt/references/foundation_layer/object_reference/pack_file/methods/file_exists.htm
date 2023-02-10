@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>file_exists</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method checks whether a given file exists in the pack.<br>
+<br>
+bool file_exists(string internal_name)<br>
+<br>
+Parameters:<br>
+internal_name<br>
+The name of the file to search for in the pack.<br>
+<br>
+Return value:<br>
+true if the file exists, false otherwise.<br>
+<br>
+Remarks:<br>
+This method will work in a pack file opened for reading.<br>
+<br>
+Example:<br>
+<pre>
+// Check if a file exists.
+
+void main()
+{
+pack_file test;
+test.open("pack.dat");
+if(test.file_exists("t1");
+{
+alert("Information", "The file t1 exists in the pack.dat file.");
+}
+else
+{
+alert("Oops", "T1 does not exist in the pack.dat file.");
+}
+}
+</pre>
+</body>
+</html>

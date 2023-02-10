@@ -1,0 +1,108 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>garbage_collect</b><br>
+<br>
+This function runs a complete cycle of the garbage collector used internally in the BGT engine (see remarks).<br>
+<br>
+void garbage_collect()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+Garbage collection is used in BGT in order to resolve circular references. Circular references are objects that point back to one another and thus make the technique used for the most part in the engine, reference counting, impractical. Any object that has the potential of creating a circular reference is automatically made known to the garbage collector, such as arrays and script defined classes. The garbage collector runs incrementally in the background all the time during the execution of your game, and cleans up garbage as soon as it is found. This means that you should not depend on a destructor of any given class being called at any specific time.<br>
+<br>
+If your script accumulates a lot of garbage and you see memory usage beginning to increase too much, it is a good idea to call this function in order to force the garbage collector to run a complete cycle and destroy all currently known garbage. This may take up to a few hundred milliseconds and so should only be done at a point in the game when speed is not critical, such as during a game over sequence or cut-scene.<br>
+<br>
+If BGT notices that enough garbage has been accumulated to cause potential problems such as crashes or program instability, it automatically increases the rate at which the incremental garbage collection cycle is run. This is not the same as running a complete cycle, but it may impact performance slightly. Thus, calling this function yourself at a time when performance won't suffer is useful in more ways than one in this scenario as it not only decreases memory usage significantly, but also gives you control over when this time cost should be incurred.<br>
+<br>
+Example:<br>
+<pre>
+// This script shows how the garbage collector destroys objects with circular references incrementally.
+// A lot of temporary class instances are created, and then a loop runs to wait for these to be destroyed.
+// Once the last instance has been destroyed, the script shows an alert box telling you how long this took and then exits.
+// The user can press space to force a complete garbage collection cycle, or escape to exit.
+
+const int number_of_instances=50;
+// This indicates how much garbage that should be generated. You may change this to experiment.
+
+int destroyed_instances=0;
+
+class dummy
+{
+
+timer counter;
+// This timer keeps track of how long the class has been in existence.
+
+dummy@ other_dummy;
+// This is a handle that is set by the constructor to point to itself. This creates a circular reference.
+
+dummy()
+{
+counter.restart();
+@other_dummy=this;
+}
+
+~dummy()
+{
+destroyed_instances+=1;
+if(destroyed_instances==number_of_instances)
+{
+alert("Destroying last class", "The last class instance is now being destroyed after having existed for " + counter.elapsed + " milliseconds.");
+exit();
+}
+}
+
+}
+
+void main()
+{
+show_game_window("Garbage collection test");
+
+alert("Welcome", "We are now generating a bunch of garbage class instances with circular references in them.");
+
+// Call a function that generates a bunch of temporary instances of the dummy class.
+generate_garbage();
+
+while(key_pressed(KEY_ESCAPE)==false)
+{
+if(key_pressed(KEY_SPACE))
+{
+garbage_collect();
+}
+wait(5);
+}
+}
+
+void generate_garbage()
+{
+dummy[] dummy_list(number_of_instances);
+}
+</pre>
+</body>
+</html>

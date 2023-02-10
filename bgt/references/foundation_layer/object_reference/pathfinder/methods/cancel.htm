@@ -1,0 +1,45 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>cancel</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+This method cancels the current pathfinding operation.<br>
+<br>
+bool cancel()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If you cancel the current pathfinding operation, the find call will return an array with 0 elements and set the last error flag accordingly.<br>
+<br>
+This method may only be invoked from within the user callback.<br>
+<br>
+Example:<br>
+See the main pathfinder chapter and the pathfinding tutorial.<br>
+</body>
+</html>

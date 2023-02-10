@@ -1,0 +1,89 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>combination</title>
+</head>
+<body>
+<br>
+<b>combination object</b><br>
+<br>
+The combination object contains algorithms to enumerate arbitrarily large combinations of elements in a given set.<br>
+<br>
+combination()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+Enumerating combinations of elements is useful in many different scenarios. An example is when you have a set of sports teams, all of which must play against every other team at least once but no more than that. Another example which requires a different type of combination is the traditional game of rock, paper and sizzors. There we want to find each combination of two that the three items can form, in every possible order including the same item appearing twice.<br>
+<br>
+The combination object facilitates exactly these types of enumerations. You start by calling one of the generate_x methods depending on which algorithm you want, and then you repeatedly call the next method to retrieve each combination in an array. You continue doing this until the next method returns false. At this point you will have enumerated all possible combinations that the algorithm searches for, and your array will be empty.<br>
+<br>
+When you call one of the generate_x methods you need to specify the number of items that you have in your set, as well as how many items you want in each combination. Depending on the behavior of the algorithm in question, there will be different restrictions for these values. When the next method fills your array with a new combination, it will use the numbers in your set to denote the items in that combination. These values will range from 0 to the number of items in your set minus 1.<br>
+<br>
+Note that many of these algorithms have the potential to quickly generate millions or billions of combinations depending on the size of your set and the number of items in the combinations. The examples purposefully use small values, so that they can be printed in alert boxes easily. Be very careful when you start working with larger sets and/or combinations, therefore, so that you don't attempt to display a million message boxes.<br>
+<br>
+Example:<br>
+<pre>
+// We have 4 sports teams and we want each of them to play against every other team once, but no more than that.
+
+void main()
+{
+int combination_size=2;
+// This is the number of items that we want in each combination.
+
+int items=4;
+// This is the number of items we have all in total, which is to say our sports teams.
+
+combination process;
+
+if(process.generate_unique_combinations(items, combination_size)==false)
+{
+alert("Error", get_last_error_text());
+exit();
+}
+
+int[] list;
+// This is the array which will be filled with each combination.
+
+int count=0;
+// This simply keeps track of how many combinations we've generated so far. It is not really needed.
+
+while(process.next(list))
+{
+count+=1;
+
+// At this point, we have a new combination. We print it out in an alert box as a comma separated string.
+string data;
+for(int i=0;i&lt;list.length();i++)
+{
+if(i>0)
+data+=", ";
+data+=list[i];
+}
+alert("Combination " + count, data);
+}
+
+// We're done, so let's display how many combinations we found before we quit.
+alert("Result", count + " unique combinations were generated from a set of " + items + " items, with " + combination_size + " items in each combination.");
+}
+</pre>
+</body>
+</html>

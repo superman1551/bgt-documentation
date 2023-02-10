@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_seconds</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will add a number of seconds to the second property.<br>
+<br>
+bool add_seconds(int seconds)<br>
+<br>
+Parameters:<br>
+seconds<br>
+The number of seconds to add.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+A negative value in the seconds parameter will subtract seconds from the current second.<br>
+<br>
+Any number of seconds can be added or subtracted. The rest of the time will adjust accordingly.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and add 86400 seconds.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.add_seconds(86400);
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>key_released</b><br>
+<br>
+This function checks if a particular key on the keyboard has just been released.<br>
+<br>
+bool key_released(int key)<br>
+<br>
+Parameters:<br>
+key<br>
+One of the BGT key name constants, see appendix A for a full list.<br>
+<br>
+Return value:<br>
+true if the key has just been released, false if it has not or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between key_up and key_released is that key_released will only return true when the user first releases the key, while key_up will continue returning true until the key is down.<br>
+<br>
+Example:<br>
+<pre>
+// Speak a message when the space bar is released.
+
+void main()
+{
+tts_voice voice;
+show_game_window("Test Game");
+while(true)
+{
+if(key_pressed(KEY_SPACE))
+{
+voice.speak_interrupt("Space bar pressed.");
+}
+if(key_released(KEY_SPACE))
+{
+voice.speak_interrupt("Space bar released.");
+}
+if(key_pressed(KEY_ESCAPE))
+{
+exit();
+}
+// Other code goes here.
+wait(5);
+}
+}</pre>
+</body>
+</html>

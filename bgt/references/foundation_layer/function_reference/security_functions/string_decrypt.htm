@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_decrypt</b><br>
+<br>
+This function decrypts a string previously encrypted by string_encrypt.<br>
+<br>
+string string_decrypt(string the_string, string encryption_key)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string to decrypt.<br>
+encryption_key<br>
+The key that will be used to decrypt the data. This must be the same key given when the string was encrypted.<br>
+<br>
+Return value:<br>
+The decrypted string on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+The input string must match the string returned by string_encrypt. If you have converted the string to hexadecimal for printing, it is essential that you use hex_to_string to convert it back before using string_decrypt.<br>
+<br>
+Example:<br>
+<pre>
+// Decrypt a string and print it.
+
+void main()
+{
+string test="881C830C5245F740C578E6C4F4A7DE10F960D10F3E47535CF56F94DF4F2E4CB38E7C35CA0C30C71AED7A1F0F33BB35F2";
+test=hex_to_string(test);
+test=string_decrypt(test, "you_are_not_hacking_into_me");
+alert("Decrypted string", test);
+}
+</pre>
+</body>
+</html>

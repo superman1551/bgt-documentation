@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>write</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will write a string or text or binary data into a file.<br>
+<br>
+double write(string data)<br>
+<br>
+Parameters:<br>
+data<br>
+The data to be written.<br>
+<br>
+Return value:<br>
+A double containing the number of characters or bytes written.<br>
+<br>
+Remarks:<br>
+If the file is opened in text mode, the return value shows the number of characters written. If, on the other hand, the file is opened as binary, then the return value shows the number of bytes written instead.<br>
+<br>
+Example:<br>
+<pre>
+// Write to a file.
+
+void main()
+{
+file test;
+test.open("test.txt", "w");
+test.write("I am a text file!");
+test.close();
+}
+</pre>
+</body>
+</html>

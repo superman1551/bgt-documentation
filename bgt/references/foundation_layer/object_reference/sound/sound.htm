@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>sound</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+The sound object is used to play audio stored either as Wav or Ogg, either in a folder or in a pack file, with or without encryption.<br>
+<br>
+sound()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+When a sound object is first created, it will not be active. To activate it you must call either the "load" or the "stream" method on the object, specifying a file that should be associated with it. You may call these methods again at any time if you wish to associate another sound with the object, at which point the old association (if any) will be cleared. This, in short, allows you to reuse the same sound object for playing more than one sound.<br>
+<br>
+Example:<br>
+<pre>
+// Load a sound into memory and play it.
+
+void main()
+{
+sound test;
+test.load("c:\\windows\\media\\ding.wav");
+test.play_wait();
+test.close();
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>soundtrack</title>
+</head>
+<body>
+<br>
+<b>soundtrack object</b><br>
+<br>
+The soundtrack object is stored in soundtrack.bgt in the BGT include directory. Building upon the BGT tone generator, the soundtrack object attempts to give you more music for less code.<br>
+<br>
+soundtrack()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+Using the soundtrack object, you create music by adding channels to a song. A channel is described by a sequence of commands. Note that the command sequence contains no spaces---it is simply a string of commands as defined below.<br>
+<br>
+<h2>Setting the octave</h2>
+<br>
+Use the o command followed by a number to set the octave for subsequent notes. Valid octaves are 1 to 6, so o1 through o6 are valid octave commands. The default octave starts out as 4.<br>
+<br>
+<h2>Setting the default length</h2>
+<br>
+Use the l command followed by a number to set the default length for subsequent notes. A note may provide its own length, but those that don't will get the default length. Lengths are specified by how many of them would fit into a whole note. For example, 1 is a whole note, 2 is a half note, and 16 is a 16th note. Any whole number from 1 to 64 is allowed. For example, 24 is a length that would fit three times into an 8th note. The default length starts out as 4 (meaning quarter notes).<br>
+<br>
+<h2>Increasing or decreasing the octave</h2>
+<br>
+The &lt; and &gt; commands provide convenient shortcuts for increasing or decreasing the octave by one. The &gt; command increases the octave if possible, and the &lt; command decreases it if possible.<br>
+<br>
+<h2>Selecting the instrument</h2>
+<br>
+Use the @ command followed by a number to select the instrument for subsequent notes. Valid instruments are @1 (sawtooth), @2 (square), @3 (sine) and @4 (triangle). The instrument starts out as @1 (sawtooth).<br>
+<br>
+<h2>Setting the quantization</h2>
+<br>
+Quantization determines how much of the note will actually be heard. Use the q command followed by a number between 1 and 100 to set the quantization for subsequent notes. A quantization of 8 means the entire note will be heard while, for example, a quantization of 4 means that only the first half of the note will be heard whereas the second half will be silenced. Use quantizations greater than 8 to make a note last beyond its notational end. The quantization starts out at 8.<br>
+<br>
+<h2>Setting the tempo</h2>
+<br>
+Use the t command followed by a number to set the tempo for subsequent notes. The tempo is measured in quarter notes per minute, and valid tempi are numbers between 60 and 240. The tempo starts out as 120. You may have as many tempo changes as you like, and it is perfectly valid to have different channels play at different tempi although the result might not be to your liking.<br>
+<br>
+<h2>Setting the attack</h2>
+<br>
+Attack determines how long the note will rise in volume until it reaches its maximum. Use the a command followed by a number to set the attack for subsequent notes. Valid attack values are 0 to 100. 100 means that the note will take a second to reach its maximum volume, while 0 means that the note will start out at its maximum volume. The attack value starts out as 1.<br>
+<br>
+<h2>Setting the release</h2>
+<br>
+Release determines how long the note will take to fade from its maximum volume to silence. Use the r command to set the release for subsequent notes. Valid release values are 0 to 100. 100 means that the note will take a second to fade, while 0 means it will go directly to silence as if cut off. Note that having a note with 0 release followed by a note with 0 attack may create a clicking noise. This is not a bug but simply means the generator is doing what it should. The release value starts out as 1.<br>
+<br>
+<h2>Generating a pause</h2>
+<br>
+Use the p command followed by a number to insert a pause, or rest, into your channel. The number follows the same rules as that used in the l command, so p1 will create a whole rest, p4 will create a quarter rest, etc.<br>
+<br>
+<h2>Setting the volume</h2>
+<br>
+Use v followed by a number between 0 and 100 to set the volume. 100 is loudest while 0 is silent. The volume starts out at 100.<br>
+<br>
+<h2>Transposition</h2>
+<br>
+Use u followed by a number to shift subsequent notes up the given number of semitones. Use d followed by a number to shift subsequent notes down the given number of semitones. Use the n command to specify that subsequent notes should no longer be transposed. The u and d commands accept numbers from 1 to 11. These three commands are best remembered as u for up, d for down, and n for normal.<br>
+<br>
+<h2>Generating notes</h2>
+<br>
+Use one of the uppercase letters C, D, E, F, G, A, B to insert a corresponding note. To sharpen the note, put a + after it, and to flatten the note, put a - after it.<br>
+If you leave it at that, the note will get the default length. To change the length for just this single note, put a number directly after it. For example, E-2 is a half E flat.<br>
+Finally, you can put a . after the whole thing to get a dotted note. A dotted note is simply a note with its length increased by half of what it was. For example, F2. is a half F dotted, meaning an F the length of three quarter notes.<br>
+<br>
+<h2>Generating chords</h2>
+<br>
+To generate chords, i.e. simultaneous notes, connect them with an &amp; sign, like so:<br>
+C&amp;E&amp;G<br>
+This would generate a C major chord in the current channel.<br>
+It is valid to connect notes in this way even if they are of different lengths. Technically, the & operator only makes sure that all the notes it connects start at the same time. Consider the following:<br>
+l1C&amp;E&amp;G&amp;&gt;l8CDEFGAG4<br>
+In terms of a piano, this is a left hand playing a C major chord while the right hand, one octave higher, plays a little cheery melody.<br>
+<br>
+<h2>Repetitions</h2>
+<br>
+To repeat a sequence of commands a given number of times, enclose the sequence in brackets and put a number from 2 to 100 directly after the closing bracket, like so:<br>
+[CDE]3<br>
+This would be equivalent to:<br>
+CDECDECDE<br>
+Any sequence of commands is valid between the brackets. For example, to shift down 3 octaves you can write:<br>
+[&lt;]3<br>
+Repetitions can even be nested. For example:<br>
+[[CDE]3[EFG]3]2<br>
+is equivalent to:<br>
+CDECDECDEEFGEFGEFGCDECDECDEEFGEFGEFG<br>
+<br>
+Example:<br>
+<pre>
+// Write a song.
+
+#include "soundtrack.bgt"
+
+void main()
+{
+soundtrack s;
+string preamble = "t140u6";
+string chords1 = "@1v97l2a8r100q12[C&amp;E&amp;G]2[&lt;B&amp;&gt;E&amp;G]2[&lt;B-&amp;&gt;E&amp;G]2[&lt;A&amp;&gt;D&amp;F]2&lt;F+&amp;A&amp;B&amp;&gt;D&lt;A-&amp;B&amp;&gt;D&amp;E&lt;A&amp;&gt;C&amp;E&lt;G&amp;&gt;C&amp;E&lt;E&amp;G&amp;&gt;C&lt;D&amp;F+&amp;&gt;C&lt;F&amp;G&amp;&gt;C&amp;D&lt;F&amp;G&amp;B&amp;&gt;D";
+string chords2 = "[&lt;B&amp;&gt;D&amp;G]2[C&amp;E&amp;G]2q20&lt;B4&amp;&gt;D4&amp;B4C8&amp;E8&amp;&gt;C8&lt;&lt;l4B&amp;&gt;D&amp;B&lt;A&amp;&gt;C&amp;Aq12l2&lt;G&amp;B&amp;&gt;Gp8&lt;G&amp;B&amp;&gt;C&amp;G&lt;B&amp;&gt;D&amp;G&lt;B&amp;&gt;D&amp;F&lt;B&amp;&gt;D&amp;G&lt;G&amp;&gt;C&amp;E";
+string chords3 = "&lt;G&amp;&gt;C&amp;E&lt;F+&amp;&gt;C&amp;D&lt;F&amp;&gt;C&amp;D&lt;F&amp;B&amp;&gt;D";
+string chords4 = "[&lt;A&amp;&gt;C&amp;F]3&lt;G&amp;B&amp;&gt;F&lt;G&amp;&gt;C&amp;El8q8r10&lt;B-&amp;&gt;C&amp;Gl4&lt;A-&amp;&gt;C&amp;Fl1&lt;G&amp;&gt;C&amp;Ep8l4&lt;A-&amp;&gt;C&amp;E&lt;A-&amp;&gt;C&amp;Dp4l1&lt;E&amp;G&amp;&gt;C";
+string chords = chords1 + chords1 + chords2 + chords3 + chords2 + chords4;
+string bass1 = "@3r100C2.CC2.CC2.CC2.C&lt;B2&gt;E2&lt;A2.A&gt;D2.D&lt;G2.";
+string bass2 = "E2.E&lt;A2.A&gt;F2.FE2&lt;A2&gt;F2&lt;B2&gt;E2&lt;A2&gt;";
+string bass3 = "D2.D&lt;G2.&gt;F";
+string bass4 = "D2.D4&lt;G2.G&gt;C1C1C4&lt;G4p4C1";
+string bass = bass1 + "G&gt;" + bass1 + "&gt;F" + bass2 + bass3 + bass2 + bass4;
+string melody1 = "@2a10r10E2.p4E2.p4EE8FCD2.p4p8DD8E4.&lt;B8&gt;C4.DC&lt;BA2p8&gt;E.";
+string melody2 = "l4G2.p4G2.p4B&gt;C8&lt;BAG2.p4p8B8B8&gt;C8&lt;B4.A8G4.&gt;D8C4.&lt;";
+string melody3 = "E8E2.p8D8CD2A4.";
+string melody4 = "l4EEF8F4.GA2B2&gt;C1.";
+string melody = melody1 + "D2.p4" + melody1 + "D2p8A4." + melody2 + melody3 + melody2 + melody4;
+s.add_channel(preamble + "o3" + bass);
+s.add_channel(preamble + "o2" + bass);
+s.add_channel(preamble + chords);
+s.add_channel(preamble + melody);
+s.add_channel(preamble + "o5v90" + melody);
+s.write("song4.wav");
+}
+</pre>
+</body>
+</html>

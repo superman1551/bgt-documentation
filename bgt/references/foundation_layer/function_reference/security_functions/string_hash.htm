@@ -1,0 +1,66 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_hash</b><br>
+<br>
+This function generates what is known as a hash for a block of data, using one of several available algorithms.<br>
+<br>
+string string_hash(string data, int algorithm, bool binary)<br>
+<br>
+Parameters:<br>
+data<br>
+The data from which the hash should be generated.<br>
+algorithm<br>
+A number indicating which hashing algorithm to use (see remarks).<br>
+binary<br>
+A boolean specifying whether or not the resulting string should be in binary or hex form, true meaning binary.<br>
+<br>
+Return value:<br>
+The generated hash on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+A hash is a fixed size representation of an arbitrary amount of data. What this means in practice is that you can pass a block of data of any length to this function and you will get a string back which is a sort of identifier of the data, always with the same size. It doesn't matter if the data block is 1 kb or 1 gb, the size of the hash will always be the same. The hash will change completely if even one byte of the data block is different, making it very useful for tasks such as integrity verification of files etc.<br>
+<br>
+The available algorithms are:<br>
+<ul>
+<li>1 - SHA256</li>
+<li>2 - Sha512</li>
+</ul>
+<br>
+Please note that due to the nature of hashes, some completely different blocks of data will ultimately generate the same hash. This is an inevitable consequence of trying to convert an arbitrary amount of data to a fixed size representation, since a hash is entirely different from data compression. However, the frequency at which duplication occurs depends on what hashing algorithm you use. The 256 bit algorithms are more likely to generate duplicates than their 512 bit counterparts, which are twice as large and thus have more room for variation.<br>
+<br>
+Example:<br>
+<pre>
+// Generate a SHA256 bit hash for a normal piece of text, as a hex string.
+
+void main()
+{
+string text="Hello, this is the text from which the hash should be generated.";
+alert("Original text", text);
+text=string_hash(text, 1, false);
+alert("Hash", text);
+}
+</pre>
+</body>
+</html>

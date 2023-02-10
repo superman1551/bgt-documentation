@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_is_digits</b><br>
+<br>
+This function returns a boolean value showing whether the passed string contains purely digits.<br>
+<br>
+bool string_is_digits(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be evaluated.<br>
+<br>
+Return value:<br>
+Returns true if the string contains purely digits, false if not or if an error occurred.<br>
+<br>
+Remarks:<br>
+This function does not evaluate numbers, but rather digits. If the string contains a negative or floating point number this function will return false.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+string text1, text2;
+text1="0.5";
+text2="15244";
+if(string_is_digits(text1))
+{
+alert("string_is_digits test", "text1 contains digits only.");
+}
+else
+{
+alert("string_is_digits test", "text1 does not contain only digits.");
+}
+if(string_is_digits(text2))
+{
+alert("string_is_digits test", "text2 contains digits only.");
+}
+else
+{
+alert("string_is_digits test", "text2 does not contain only digits.");
+}
+}
+</pre>
+</body>
+</html>

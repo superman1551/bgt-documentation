@@ -1,0 +1,45 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_peer_list</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will return an array containing the unique ID's of all connected peers.<br>
+<br>
+uint[] get_peer_list()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array containing the unique ID's of all connected peers on success, or an array with 0 elements on error.<br>
+<br>
+Remarks:<br>
+This method is useful for sending messages to all connected peers, as the returned array can easily be used in a loop to send the same message to everyone. Please note that the same functionality can be achieved by passing 0 as the peer ID to either the send_unreliable or send_reliable methods.<br>
+<br>
+This function is also useful when you wish to disconnect all peers gracefully before destroying the host.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

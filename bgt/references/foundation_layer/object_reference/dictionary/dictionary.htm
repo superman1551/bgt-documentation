@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>dictionary</title>
+</head>
+<body>
+<br>
+<b>dictionary object</b><br>
+<br>
+The dictionary object is used to store pairs of keys and values, the key being a string with which one can look up a value of any type.<br>
+<br>
+dictionary()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The dictionary object comes in handy when you need to store an arbitrary number of variables with different types. When setting a new value you must use a unique string key with which you can then refer to the value again. You are able to delete a value at any given time, without affecting any of the others.<br>
+<br>
+In more technical terms, the dictionary is what is commonly known as a hash map. When a new key/data pare is inserted, a hash is generated from the key which makes later lookup operations much faster than if a linear search of all the keys had to be performed.<br>
+<br>
+Example:<br>
+<pre>
+dictionary game_board; // Declare our dictionary.
+
+void main()
+{
+int value; // Declare a variable for retrieving values from a dictionary.
+
+// Set our values.
+game_board.set("1", 2); // Sets the value 2 to a key called 1.
+game_board.set("2", 4); // Sets the value 4 to a key called 2.
+game_board.get("1", value); // Retrieve value for 1.
+alert("Dictionary example", "current value="+value);
+game_board.get("2", value); // Retrieve value for 2.
+alert("Dictionary example", "current value="+value);
+game_board.delete_all(); // Delete all the values.
+}
+</pre>
+</body>
+</html>

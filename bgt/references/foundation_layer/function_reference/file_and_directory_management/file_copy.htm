@@ -1,0 +1,71 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>file_copy</b><br>
+<br>
+This function copies a given file.<br>
+<br>
+bool file_copy(string source, string destination, bool overwrite)<br>
+<br>
+Parameters:<br>
+source<br>
+The name of the file to copy.<br>
+destination<br>
+The name of the file to copy to.<br>
+overwrite<br>
+A boolean specifying whether the source file should be overwritten (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Situations in which this function may return false could include:<br>
+<ul>
+<li>The source file does not exist. In this case the function will set the last error flag to -15.</li>
+<li>The destination filename references a directory that does not exist. In this case the last error flag will be set to -30.</li>
+<li>The overwrite flag is set to false and the destination exists. In this case the last error flag will be set to -35.</li>
+</ul>
+<br>
+A file copied with this function inherits all the attributes of the source file.<br>
+<br>
+This function works with both absolute and relative paths.<br>
+<br>
+Example:<br>
+<pre>
+// Copy the file C:\test.txt.
+
+void main()
+{
+if(file_copy("C:\\test.txt", "c:\\test_copy.txt", false))
+{
+alert("Information", "The file was copied successfully.");
+}
+else
+{
+alert("Error", "The file could not be copied.\nReason: " + get_last_error_text());
+}
+}
+</pre>
+</body>
+</html>

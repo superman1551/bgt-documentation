@@ -1,0 +1,59 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>read_environment_variable</b><br>
+<br>
+This function reads the value of a user specific or system wide environment variable.<br>
+<br>
+string read_environment_variable(string name)<br>
+<br>
+Parameters:<br>
+name<br>
+The name of the environment variable to read.<br>
+<br>
+Return value:<br>
+A string containing the retrieved value on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+Environment variables are pieces of information that are either related to the operating system or to the current user. This function can retrieve both types.<br>
+<br>
+The environment variable names are not case sensitive.<br>
+<br>
+Example:<br>
+<pre>
+// Try to retrieve some information about the processor.
+
+void main()
+{
+string value=read_environment_variable("PROCESSOR_IDENTIFIER");
+if(get_last_error()!=0)
+{
+alert("Error", get_last_error_text());
+exit();
+}
+alert("Value", value);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>number_to_words</b><br>
+<br>
+This function converts an integral number into English words.<br>
+<br>
+string number_to_words(double number, bool include_and)<br>
+<br>
+Parameters:<br>
+number<br>
+The number to convert.<br>
+include_and<br>
+A boolean which specifies whether or not the word "and" should be inserted in the appropriate places in the output string.<br>
+<br>
+Return value:<br>
+The word representation of the number on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+This function only works with numbers (positive or negative), without decimals. If the supplied number contains decimals, these will simply be removed without rounding.<br>
+<br>
+If the number is lower than -999999999 (minus nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine) or greater than 999999999 (nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine), the function will fail.<br>
+<br>
+This function is very useful when you wish to have a number spoken by using concatenated sound files, for instance. Simply split the words up into an array with the string_split function, and then loop through the resulting array and play an appropriate sound file for each word.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+long my_number=random(-1000, 1000);
+string result=number_to_words(my_number, true);
+alert("Result", my_number + " is written as " + result + ".");
+}
+</pre>
+</body>
+</html>

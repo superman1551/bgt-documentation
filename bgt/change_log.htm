@@ -1,0 +1,436 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Change Log</title>
+</head>
+<body>
+<br>
+Version 1.3 (revision 2):<br>
+* Re-released the engine as freeware. All features that used to be exclusive to the paid versions of the engine are now available for free. Enjoy!<br>
+* Removed the "check for updates" feature. New releases will be announced on the Blastbay website as well as in the forum, which has an rss feed.<br>
+* Added the ability to specify a custom port number as part of an http request (sponsored by Valiant Galaxy Associates and Alter Aeon).<br>
+* Fixed a very serious problem in the audio subsystem that would cause random crashes and hangs.<br>
+* Set an upper bound of 10000 by 10000 for the size of a pathfinder map.<br>
+* Made the calendar object verify that the parameters given to the set method are in range, as wildly incorrect arguments could actually result in crashes.<br>
+* Fixed a crash that would occur in the tone synth due to incorrectly calculated sample offsets when calling rewind or rewind_ms (thanks Corey).<br>
+* The max_distance property in the sound_pool include class is now sound specific, which means that different sounds can have different max distances rather than just one global setting (thanks Aaron).<br>
+* Fixed a runtime error that would sometimes occur in the audio_form include class when using multiline input fields (thanks Aaron).<br>
+* Updated the language tutorial with some information about uninitialized variable usage (thanks Aaron).<br>
+* Fixed some ambiguities in the documentation for the call method of the library class.<br>
+<br>
+Version 1.3 (revision 1):<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users, and adds the following features:<br>
+1. The infamous "unexpected end of file" compilation error now shows a lot more information.<br>
+2. It is now possible to declare several class properties of the same type on a single line, separated by comma.<br>
+3. It is also possible to initialize class properties in their declaration, rather than having to do it in the constructor.<br>
+Note: This means that some obscure scripts, where a child class calls a method in the parent class that in turn tries to access its members before its constructor has been called by the child class, will now result in a null pointer access script runtime error. This happens very rarely, but should be taken into account if you are upgrading and have scripts that may potentially reproduce the above scenario.<br>
+4. Large scripts will now compile significantly faster, and loading of precompiled byte code is faster as well.<br>
+5. The script compiler no longer implements a default constructor for classes that define a constructor with arguments. If you want both a default constructor and a constructor that takes arguments, you must define both of them explicitly (see the language tutorial for more information).<br>
+* Added DLL call support.<br>
+* Added the ability to compile scripts either as debug or release builds, and added documentation to explain the differences (see appendix h).<br>
+* Added some basic serialization functions that make it easier to save and load data from files or from memory.<br>
+* Made it possible to serialize and restore the exact state of the random number generator at any point in time.<br>
+* Added an object called combination which contains algorithms to calculate different types of combinations from an arbitrarily large set of items (sponsored by Marc Andersen).<br>
+* Added a pan property to the tone synth object which affects all subsequently generated notes.<br>
+* Added reverberation to the tone synth object, which is controlled by various properties.<br>
+* Added a new function called is_admin which checks if the program is being run with administrator priviliges (thanks Liam).<br>
+* Added some new functions to force/simulate keystrokes (thanks Nikola).<br>
+* Added two new functions (string_base64_encode and string_base64_decode) which makes it possible to convert binary data to and from a printable, Ascii compatible representation.<br>
+* The keyhook is now automatically uninstalled when the user leaves the game window, and installed again when the window is reactivated. This is to prevent lag in certain screen readers when the user is working with an application other than the game.<br>
+* Upgraded to the Visual Studio 2010 compiler, which gives a performance boost.<br>
+* Changed it so that initial text that is placed in an input box is selected automatically when the window appears (thanks Nikola).<br>
+* Added a new folder constant (DIRECTORY_MY_DOCUMENTS), see appendix e for more details (thanks Liam).<br>
+* Significantly optimized the way audio files are read, resulting in a great performance improvement when loading sounds (thanks Aaron).<br>
+* Optimized the string_contains function.<br>
+* Significantly optimized the internals of the sound_pool include class so that it now runs much faster.<br>
+* Made the script compilation result dialog show the amount of time that the compilation took.<br>
+* Added a speak_to_file method to the tts_voice object (thanks Marc).<br>
+* Added a function to hide the game window (thanks Nikola).<br>
+* Added the concept of named items to the dynamic_menu include class, making it easier to figure out what the chosen item is regardless of in what order the items were added.<br>
+* Added a new method to the audio_form class that allows a listbox cursor to be changed (Thanks Damien).<br>
+* Allowed the home and end keys to navigate to the top and bottom of a listbox in an audio form.<br>
+* Fixed a serious bug in the audio subsystem which would cause random crashes.<br>
+* Fixed a crash which would occur when converting large floating point numbers to strings (thanks Corey).<br>
+* Fixed a bug which would cause the string_split function to enter an infinite loop if the NULL terminator was used in the delimiter (thanks Damien).<br>
+* Fixed a crash which would sometimes occur after a runtime error (thanks Corey).<br>
+* Improved support for the Window Eyes screen reader (thanks Aaron and Jason).<br>
+* Fixed a problem where erroneous warning messages could be triggered if the initialization of the global variables failed (thanks Damien).<br>
+* Fixed a bug in the sound_pool include class which made it try to reload a sound that came back within earshot, from the currently used storage rather than the storage that was active when the sound was initially loaded (thanks Liam).<br>
+* Fixed a bug in the dynamic_menu include class which would cause the intro message not to be heard if the auto_speak_first parameter was true and the first item used an output different from the intro message (thanks Aaron).<br>
+* Fixed a bug in the audio_form include class in the get_list_count method where the maximum index was being returned rather than the number of items as described in the documentation (Thanks Damien).<br>
+* Fixed several multiline input field bugs in the audio_form include class (Thanks Damien).<br>
+* Updated the language tutorial with information about the new behavior of automatic default constructors, and about how to assign values to class properties directly in their declaration.<br>
+* Added a serialization tutorial.<br>
+* Documented the string object.<br>
+* Added four missing overloaded operators to the list in the language tutorial (opPreInc, opPreDec, opPostInc and opPostDec).<br>
+* Added a note to the number_to_hex_string documentation regarding the fact that it produces lowercase results (thanks Jordan).<br>
+* Added a list of command line options available in the BGT engine (see appendix g).<br>
+* Updated the documentation for the profiler to explain the differences when profiling debug versus release builds.<br>
+* Failed to document the new array methods mentioned in the change log for version 1.2 revision 1 (thanks Marc).<br>
+* Failed to document the new get_size method mentioned in the change log for version 1.2 revision 1 (thanks Damien).<br>
+* Failed to document the sound_is_playing method in the sound_pool include class(Thanks Lukás).<br>
+* Failed to document several methods of the dynamic_menu class (Thanks Lukás).<br>
+* Fixed an error in one of the examples in the language tutorial to do with integer calculations.<br>
+* Fixed a few typos in the html code in the documentation (thanks Nikola).<br>
+<br>
+Version 1.2 (revision 1):<br>
+* Modified the internal encryption key scheme to be considerably more secure.<br>
+IMPORTANT! The encryption functions are not backwards compatible. You will not be able to decrypt any data encrypted with earlier revisions of BGT, using this version. These measures were taken to make it harder for hackers to steal keys from memory dumps.<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users, and adds the following features:<br>
+1. A method called reserve to the array object which is useful for optimizing performance because it preallocates memory for future elements.<br>
+2. A method called is_empty to the string, the array and the dictionary objects which sometimes is a more efficient shortcut than checking the length.<br>
+3. A method called get_size to the string, the array and the dictionary objects. In the two former cases, get_size is the same as the length method.<br>
+4. Some great optimizations to the array methods that call user defined functions internally, such as find and sort_ascending/sort_descending.<br>
+* Added joystick support.<br>
+* Added some new functions to perform script code profiling.<br>
+* Added an instance object that allows you to ensure that only one copy of your game is running (thanks Damien).<br>
+* Added a function called set_error_output which enables you to have internal engine errors automatically printed to a file throughout the execution of the program, along with some other information such as the script call stack when the error happened.<br>
+* Added a method called get_headers to the http object that retrieves only the headers from a given location on an http server (thanks Nikola).<br>
+* Added two functions (set_sound_master_volume and get_sound_master_volume) to adjust the volume of the entire sound output in a given game.<br>
+* Added two functions (screen_reader_set_library_path and screen_reader_unload_library) which provide you with more control over how BGT uses the dll files for System Access and NVDA (sponsored by Lukáš Hosnedl).<br>
+* Added an optional parameter to the input_box function to fill the box with some initial text (thanks Claudio).<br>
+* Added a global script property called SCRIPT_EXECUTABLE which retrieves the full path to the program (sponsored by Lukáš Hosnedl).<br>
+* The set_sound_decryption_key method now opens the default audio device implicitly if a device isn't already open.<br>
+* Reduced the size of precompiled game executables a little more.<br>
+* The maximum stack size has been increased from 2000 to 10000 functions.<br>
+* Updated the performance optimization tutorial with a section on reserving memory in arrays.<br>
+* Added support for progress bars with beeps to the audio_form include class (thanks Christopher).<br>
+* Added an optional parameter to the non-extended play methods in the sound_pool include class, to allow these to create persistent sounds as well (thanks Ryan).<br>
+* Added support for multiselection enabled listboxes in the audio_form include class (Thanks Damien).<br>
+* Added several new methods and constants for retrieving, setting and managing control information in the audio_form include class (Thanks Damien).<br>
+* Added support for additional keys such as right control and NumPad Enter to be used in the audio_form class (Thanks Damien).<br>
+* Improved several speech and keyboard behaviors in the audio_form class (Thanks Damien).<br>
+* Changed a behavior in the audio_form so that now only one progress bar in the form may be flagged as global (Thanks Damien).<br>
+* Changed the name of the redist/screen-readers directory to redist/screen_readers, as it was originally supposed to be.<br>
+* Fixed a crash in the load_from_memory method of the sound object if invalid input is given (thanks Nikola).<br>
+* Fixed a bug that would cause sound cloning to be performed incorrectly if a file with the same name was loaded both from a pack file and from disk.<br>
+* Fixed a bug in the write method of the logger class where a file would still be written to even if the log was empty (Thanks Damien).<br>
+* Fixed a bug in the logger class that caused line breaks not to be written correctly (Thanks Damien).<br>
+* Fixed several crashes in the audio_form class (Thanks Damien).<br>
+* Fixed a bug in the audio_form include class where the cursor of a listbox would reset if adding an item to a list (Thanks Damien).<br>
+* fixed a bug in the audio_form class whereby the set_tts_object method would fail if the form was active (Thanks Damien).<br>
+* Fixed a bug in the audio_form class that pasted multiline text into a single line field (Thanks Damien).<br>
+* Notice: Failed to document the additional parameters in the create_button method in the audio_form include class (thanks Damien).<br>
+* Fixed a few typos in the language tutorial (thanks Marc and Michael).<br>
+<br>
+Version 1.1 (revision 5):<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users, and adds the following features:<br>
+1. Rather than crashing when there isn't enough memory available to allocate an array, the engine now triggers a regular script runtime error.<br>
+2. The script compiler is now separate from the virtual machine, which means that compiled game executables are quite a bit smaller than before.<br>
+* Added the ability to store a pack file inside precompiled executables that can be accessed both by the pack_file object and by the set_sound_storage function (sponsored by Marc Andersen).<br>
+* Added four new functions (key_up, key_released, keys_up and keys_released).<br>
+* Added a method called get_keys to the dictionary.<br>
+* Added a method called load_from_memory to the sound object which accepts a buffer of data, rather than a filename.<br>
+* Added a method called write_wave_sound to the tone synth object which mixes its data down into a sound object rather than to a wave file.<br>
+* Significantly optimized the internal handling of string constants which will give a performance improvement of about 260 % for scripts that use a lot of literals.<br>
+* Optimized the dictionary to use a hash map implementation from the Boost C++ libraries rather than the standard map, which increases performance a bit.<br>
+* Optimized the string_contains function slightly.<br>
+* Added a new function called garbage_collect which allows you to control the internal garbage collector used in BGT a little more precisely.<br>
+* Added a new function called file_copy.<br>
+* Made the argument to the read method in the file object optional.<br>
+* Decreased the number of internal memory allocations that take place when a timer object is created, which gives a slight performance boost.<br>
+* Added a new boolean property to the dynamic_menu include class, enable_home_and_end, which enables and disables these extra navigational keys to jump to the start and the end of the menu respectively (thanks Damien).<br>
+* Optimized the dynamic_menu include class so that it now only initializes Sapi when it is actually needed (thanks Marc).<br>
+* Added some safeguards to catch C++ exceptions during execution and report them with a script runtime error, rather than simply crashing.<br>
+* Scripts are now compiled with fewer suspend instructions which increases over-all execution performance.<br>
+* Removed the limiter from the mixing chain of the tone synth. A simple peak normalize function is all that's needed to prevent clipping.<br>
+* Added a tutorial on how to include a pack file in the executable.<br>
+* Added a tutorial on how to optimize the overall performance of BGT games.<br>
+* Updated the soundtrack include class to expose the support for triangle waveforms (thanks Felix).<br>
+* Fixed a bug where the engine would crash if the user tried to convert an infinite or NaN floating point number into a string (thanks Emanuel and Andreas).<br>
+* Fixed a bug where the window event queue wasn't cleared before a question dialog box appeared, which could cause issues with the keyboard in certain cases (thanks Christopher).<br>
+* Fixed some spelling errors in the documentation, and updated the change log to indicate which features were sponsored by third parties both in the past and for this release.<br>
+* Cleaned up the code in the dynamic_menu include class a great deal, removing a lot of unnecessary parts.<br>
+* Changed the BGT version number in the installer from 1.0 to 1.1 (thanks Kevin).<br>
+<br>
+Version 1.1 (revision 4):<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users.<br>
+* Added a pitch property to the tts_voice object.<br>
+* Added two new global constants (TIME_SYSTEM_RUNNING_MILLISECONDS, and TIME_STAMP).<br>
+* Reworked the script compilation process to make the resulting game executables smaller and more compact.<br>
+* Changed the numeric properties from doubles to integers in the tts_voice object to save space and some performance, as doubles served no purpose.<br>
+* Changed the dynamic_menu include class so that the methods that add items return the menu position of the new item, rather than a boolean (thanks Damien).<br>
+* Fixed a serious memory leak that could consume several hundred mb in a matter of seconds if the speaking property of the tts_voice object was accessed often.<br>
+* Fixed a problem where the garbage collector could overflow if an engine function that returned an array was called too often in a tight loop without a wait call (thanks Nikola).<br>
+* Fixed a bug where the return values from the diff_hours, diff_minutes and diff_seconds methods in the calendar object would be wrong if the years of the time stamps were different.<br>
+* Fixed some artifacts in the tone generator (thanks Jayson and Damien).<br>
+* Fixed the handling of global variable initialization errors in compiled game executables (thanks Damien).<br>
+<br>
+Version 1.1 (revision 3):<br>
+* Limited the number of values that can be written to the registry for a given game to 50 (thanks Willem).<br>
+* Fixed a runtime error in the dynamic menu that would happen when Sapi was used with no explicit tts_voice handle (thanks John).<br>
+* Fixed a bug in the run_extended method in the dynamic menu include class when it was used with screen readers (thanks Hayden).<br>
+<br>
+Version 1.1 (revision 2):<br>
+* Added a settings object which allows you to read and write in the Windows registry.<br>
+* Added two global constants (double BGT_VERSION and int BGT_REVISION) to determine the version and revision of the engine that is being used (thanks John).<br>
+* Added the ability to set a speech output mode (either Sapi 5.1 or a screen reader) to the dynamic_menu include class.<br>
+* Notice: Failed to mention that compiled scripts can now read the command line parameters given to them, in the change log for version 1.1 revision 1.<br>
+* Notice: Failed to document the set_speech_mode method in the audio_form include class in version 1.1 revision 1 (thanks Damien).<br>
+* Fixed a bug that caused the result from the get_characters function to be slightly out of date (thanks John).<br>
+* Fixed a bug where the update_sound_start_values method of the sound_pool include class didn't work for stationary sounds (thanks Damien).<br>
+* Fixed a bug that caused the index operator for strings not to retrieve characters properly.<br>
+<br>
+Version 1.1 (revision 1):<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users, gives significant performance boosts in many areas, and adds the following features:<br>
+1. Declaring functions with default arguments.<br>
+2. Several new features to the array object such as sorting, reversing, searching etc.<br>
+* Added support for mouse devices.<br>
+* Added the pathfinder object to find intelligent paths between two points with a lot of customization options.<br>
+* Included one of the add-ons for the script interpreter, a vector object to represent locations in space with many overloaded operators for easy manipulation.<br>
+* Added support for communicating directly with four popular screen readers in order to have text spoken.<br>
+* Changed the memory management functions from the standard malloc and free to custom replacements which are much faster, giving a great performance boost of the entire engine as large amounts of dynamic memory are allocated all the time during execution.<br>
+* Optimized all functions and methods that return objects (particularly arrays), resulting in a significant speed increase for these.<br>
+* Added two functions called keys_down and keys_pressed to return a list of all the keys that are currently down or that have just been pressed.<br>
+* Added a function called list_sound_devices, and another called open_sound device which enables the opening of any given device on the user's system rather than just the default one (thanks Liam).<br>
+* Added a function to read environment variables (thanks Marc).<br>
+* Added a function to read text from the clipboard.<br>
+* Added an option to the BGT program group to check for engine updates.<br>
+* Updated the ENet library to the latest version which fixes some bugs and improves performance even further when using reliable packets.<br>
+* Changed the behavior when a runtime error occurs, so that it is now possible to choose whether or not the complete stack trace text should be copied to the clipboard before the program exits.<br>
+* Added a tutorial about pathfinding (thanks Felix).<br>
+* Extended the language tutorial with a description of functions with default arguments.<br>
+* Made the automatic window polling occur a little less frequently which gives a slight performance boost.<br>
+* Added the install_keyhook and uninstall_keyhook functions to enable BGT games to access the keyboard even while the Jaws for Windows screen reader is active.<br>
+* Added a method called read_until to the file object that reads data until a certain criteria has been met.<br>
+* Added a method called force to the timer object to simulate that a certain amount of time has elapsed, which is needed for serialization.<br>
+* Filtered out the signed/unsigned mismatch warning from the compiler output as it was being triggered in the most trivial cases.<br>
+* Significantly improved the performance of the keyboard management functions.<br>
+* Completely rewrote the generate_computer_id function to be a lot more reliable.<br>
+IMPORTANT! The function is not backwards compatible with earlier versions, as they had serious flaws. Thus, none of the generated ID's will be the same.<br>
+* Rewrote the implementation of the tts_voice object so that it now uses the IDispatch COM interface, which allows for more functionality such as enumerating and changing voices.<br>
+* Optimized the stop method of the tts-voice object slightly.<br>
+* Improved the unpredictability of the seed to the random number generator so that it no longer generates the same sequence of numbers if two BGT instances are launched within the same second.<br>
+* Added a function called string_distance to check how similar two arbitrary strings are.<br>
+* Added checks for invalid input to the key_down and key_pressed functions as this would otherwise cause a hard crash.<br>
+* Added the ability to generate triangle waves to the tone synth.<br>
+* Changed the key_down and key_pressed functions to take an integer as their parameter.<br>
+* Added support for screen readers to the audio form include class (thanks Damien).<br>
+* Added a new optional parameter to the extended methods in the sound_pool include class to set whether or not a returned slot should be persistent and not get automatically cleaned up after playback is finished.<br>
+* Extended the FAQ with a brief description of how to protect your sounds with encryption in a way that makes it harder to break.<br>
+* Added some new information to the documentation about how to use the sound_pool include class properly.<br>
+* Fixed a number of serious crashes that would occur occasionally on Windows 7 (thanks Lukáš and Daniel).<br>
+* Fixed an ancient and very serious bug that caused sounds to mysteriously inherit properties from each other (thanks Lukáš, Michael and Damien).<br>
+* Fixed a memory leak that would occur on exit.<br>
+* Fixed a bug in the network_event overloaded assignment operator that would cause it to crash seemingly at random (thanks Emanuel).<br>
+* Fixed a bug in the tone generator that would cause it to produce notes that were slightly off key.<br>
+* Fixed a bug where the properties SCRIPT_CURRENT_LINE, SCRIPT_CURRENT_FILE and SCRIPT_CURRENT_FUNCTION were returning error values if accessed before main began executing.<br>
+* Fixed a number of bugs in the audio form include class (thanks Damien).<br>
+* Fixed a bug in the sound_pool include class where more sounds would start playing after a pause/resume operation.<br>
+* Fixed a bug where some uncommon international characters would not be spoken properly by the tts-voice object (thanks Lukáš).<br>
+* Fixed a bug in the file object where the reached_end property would not be accurately set when reading files in binary rather than text format (thanks Damien).<br>
+* Fixed a bug where the last error flag would not be correctly set after a call to one of the encryption or decryption functions (thanks Damien).<br>
+* Fixed a bug in the input_box function where it would freeze the window if no information text was given (thanks Nikola).<br>
+* Fixed a bug where the wrong error code would be given if a file could not be opened for reading in binary mode using the file object.<br>
+* Fixed some errors in the documentation layout (thanks Damien).<br>
+<br>
+Version 1.0:<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users, as well as adds the following features:<br>
+1. The ability to convert booleans to strings.<br>
+2. Four new methods to the array called insert_at, remove_at, insert_last and remove_last.<br>
+3. Explaining messages when failing to initialize a global variable after a compilation.<br>
+4. Explaining messages when trying to declare variables within a switch/case statement.<br>
+5. The ability to write floating point numbers as .42, without the leading 0.<br>
+* Updated the ENet library to the latest version which improves bandwidth throttling of reliable packets.<br>
+* Added a calendar object for more advanced date and time calculations.<br>
+* Added the pack_file object to enable reading and writing pack files, which are also used by the sound object.<br>
+* Extended the language tutorial with several new chapters as well as a section about array initialization lists (thanks Felix).<br>
+* Extended the language tutorial with a description on how to use multidimensional arrays.<br>
+* Added a series of comprehensive tutorials that explain how games are written in practise (thanks Felix).<br>
+* Added support for sending synchronous HTTP GET and POST requests through two simple functions.<br>
+* Added the http object which allows for more advanced HTTP access using an asynchronous interface, which means that any number of files/resources can be downloaded in the background from the Internet.<br>
+* Added two functions (url_encode and url_decode) to make it easier to assemble parameters for Get and Post HTTP requests.<br>
+* Added the generate_computer_id function.<br>
+* Added a function to run third party executables.<br>
+* Added several new file and directory functions (directory_create, directory_delete, directory_exists, and file_delete).<br>
+* Added an article to the tutorials section of this documentation that explains the various methods used for game registration.<br>
+* It is now possible to modify an individual character at a particular location in a string, just as if the string were an array.<br>
+* Added two hash functions to the engine (file_hash and string_hash) which expose sha256 and sha512 hash generation at present, returned in either hex or binary form.<br>
+* Added a number of constants listed in appendix e that contain the paths of special folders on the system (thanks Liam).<br>
+* Added the get_last_error_text function that converts the value returned by get_last_error to its corresponding textual description (thanks Damien).<br>
+* Added a function to check whether the game window is currently active.<br>
+* Added the COMMAND_LINE property (listed in appendix d) to retrieve the parameters given to a compiled game executable.<br>
+* The array object is now fully documented (thanks Damien).<br>
+* Added the reset method for the dynamic menu include class to the documentation (thanks Lukáš).<br>
+* Added a method called set_sound_object to the dynamic_menu include class which allows you to specify a sound object that should be used for auditory feedback.<br>
+* Added a virtual audio window include class (thanks Damien).<br>
+* Added the soundtrack include class which wraps the tone_synth object in a simpler interface (thanks Felix).<br>
+* The error dialog now displays the contents of a faulty line as well as its number, rather than just the number on its own.<br>
+* Changed the behavior of the file_exists function so that it only works with files, and added the directory_exists function instead.<br>
+* Removed every trace of the MD5 hashing algorithm from the encryption layer in the engine, which is not only good for improving security but also for humanity at large.<br>
+Please note: All data that was encrypted with a prior version of BGT will no longer be valid and cannot be decrypted with this release.<br>
+* Fixed a bug where I had accidentally made float equal to double in the engine.<br>
+* Fixed a bug in the number_to_words function (thanks Daniel).<br>
+* Fixed a bug in the string_trim_left function that would cause it to trim one character too little.<br>
+* Fixed a bug in the string_contains function that would cause it to erroneously return a positive result even if a particular occurrence was not found in rare cases.<br>
+* Fixed a mistake in the documentation for the set method in the dictionary object (thanks Damien).<br>
+* Fixed a typo in the example for the freq_ms method in the tone_synth object (thanks Jason).<br>
+* Updated the end user lisence agreement to clarify the fact that an unlimited number of non-commercial games may also be created with the pro single version of the engine.<br>
+* Fixed a typo in the documentation for the write method of the logger include class (thanks Michael).<br>
+* Fixed a large number of trivial typos in the documentation.<br>
+* Added the default start and end time values for the edge fades in the tone_synth object to the documentation (thanks Oriol).<br>
+<br>
+Beta Version 0.5.1:<br>
+* Updated the end user license agreement to cover the difference between the pro single and pro unlimited versions of the engine.<br>
+<br>
+Beta Version 0.5:<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users.<br>
+* Added a powerful sound management include class that handles positioning of an arbitrary number of sound sources in a 1d or 2d environment.<br>
+* Updated the functions in sound_positioning.bgt to be more flexible, and added two new ones with extra parameters. This will require some minor modifications to scripts that currently make use of position_sound_2d.<br>
+* Added support for high performance networking, optimized especially for fast paced action games.<br>
+* Added a method called run_extended to the dynamic menu include class which allows you to specify a starting position for the menu cursor, and to have the initially selected item automatically announced after the intro finishes.<br>
+* Added a reset method to the dynamic menu include class that allows you to remove all previously added items, as well as optionally reset all the behavior properties to their defaults.<br>
+* Added a boolean property called paused to the sound object which is set to true if a sound has been paused with an explicit call to the pause method.<br>
+* Added a function to convert numbers to their corresponding hexadecimal string counterparts.<br>
+* Added two functions (find_files and find_directories) that return a list of all the files and all the directories in a given path, respectively.<br>
+* Made the engine registerable, with automatic detection of the purchased version (lite or pro) based on the key given.<br>
+* Added the ability to compile scripts into standalone executables if a lite or pro license has been purchased.<br>
+* Added a credits section to the documentation.<br>
+* Added a function called get_call_stack_size to retrieve the number of functions currently on the stack.<br>
+* Allowed the use of multiline strings (e.g. string literals that contain a line feed) (thanks Nick).<br>
+* Restructured the script execution flow, which will allow the engine to invoke user defined callback functions in the future.<br>
+* changed the range of the rate property in the tts_voice object from -100 (slowest) to 100 (fastest), so that it is now -10 (slowest) to 10 (fastest) which prevents situations where no change is perceived even though the property is actually modified (thanks Jason).<br>
+* Fixed a slight inconvenience in the dynamic menu include class where the text to speech and the audio options were not cooperating with one another.<br>
+* Fixed a bug in the random number generator that would cause it to generate the same sequence of numbers every time (thanks Sorin).<br>
+* Changed the internal buffer size for streaming sounds in order to boost performance slightly.<br>
+* Fixed a bug that would sometimes cause static sounds to have an initial starting position greater than 0.<br>
+* Improved the error output when including script files that do not exist, so that the engine now displays all the locations in which it tried to find the file rather than just the last one.<br>
+* Fixed a bug in the #include searching algorithm so that it now derives the current base directory for a relative include path based on the location of the script that is trying to include it (thanks Damien).<br>
+* Fixed a few bugs that would cause crashes when calling certain functions during global variable initialization (thanks Damien).<br>
+* Made the exit function usable even during global variable initialization.<br>
+* Fixed a bug where the volume property in the tts_voice object would get incorrect values (thanks Jason).<br>
+* Fixed a bug where the key_down function could erroneously report that a key was down if the user left the window while the key was still down but released later.<br>
+* Fixed a bug where certain special characters would not be spoken properly by the tts_voice object (thanks Oriol).<br>
+* Fixed a few typos in the language tutorial.<br>
+<br>
+Beta Version 0.4.1:<br>
+* Changed the number_speaker class back to only have one argument in the speak and speak_wait functions, and have the include_and parameter as a property instead. This means that code written with beta versions earlier than 0.4 can remain unchanged.<br>
+<br>
+Beta Version 0.4:<br>
+* Changed the way that the script engine interprets characters, so that it now works exclusively with the extended Ascii character set and no longer complains about invalid Unicode sequences every now and then.<br>
+* Added two functions (ascii_to_character and character_to_ascii) to convert between string characters and their numerical Ascii representations.<br>
+* Added two functions (hex_to_string and string_to_hex) to convert between normal strings and their hexadecimal representations (thanks Felix).<br>
+* Added a function called get_characters which retrieves actual characters pressed by the user in the window, so that one no longer has to rely on the BGT keyboard handling to intercept written text.<br>
+* Added functions to encrypt and decrypt files and strings using an algorithm that has not yet been cracked by anyone.<br>
+* Added an assert function to aid in debugging.<br>
+* Added a function called get_call_stack that retrieves a string with the entire nested stack of function calls leading up to the current execution point.<br>
+* Added 15 new math functions (round, absolute, floor, ceiling, sine, cosine, tangent, arc_sine, arc_cosine, arc_tangent, square_root, exponent, log, log10, and powwer).<br>
+* Updated the number_to_words function to include an extra boolean parameter which specifies whether the word "and" should be inserted in the appropriate places in the output string.<br>
+Please note: Existing code using this function needs to be slightly modified in order to run.<br>
+* Added a property called running to the timer object that specifies whether a particular timer is running or paused (thanks Damien).<br>
+* Limited the call stack size to 2000, which means that the engine will now prevent endless function recursion conditions etc.<br>
+* Added four global script properties (SCRIPT_COMPILED, SCRIPT_CURRENT_FILE, SCRIPT_CURRENT_LINE, and SCRIPT_CURRENT_FUNCTION).<br>
+* Added an include class that makes it easy to print log files with dated entries (thanks Damien).<br>
+* Added an include function to print out properly formatted currencies (thanks Damien).<br>
+* Modified the number_speaker class to reflect the change in the number_to_words function.<br>
+Please note: Existing code using this class needs to be slightly modified in order to run.<br>
+* Changed the internal random number generation algorithm to one that runs considerably faster, supports a wider range of values and is more statistically accurate.<br>
+* Added some more details to a rather uninformative engine error message.<br>
+* The help file now has a complete searchable index (thanks Damien).<br>
+* Fixed a memory access violation that would cause a hard crash when the exit function was called (thanks Lukáš).<br>
+* Fixed a bug in the string_replace function that would sometimes cause inaccurate replacements (thanks Damien).<br>
+* Fixed a bug where script files would be included incorrectly on Windows 7 64 bit machines (thanks Jodie).<br>
+* Fixed a bug where the engine would crash if presented with an unsupported wave file format other than PCM (thanks Casey).<br>
+<br>
+Beta Version 0.3.2:<br>
+* Fixed some mistakes in the documentation where certain files were not being included.<br>
+* Added 7 more string functions to convert strings between upper and lower case, and to check whether a string meets certain conditions such as if it's all alphabetic or numeric characters.<br>
+* Modified the license agreement to properly state the versions of Windows on which the engine can be run.<br>
+<br>
+Beta Version 0.3.1:<br>
+* Changed the name of the function add_tts_item to it's proper name add_item_tts which is referenced in the documentation.<br>
+* Removed some debugging message boxes from the sound object that had managed to sneak in before release.<br>
+<br>
+Beta Version 0.3:<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users.<br>
+* Added global date and time properties.<br>
+* Reworked the menu class to support Sapi.<br>
+Please note: Existing code using this class needs to be slightly modified in order to run.<br>
+* Added a file_exists function.<br>
+* Added two more string functions (string_contains and string_replace) (thanks Damien).<br>
+* Added the ability to compile scripts into standalone executables, however this functionality is only available to preorder users.<br>
+* Modified the end user license agreement to reflect the fact that demo users will not actually be allowed to compile binary executables.<br>
+* Added a privacy policy.<br>
+* Some bugs that would occur when playing audio on x64 machines have been fixed.<br>
+* The pitch of a sound can no longer go quite as low as in previous versions, as it would often cause unstable behavior.<br>
+* Added a property to the sound object called "pitch_lower_limit" that allows you to check how far down the pitch can go for the current sound.<br>
+* Disabled the system menu that would appear when pressing the alt key in the game window, as this interfered with the BGT keyboard input (thanks Lukáš).<br>
+* The engine now looks for include files properly, e.g. first in the current working directory and then in the BGT include directory.<br>
+* Changed the compiler output to specify the full path of the file that the error or warning message in question is refering to. The word "section" has also been changed to "file".<br>
+* Added some extended error checking to the compiler which is useful in some rare cases.<br>
+* Moved the Blastbay office to a new location (thanks Stockholm furniture Removal Services, sort of).<br>
+<br>
+Beta Version 0.2:<br>
+* Updated the script interpreter to the latest version which fixes some more bugs found by users.<br>
+* File reading and writing support has been added, both for binary and text files.<br>
+* Properties to get the current  position and total length of a sound have been added to the sound object, along with a method to set the position as well.<br>
+* Partial support for Microsoft Sapi 5.1 text to speech has been added.<br>
+* A fully featured waveform tone generator has been added which allows the creation of musical compositions using sine, sawtooth and square waves (sponsored by Damien Pendleton).<br>
+* Fixed a few minor errors in the tutorial.<br>
+* The error edit control now uses word wrap rather than a scroll bar.<br>
+* Switched from the MinGw C++ compiler to Visual Studio 2008, which brings us up to date with all the latest Microsoft features, and which also produces an executable that is roughly 400 kb smaller and runs considerably faster.<br>
+* Fixed a few object methods where I had forgotten to set the global error flag based on the results.<br>
+<br>
+Beta Version 0.1:<br>
+* Fixed a few errors in the tutorial.<br>
+* Added an Edit Script option to the context menu for BGT scripts.<br>
+* Added a list of current limitations to the help file.<br>
+<br>
+Alpha version 0.5:<br>
+* Updated the script interpreter to the latest version which fixes some more bugs related to loops and object properties.<br>
+* A bunch of new functions to manipulate strings have been added (thanks Damien).<br>
+* A function to convert a string to a number has been added.<br>
+* Two new functions have been added to the include directory which help to simplify the positioning of sounds in 1d and 2d environments.<br>
+* The set_sound_storage function has been added, making it very easy to read sounds from pack files as soon as the packing features themselves are implemented.<br>
+* Enabled automatic scrolling for the edit field where errors and warnings are shown.<br>
+* Finally fixed the pitch bug properly after it came up once again in an even more weird form (thanks Lukáš). The minimum value for the pitch is now 1 instead of 0.<br>
+* Improved the documentation with better examples, spelling error fixes, anchor links as well as some general cleanup and restructuring (thanks Damien).<br>
+* Fixed a bug where the engine would throw a fatal error and then lock up if an include file was not found (thanks Damien).<br>
+* Modified the installer settings slightly, making it necessary to uninstall the previous version before installing this one.<br>
+<br>
+Alpha version 0.4:<br>
+* Rewrote the string_split function to work with the new script interpreter, so it is now part of the engine again.<br>
+* Added a function called number_to_words, with which you can translate a numeric value into English text. This is useful for speaking scores etc.<br>
+* Added a class to speak numbers intelligently using concatenated sound files to the include library.<br>
+* Fixed a bug that would cause the program to exit if the pitch was set to a small decimal value between 0 and 1 (thanks Oriol).<br>
+* Fixed a bug where the pan would be retrieved incorrectly by the engine (thanks Oriol).<br>
+* Changed the internal window handling so that it is now done asynchronously in the same thread as the main script execution, preventing a few potential multithreading errors and speeding up some window related function calls.<br>
+* Compilation errors and warnings are now displayed in a multiline edit field, rather than in multiple message boxes with no easy way of copying the information or getting a general overview.<br>
+* Fixed a serious memory leak where the audio resources would be left in a total mess at script termination.<br>
+* The tutorial has been updated with some new information in the section about arrays (thanks Damien).<br>
+* The end user license agreement has been added to this help file.<br>
+<br>
+Alpha version 0.3:<br>
+* Fixed a few sneaky bugs that would cause BGT to crash when using some internal engine object properties in while conditions and in arrays (thanks Damien).<br>
+* Fixed a bug where the command line could sometimes be filled with junk in the end (thanks Damien).<br>
+* The ranges of the properties in the sound object have been radically changed, and a few new ones have been added such as pitch and sample_rate.<br>
+* Rudimentary error checking has been implemented (see the get_last_error function).<br>
+* The tutorial has been updated with a new section about switch ...case statements, and a few explanations have been added on if statements when comparing booleans versus other values etc.<br>
+* A bunch of spelling mistakes have been fixed in the language tutorial (thanks Lukáš).<br>
+* The installer has been changed slightly to allow users who don't want a start menu folder to disable it, and the BGT end user license agreement has been added also.<br>
+* An include directory has been added to the distribution where you will currently find a menu class.<br>
+<br>
+Alpha version 0.2:<br>
+A new script interpreter has been integrated with the engine, there are so many major changes so that it is impossible to list them here. In short, however, nothing at all is compatible with the 0.1 release. The language tutorial has undergone some major modifications, there are some new methods in the sound object and a new object called dictionary, plus a whole lot more.<br>
+<br>
+Alpha version 0.1:<br>
+First public alpha release.<br>
+</body>
+</html>

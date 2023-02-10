@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_voice_names</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will list the names of all the available voices on the system.<br>
+<br>
+string[] get_voice_names()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array of names on success, or an empty array on failure.<br>
+<br>
+Remarks:<br>
+The list of voices returned by this method is cached. The tts_voice object automatically retrieves a list of all the available voices when it is first created, and this list is then kept internally for performance reasons. This means that if the user installs or uninstalls voices while your game is running, this list will be out of date. You may refresh the internal cache manually by calling the refresh_voice_list method.<br>
+<br>
+Example:<br>
+<pre>
+// Show a series of message boxes with the names of the voices that are currently installed.
+
+void main()
+{
+tts_voice speech;
+string[] list=speech.get_voice_names();
+for(uint counter=0; counter&lt;list.length(); counter++)
+{
+alert("Voice "+counter,list[counter]);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>buttons_up</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This function returns a list of all the buttons on the joystick that are currently up.<br>
+<br>
+int[] buttons_up()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array with the buttons that are up, or an empty array if no buttons are up or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between buttons_up and buttons_released is that buttons_released will only return a list of the buttons that the user has just released, while buttons_up will return a list of the buttons that are currently up regardless of whether the same buttons have been reported as being up in a previous call.<br>
+<br>
+The joystick object supports up to 128 buttons, ranging from 0 to 127. However the actual maximum button is determined by the buttons property for the given device, ranging from 0 to buttons minus 1.<br>
+<br>
+It is important to remember when mapping functions to joystick buttons that devices can vary greatly between models, supporting anything between 3 and 15 buttons, and therefore it is always a good idea to map the most common activities to buttons with lower numbers.<br>
+<br>
+Example:<br>
+<pre>
+// The example will constantly monitor buttons that are up. If it registers three or more buttons that are not up, it will exit.
+
+void main()
+{
+show_game_window("buttons up Test");
+int[] button_list;
+joystick stick;
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+button_list=stick.buttons_up();
+while(button_list.length()>125)
+{
+button_list=stick.buttons_up();
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

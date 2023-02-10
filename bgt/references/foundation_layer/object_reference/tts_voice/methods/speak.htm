@@ -1,0 +1,59 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>speak</title>
+</head>
+<body>
+<br>
+<b>tts_voice object</b><br>
+<br>
+This method will speak a given string.<br>
+<br>
+bool speak(string text)<br>
+<br>
+Parameters:<br>
+text<br>
+The text to speak.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If Sapi is already speaking the text will be placed in the buffer queue and is the last string spoken, unless the buffer is cleared beforehand with either the stop, speak_interrupt or speak_interrupt_wait methods.<br>
+<br>
+Example:<br>
+<pre>
+// Add various text to a buffer.
+
+tts_voice speech;
+
+void main()
+{
+speech.speak("This is text1.");
+speech.speak("This is text2.");
+speech.speak("This is text3.");
+while(speech.speaking)
+{
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

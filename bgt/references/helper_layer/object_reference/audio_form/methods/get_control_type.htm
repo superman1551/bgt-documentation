@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_control_type</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will return the type of a given control (See control type constants).<br>
+<br>
+int get_control_type(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The control ID to retrieve the type from.<br>
+<br>
+Return value:<br>
+The control type on success, or -1 on failure.<br>
+<br>
+Remarks:<br>
+This function is useful for checking if you can perform a specific operation on the control.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+alert("Information", "The control type of OK is "+form.get_control_type(ok));
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

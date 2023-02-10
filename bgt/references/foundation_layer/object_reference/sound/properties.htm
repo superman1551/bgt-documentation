@@ -1,0 +1,64 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>sound object</b><br>
+<br>
+double pan<br>
+This is the place in the stereo field in which the sound is positioned.<br>
+-100 is far left, 0 is center, and 100 is far right. This number may contain decimals, but will be rounded internally if needed and so absolute values should not be relied upon. This is set to -1 on error.<br>
+<br>
+double volume<br>
+This determines how loudly the sound will play. 0 is the original volume, and -100 is completely silent. This number may contain decimals, but will be rounded internally if needed and so absolute values should not be relied upon. This is set to -1 on error.<br>
+<br>
+double pitch<br>
+This is the pitch/speed at which the sound will play. 100 is the original, 50 is half speed, 1 is the lowest speed possible, 200 is double speed, and 400 is quadruple speed. Note that different soundcards will impose different minimum's and maximum's for this value so always check what the pitch actually turned out as after an assignment if you wish to be certain. This number may contain decimals, but is very likely to be rounded internally which will result in an actual pitch that is very close to the intended value but not exact. This is set to -1 on error.<br>
+<br>
+double pitch_lower_limit<br>
+This specifies the lowest possible pitch value for the particular sound. The lower limit will differ depending on the sound's sample rate, so always be sure to use this if you are trying to reach the minimum pitch. The pitch of the sound will never go below this value. This is set to -1 on error. This property cannot be modified from the script.<br>
+<br>
+bool active<br>
+This is set to true when a sound file is associated with the object, and to false otherwise. This property cannot be modified from the script.<br>
+<br>
+bool playing<br>
+This is set to true when the sound is playing, and to false when paused, stopped or on error. This property cannot be modified from the script.<br>
+<br>
+bool paused<br>
+This is set to true when the sound has been paused with an explicit call to the pause method, and to false otherwise and on error. This property cannot be modified from the script.<br>
+<br>
+double position<br>
+This is the current position in milliseconds of the playing cursor in the sound. This is set to -1 if the current position cannot be retrieved. This property cannot be modified from the script.<br>
+<br>
+double length<br>
+This is the total length of the sound in milliseconds. This is set to -1 if the length cannot be retrieved. This property cannot be modified from the script.<br>
+<br>
+double sample_rate<br>
+This is the sample rate of the current sound, in Hz. This is set to -1 on error. This property cannot be modified from the script.<br>
+<br>
+double channels<br>
+This is the number of channels that  the current sound contains. 1 is mono, 2 is stereo and -1 means an error has occurred. This property cannot be modified from the script.<br>
+<br>
+double bits<br>
+This is the bit depth of the current sound, usually 8 or 16, or -1 on error. This property cannot be modified from the script.<br>
+</body>
+</html>

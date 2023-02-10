@@ -1,0 +1,170 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>unload</title>
+</head>
+<body>
+<br>
+<b>library object</b><br>
+<br>
+This method will unload the library currently associated with the object.<br>
+<br>
+bool unload()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+It is essential that you free any memory or other resources that the DLL may be using before unloading the library. Failure to do this could cause memory leaks or even crashes. Check the DLL's reference to find out whether this is necessary and for instructions on how to do this.<br>
+<br>
+Example:<br>
+<pre>
+// This code will not work unless you have a library called my_recorder.dll containing the functions that this script will attempt to execute. This merely demonstrates the necessity for some libraries to have their associated resources cleared before unloading them.
+
+// Declare some variables.
+library dll;
+dictionary@ dll_params;
+
+void main()
+{
+record("test.wav");
+}
+
+void record(string filename)
+{
+int result=-1; // For storing return values from the library.
+int handle=-1; // For manipulating a file.
+
+// Load the library.
+dll.load("my_recorder.dll");
+
+// Initialise the library.
+@dll_params=dll.call("int initialise_recorder();");
+if(dll_params.is_empty())
+{
+alert("Error", "Failed to call function initialise_recorder.");
+exit();
+}
+dll_params.get("0", result);
+if(result!=1)
+{
+alert("Error", "Recorder initialisation failed.");
+exit();
+}
+
+// Open a file.
+@dll_params=dll.call("int create_file(char*);", filename);
+if(dll_params.is_empty())
+{
+alert("Error", "File could not be created.");
+cleanup();
+exit();
+}
+dll_params.get("0", handle);
+if(handle==-1)
+{
+alert("Error", "File creation failed.");
+cleanup();
+exit();
+}
+
+// Record to the file.
+@dll_params=dll.call("int record(int);", handle);
+if(dll_params.is_empty())
+{
+alert("Error", "Cannot record to file.");
+cleanup(handle);
+file_delete(filename);
+exit();
+}
+dll_params.get("0", result);
+if(result!=1)
+{
+alert("Error", "Recording failed.");
+cleanup(handle);
+file_delete(filename);
+exit();
+}
+
+// Wait for five seconds to allow a recording to form.
+wait(5000);
+
+// Stop recording.
+@dll_params=dll.call("int stop(int);", handle);
+if(dll_params.is_empty())
+{
+cleanup(handle);
+exit();
+}
+dll_params.get("0", result);
+if(result!=1)
+{
+cleanup(handle);
+exit();
+}
+
+//Perform cleanup.
+cleanup(handle);
+}
+
+void cleanup(int handle=-1)
+{
+int result=-1;
+
+// See if we need to close the file.
+if(handle>-1)
+{
+@dll_params=dll.call("int Close(int);", handle);
+if(dll_params.is_empty())
+{
+alert("Oops!", "Cannot close file.");
+cleanup();
+exit();
+}
+dll_params.get("0", result);
+if(result!=1)
+{
+alert("Ouch!", "File close operation failed!");
+cleanup();
+exit();
+}
+}
+
+// Free the recorder.
+@dll_params=dll.call("int free_recorder();");
+if(dll_params.is_empty())
+{
+alert("Terror!", "Unable to free the recorder library!");
+exit();
+}
+dll_params.get("0", result);
+if(result!=1)
+{
+alert("Horror!", "Recorder cleanup procedure failed!");
+exit();
+}
+dll.unload();
+}
+</pre>
+</body>
+</html>

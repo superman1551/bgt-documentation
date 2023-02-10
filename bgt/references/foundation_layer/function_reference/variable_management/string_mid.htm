@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_mid</b><br>
+<br>
+This function returns a specified number of characters from any given position of a string.<br>
+<br>
+string string_mid(string the_string, uint start_position, uint count)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be extracted from.<br>
+start_position<br>
+The position to start extracting from.<br>
+count<br>
+The number of characters to return.<br>
+<br>
+Return value:<br>
+The extracted string.<br>
+<br>
+Remarks:<br>
+If the count is less than 1, a blank string will be returned, regardless of the position value.<br>
+If the count is greater than the length of the string minus the start position, the remainder of the string is returned.<br>
+If start_position is less than 1, the function will extract from the left hand side of the string.<br>
+If start_position is greater than the length of the string, a blank string is returned.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_mid test", string_mid("Hello, I am here to test the string_mid function!", 30, 10)); //output should be string_mid
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_is_alphabetic</b><br>
+<br>
+This function returns a boolean value showing whether the passed string contains purely letters.<br>
+<br>
+bool string_is_alphabetic(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be evaluated.<br>
+<br>
+Return value:<br>
+Returns true if the string contains purely letters, false if not or if an error occurred.<br>
+<br>
+Remarks:<br>
+This function does not evaluate punctuation. If the string contains punctuation this function will return false.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+string text1, text2;
+text1="I am normal text.";
+text2="Randomness";
+if(string_is_alphabetic(text1))
+{
+alert("string_is_alphabetic test", "text1 contains letters only.");
+}
+else
+{
+alert("string_is_alphabetic test", "text1 does not contain only letters.");
+}
+if(string_is_alphabetic(text2))
+{
+alert("string_is_alphabetic test", "text2 contains letters only.");
+}
+else
+{
+alert("string_is_alphabetic test", "text2 does not contain only letters.");
+}
+}
+</pre>
+</body>
+</html>

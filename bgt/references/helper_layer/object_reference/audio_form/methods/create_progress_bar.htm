@@ -1,0 +1,89 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>create_progress_bar</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method will create a progress bar and return a control ID.<br>
+<br>
+int create_progress_bar(string caption, int speak_interval=5, bool speak_global=true)<br>
+<br>
+Parameters:<br>
+caption<br>
+The text for the progress bar.<br>
+speak_interval<br>
+An optional parameter specifying the interval at which the progress bar should notify the user, in seconds. A value of 0 means the notification is not timed and the user will only be notified when the progress changes.<br>
+speak_global<br>
+An optional parameter indicating whether the progress is to be spoken globally. true means the progress will be announced globally, false means the announcements will only be made if the progress bar is in focus.<br>
+<br>
+Return value:<br>
+A control ID that can be used to check the status of the control, or -1 on error.<br>
+<br>
+Remarks:<br>
+Prepending any letter in the caption string with an ampersand (&) sign will cause a shortcut to be created for the progress bar. For example, &Copying will cause alt+c to be the shortcut for the progress bar.<br>
+<br>
+Please note that only one progress bar can be set as global at a time. This is to avoid confusion with multiple progress bars announcing different values. If the global flag is set and a progress bar is already determined to be announcing globally, the flag will be set to false.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons and a dummy progress bar.
+
+#include "form.bgt"
+
+audio_form form;
+int dummy_counter;
+
+void main()
+{
+dummy_counter=0;
+form.create_window("Example Form", true);
+int dummy=form.create_progress_bar("&Copying", 0, false);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+dummy_counter++;
+if(dummy_counter>=250)
+{
+form.set_progress(dummy, form.get_progress(dummy)+1);
+dummy_counter=0;
+}
+if(form.is_pressed(ok))
+{
+exit();
+}
+if(form.is_pressed(cancel))
+{
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

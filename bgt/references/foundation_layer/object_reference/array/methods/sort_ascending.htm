@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>sort_ascending</title>
+</head>
+<body>
+<br>
+<b>array object</b><br>
+<br>
+This method sorts the items in an array in ascending order.<br>
+<br>
+void sort_ascending(uint start_index, uint count)<br>
+<br>
+Parameters:<br>
+start_index<br>
+The index to begin sorting from.<br>
+count<br>
+The number of elements to sort.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+This method is overloaded, and can be called with no parameters. If this is the case, the entire array will be sorted.<br>
+<br>
+The start_index parameter is 0-based.<br>
+<br>
+Please note: To sort an array of classes it is necessary for the class to overload the comparison operator.<br>
+<br>
+Example:<br>
+<pre>
+// Declare an array, sort its values and display them. We will use the extended declaration to show how to manually sort the array.
+
+void main()
+{
+string[] names(6);
+names[0]="Damien";
+names[1]="Philip";
+names[2]="Percival";
+names[3]="Byron";
+names[4]="Humphrey";
+names[5]="Edmund";
+names.sort_ascending(0, names.length());
+for(int counter=0; counter&lt;names.length(); counter++)
+{
+alert("Names", "Element "+counter+" contains the name "+names[counter]+".");
+}
+}
+</pre>
+</body>
+</html>

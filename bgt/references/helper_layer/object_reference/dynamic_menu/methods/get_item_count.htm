@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>get_item_count</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will tell you how many items have been added to the menu.<br>
+<br>
+double get_item_count()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+A double indicating the number of items currently added to the menu.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu and retrieve the number of items.
+
+#include "dynamic_menu.bgt"
+
+void main()
+{
+dynamic_menu test;
+test.add_item("start_game.wav");
+test.add_item("test_speakers.wav");
+test.add_item("exit.wav");
+alert("Menu example", test.get_item_count()+" items are currently stored in the menu.");
+}
+</pre>
+</body>
+</html>

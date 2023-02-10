@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_callback_function</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+This method allows you to specify a function in your script that should be used as the pathfinder callback.<br>
+<br>
+bool set_callback_function(pathfinder_callback@ callback)<br>
+<br>
+Parameters:<br>
+callback<br>
+A handle to a function that conforms to the pathfinder_callback signature.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+For more information about the callback function such as its exact signature and its use, see the pathfinder_callback chapter.<br>
+<br>
+This method must not be invoked from within the user callback.<br>
+<br>
+Example:<br>
+See the main pathfinder chapter and the pathfinding tutorial.<br>
+</body>
+</html>

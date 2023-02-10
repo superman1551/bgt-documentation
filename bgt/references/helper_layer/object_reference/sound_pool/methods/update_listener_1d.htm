@@ -1,0 +1,115 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>update_listener_1d</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method will update the position of the sounds according to the listener's new position on a 1d grid.<br>
+<br>
+void update_listener_1d(int listener_x)<br>
+<br>
+Parameters:<br>
+listener_x<br>
+The new position of the listener on the grid.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+This method is used when the listener has moved, meaning that all of the currently active sounds in the pool will move. To move individual sounds, use the update_sound methods.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sound_environment;
+timer walk_timer;
+
+int player_position;
+int step;
+
+const string sound_extension=".wav";
+
+const int left=-1;
+const int right=1;
+
+const int boundary=200;
+
+void main()
+{
+show_game_window("sound_pool test");
+sound_environment.max_distance=70;
+for(int counter=1; counter<15; counter++)
+{
+sound_environment.play_extended_1d("sounds/sound"+counter+sound_extension, 0, random(0, boundary), -10, 10, true, 0, false);
+}
+while(true)
+{
+check_input();
+wait(5);
+}
+}
+
+void check_input()
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+if(key_down(KEY_LEFT))
+{
+walk(left);
+}
+if(key_down(KEY_RIGHT))
+{
+walk(right);
+}
+}
+
+void walk(int direction)
+{
+if((direction<=left)&&(player_position<=0))
+{
+return;
+}
+if((direction>=right)&&(player_position>=boundary))
+{
+return;
+}
+if(walk_timer.elapsed<350)
+{
+return;
+}
+step++;
+if(step>6)
+{
+step=1;
+}
+walk_timer.restart();
+player_position+=direction;
+sound_environment.play_stationary("sounds/steps/"+step+sound_extension, false);
+sound_environment.update_listener_1d(player_position);
+}
+</pre>
+</body>
+</html>

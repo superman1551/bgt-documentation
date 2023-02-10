@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>get_last_error_text</b><br>
+<br>
+This function retrieves the textual error description set by the last engine function or object method that you called.<br>
+<br>
+string get_last_error_text()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An error description if an error occured in the last call, or a blank string otherwise.<br>
+<br>
+Remarks:<br>
+Many engine functions and object methods cannot give any specific information about an error that it encountered via its return value, such as the input_box function which returns an empty string if an error occurs. This, however, can also happen if the user just clicks OK which makes it impossible to distinguish these two conditions from one another. This is when the get_last_error_text function comes in handy. It will return a textual error description that the engine function or object method specified before returning, which allows you to determine with much greater exactitude what went wrong.<br>
+<br>
+The get_last_error_text function will return a blank string if no error occured in the last call. This means that the error is reset for every new call to an engine function or object method, so you should retrieve the error description before making any other calls.<br>
+<br>
+The error description returned by the get_last_error_text function is not affected by calls to any of your own functions or methods.<br>
+<br>
+Example:<br>
+<pre>
+// Attempt to open a file that we can be fairly sure does not exist, and print the output from get_last_error_text.
+
+void main()
+{
+file reader;
+reader.open("a_file_that_is_dead");
+alert("Result", get_last_error_text());
+}
+</pre>
+</body>
+</html>

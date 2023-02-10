@@ -1,0 +1,69 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>read_number</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will read the data contained in a numeric value.<br>
+<br>
+double read_number(string value_name)<br>
+<br>
+Parameters:<br>
+value_name<br>
+The name of the value to read.<br>
+<br>
+Return value:<br>
+The value on success, or 0 on failure.<br>
+<br>
+Remarks:<br>
+If an error occurs, the method will return 0 and the last_error flag will be set.<br>
+<br>
+Example:<br>
+<pre>
+// Read the music volume from the registry.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+if(!game_data.exists("music_volume"))
+{
+alert("Error", "Could not read music_volume. The specified value does not exist.");
+exit();
+}
+double vol=game_data.read_number("music_volume");
+if(last_error<0)
+{
+alert("Error", "Could not access music_volume.");
+exit();
+}
+alert("Music Volume", vol);
+}
+</pre>
+</body>
+</html>

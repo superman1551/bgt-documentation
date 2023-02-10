@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Serialization Tutorial</title>
+</head>
+<body>
+<h1>Serialization Tutorial</h1>
+<h2>What Is Serialization?</h2>
+Serialization is the process of taking data inside of an application such as integers, floating point numbers and strings, and converting them to a stream of bytes. In game related terms, serialization allows you to save game data and load it back again at a later time. This can be anything from entire levels with enemies and traps, to simple configuration data.<br>
+<br>
+Many developers, when faced with the task of saving game levels, will come up with a very application specific format where the order in which things are saved and loaded matters greatly, and where it is difficult to adapt the saving and loading routines as new versions are made. BGT's serialization functionality attempts to circumvent both of these problems by using keys and values. Each saved piece of information has a corresponding name which is used when it is time to look up the data again when it needs to be loaded. This means that the order in which things are saved is no longer relevant because each value is looked up based on its name, rather than based on where in the long list of values it is expected to be stored. Furthermore, when you release a new version of your game which requires new content to be saved, your old data files will still be compatible with the new version provided that you are able to set the new variables to default values if they are not found.
+<h2>Serializing your Data</h2>
+The first step to serializing data is to decide exactly what needs saving. For instance, a game that only saves its data at the beginning of each level will not need to store the player's position, since this will generally be set when the level starts. However, a player's inventory will need to be saved, as this could change from game to game and therefore should not be surmised.<br>
+<br>
+Once you have done this, all your chosen variables need to be stored in one or more dictionaries. Such variables will typically consist of global variables and class properties.<br>
+Dictionaries provide an easy way to assign a name to your variable that can easily be stored, and when inventing your names it is important to use names that are unique, otherwise values will be overwritten. A simple way to do this is to use the same name as your variable, including any class names. For example, if you have a map class with an environment stored in a 2d array, you might store a location in your map as follows:<br>
+<br>
+<pre>
+for(int x=0; x&lt;map.length(); x++)
+{
+for(int y=0; y&lt;map[x].length(); y++)
+{
+map.location[x][y]=0;
+my_dictionary.set("map.location["+x+"]["+y+"]", map.location[x][y]);
+}
+}
+</pre>
+<br>
+Another way might be to store it similar to a path value, like so:<br>
+<br>
+<pre>
+my_dictionary.set("map/location/"+x+"/"+y, map.location[x][y]);
+</pre>
+<br>
+Either way, it needs to be unique, and recognizable to you as the script writer, so your values can be consistent during loading and saving.<br>
+<br>
+To serialize your data, you need to call the serialize function in BGT, passing the dictionary as a parameter. The function will then return a string, that you can easily save to a file. See the serialization function chapter in the reference for more details.<br>
+<br>
+It is perfectly acceptable to serialize multiple dictionaries into one string by calling the serialize function with as many dictionaries as you have and then concatenating all the strings together to form a whole. However, deserializing will always load the data back into one dictionary which could potentially cause problems if you have keys with the same names in your original dictionaries.<br>
+<br>
+It is important to note that, while the resulting string is hard to read, numbers are easily discernible, and the text data is encoded in Base64, making it easy to decode the string back into text. This means that if you wish to make your saved data secure to prevent cheating, you will still need to use the encryption functions provided by BGT.<br>
+<h2>Deserializing your Data</h2>
+Deserializing data is slightly more complicated, since you have to make room for an event where a specific value is not saved, for example in a different version with a new feature that has not yet been used. A simple approach might be to set all variables in a given class to default values before loading, and then simply overwriting these defaults with all the things that are successfully retrieved from the data file. You may also want to store a version number, so that in the unfortunate case where there is absolutely no way to make saved games backwards compatible you can at least inform the user about this and bail out.<br>
+<br>
+To deserialize, you first need to retrieve the data from the storage location, decrypt it if applicable, and call the deserialize function, passing the string as a parameter. It will return a dictionary object, whose values you will then need to store back in the relevant variables.<br>
+<br>
+If a value you look for cannot be found in the loaded dictionary, the variable will not be changed, which of course doesn't matter in this case, as we have assigned a default value to the variable for the game to fall back on.<br>
+<br>
+For an example of how you might go about deserializing your data, see the deserialize function chapter in the reference.<br>
+</body>
+</html>

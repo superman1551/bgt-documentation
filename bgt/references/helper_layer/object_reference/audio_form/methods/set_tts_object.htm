@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>set_tts_object</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method allows you to specify an existing tts_voice object to be used for any Sapi 5 spoken output in the form.<br>
+<br>
+bool set_tts_object(tts_voice@ handle)<br>
+<br>
+Parameters:<br>
+handle<br>
+A handle to an existing tts_voice object that is to be used for all subsequent Sapi 5 output.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This method is useful if you wish to preserve any settings such as rate, volume etc of an existing tts_voice object. The object that you specify in this function will be used for all subsequent text strings spoken by Sapi 5. If you do not call this method and still use Sapi output, an internal tts_voice object with default settings will be used instead.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with redirected Sapi.
+
+#include "form.bgt"
+
+audio_form form;
+tts_voice my_voice;
+
+void main()
+{
+my_voice.rate=120;
+form.set_tts_object(my_voice);
+form.create_window("Test", true);
+while(true)
+{
+form.monitor();
+wait(5);
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+my_voice.speak_interrupt_wait("Exiting.");
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

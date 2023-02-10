@@ -1,0 +1,64 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>screen_reader_set_library_path</b><br>
+<br>
+This function will set the path and filename of the dll library for a given screen reader.<br>
+<br>
+bool screen_reader_set_library_path(int reader, string filename)<br>
+<br>
+Parameters:<br>
+reader<br>
+A value representing one of the two screen readers for which this operation is supported (see remarks).<br>
+filename<br>
+The filename of the DLL.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function expects a complete path and filename of an existing file, or it will fail. The name must be included though the extension is not important, it doesn't have to be .dll.<br>
+<br>
+If this function is not called the engine will assume the libraries to be in the same directory as your script, and that they have the default filenames as set by the manufacturer.<br>
+<br>
+This function will work with two of the four supported screen readers, namely System Access and NVDA. If you attempt to use this function with Jaws or WindowEyes, the function will fail as these readers use COM rather than standard DLL calls.<br>
+<br>
+When you call this function, if the screen reader library is already loaded it will be unloaded automatically before the path is changed. The next call to any of the other screen reader functions except screen_reader_unload_library will then automatically initialize the screen reader library with your new path.<br>
+<br>
+Example:<br>
+<pre>
+// Set the path of the NVDA screen reader and get it to speak some text.
+
+void main()
+{
+if(!screen_reader_set_library_path(NVDA, DIRECTORY_TEMP+"/NVDA.dll"))
+{
+alert("Error", "There was an error interacting with the NVDA screen reader.");
+exit();
+}
+screen_reader_speak(NVDA, "Hi. My library is now in the temp directory!");
+}
+</pre>
+</body
+</html>

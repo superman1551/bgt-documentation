@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>calendar</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+The calendar object is used to calculate and manipulate dates and times.<br>
+<br>
+calendar()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+When created, the calendar object is automatically set to the current system date and time.<br>
+<br>
+This object uses operator overloading so that dates can be compared accurately. Below is a list of the operators that can be used.<br>
+<ul>
+<li>=</li>
+<li>&lt;</li>
+<li>&lt;=</li>
+<li>&gt;</li>
+<li>&gt;=</li>
+<li>==</li>
+<li>!=</li>
+</ul>
+<br>
+Example:<br>
+<pre>
+// Do some comparisons with calendars.
+
+void main()
+{
+calendar now;
+calendar alarm;
+timer time;
+alarm.add_seconds(10);
+while(true)
+{
+wait(5);
+if(time.elapsed>=1000)
+{
+time.restart();
+now.reset();
+}
+if(now==alarm)
+{
+alert("Alarm", "This is an alarm!");
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

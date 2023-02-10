@@ -1,0 +1,60 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>open</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will open an existing pack file for reading.<br>
+<br>
+bool open(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The pack file on disk to open.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+When you call this method, the pack file will be opened in read mode. Please note that a pack file cannot be added to once closed unless it is recreated from scratch.<br>
+<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+If you pass * to this function, the engine will attempt to open a pack file that has been included into the program itself. For more information on how this is done, see the tutorial on packaging files with your executable.<br>
+<br>
+Example:<br>
+<pre>
+// Open a pack file and extract some data.
+
+void main()
+{
+pack_file test;
+test.open("pack.dat");
+test.extract_file("t1","test1.txt");
+test.extract_file("t2","test2.txt");
+test.extract_file("t3","test3.txt");
+test.close();
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>clipboard_read_text</b><br>
+<br>
+This function reads text from the clipboard.<br>
+<br>
+string clipboard_read_text()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+The text stored in the clipboard on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+None.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+clipboard_copy_text("Hello, I have been automatically copied!");
+alert("Clipboard text", clipboard_read_text());
+}
+</pre>
+</body>
+</html>

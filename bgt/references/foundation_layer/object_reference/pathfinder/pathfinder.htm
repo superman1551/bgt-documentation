@@ -1,0 +1,271 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pathfinder</title>
+</head>
+<body>
+<br>
+<b>pathfinder object</b><br>
+<br>
+The pathfinder object is used to find a path between two locations.<br>
+<br>
+pathfinder()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+Pathfinding is widely used in artificial intelligence, to make computer entities appear to make smart and calculated decisions in an arbitrarily complex environment.<br>
+<br>
+The environment is represented as a map, which is a two dimensional grid. When finding a path from one location on the map to another, the pathfinder investigates numerous squares on the map when determining the best path. For each square that it investigates it calls a function in your script known as the pathfinder callback. This function is meant to tell the pathfinder the risk, or cost, of moving to this particular square. For instance, a square with grass is a lot less dangerous than a square with fire. By use of this callback you may impose any types of rules you wish, such as deciding that certain creatures in your game are allowed to walk through fire while others are not. You would determine what type of creature you were dealing with inside the callback, and then return an appropriate risk factor for the fire square.<br>
+<br>
+For more detailed information about how pathfinding works in practise, see the pathfinding tutorial.<br>
+<br>
+Example:<br>
+<pre>
+// Let the user walk around on a grid and place out walls, as well as a starting square.
+// Pressing enter will generate a path between the starting square and the user's current location.
+// All the keyboard commands are spoken at the start of the program.
+
+const int maze_size=10;
+// The maze is always a square, so setting this constant to 10 generates a 10 by 10 maze (100 squares).
+
+// Declare the two dimensional maze array.
+int[][] maze;
+
+// Now declare the variables that will hold the user's current coordinates, and the coordinates of the starting square.
+int x=0;
+int y=0;
+int start_x=-1;
+int start_y=-1;
+
+// Finally, declare the pathfinder and tts_voice objects.
+pathfinder holmes;
+tts_voice speech;
+
+void main()
+{
+show_game_window("Maze Builder");
+
+// Resize the grid to the proper dimentions and fill it with empty space.
+maze.resize(maze_size);
+for(int i=0;i&lt;maze_size;i++)
+{
+maze[i].resize(maze_size);
+for(int i2=0;i2&lt;maze_size;i2++)
+maze[i][i2]=0;
+}
+
+// Set up the pathfinder.
+if(holmes.create_map(maze_size, maze_size)==false)
+{
+speech.speak_wait("Could not set up the map.");
+exit();
+}
+holmes.set_callback_function(maze_callback);
+
+speech.speak("Use the four arrow keys to navigate on the grid, and press escape to quit. Press space to place out a wall, and delete to remove one. Press s to set the starting square, and enter to ask the computer to walk from the starting square to your current location. Press the letter keys x and y to check your current coordinates. Press the d key to toggle whether diagonal paths are allowed or not.");
+
+// Run the main game loop, which exits when the user presses escape.
+while(key_down(KEY_ESCAPE)==false)
+{
+
+// Allow the user to move, but not outside the grid boundries.
+if(key_pressed(KEY_LEFT))
+{
+x-=1;
+if(x&lt;0)
+x+=1;
+else
+speak_location();
+}
+if(key_pressed(KEY_RIGHT))
+{
+x+=1;
+if(x&gt;=maze_size)
+x-=1;
+else
+speak_location();
+}
+if(key_pressed(KEY_DOWN))
+{
+y-=1;
+if(y&lt;0)
+y+=1;
+else
+speak_location();
+}
+if(key_pressed(KEY_UP))
+{
+y+=1;
+if(y&gt;=maze_size)
+y-=1;
+else
+speak_location();
+}
+
+// Place out and remove walls.
+if(key_pressed(KEY_SPACE))
+{
+if(maze[x][y]==1)
+{
+speech.speak_interrupt("Already a wall there.");
+}
+else
+{
+maze[x][y]=1;
+speech.speak_interrupt("Added wall.");
+}
+}
+if(key_pressed(KEY_DELETE))
+{
+if(maze[x][y]==0)
+{
+speech.speak_interrupt("No wall there.");
+}
+else
+{
+maze[x][y]=0;
+speech.speak_interrupt("Removed wall.");
+}
+}
+
+// Find a path from the starting square to the user's current location.
+if(key_pressed(KEY_RETURN))
+{
+if(start_x==-1 or start_y==-1)
+{
+speech.speak_interrupt("Please specify a starting square by pressing s somewhere.");
+continue;
+}
+vector[] path=holmes.find(start_x, start_y, x, y, "");
+if(path.length()==0)
+{
+speech.speak_interrupt("No path found.");
+continue;
+}
+
+// We now have a path, so we assemble a string with the information that should be spoken.
+string output="";
+
+// We now go through the path and convert the absolute coordinates to relative moves like west, north, etc.
+int last_x=start_x;
+int last_y=start_y;
+for(int i=0;i&lt;path.length();i++)
+{
+
+// Be nice to speech synthesizers.
+if(output!="")
+{
+output+=", ";
+}
+
+// Check for the 8 possible directions, inserting messages in the string accordingly.
+// Note that only four of these will actually be present in the path unless diagonal paths are enabled.
+if(path[i].x&lt;last_x and path[i].y==last_y)
+output+="west";
+if(path[i].x&gt;last_x and path[i].y==last_y)
+output+="east";
+if(path[i].y&lt;last_y and path[i].x==last_x)
+output+="south";
+if(path[i].y&lt;last_y and path[i].x&lt;last_x)
+output+="south west";
+if(path[i].y&lt;last_y and path[i].x&gt;last_x)
+output+="south east";
+if(path[i].y&gt;last_y and path[i].x==last_x)
+output+="north";
+if(path[i].y&gt;last_y and path[i].x&lt;last_x)
+output+="north west";
+if(path[i].y&gt;last_y and path[i].x&gt;last_x)
+output+="north east";
+
+last_x=path[i].x;
+last_y=path[i].y;
+}
+speech.speak_interrupt(output);
+}
+
+// Set the starting location.
+if(key_pressed(KEY_S))
+{
+start_x=x;
+start_y=y;
+speech.speak_interrupt("Starting square set to x " + x + ", y " + y + ".");
+}
+
+// Should we allow diagonal paths?
+if(key_pressed(KEY_D))
+{
+if(holmes.allow_diagonals==true)
+{
+holmes.allow_diagonals=false;
+speech.speak_interrupt("Diagonal paths are now forbidden.");
+}
+else
+{
+holmes.allow_diagonals=true;
+speech.speak_interrupt("Diagonal paths are now allowed.");
+}
+}
+
+// Check our coordinates.
+if(key_pressed(KEY_X))
+{
+speech.speak_interrupt("X " + x);
+}
+if(key_pressed(KEY_Y))
+{
+speech.speak_interrupt("Y " + y);
+}
+wait(5);
+}
+
+speech.speak_interrupt_wait("Thanks for, playing? I guess?");
+}
+
+// This function tells the user whether the square is free or has a wall on it, and whether it is the starting square.
+void speak_location()
+{
+if(maze[x][y]==1)
+{
+if(x==start_x and y==start_y)
+speech.speak_interrupt("Starting square and wall.");
+else
+speech.speak_interrupt("Wall.");
+return;
+}
+if(x==start_x and y==start_y)
+speech.speak_interrupt("Starting square and floor.");
+else
+speech.speak_interrupt("Floor.");
+}
+
+// This is the pathfinder callback. We simply check if there is a wall on the square and if there is, return 10. If not, return 0.
+int maze_callback(int x, int y, int parent_x, int parent_y, string user_data)
+{
+if(maze[x][y]==1)
+{
+return 10;
+}
+return 0;
+}
+</pre>
+</body>
+</html>

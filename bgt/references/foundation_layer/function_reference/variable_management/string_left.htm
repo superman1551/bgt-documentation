@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_left</b><br>
+<br>
+This function returns a specified number of characters from the left hand side of a string.<br>
+<br>
+string string_left(string the_string, uint count)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be extracted from.<br>
+count<br>
+The number of characters to return.<br>
+<br>
+Return value:<br>
+A string containing the leftmost count characters of the string.<br>
+<br>
+Remarks:<br>
+If count is less than 1, a blank string will be returned. Likewise, if count is greater than the string's length, then the whole string will be returned.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_left test", string_left("Hello, I am a string!", 5)); //output should be Hello
+}
+</pre>
+</body>
+</html>

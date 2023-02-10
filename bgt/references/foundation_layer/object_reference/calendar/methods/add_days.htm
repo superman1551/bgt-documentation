@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>add_days</title>
+</head>
+<body>
+<br>
+<b>calendar object</b><br>
+<br>
+This method will add a number of days to the day property.<br>
+<br>
+bool add_days(int days)<br>
+<br>
+Parameters:<br>
+days<br>
+The number of days to add.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+A negative value in the days parameter will subtract days from the current day.<br>
+<br>
+Any number of days can be added or subtracted. The month and year properties will adjust accordingly.<br>
+<br>
+Example:<br>
+<pre>
+// Create a calendar and set it to October 7, 1767 at 09:00 and add a week.
+
+void main()
+{
+calendar test;
+test.set(1767, 10, 7, 9, 0, 0);
+test.add_days(7);
+alert("Date", "The date is "+test.weekday_name+", "+test.month_name+" "+test.day+", "+test.year+", at "+test.hour+":"+test.minute+":"+test.second);
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>list_files</title>
+</head>
+<body>
+<br>
+<b>pack_file object</b><br>
+<br>
+This method will list all the files in the pack.<br>
+<br>
+string[] list_files()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array of files on success, or an empty array on failure.<br>
+<br>
+Remarks:<br>
+Although internal names can take the form of directory formatting, the pack format cannot differentiate between directories and files. Therefore if you have an internal name of music/level1.ogg, that is what will appear in the relevant entry in the list.<br>
+<br>
+Files will be listed in the order they were added to the pack file.<br>
+<br>
+This method can only be used on a pack opened for reading.<br>
+<br>
+Example:<br>
+<pre>
+// List the files in a pack.
+
+void main()
+{
+pack_file test;
+test.open("pack.dat");
+string[] list;
+list=test.list_files();
+for(uint counter=0; counter&lt;list.length(); counter++)
+{
+alert("File "+counter,list[counter]);
+}
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>is_game_window_active</b><br>
+<br>
+This function checks whether your game window is currently in focus.<br>
+<br>
+bool is_game_window_active()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true if your game window is currently active, false otherwise.<br>
+<br>
+Remarks:<br>
+This function returns true if your game window has keyboard focus at the present time. It is imperative that you call show_game_window before you rely on this function.<br>
+<br>
+Example:<br>
+<pre>
+// Play a looping sound only while the game window has focus.
+
+void main()
+{
+show_game_window("Temperamental Sound");
+sound noise;
+noise.load("myfile.ogg");
+if(noise.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+while(true)
+{
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+if(is_game_window_active()==true)
+{
+if(noise.playing==false)
+{
+noise.play_looped();
+}
+}
+else
+{
+if(noise.playing==true)
+{
+noise.pause();
+}
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

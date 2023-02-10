@@ -1,0 +1,339 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>serialize</b><br>
+<br>
+This function serializes a dictionary into a string.<br>
+<br>
+string serialize(dictionary the_data)<br>
+<br>
+Parameters:<br>
+the_data<br>
+The data stored in a dictionary.<br>
+<br>
+Return value:<br>
+A string with the serialized data on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+Serialization is the process of storing data in the game and converting them to a stream of bytes, which is easily saved to a file and retrieved again later. This can be anything from entire levels with enemies and traps, to simple configuration data.<br>
+BGT's serialization functionality takes away most of the tedium involved in designing a format for saving your data, writing a parser to convert the data back into something understood by the game etc.<br>
+Each piece of data has a name which is used when it is time to look up the data again when it needs to be loaded. This means that the order in which things are saved is no longer relevant because each value is looked up based on its name, rather than based on where in the long list of values it is expected to be stored. Furthermore, when you release a new version of your game which requires new content to be saved, your old data files will still be compatible with the new version provided that you are able to set the new variables to default values if they are not found.<br>
+See the serialisation tutorial for more information.<br>
+<br>
+Example:<br>
+<pre>
+// Serialize some data.
+
+// Create a map class.
+
+class map
+{
+int[][] location; // Stores all the various positions on the map.
+int size_x; // The number of squares to place on the X axis.
+int size_y; // The number of squares to place on the Y axis.
+
+// Create our constructor.
+map()
+{
+reset();
+}
+
+// Implement a reset method for resetting our map.
+void reset()
+{
+location.resize(0);
+size_x=0;
+size_y=0;
+}
+
+// Implement a rudimentary setup procedure.
+void setup(int max_x=20, int max_y=20)
+{
+if((max_x&lt;=0)||(max_y&lt;=0))
+{
+return;
+}
+
+// Fill out our properties.
+size_x=max_x;
+size_y=max_y;
+
+// Fill up the array.
+location.resize(max_x);
+for(int x=0; x&lt;max_x; x++)
+{
+location[x].resize(max_y);
+
+// Assign values to it.
+for(int y=0; y&lt;max_y; y++)
+{
+location[x][y]=random(0, 5);
+}
+}
+}
+
+// This serializes the map.
+string save()
+{
+dictionary data; // We will pass this dictionary to the serialize function.
+
+// First, we store the size of the map so we know how many squares we have available.
+data.set("map.size_x", size_x);
+data.set("map.size_y", size_y);
+
+// Put our map in the dictionary.
+for(int x=0; x&lt;size_x; x++)
+{
+for(int y=0; y&lt;size_y; y++)
+{
+data.set("map.location["+x+"]["+y+"]", location[x][y]);
+}
+}
+
+// Return the serialization.
+return serialize(data);
+}
+
+// This will deserialize and load the values back into the map.
+bool load(string data)
+{
+
+// Check if we have no data.
+if(data=="")
+{
+return false;
+}
+dictionary@ restore=deserialize(data); // This is where the data will be stored initially.
+reset(); // So we have a clean start.
+restore.get("map.size_x", size_x);
+restore.get("map.size_y", size_y);
+if((size_x&lt;=0)||(size_y&lt;=0))
+{
+return false;
+}
+
+//Resize our map.
+location.resize(size_x);
+for(int x=0; x&lt;size_x; x++)
+{
+location[x].resize(size_y);
+
+// Now we can restore our values.
+for(int y=0; y&lt;size_y; y++)
+{
+restore.get("map.location["+x+"]["+y+"]", location[x][y]);
+}
+}
+return true;
+}
+}
+
+// Create a player class
+
+class player
+{
+int x;
+int y;
+int score;
+int health;
+
+player()
+{
+reset();
+}
+
+void reset()
+{
+x=0;
+y=0;
+health=100;
+score=0;
+}
+
+void setup()
+{
+
+// This will set random values for each property, merely to demonstrate serialization.
+x=random(0, 10);
+y=random(0, 10);
+score=random(0, 500000);
+health=random(1, 100);
+}
+
+string save()
+{
+dictionary data; // We will pass this dictionary to the serialize function.
+
+// Put our values in the dictionary.
+data.set("player.x", x);
+data.set("player.y", y);
+data.set("player.health", health);
+data.set("player.score", score);
+
+// Return the serialization.
+return serialize(data);
+}
+
+// This will deserialize and load the values back into the class.
+bool load(string data)
+{
+
+// Check if we have no data.
+if(data=="")
+{
+return false;
+}
+dictionary@ restore=deserialize(data); // This is where the data will be stored initially.
+reset(); // So we have a clean start.
+restore.get("player.x", x);
+restore.get("player.y", y);
+restore.get("player.health", health);
+restore.get("player.score", score);
+return true;
+}
+}
+
+// Create an enemy class
+
+class enemy
+{
+int id; //Used to store a unique identifier, typically the position in the array where he is stored.
+int x;
+int y;
+int speed;
+int health;
+int state;
+
+enemy()
+{
+reset();
+}
+
+void reset()
+{
+id=-1;
+x=0;
+y=0;
+speed=random(300, 500);
+health=100;
+state=0; //Can be used to store whether he is attacking, walking etc.
+}
+
+void setup(int id)
+{
+
+// This will set random values for each property, merely to demonstrate serialization. We ask for the ID so we can serialize the correct enemy when the time comes.
+this.id=id;
+x=random(0, 10);
+y=random(0, 10);
+speed=random(300, 500);
+health=random(1, 100);
+state=random(0, 5); //Can be used to store whether he is attacking, exploring, fleeing etc.
+}
+
+string save()
+{
+dictionary data; // We will pass this dictionary to the serialize function.
+
+// Put our values in the dictionary. Notice we use the enemy ID as a key rather than as a value.
+data.set("enemy["+id+"].x", x);
+data.set("enemy["+id+"].y", y);
+data.set("enemy["+id+"].health", health);
+data.set("enemy["+id+"].state", state);
+data.set("enemy["+id+"].speed", speed);
+
+// Return the serialization.
+return serialize(data);
+}
+
+// This will deserialize and load the values back into the class.
+bool load(string data, int id)
+{
+
+// Check if we have no data.
+if((data=="")||(id&lt;0))
+{
+return false;
+}
+dictionary@ restore=deserialize(data); // This is where the data will be stored initially.
+reset(); // So we have a clean start.
+this.id=id;
+restore.get("enemy["+id+"].x", x);
+restore.get("enemy["+id+"].y", y);
+restore.get("enemy["+id+"].health", health);
+restore.get("enemy["+id+"].state", state);
+restore.get("enemy["+id+"].speed", speed);
+return true;
+}
+}
+
+// Now we declare some values and serialize them to a file.
+
+player me;
+map world;
+enemy[] monster;
+
+void main()
+{
+
+// Declare our variables.
+dictionary example;
+file storage;
+
+// Set up our environment.
+int monsters=random(5, 10);
+monster.resize(monsters);
+for(int counter=0; counter&lt;monster.length(); counter++)
+{
+monster[counter].setup(counter);
+}
+me.setup();
+world.setup();
+
+// Construct our serialization.
+example.set("enemy.length", monsters);
+string data=world.save();
+data+=me.save();
+data+=serialize(example);
+for(int counter=0; counter&lt;monsters; counter++)
+{
+data+=monster[counter].save();
+
+// We may as well reset our enemies in this loop, since we are going to reset everything after anyway.
+monster[counter].reset();
+}
+
+// Go about resetting everything.
+monster.resize(0);
+me.reset();
+world.reset();
+
+// Save our serialization to a file.
+storage.open("serialize_test.txt", "wb");
+storage.write(data);
+storage.close();
+}
+</pre>
+</body>
+</html>

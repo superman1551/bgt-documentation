@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>ceiling</b><br>
+<br>
+This function returns the smallest integral value that is not less than x.<br>
+<br>
+double ceiling(double x)<br>
+<br>
+Parameters:<br>
+x<br>
+The number to round.<br>
+<br>
+Return value:<br>
+The smallest integral value that is not less than x.<br>
+<br>
+Remarks:<br>
+This function will always increase x, except where x is already an integer. For example, the ceiling of 5.1 will be 6, but the ceiling of -5.1 will be -5.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("ceiling test", "ceiling of 5.1 is "+ceiling(5.1)+".");
+alert("ceiling test", "ceiling of 5 is "+ceiling(5)+".");
+alert("ceiling test", "ceiling of -5.1 is "+ceiling(-5.1)+".");
+}
+</pre>
+</body>
+</html>

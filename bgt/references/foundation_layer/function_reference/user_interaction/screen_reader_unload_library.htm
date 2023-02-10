@@ -1,0 +1,59 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>screen_reader_unload_library</b><br>
+<br>
+This function will unload the DLL for the specified screen reader.<br>
+<br>
+bool screen_reader_unload_library(int reader)<br>
+<br>
+Parameters:<br>
+reader<br>
+A value representing one of the two screen readers for which this operation is supported (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+While Windows is using a dll, it cannot be deleted or removed. Therefore this function is useful if you want to delete the DLL file, for instance if you have packaged it into an executable and extract it to a temporary location during the execution of your script. After unloading the dll for the given screen reader, it may then be manipulated like any other file.<br>
+<br>
+This function will work with two of the four supported screen readers, namely System Access and NVDA. If you attempt to use this function with Jaws or WindowEyes, the function will fail as these readers use COM rather than standard DLL calls.<br>
+<br>
+Note that if you call any screen reader functions later except screen_reader_set_library_path, it will automatically attempt to reload the dll for that screen reader if applicable.<br>
+<br>
+Example:<br>
+<pre>
+// Set the path of the NVDA screen reader and get it to speak some text, then delete the DLL afterwards.
+
+void main()
+{
+screen_reader_set_library_path(NVDA, DIRECTORY_TEMP+"/NVDA.dll");
+screen_reader_speak(NVDA, "Hi. My library is now in the temp directory!");
+wait(2000);
+screen_reader_unload_library(NVDA);
+file_delete(DIRECTORY_TEMP+"/NVDA.dll");
+}
+</pre>
+</body
+</html>

@@ -1,0 +1,127 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>reset</title>
+</head>
+<body>
+<br>
+<b>dynamic_menu object</b><br>
+<br>
+This method will reset the menu, removing previously added items and, if required, the options previously set.<br>
+<br>
+bool reset(bool completely)<br>
+<br>
+Parameters:<br>
+completely<br>
+A boolean value specifying whether the options should be reset in addition to the menu items.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This is useful if you need to rebuild a new menu with the object, for example to make a submenu.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple menu.
+
+#include "dynamic_menu.bgt"
+
+dynamic_menu my_menu;
+
+void main()
+{
+main_menu();
+}
+
+void main_menu()
+{
+my_menu.reset(true);
+my_menu.allow_escape=true;
+my_menu.wrap=false;
+my_menu.add_item("start_game.wav");
+my_menu.add_item("test_speakers.wav");
+my_menu.add_item("exit.wav");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was start game.");
+difficulty_menu();
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was test speakers.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was exit. Exiting.");
+exit();
+}
+}
+
+void difficulty_menu()
+{
+my_menu.reset(false);
+my_menu.add_item("easy.wav");
+my_menu.add_item("medium.wav");
+my_menu.add_item("hard.wav");
+my_menu.add_item("return_to_main_menu.wav");
+menu_result=my_menu.run("choose_an_option.wav", false);
+if(menu_result==-1)
+{
+alert("Error", "There was an error loading the menu.");
+exit();
+}
+if(menu_result==0)
+{
+alert("Option", "Escape was pressed. Exiting.");
+exit();
+}
+if(menu_result==1)
+{
+alert("Option", "Option selected was easy.");
+}
+if(menu_result==2)
+{
+alert("Option", "Option selected was medium.");
+}
+if(menu_result==3)
+{
+alert("Option", "Option selected was hard.");
+}
+if(menu_result==4)
+{
+alert("Option", "Option selected was return to main menu.");
+main_menu();
+}
+}
+</pre>
+</body>
+</html>

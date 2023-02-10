@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>network_event object</b><br>
+<br>
+int type<br>
+Determines the type of event that is being received. This can be any of the following values:<br>
+<ul>
+<li>EVENT_NONE (0) - No event is being received at that time.</li>
+<li>EVENT_CONNECT (1) - A peer has just connected.</li>
+<li>EVENT_RECEIVE (2) - A packet has been received from a peer.</li>
+<li>EVENT_DISCONNECT (3) - A remote peer has just disconnected.</li>
+</ul>
+The default value for this property is event_none. This property cannot be modified from the script.<br>
+<br>
+uint peer_id<br>
+The unique ID of the peer to whom the event relates. This is valid for all events except EVENT_NONE, and is set to 0 otherwise. This property cannot be modified from the script.<br>
+<br>
+int channel<br>
+The channel on which the event was received. This is only valid for events of type EVENT_RECEIVE, and is set to 0 otherwise.<br>
+<br>
+string message<br>
+The message that was received. This is only valid for events of type EVENT_RECEIVE, and is an empty string otherwise. This property cannot be modified from the script.<br>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none
+	color: blue
+}
+
+a:visited {
+	text-decoration: none
+	color: blue
+}
+
+a:hover, a:active {
+	text-decoration: underline
+	color: blue
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+uint joysticks<br>
+The number of joysticks that are currently attached. This property cannot be modified from the script.<br>
+<br>
+bool has_x<br>
+Checks to see if the joystick has an x axis. This property cannot be modified from the script.<br>
+<br>
+bool has_y<br>
+Checks to see if the joystick has a y axis. This property cannot be modified from the script.<br>
+<br>
+bool has_z<br>
+Checks to see if the joystick has a z axis. This property cannot be modified from the script.<br>
+<br>
+bool has_r_x<br>
+Checks to see if the joystick has a rotational x axis. This property cannot be modified from the script.<br>
+<br>
+bool has_r_y<br>
+Checks to see if the joystick has a rotational y axis. This property cannot be modified from the script.<br>
+<br>
+bool has_r_z<br>
+Checks to see if the joystick has a rotational z axis. This property cannot be modified from the script.<br>
+<br>
+uint buttons<br>
+The number of buttons on the device. This property cannot be modified from the script.<br>
+<br>
+uint sliders<br>
+The number of sliders on the device. This property cannot be modified from the script.<br>
+<br>
+uint povs<br>
+The number of povs (point of view controls) on the device. This property cannot be modified from the script.<br>
+<br>
+string name<br>
+The name of the device that is currently being used. This property cannot be modified from the script.<br>
+<br>
+bool active<br>
+This is true if a joystick device is opened, false if not. This property cannot be modified from the script.<br>
+<br>
+int preferred_joystick<br>
+Returns the index of the joystick that the user has set as their preferred device in the control panel. This corresponds to the list returned by list_joysticks, and is never greater than the joysticks property -1. On error or if there is no default, -1 is returned. This property cannot be modified in the script.<br>
+<br>
+long x<br>
+X-axis, usually the left-right movement of a stick. This property cannot be modified from the script.<br>
+<br>
+long y<br>
+Y-axis, usually the forward-backward movement of a stick. This property cannot be modified from the script.<br>
+<br>
+long z<br>
+Z-axis, often the throttle control. If the joystick does not have this axis, the value is 0. This property cannot be modified from the script.<br>
+<br>
+long r_x<br>
+X-axis rotation. If the joystick does not have this axis, the value is 0. This property cannot be modified from the script.<br>
+<br>
+long r_y<br>
+Y-axis rotation. If the joystick does not have this axis, the value is 0. This property cannot be modified from the script.<br>
+<br>
+long r_z<br>
+Z-axis rotation (often called the rudder). If the joystick does not have this axis, the value is 0. This property cannot be modified from the script.<br>
+<br>
+long slider_1<br>
+An additional axis value (formerly called the u-axis) whose semantics depend on the joystick. This property cannot be modified from the script.<br>
+<br>
+long slider_2<br>
+An additional axis value (formerly called the v-axis) whose semantics depend on the joystick. This property cannot be modified from the script.<br>
+<br>
+uint pov_1<br>
+Direction controller, such as point-of-view hat. The position is indicated in hundredths of a degree clockwise from north (away from the user). The center position is normally reported as - 1, but not all devices follow this rule. To check if a POV is centered, use the pov_centered method. For indicators that have only five positions, the value for a controller is - 1, 0, 9,000, 18,000, or 27,000. This property cannot be modified from the script.<br>
+<br>
+uint pov_2<br>
+Direction controller, such as point-of-view hat. The position is indicated in hundredths of a degree clockwise from north (away from the user). The center position is normally reported as - 1, but not all devices follow this rule. To check if a POV is centered, use the pov_centered method. For indicators that have only five positions, the value for a controller is - 1, 0, 9,000, 18,000, or 27,000. This property cannot be modified from the script.<br>
+<br>
+uint pov_3<br>
+Direction controller, such as point-of-view hat. The position is indicated in hundredths of a degree clockwise from north (away from the user). The center position is normally reported as - 1, but not all devices follow this rule. To check if a POV is centered, use the pov_centered method. For indicators that have only five positions, the value for a controller is - 1, 0, 9,000, 18,000, or 27,000. This property cannot be modified from the script.<br>
+<br>
+uint pov_4<br>
+Direction controller, such as point-of-view hat. The position is indicated in hundredths of a degree clockwise from north (away from the user). The center position is normally reported as - 1, but not all devices follow this rule. To check if a POV is centered, use the pov_centered method. For indicators that have only five positions, the value for a controller is - 1, 0, 9,000, 18,000, or 27,000. This property cannot be modified from the script.<br>
+<br>
+long v_x<br>
+The X-axis velocity. This property cannot be modified from the script.<br>
+<br>
+long v_y<br>
+Y-axis velocity. This property cannot be modified from the script.<br>
+<br>
+long v_z<br>
+Z-axis velocity. This property cannot be modified from the script.<br>
+<br>
+long vr_x<br>
+X-axis angular velocity. This property cannot be modified from the script.<br>
+<br>
+long vr_y<br>
+Y-axis angular velocity. This property cannot be modified from the script.<br>
+<br>
+long vr_z<br>
+Z-axis angular velocity. This property cannot be modified from the script.<br>
+<br>
+long v_slider_1<br>
+Extra axis velocity. This property cannot be modified from the script.<br>
+<br>
+long v_slider_2<br>
+Extra axis velocity. This property cannot be modified from the script.<br>
+<br>
+long a_x<br>
+X-axis acceleration. This property cannot be modified from the script.<br>
+<br>
+long a_y<br>
+Y-axis acceleration. This property cannot be modified from the script.<br>
+<br>
+long a_z<br>
+Z-axis acceleration. This property cannot be modified from the script.<br>
+<br>
+long ar_x<br>
+X-axis angular acceleration. This property cannot be modified from the script.<br>
+<br>
+long ar_y<br>
+Y-axis angular acceleration. This property cannot be modified from the script.<br>
+<br>
+long ar_z<br>
+Z-axis angular acceleration. This property cannot be modified from the script.<br>
+<br>
+long a_slider_1<br>
+Extra axis acceleration. This property cannot be modified from the script.<br>
+<br>
+long a_slider_2<br>
+Extra axis acceleration. This property cannot be modified from the script.<br>
+<br>
+long f_x<br>
+X-axis force. This property cannot be modified from the script.<br>
+<br>
+long f_y<br>
+Y-axis force. This property cannot be modified from the script.<br>
+<br>
+long f_z<br>
+Z-axis force. This property cannot be modified from the script.<br>
+<br>
+long fr_x<br>
+X-axis torque. This property cannot be modified from the script.<br>
+<br>
+long fr_y<br>
+Y-axis torque. This property cannot be modified from the script.<br>
+<br>
+long fr_z<br>
+Z-axis torque. This property cannot be modified from the script.<br>
+<br>
+long f_slider_1<br>
+Extra axis force. This property cannot be modified from the script.<br>
+<br>
+long f_slider_2<br>
+Extra axis force. This property cannot be modified from the script.<br>
+</body>
+</html>

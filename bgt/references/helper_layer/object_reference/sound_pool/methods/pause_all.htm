@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>pause_all</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+This method pauses all of the sounds in the sound pool.<br>
+<br>
+void pause_all()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+None.<br>
+<br>
+Remarks:<br>
+To restart all the sounds, you must call the resume_all method or call the resume_sound method on each slot.<br>
+<br>
+Example:<br>
+<pre>
+#include "sound_pool.bgt"
+
+sound_pool sounds;
+
+void main()
+{
+sounds.max_distance=70;
+sounds.play_stationary("sounds/ambience.wav", true);
+wait(5000);
+sounds.pause_all();
+wait(5000);
+sounds.resume_all();
+wait(5000);
+}
+</pre>
+</body>
+</html>

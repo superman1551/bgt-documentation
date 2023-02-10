@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>freq_ms</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+This method generates a given frequency or list of frequencies that will last for a specified number of milliseconds.<br>
+<br>
+bool freq_ms(string frequencies, double length)<br>
+<br>
+Parameters:<br>
+frequencies<br>
+A string specifying a frequency or list of frequencies to generate.<br>
+length<br>
+The length of the generated frequencies, in milliseconds.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Each frequency in the list is separated by a comma and space. Valid values are from 1 to 20000Hz. If the list does not meet the criteria the function will fail.<br>
+<br>
+The frequencies provided in the list will be generated together (as opposed to separately, one after the other), allowing for easier and quicker creation of chords.<br>
+<br>
+Example:<br>
+<pre>
+// Write a C major chord using frequencies.
+
+tone_synth synth;
+
+void main()
+{
+synth.freq_ms("262, 328, 394", 2000);
+synth.write_wave_file("wave.wav");
+}
+</pre>
+</body>
+</html>

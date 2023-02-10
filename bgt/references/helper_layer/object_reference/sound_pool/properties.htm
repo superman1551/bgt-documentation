@@ -1,0 +1,39 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Properties</title>
+</head>
+<body>
+<br>
+<b>sound_pool object</b><br>
+<br>
+int max_distance<br>
+The maximum distance at which to play a sound. It is essential to set this property if a larger quantity of sounds are to play. This will close any sounds that are out of earshot (e.g. beyond the value of max_distance), to improve performance. A value of 0 which is the default, turns off this optimization.<br>
+<br>
+float pan_step<br>
+The value that specifies how much the sound should pan when the object and/or listener position changes. Changing this value will only affect sound sources created in subsequent calls to one of the play methods, but not existing sources.<br>
+<br>
+float volume_step<br>
+The value that specifies how much the sound's volume will change when the object and/or listener position changes. Changing this value will only affect sound sources created in subsequent calls to one of the play methods, but not existing sources.<br>
+<br>
+float behind_pitch_decrease<br>
+The pitch that will simulate the object sound behind the listener relative to the current pitch. Changing this value will only affect sound sources created in subsequent calls to one of the play methods, but not existing sources.<br>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>is_visible</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+This method returns a value indicating whether the specified control is visible.<br>
+<br>
+bool is_visible(int control_id)<br>
+<br>
+Parameters:<br>
+control_id<br>
+The ID of the control you wish to check.<br>
+<br>
+Return value:<br>
+true if the control is visible, false if the control is invisible or if an error occurred.<br>
+<br>
+Remarks:<br>
+In the case of the audio form, visibility simply refers to whether the control is accessible whilst tabbing through the dialog. If it is set to invisible, the form's cursor will skip the control, but the control may still be used and/or modified by the script.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple form with a few buttons.
+
+#include "form.bgt"
+
+audio_form form;
+
+void main()
+{
+form.create_window("Example Form", true);
+int ok=form.create_button("OK");
+int cancel=form.create_button("E&xit");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(ok))
+{
+if(form.is_visible(ok))
+{
+alert("Information", "The OK button is visible.");
+}
+else
+{
+alert("Information", "The OK button is invisible.");
+}
+exit();
+}
+if(form.is_pressed(cancel))
+{
+if(form.is_visible(cancel))
+{
+alert("Information", "The Cancel button is visible.");
+}
+else
+{
+alert("Information", "The Cancel button is invisible.");
+}
+exit();
+}
+if((key_down(KEY_LMENU))&&(key_pressed(KEY_F4)))
+{
+exit();
+}
+}
+}
+</pre>
+</body>
+</html>

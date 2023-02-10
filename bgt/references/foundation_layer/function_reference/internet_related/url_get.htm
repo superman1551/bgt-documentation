@@ -1,0 +1,74 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>url_get</b><br>
+<br>
+This function retrieves the contents of a URL on the Internet and returns it as a string.<br>
+<br>
+string url_get(string url)<br>
+<br>
+Parameters:<br>
+url<br>
+The URL of the file on the Internet that should be retrieved.<br>
+<br>
+Return value:<br>
+The data from the server on success, or an error description or blank string on failure (see remarks).<br>
+<br>
+Remarks:<br>
+This function will wait until all data has been retrieved from the server before returning. Thus, no large amounts of data should be downloaded using this function as your game will stop responding completely while the operation is in progress. This function is appropriate for actions such as posting scores, where the returned content is minimal.<br>
+<br>
+This function will send what is known as a GET request. A GET request is used in most cases when a normal URL is being visited. The URL given may contain so called GET parameters, which are used to pass small amounts of data to the server.<br>
+<br>
+The URL may not contain any special characters such as spaces or similar. If you wish to include such characters, always encode the URL by calling the url_encode function before attempting to retrieve it from the Internet.<br>
+<br>
+If the http server to which the URL points uses a port other than 80, you will need to include the port after the host name proceeded by a colon. The path on the server (if any) should then follow, proceeded by a slash. Such a URL might look like http://myserver.com:8080/myfile.html.<br>
+<br>
+If multiple calls are made to this function with URL's pointing to the same server, the function will attempt to keep the connection alive for a short while which results in a dramatic speed increase for subsequent calls.<br>
+<br>
+If the network subsystem fails to initialize, the get_last_error function will return -27 and the returned string will be blank.<br>
+<br>
+If an Internet related error occurs, the get_last_error function will return -29 and the returned string will contain a textual description of the error.<br>
+<br>
+This function can be used to retrieve both binary and textual data.<br>
+<br>
+Example:<br>
+<pre>
+// Retrieve the contents of the index page at blastbay.com.
+
+void main()
+{
+string body=url_get("http://www.blastbay.com/");
+if(get_last_error()!=0)
+{
+alert("Error", "An error occured.\nDescription: " + body + "");
+}
+else
+{
+clipboard_copy_text(body);
+alert("Success", "The data was retrieved and has been copied to your clipboard.");
+}
+}
+</pre>
+</body>
+</html>

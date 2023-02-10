@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>tone_synth</title>
+</head>
+<body>
+<br>
+<b>tone_synth object</b><br>
+<br>
+The tone_synth object is used to create tunes and store them as PCM wave sounds.<br>
+<br>
+tone_synth()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Remarks:<br>
+The idea is to create a tune, as simple or as complicated as you wish. The tune can have chords or single notes, with multiple or single waveform types, and can be any length. When your tune is finished you can then create a wave file of your composition.<br>
+<br>
+Please note that this is not an instrumental synth, but rather a waveform synth. This means that the sound output produced will be similar to that of an older game console. The four basic waveform types supported are sine, square, sawtooth and triangle.<br>
+<br>
+When creating a tune, lengths can either be specified in beats, or in milliseconds by using the ms methods. When specifying the length in beats, the synth will automatically calculate the appropriate milliseconds to use based on the tempo property, which specifies beats per minute.<br>
+<br>
+To specify a length in beats, 1 specifies one beat, 0.5 is half a beat, 0.666 is a swing beat, etc.<br>
+<br>
+Example:<br>
+<pre>
+// Make a simple tune and write it to a wave file.
+
+tone_synth synth;
+
+void main()
+{
+synth.tempo=120;
+synth.waveform_type=2;
+synth.note("C4", 4);
+synth.note("E4", 4);
+synth.note("G4", 4);
+synth.waveform_type=3;
+synth.note("C5", 0.666);
+synth.rest(0.666);
+synth.note("E5", 0.666);
+synth.rest(0.666);
+synth.note("G5", 0.666);
+synth.rest(0.666);
+synth.note("C6", 2);
+synth.write_wave_file("synth.wav");
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>button_released</title>
+</head>
+<body>
+<br>
+<b>joystick object</b><br>
+<br>
+This function checks if a particular button on the joystick has been released.<br>
+<br>
+bool button_released(int button)<br>
+<br>
+Parameters:<br>
+button<br>
+The ID of a joystick button to check (see remarks).<br>
+<br>
+Return value:<br>
+true if the button has been released, false if it has not or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between button_up and button_released is that button_released will only return true when the user first releases the button, while button_up will continue returning true until the button is pushed down again.<br>
+<br>
+The joystick object supports up to 128 buttons, ranging from 0 to 127. However the actual maximum button is determined by the buttons property for the given device, meaning that the allowed range is from 0 to buttons minus 1.<br>
+<br>
+It is important to remember when mapping functions to joystick buttons that devices can vary greatly between models, supporting anything between 3 and 15 buttons, and therefore it is always a good idea to map the most common activities to buttons with lower numbers.<br>
+<br>
+Example:<br>
+<pre>
+// Play a looping sound whenever a button is pushed down, stopping it when the button is released.
+
+void main()
+{
+sound loop;
+joystick stick;
+int current_loop=-1;
+show_game_window("Joystick Test");
+if(stick.joysticks==0)
+{
+alert("Error", "No joysticks seem to be attached.");
+exit();
+}
+while(!key_pressed(KEY_ESCAPE))
+{
+for(int counter=0; counter&lt;stick.buttons; counter++)
+{
+if(stick.button_pressed(counter))
+{
+if(current_loop!=counter)
+{
+loop.load("loop"+counter+".wav");
+current_loop=counter;
+}
+loop.play_looped();
+}
+if(stick.button_released(counter))
+{
+loop.stop();
+}
+}
+}
+}
+</pre>
+</body>
+</html>

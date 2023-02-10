@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>set_sound_storage</b><br>
+<br>
+This function sets the location of the pack file in which the engine will look for sound files loaded through the sound object.<br>
+<br>
+bool set_sound_storage(string filename)<br>
+<br>
+Parameters:<br>
+filename<br>
+The pack file to use. This can be either an absolute path, a relative path, the file name on its own, or a * (see remarks).<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+Note that both \ and / can be used to specify paths.<br>
+<br>
+If an empty string is passed to this function, the engine will not look for sounds in a pack file but will attempt to locate requested files on disk instead. This is the default behavior.<br>
+<br>
+If you pass * to this function, the engine will attempt to look for sounds in a pack file that has been included into the program itself. For more information on how this is done, see the tutorial on packaging files with your executable.<br>
+<br>
+It is perfectly legal to call this function more than once in your game. Sounds that are already loaded will not be affected, any changes are only seen the next time you attempt to load a sound.<br>
+<br>
+Example:<br>
+<pre>
+// Tell the engine to look for sound files in a file called sounds.dat.
+
+void main()
+{
+set_sound_storage("sounds.dat");
+}
+</pre>
+</body>
+</html>

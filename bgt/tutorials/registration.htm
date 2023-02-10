@@ -1,0 +1,81 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Registration in BGT</title>
+</head>
+<body>
+<h1>Registration in BGT</h1>
+<h1>1. Introduction</h1>
+A lot of users are requesting a way to protect their games from piracy, which is a very understandable attitude considering how much time and money that is usually spent on a commercial game. However, the sad truth is that there is no bulletproof way of accomplishing this. If you search for the name of your favorite software plus the word crack on Google or any other popular search engine, you will almost always find someone who has taken the time to break the registration system and post either a patch, a key generator or some other way of bypassing the security system. The problem becomes even greater when using a game engine, because the way in which things like unique computer ID's are generated will be the same for every game produced with it. This is not to say that the ID itself will be the same for each game, but the internal generation code will ultimately be the same. In other words, the more BGT does for you behind the scenes in order to simplify your work, the easier it will be for a cracker to break almost every game produced with the engine. For this reason, BGT provides an absolute minimal set of features for registration management and it is up to you as the script writer to think of a way of generating keys etc. The advantage with this is that every game will do it a little differently, making it a lot harder for someone to generate some ultimate BGT game crack that will work everywhere. This is still far from a guarantee that your game will not be cracked, but it does make it harder as the cracker will have to start from scratch for each new game.<br>
+<h1>2. Methods</h1>
+So how do I go about protecting my product, you ask? There are three main types of registration systems used today. Below follows a list of them, with pros and cons of each:<br>
+<h2>2.1. Name/key</h2>
+This system is by far the simplest, most user friendly, and least secure. The user simply enters their name, pays for the software, and gets a key back that is a scrambled version of their name plus some unique constant identifying the game in question. Without this game specific constant, a user who purchases one game from you could use the same key to register all your other games as well. The only difficult part with this system is to scramble the user's name in a creative way. There is no right or wrong way of doing this, and there is really only one rule. Make it as irrecognizable as possible and you are off to a good start. BGT provides a large number of string related functions so it's really up to your imagination which ones you want to use and how to combine them.<br>
+<br>
+Pros:<br>
+<ul>
+<li>Very user friendly. A customer who has purchased the game can back up their name and key and reuse this information if they get a new computer for example, since it never changes.</li>
+<li>Easy to implement. all that is required is a creative way of obscuring the user's name, a constant identifying your game which is scrambled in with the name to form the final key, and you're done.</li>
+</ul><br>
+<br>
+Cons:<br>
+<ul>
+<li>Trivial to crack. All a user has to do in order to give your game to their best friend and the best friend's relatives is to hand out their name and key.</li>
+</ul><br>
+<h2>2.2. Product ID/key</h2>
+This is very similar to the name/key system mentioned above, with one major difference. Instead of basing the unlock key on the user's name, you base it on some unique hardware information on the user's computer. You will want to combine the generated unique ID with a game specific constant as described in the section above, or the product ID will be the same for all of your games on a given machine. You must provide a way for the user to obtain this product ID from within your game, and the user is then required to submit this information along with their payment. Then, the steps are the same as with the name/key system, where you have to scramble the user's product ID in as creative a way as you can think of in order to generate the key. You probably do not need to use the game specific constant while creating the key, however, as this should already have been used while generating the product ID to make the ID different for each of your games. The main issue with this system is that you will need to provide new keys to a user as soon as he or she makes some change to their hardware. BGT provides a function to generate a unique computer ID based on several different hardware components, however this ID will most certainly change if the user reformats their PC. This makes for a lot of maintenance work, and plenty of frustration for users who have to wait for you to generate keys for them.<br>
+<br>
+Pros:<br>
+<ul>
+<li>Considerably more secure than name/key. A user cannot simply copy over their registration key to another machine.</li>
+<li>Easy to implement. This requires about the same amount of work to implement as name/key, given the unique computer ID generation function provided in BGT.</li>
+</ul><br>
+<br>
+Cons:<br>
+<ul>
+<li>Requires a lot more maintenance. As soon as the user reformats their computer or changes a certain hardware component, they will need to contact you in order to get a new key just to keep using the product they have already paid for.</li>
+<li>Vulnerable on a massive scale. If the product ID generation system in BGT is cracked, every game that uses it will be cracked in an instant.</li>
+</ul><br>
+<h2>2.3. Online based</h2>
+This can be considered a sort of hybrid between the above mentioned systems. The basic idea is to have a central server hosted somewhere that the game connects to when registering, and the server then tells the program whether the registration is accepted or not. It is common to use the name/key system together with the online server, as that allows a user to register their game on as many computers as the server allows without having to request different keys for each machine which would be the case if a product ID was used. Thus the main advantage of this system is that the user can reuse the same name and key, but only as many times as the developer allows for. However, as with each system described here, this one also has a number of drawbacks. First, the user needs to be connected to the Internet at the time of registration. This is usually not a problem for most customers, but may be in rare cases. Second, the server needs to be online at all times in order for registrations to work at all. Third, after the registration has been acknowledged and accepted by the server the game still needs to remember the fact that it is registered as to avoid having to connect to the server each and every time the program is started. This means that there must be some local information stored that tells the game that it is registered, without using the server. As a result, a cracker can simply simulate this information and get the game registered without the server having the slightest idea of what happened.<br>
+<br>
+Pros:<br>
+<ul>
+<li>Full control. You as the developer have full control over who is registered, how many computers they are using the game on, and can limit the number of allowed registrations at any time.</li>
+<li>Reusability. Since the customer does not need a product ID but can use their name instead, they are able to register it on multiple computers with the same information provided that you allow for this.</li>
+</ul><br>
+<br>
+Cons:<br>
+<ul>
+<li>Requires an Internet connection at the time of registration. As stated previously this is usually not an issue, but it may be.
+. Completely dependent on the server. If the server goes down for any reason, the paying customers will not be able to register and use the product they have purchased.</li>
+<li>Harder to implement. A server script is needed for the system to work, which requires a good understanding of a scripting language such as PHP as well as an excellent awareness of security design techniques.</li>
+<li>Vulnerable. Local information must be stored to tell the game that it is already registered. This information is not difficult for a cracker to forge.</li>
+</ul><br>
+<h1>3. Conclusion</h1>
+After looking at all three of these registration systems, we can come to one obvious conclusion. No matter what we do, our game will be cracked eventually. If it is a good game and someone feels it is worth the time spent, you do not stand a chance no matter what measures you have taken. This applies especially to the product ID system described in section 2.2, as the internal generation code will be the same for all BGT games even though the resulting ID is not the same. On top of this, the product ID system requires a lot of maintenance and is likely to get frustrating both for the developer and the end users. It is almost inevitable that the product ID generation code in BGT will eventually be cracked, as are all similar systems if the cracker is determined enough. When this happens, you have not only got your game pirated; you have also made it a lot harder for the honest customers to actually use your software. In the end, the product ID has not served any other purpose than to complicate life both for you and your users while not preventing cracks. The same is true for the online system, as this also has several drawbacks as listed above. Thus, as an experienced software developer I personally conclude that the name/key system is to prefer, for three reasons:<br>
+<br>
+1. It is very easy; both on the developer in terms of maintenance and the end users as regarding portability.<br>
+2. As soon as the other two systems are cracked which will happen sooner or later, they only complicate things for no purpose.<br>
+3. The people who crack your game would not have purchased it in the first place. However, you will get a lot more sales from honest customers if you show that you trust them with a system that does not limit their use of your software.<br>
+<br>
+Naturally, the choice is yours. I have attempted to outline the three most common types of registration systems in order to help you make an educated choice as to which one you wish to use. BGT provides the facility required for all three (a large array of string functions, a computer ID generation function, and access to http servers using either the http object or the url_get and url_post functions). However please understand that if our product ID generation system is cracked, there is not much that we or anyone else can do to solve the situation. As per our license agreement, we can not assume any responsibility for loss of profit or any other direct and/or indirect issues and/or damages that may arise as a result of your use of this software.<br>
+</body>
+</html>

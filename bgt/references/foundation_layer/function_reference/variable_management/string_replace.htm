@@ -1,0 +1,57 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_replace</b><br>
+<br>
+This function searches and replaces a specific text within a string and returns the result.<br>
+<br>
+string string_replace(string the_string, string the_search, string replacement, bool replace_all)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be processed.<br>
+the_search<br>
+The text to search for within the string.<br>
+replacement<br>
+The string that will replace an occurrence of the search string.<br>
+replace_all<br>
+A boolean flag indicating whether every occurrence of the search should be replaced. If set to false, only the first occurrence is replaced.<br>
+<br>
+Return value:<br>
+A new string containing any specified replacements. If no characters were replaced, or the search string was blank, the original string is returned. If the main text string is blank, a blank string is returned.<br>
+<br>
+Remarks:<br>
+If the replacement string is blank, this has the effect of removing the search text from the string.<br>
+<br>
+The search is case sensitive, meaning that Name is different from name, for instance.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+alert("string_replace test", "string_replace="+string_replace("Hello, I am a strange string!", "string", "strange", true)); //output should be Hello, I am a strange strange!
+}
+</pre>
+</body>
+</html>

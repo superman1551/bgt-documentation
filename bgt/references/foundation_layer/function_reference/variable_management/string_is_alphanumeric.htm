@@ -1,0 +1,67 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_is_alphanumeric</b><br>
+<br>
+This function returns a boolean value showing whether the passed string contains letters and numbers.<br>
+<br>
+bool string_is_alphanumeric(string the_string)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string that will be evaluated.<br>
+<br>
+Return value:<br>
+Returns true if the string contains letters and/or numbers, false if not or if an error occurred.<br>
+<br>
+Remarks:<br>
+This function does not evaluate punctuation. If the string contains punctuation this function will return false.<br>
+<br>
+Example:<br>
+<pre>
+void main()
+{
+string text1, text2;
+text1="I am normal text.";
+text2="Randomness15";
+if(string_is_alphanumeric(text1))
+{
+alert("string_is_alphanumeric test", "text1 contains letters and numbers.");
+}
+else
+{
+alert("string_is_alphanumeric test", "text1 does not contain only letters and numbers.");
+}
+if(string_is_alphanumeric(text2))
+{
+alert("string_is_alphanumeric test", "text2 contains letters and numbers.");
+}
+else
+{
+alert("string_is_alphanumeric test", "text2 does not contain only letters and numbers.");
+}
+}
+</pre>
+</body>
+</html>

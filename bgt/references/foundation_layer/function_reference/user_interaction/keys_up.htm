@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>keys_up</b><br>
+<br>
+This function returns a list of all the keys on the keyboard that are currently up.<br>
+<br>
+int[] keys_up()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+An array with the keys that are up, or an empty array if no keys are up or if an error occurs.<br>
+<br>
+Remarks:<br>
+The difference between keys_up and keys_released is that keys_released will only return a list of the keys that the user has just released, while keys_up will return a list of the keys that are currently up regardless of whether the same keys have been reported as being up in a previous call.<br>
+<br>
+Example:<br>
+<pre>
+// The example will constantly monitor keys that are up. If it registers three or more keys that are not up, it will exit.
+
+void main()
+{
+show_game_window("Keys up Test");
+int[] key_list;
+while(key_list.length()&gt;253)
+{
+key_list=keys_up();
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

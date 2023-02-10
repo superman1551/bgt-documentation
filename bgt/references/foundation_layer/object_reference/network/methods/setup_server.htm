@@ -1,0 +1,50 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>setup_server</title>
+</head>
+<body>
+<br>
+<b>network object</b><br>
+<br>
+This method will initialise and set up the network object in server mode.<br>
+<br>
+bool setup_server(int listening_port, int channels, int max_peers)<br>
+<br>
+Parameters:<br>
+listening_port<br>
+The port that is to be used while listening for a connection.<br>
+channels<br>
+The number of channels that are used by the client. The maximum is 100.<br>
+max_peers<br>
+The maximum number of peers that the server can be connected with simultaneously. The maximum is 4000.<br>
+<br>
+Return value:<br>
+true if the server was set up successfully, false otherwise.<br>
+<br>
+Remarks:<br>
+This method is used to set up the network object in server mode. Once the server has been set up, it will automatically listen for connections on the given port. Whenever a new peer tries to connect, an event of type connect will be received.<br>
+<br>
+Please note that it is perfectly legal for a server to make outgoing connections as well. These outgoing connections will be part of the same list of peers as the incoming connections, meaning that both incoming and outgoing connections on the server will count towards the maximum peer count. Thus, a server may act both as a server and as a client at one and the same time.<br>
+<br>
+Example:<br>
+See the main network chapter.<br>
+</body>
+</html>

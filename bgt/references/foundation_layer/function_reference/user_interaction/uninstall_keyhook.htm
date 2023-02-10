@@ -1,0 +1,65 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>uninstall_keyhook</b><br>
+<br>
+This function uninstalls a low level keyboard hook previously installed with the install_keyhook function.<br>
+<br>
+bool uninstall_keyhook()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true if the keyboard hook was successfully uninstalled, false otherwise.<br>
+<br>
+Remarks:<br>
+The program will automatically uninstall a keyhook on exit.<br>
+<br>
+Example:<br>
+<pre>
+// Install a keyhook and display a message saying that the Insert key has been pressed.
+
+void main()
+{
+show_game_window("Test Game");
+install_keyhook();
+while(true)
+{
+if(key_down(KEY_LMENU) && key_pressed(KEY_F4))
+{
+exit();
+}
+if(key_pressed(KEY_INSERT))
+{
+alert("Information", "The Insert key was successfully pressed.");
+}
+// Other code goes here.
+wait(5);
+}
+uninstall_keyhook();
+}
+</pre>
+</body>
+</html>

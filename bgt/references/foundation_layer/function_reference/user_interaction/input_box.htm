@@ -1,0 +1,68 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>input_box</b><br>
+<br>
+This function displays an input box on the user's screen with an OK and a cancel button.<br>
+<br>
+string input_box(string title, string text, string initial_text)<br>
+<br>
+Parameters:<br>
+title<br>
+The title of the window.<br>
+text<br>
+The text that is to be shown along with the input field.<br>
+initial_text<br>
+(Optional) A string of text that should be written in the input box by default.<br>
+<br>
+Return value:<br>
+The text that the user entered on success, or an empty string on failure.<br>
+<br>
+Remarks:<br>
+This function is useful when you want to request some input from the user such as their name or other data. The script execution will pause until the user clicks on either the OK or the cancel button.<br>
+<br>
+The user is allowed to enter a maximum of 4096 characters, which is to say 4 kb worth of data.<br>
+<br>
+Example:<br>
+<pre>
+// Generate an input box, and check whether the user pressed cancel by calling get_last_error.
+
+void main()
+{
+string name=input_box("Name", "Please type in your name.");
+if(name=="")
+{
+if(get_last_error()==-12)
+{
+alert("OK", "If you wish to press cancel, then I will trouble you no further. Goodbye!");
+exit();
+}
+alert("OK", "If you wish not to disclose that personal precious information, then I will trouble you no further. Goodbye!");
+exit();
+}
+alert("Hello!", "Hello "+name+", nice to meet you!");
+}
+</pre>
+</body>
+</html>

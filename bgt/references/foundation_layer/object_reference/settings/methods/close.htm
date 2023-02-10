@@ -1,0 +1,58 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>close</title>
+</head>
+<body>
+<br>
+<b>settings object</b><br>
+<br>
+This method will free all resources allocated for the settings object.<br>
+<br>
+bool close()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If the close method is not called explicitly, the object will automatically free itself when the object goes out of scope or when the engine shuts down.<br>
+<br>
+Example:<br>
+<pre>
+// Store a value in the registry and explicitly close afterwards.
+
+void main()
+{
+settings game_data;
+bool success=game_data.setup("Testtime Interactive", "Bonebreaker", false);
+if(!success)
+{
+alert("Error", "Could not access the registry.");
+exit();
+}
+game_data.write_number("music_volume", -5.0);
+game_data.close();
+}
+</pre>
+</body>
+</html>

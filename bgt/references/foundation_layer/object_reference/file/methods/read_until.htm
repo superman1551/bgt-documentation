@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>read_until</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will read a file until a specified string is found.<br>
+<br>
+string read_until(string text, bool require_full)<br>
+<br>
+Parameters:<br>
+text<br>
+The text to search for in the file.<br>
+require_full<br>
+A boolean value specifying whether the full text should be found before the file stops reading, or any character in the sequence.<br>
+<br>
+Return value:<br>
+A string containing the retrieved data on success, the entire text if the file was successfully read but the string not found, or an empty string if data is unretrievable.<br>
+<br>
+Remarks:<br>
+The data returned will include the search string. If the search string cannot be found, the entire text, if any, will be returned by this function.<br>
+<br>
+Example:<br>
+<pre>
+// Read a file and display the first line of its content in an alert box.
+
+void main()
+{
+file test;
+test.open("test.txt", "r");
+alert("test.txt contents", test.read_until("\r\n",true));
+}
+</pre>
+</body>
+</html>

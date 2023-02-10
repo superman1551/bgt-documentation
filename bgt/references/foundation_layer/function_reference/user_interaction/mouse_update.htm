@@ -1,0 +1,118 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>mouse_update</b><br>
+<br>
+This function updates the mouse device to see if any movement or button presses have occurred.<br>
+<br>
+bool mouse_update()<br>
+<br>
+Parameters:<br>
+None.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+This function updates the state of the mouse device in order to retrieve any changes that have occurred since the last call. It is important that you call this function very frequently in order for the mouse movement to be responsive and accurate.<br>
+<br>
+The mouse is a relative movement device, which means that there is no meaningful absolute position information that can be retrieved. Instead, each call to this function updates the three global mouse movement constants with the amount that the mouse has moved in each direction since the last call. Before the first call to this function, all three constants will be 0. Similarly, if no movement has been made in a particular direction since the last call, the constant in question will also be 0.<br>
+<br>
+The three constants that may be accessed are MOUSE_X, MOUSE_Y and MOUSE_Z. MOUSE_X and MOUSE_Y represent the left and right and backward and forward movement respectively, while MOUSE_Z indicates the movement of the wheel if one is present.<br>
+<br>
+You may also use the mouse_down and mouse_pressed functions to check the state of the available mouse buttons.<br>
+<br>
+Please note that in order to avoid a situation where a mouse click may accidentally move focus away from the game window, BGT acquires exclusive access to the device. This in turn means that the visible cursor disappears and that the mouse cannot be used to get out of the window. For this reason, the mouse is only acquired when it is actually being called upon by the script writer. It is acquired when mouse_update is called for the first time, and automatically released again if mouse_update is not called for one second. Should mouse_update be called again at a later point, the mouse will be reacquired. However if you use the mouse in your game, be sure to call mouse_update very frequently but only when you are actually using it as to allow users to leave the window with a click as often as possible during the games lifetime.<br>
+<br>
+Example:<br>
+<pre>
+// This is a simple and rather unrealistic truck simulation.
+
+/*
+This program plays an engine sound and allows the user to move it around with the mouse. The code lowers the sensitivity of the mouse slightly in order to make changes less rapid. Escape is pressed to close the program.
+*/
+
+void main()
+{
+show_game_window("Mouse Truck");
+sound truck;
+truck.load("engine.wav");
+if(truck.active==false)
+{
+alert("Error", "The sound could not be loaded.");
+exit();
+}
+double current_pitch=20;
+double current_pan=0;
+truck.pitch=current_pitch;
+truck.play_looped();
+while(key_pressed(KEY_ESCAPE)==false)
+{
+mouse_update();
+
+// Now that we've updated the mouse, we get the movement as doubles so we can manipulate it easier.
+double x=MOUSE_X;
+double y=MOUSE_Y;
+
+// Has the x position changed?
+if(x<0.0 or x>0.0)
+{
+
+// It has, so recalculate the movement amount to be less sensitive.
+x/=1.5;
+current_pan+=x;
+if(current_pan<-60)
+{
+current_pan=-60;
+}
+if(current_pan>60)
+{
+current_pan=60;
+}
+truck.pan=current_pan;
+}
+
+// Has the y position changed?
+if(y<0.0 or y>0.0)
+{
+
+// It has, so recalculate the movement amount to be less sensitive.
+y/=1.5;
+current_pitch-=y;
+if(current_pitch<20)
+{
+current_pitch=20;
+}
+if(current_pitch>200)
+{
+current_pitch=200;
+}
+truck.pitch=current_pitch;
+}
+wait(5);
+}
+}
+</pre>
+</body>
+</html>

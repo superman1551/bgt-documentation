@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>seek</title>
+</head>
+<body>
+<br>
+<b>file object</b><br>
+<br>
+This method will move the file cursor to a new position.<br>
+<br>
+bool seek(double new_position)<br>
+<br>
+Parameters:<br>
+new_position<br>
+The position to seek to. 0 indicates the beginning of the file.<br>
+<br>
+Return value:<br>
+true on success, false on failure.<br>
+<br>
+Remarks:<br>
+If the file is opened in text mode, the number given in the new_position parameter specifies the position in characters. If, on the other hand, the file is opened as binary, then the number specifies the position in bytes instead.<br>
+<br>
+If the file is opened in write or append mode and you seek to a position prior to the end of the file and write data, the data previously stored at that position will be overwritten.<br>
+<br>
+Example:<br>
+<pre>
+// Read character 5 in a file.
+
+void main()
+{
+file test;
+test.open("test.txt", "r");
+test.seek(4); // We use 4 because the cursor moves one when we read or write.
+alert("character 5", "character5="+test.read(1));
+}
+</pre>
+</body>
+</html>

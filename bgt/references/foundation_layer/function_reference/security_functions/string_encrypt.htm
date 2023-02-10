@@ -1,0 +1,63 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Function Reference</title>
+</head>
+<body>
+<br>
+<b>string_encrypt</b><br>
+<br>
+This function encrypts a string based on a provided key.<br>
+<br>
+string string_encrypt(string the_string, string encryption_key)<br>
+<br>
+Parameters:<br>
+the_string<br>
+The string to encrypt.<br>
+encryption_key<br>
+The key that will be used to encrypt and later decrypt the data.<br>
+<br>
+Return value:<br>
+The encrypted string on success, or a blank string on failure.<br>
+<br>
+Remarks:<br>
+This uses the AES-Rijndel 256-bit encryption algorithm, which is one of the most secure algorithms available to date. It has never been successfully cracked, and is used to protect files stored by various governments.<br>
+<br>
+Strings produced by string_encrypt are not compatible with files produced by file_encrypt.<br>
+<br>
+This function will encrypt both binary and text-only strings.<br>
+<br>
+The encrypted string is a few bytes longer than its decrypted equivalent.<br>
+<br>
+The encrypted data is in binary form. Thus, if you print out an encrypted string directly, the output will be garbled. If you need to print out an encrypted string, use the string_to_hex function to convert it into hexadecimal.<br>
+<br>
+Example:<br>
+<pre>
+// Encrypt a string and print it.
+
+void main()
+{
+string test=string_encrypt("I am an encrypted string.", "you_are_not_hacking_into_me");
+test=string_to_hex(test);
+alert("Encrypted string", test);
+}
+</pre>
+</body>
+</html>

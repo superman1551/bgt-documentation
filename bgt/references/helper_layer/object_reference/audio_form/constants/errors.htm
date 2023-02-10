@@ -1,0 +1,45 @@
+<html>
+<head>
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+	color: blue;
+}
+-->
+</style>
+<title>Error Codes</title>
+</head>
+<body>
+<br>
+<b>audio_form object</b><br>
+<br>
+Due to the complexity of the audio_form class, it is necessary for it to have its own error codes, which are independent to BGT's errors. These can be obtained with the form's get_last_error method.<br>
+Below is a list of the constants and what they mean.<br>
+<ul>
+<li>form_error_none (0) - Success.</li>
+<li>form_error_invalid_index (1) - The specified control index is invalid.</li>
+<li>form_error_invalid_control (2) - The specified control does not support the attempted operation. This could happen, for example, if you attempted to get the progress percentage from a checkbox.</li>
+<li>form_error_invalid_value (3) - A specified value is invalid. This occurs if a progress percentage is out of range.</li>
+<li>form_error_invalid_operation (4) - The requested operation is invalid. This occurs if an operation has been carried out once and cannot be done again at the present time.</li>
+<li>form_error_no_window (5) - No window is present (the form is not active).</li>
+<li>form_error_window_full (6) - No more controls can be added to the window, the limit has been reached.</li>
+<li>form_error_text_too_long (7) - The text of an input box is longer than the maximum_length parameter.</li>
+<li>form_error_list_empty (8) - A listbox is empty. This usually happens if you attempt to delete or clear an empty listbox.</li>
+<li>form_error_list_full (9) - The listbox is full, the limit has been reached.</li>
+<li>form_error_invalid_list_index (10) - The specified list index is invalid.</li>
+<li>form_error_control_invisible (11) - The specified control is invisible. This happens if you try to set focus to an invisible control.</li>
+<li>form_error_no_controls_visible (12) - All controls are invisible, therefore none can be focused.</li>
+</ul>
+</body>
+</html>
